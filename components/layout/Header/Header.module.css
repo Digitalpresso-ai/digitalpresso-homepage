@@ -1,0 +1,196 @@
+/* components/layout/Header/Header.module.css */
+
+/* ─── 헤더 래퍼 ─────────────────────────────────────────────── */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: #ffffff;
+  box-shadow: var(--shadow-header);
+}
+
+/* ─── 내부 컨테이너 ──────────────────────────────────────────── */
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 16px 64px;
+}
+
+/* ─── 로고 ───────────────────────────────────────────────────── */
+.logoLink {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.logo {
+  width: 174px;
+  height: 40px;
+  object-fit: contain;
+}
+
+/* ─── 데스크탑 네비게이션 ────────────────────────────────────── */
+.desktopNav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.navList {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navLink {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 4px;
+  border-radius: 4px;
+  color: var(--color-brand);
+  font-family: var(--font-noto-sans-kr), 'Noto Sans KR', 'Noto Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+
+.navLink:hover {
+  opacity: 0.75;
+}
+
+/* ─── CTA 버튼 ───────────────────────────────────────────────── */
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 8px 24px;
+  border-radius: 4px;
+  background-color: var(--color-brand);
+  color: #ffffff;
+  font-family: var(--font-noto-sans-kr), 'Noto Sans KR', 'Noto Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity 0.15s ease;
+}
+
+.ctaButton:hover {
+  opacity: 0.85;
+}
+
+/* ─── 햄버거 버튼 (모바일 전용, 기본 숨김) ──────────────────── */
+.hamburger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-brand);
+  flex-shrink: 0;
+}
+
+/* ─── 모바일 드롭다운 네비게이션 ─────────────────────────────── */
+.mobileNav {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  background-color: #ffffff;
+  box-shadow: var(--shadow-header);
+}
+
+.mobileNavList {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding: 8px 24px 16px;
+  margin: 0;
+  gap: 4px;
+}
+
+.mobileNavLink {
+  display: block;
+  padding: 12px 4px;
+  color: var(--color-brand);
+  font-family: var(--font-noto-sans-kr), 'Noto Sans KR', 'Noto Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(25, 60, 184, 0.1);
+}
+
+.mobileNavLink:hover {
+  opacity: 0.75;
+}
+
+.mobileCtaButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  margin-top: 12px;
+  padding: 8px 24px;
+  border-radius: 4px;
+  background-color: var(--color-brand);
+  color: #ffffff;
+  font-family: var(--font-noto-sans-kr), 'Noto Sans KR', 'Noto Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+
+.mobileCtaButton:hover {
+  opacity: 0.85;
+}
+
+/* ─── 반응형: 태블릿 (800px – 1279px) ───────────────────────── */
+@media (max-width: 1279px) {
+  .inner {
+    padding: 16px 40px;
+  }
+}
+
+/* ─── 반응형: 모바일 (<800px) ────────────────────────────────── */
+@media (max-width: 799px) {
+  .inner {
+    padding: 16px 24px;
+  }
+
+  .desktopNav {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+
+/* ─── 반응형: 소형 모바일 (≤320px) ──────────────────────────── */
+@media (max-width: 320px) {
+  .inner {
+    padding: 16px 16px;
+  }
+
+  .mobileNavList {
+    padding: 8px 16px 16px;
+  }
+}
