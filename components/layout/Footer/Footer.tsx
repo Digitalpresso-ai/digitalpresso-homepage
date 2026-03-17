@@ -1,20 +1,20 @@
-import Image from 'next/image';
-import { getTranslations } from 'next-intl/server';
-import { Link } from '@/i18n/navigation';
-import styles from './Footer.module.css';
+import Image from "next/image";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
+import styles from "./Footer.module.css";
 
 export async function Footer() {
-  const t = await getTranslations('common.footer');
+  const t = await getTranslations("common.footer");
 
   const primaryNavLinks = [
-    { href: '/about-us', label: t('nav.aboutUs') },
-    { href: '/references', label: t('nav.references') },
-    { href: '/news', label: t('nav.news') },
+    { href: "/about-us", label: t("nav.aboutUs") },
+    { href: "/references", label: t("nav.references") },
+    { href: "/news", label: t("nav.news") },
   ] as const;
 
   const legalNavLinks = [
-    { href: '/terms-of-service', label: t('nav.termsOfService') },
-    { href: '/privacy-policy', label: t('nav.privacyPolicy') },
+    { href: "/terms-of-service", label: t("nav.termsOfService") },
+    { href: "/privacy-policy", label: t("nav.privacyPolicy") },
   ] as const;
 
   return (
@@ -29,7 +29,7 @@ export async function Footer() {
             sizes="(max-width: 1279px) 200px, 264px"
             className={styles.logo}
           />
-          <small className={styles.copyright}>{t('copyright')}</small>
+          <small className={styles.copyright}>{t("copyright")}</small>
         </div>
 
         <nav className={styles.nav} aria-label="푸터 네비게이션">
