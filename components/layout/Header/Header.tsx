@@ -24,9 +24,8 @@ export default function Header() {
     <header className={styles.header}>
       <div className={styles.inner}>
         <Link href="/" className={styles.logoLink} onClick={closeMobileMenu}>
-          {/* TODO: 실제 로고 파일로 교체 예정 — 현재는 Figma 로컬 서버 URL 사용 */}
           <img
-            src="http://localhost:3845/assets/060d2d3361ff5f66a7cbef9231f9b362119d5819.png"
+            src="/images/renamedp_logo_eng.svg"
             alt="digitalPresso 로고"
             width={174}
             height={40}
