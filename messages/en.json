@@ -1,1 +1,14 @@
-{}
+{
+  "common": {
+    "footer": {
+      "copyright": "Copyright ⓒ 2025 Digitalpresso All rights reserved.",
+      "nav": {
+        "aboutUs": "About Us",
+        "references": "References",
+        "news": "News",
+        "termsOfService": "Terms of Service",
+        "privacyPolicy": "Privacy Policy"
+      }
+    }
+  }
+}

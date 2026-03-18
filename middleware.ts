@@ -1,7 +1,7 @@
-// middleware.ts — next-intl middleware (stub)
-// Replace with createMiddleware from next-intl once the package is installed.
+import createMiddleware from 'next-intl/middleware';
+import { routing } from '@/i18n/routing';
 
-export function middleware() {}
+export default createMiddleware(routing);
 
 export const config = {
   matcher: ['/((?!_next|.*\\..*).*)'],
