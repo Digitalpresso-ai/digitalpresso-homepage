@@ -4,6 +4,8 @@ import { HomeFeatureSection } from '@/src/features/home/components/HomeFeatureSe
 import { HomeHero } from '@/src/features/home/components/HomeHero/HomeHero';
 import { HomeNewsSection } from '@/src/features/home/components/HomeNewsSection/HomeNewsSection';
 import { HomeProductSection } from '@/src/features/home/components/HomeProductSection/HomeProductSection';
+import { HomeProjectSection } from '@/src/features/home/components/HomeProjectSection/HomeProjectSection';
+import { HomeUploadSection } from '@/src/features/home/components/HomeUploadSection/HomeUploadSection';
 
 export default function HomePage() {
   return (
@@ -12,6 +14,8 @@ export default function HomePage() {
       <HomeNewsSection />
       <HomeFeatureSection />
       <HomeProductSection />
+      <HomeProjectSection />
+      <HomeUploadSection />
     </main>
   );
 }

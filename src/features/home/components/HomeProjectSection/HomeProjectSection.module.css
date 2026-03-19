@@ -1,0 +1,149 @@
+/* src/features/home/components/HomeProjectSection/HomeProjectSection.module.css */
+
+/* ── Section ── */
+
+.section {
+  background: #ffffff;
+}
+
+/* ── Container ── */
+
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 64px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 48px 64px;
+}
+
+/* ── Image column (left) ── */
+
+.imageColumn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imageWrapper {
+  position: relative;
+  aspect-ratio: 480 / 634;
+  width: 100%;
+}
+
+.image {
+  object-fit: contain;
+}
+
+/* ── Text column (right) ── */
+
+.textColumn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+}
+
+.textBlock {
+  width: 487px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+/* ── Typography ── */
+
+.subtitle {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--color-heading);
+  line-height: 48px;
+  font-family: var(--font-noto-sans-kr), sans-serif;
+  word-break: keep-all;
+  margin: 0;
+}
+
+.title {
+  font-size: 40px;
+  font-weight: 600;
+  color: var(--color-accent);
+  line-height: 32px;
+  font-family: var(--font-noto-sans-kr), sans-serif;
+  word-break: keep-all;
+  margin: 0;
+}
+
+.body {
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--color-body);
+  line-height: 1.45;
+  letter-spacing: -0.12px;
+  font-family: var(--font-noto-sans-kr), sans-serif;
+  word-break: keep-all;
+  margin: 0;
+}
+
+/* ── Tablet (800px ~ 1279px) ── */
+
+@media (min-width: 800px) and (max-width: 1279px) {
+  .container {
+    padding: 32px 48px;
+  }
+
+  .textBlock {
+    width: 100%;
+  }
+
+  .subtitle {
+    font-size: 18px;
+    line-height: 32px;
+  }
+
+  .title {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -2px;
+    line-height: 1.5;
+  }
+}
+
+/* ── Mobile (≤799px) ── */
+
+@media (max-width: 799px) {
+  .container {
+    flex-direction: column;
+    gap: 32px;
+    padding: 48px 20px;
+  }
+
+  .imageColumn {
+    width: 100%;
+    order: 2;
+  }
+
+  .textColumn {
+    align-items: flex-start;
+    justify-content: flex-start;
+    order: 1;
+  }
+
+  .textBlock {
+    width: 100%;
+  }
+
+  .subtitle {
+    font-size: 18px;
+    line-height: 32px;
+  }
+
+  .title {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -2px;
+    line-height: 1.5;
+  }
+}
