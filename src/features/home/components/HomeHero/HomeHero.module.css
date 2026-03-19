@@ -1,0 +1,206 @@
+/* src/features/home/components/HomeHero/HomeHero.module.css */
+
+/* ─── Design tokens ─────────────────────────────────────── */
+.section {
+  --hero-gradient-start: #eff6ff;
+  --hero-brand: #193cb8;
+  --hero-heading-color: #1e2939;
+  --hero-body-color: rgba(0, 0, 0, 0.55);
+}
+
+/* ─── Section ───────────────────────────────────────────── */
+.section {
+  background: linear-gradient(to bottom, var(--hero-gradient-start), white);
+}
+
+/* ─── Inner container ───────────────────────────────────── */
+.inner {
+  display: flex;
+  align-items: center;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 64px;
+}
+
+/* ─── Left: Content ─────────────────────────────────────── */
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  padding: 48px 0;
+}
+
+.textGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.heading {
+  font-size: 40px;
+  font-weight: 600;
+  color: var(--hero-heading-color);
+  line-height: 32px;
+  margin: 0;
+}
+
+.logoWrapper {
+  display: block;
+}
+
+.logoWrapper img {
+  width: 370px;
+  height: 91px;
+}
+
+.body {
+  font-size: 20px;
+  color: var(--hero-body-color);
+  width: 525px;
+  letter-spacing: -0.1px;
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* ─── CTA Button ────────────────────────────────────────── */
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  background: var(--hero-brand);
+  height: 48px;
+  padding: 8px 24px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+}
+
+/* ─── Right: Image column ───────────────────────────────── */
+.imageColumn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 0 24px 0;
+}
+
+.imageWrapper {
+  width: 100%;
+  aspect-ratio: 576 / 486;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* Figma crop: show right portion of image (worker is on the right) */
+.heroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 70% center;
+  display: block;
+}
+
+/* ─── Tablet (800px – 1279px) ───────────────────────────── */
+@media (min-width: 800px) and (max-width: 1279px) {
+  .inner {
+    padding: 0 40px;
+  }
+
+  .content {
+    gap: 32px;
+    padding-right: 16px;
+  }
+
+  .heading {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -2px;
+    line-height: 1.5;
+  }
+
+  .logoWrapper img {
+    width: 280px;
+    height: 69px;
+  }
+
+  .body {
+    width: 311px;
+    font-size: 20px;
+  }
+
+  .ctaButton {
+    padding: 8px 16px;
+    font-size: 14px;
+    height: auto;
+  }
+
+  .imageWrapper {
+    aspect-ratio: 336 / 283.5;
+    border-radius: 8px;
+  }
+}
+
+/* ─── Mobile (≤799px) ───────────────────────────────────── */
+@media (max-width: 799px) {
+  .inner {
+    flex-direction: column-reverse;
+    padding: 20px 20px 0;
+  }
+
+  .content {
+    align-items: center;
+    padding: 48px 0;
+    text-align: center;
+    width: 100%;
+    gap: 32px;
+  }
+
+  .heading {
+    font-size: 28px;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .logoWrapper {
+    margin: 0 auto;
+  }
+
+  .logoWrapper img {
+    width: 272px;
+    height: 67px;
+  }
+
+  .body {
+    text-align: center;
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .ctaButton {
+    align-self: stretch;
+    width: 100%;
+    height: 40px;
+    font-size: 14px;
+    border-radius: 4px;
+  }
+
+  .imageColumn {
+    padding: 0;
+    width: 100%;
+  }
+
+  .imageWrapper {
+    aspect-ratio: 192 / 162;
+    width: 100%;
+    border-radius: 16px;
+    margin-bottom: 0;
+  }
+}

@@ -5,6 +5,12 @@
   /* Brand tokens */
   --color-brand: #193cb8;
   --shadow-header: 0px 10px 15px 0px rgba(0, 0, 0, 0.1), 0px 4px 6px 0px rgba(0, 0, 0, 0.05);
+
+  /* Semantic color tokens */
+  --color-accent: #2b7fff;
+  --color-heading: #1e2939;
+  --color-body: rgba(0, 0, 0, 0.55);
+  --color-white-overlay: rgba(255, 255, 255, 0.8);
 }
 
 @media (prefers-color-scheme: dark) {

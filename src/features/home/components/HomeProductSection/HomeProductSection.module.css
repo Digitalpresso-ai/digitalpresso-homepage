@@ -71,6 +71,7 @@
   line-height: 1.45;
   letter-spacing: -0.12px;
   font-family: var(--font-noto-sans-kr), sans-serif;
+  word-break: keep-all;
   margin: 0;
 }
 

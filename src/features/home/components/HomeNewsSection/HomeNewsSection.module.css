@@ -1,0 +1,150 @@
+/* src/features/home/components/HomeNewsSection/HomeNewsSection.module.css */
+
+.section {
+  background: white;
+}
+
+.inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 80px 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+/* 상단 헤딩 */
+.sectionHeading {
+  font-size: 36px;
+  font-weight: 600;
+  color: var(--color-heading);
+  text-align: center;
+  line-height: 48px;
+  margin: 0;
+  font-family: var(--font-noto-sans-kr), sans-serif;
+}
+
+.accent {
+  color: var(--color-accent);
+}
+
+.headingBreak {
+  display: block;
+}
+
+.headingBreakNarrow {
+  display: none;
+}
+
+/* 카드 리스트 */
+.cardList {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  width: 100%;
+  max-width: 720px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cardList li {
+  flex: 1 0 0;
+  min-width: 0;
+}
+
+/* 하단 텍스트 블록 */
+.textBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  max-width: 616px;
+  width: 100%;
+}
+
+.subHeading {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--color-heading);
+  text-align: center;
+  line-height: 48px;
+  margin: 0;
+  font-family: var(--font-noto-sans-kr), sans-serif;
+}
+
+.bodyText {
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--color-body);
+  text-align: center;
+  line-height: 1.45;
+  letter-spacing: -0.1px;
+  margin: 0;
+  font-family: var(--font-noto-sans-kr), sans-serif;
+}
+
+/* Tablet (800px ~ 1279px) */
+@media (min-width: 800px) and (max-width: 1279px) {
+  .inner {
+    padding: 64px 48px;
+  }
+
+  .sectionHeading {
+    font-size: 30px;
+    max-width: 391px;
+  }
+
+  .subHeading {
+    font-size: 18px;
+    line-height: 32px;
+  }
+
+  .textBlock {
+    max-width: 492px;
+  }
+}
+
+/* Narrow mobile (≤319px) */
+@media (max-width: 319px) {
+  .headingBreakNarrow {
+    display: block;
+  }
+}
+
+/* Mobile (≤799px) */
+@media (max-width: 799px) {
+  .inner {
+    padding: 24px 20px 48px;
+  }
+
+  .sectionHeading {
+    font-size: 32px;
+    max-width: 280px;
+    line-height: 48px;
+  }
+
+  .headingBreak {
+    display: none;
+  }
+
+  .cardList {
+    flex-direction: column;
+    max-width: 320px;
+    width: 100%;
+  }
+
+  .subHeading {
+    font-size: 18px;
+    line-height: 32px;
+  }
+
+  .textBlock {
+    max-width: 272px;
+  }
+
+  .bodyText {
+    text-align: center;
+  }
+}
