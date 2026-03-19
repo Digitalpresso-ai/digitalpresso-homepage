@@ -4,6 +4,7 @@
 .section {
   --hero-gradient-start: #eff6ff;
   --hero-brand: #193cb8;
+  --hero-brand-hover: #143093;
   --hero-heading-color: #1e2939;
   --hero-body-color: rgba(0, 0, 0, 0.55);
 }
@@ -80,6 +81,11 @@
   cursor: pointer;
   border: none;
   text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.ctaButton:hover {
+  background: var(--hero-brand-hover);
 }
 
 /* ─── Right: Image column ───────────────────────────────── */
