@@ -10,5 +10,72 @@
         "privacyPolicy": "Privacy Policy"
       }
     }
+  },
+  "home": {
+    "hero": {
+      "heading": "현장 기록의 새로운 표준,",
+      "body": "시공 품질과 안전 관리를 위한 데이터를 기록해 프로젝트 전반의 업무를 체계적으로 관리할 수 있습니다.",
+      "ctaButton": "문의하기",
+      "imageAlt": "건설현장 작업자가 리네임 DP 화면이 열린 휴대폰을 가리키는 모습",
+      "logoAlt": "RENAME DP 로고"
+    },
+    "feature": {
+      "headingPre": "현장인력이 바로 쓸 수",
+      "headingPost": " 있는 ",
+      "headingAccent1": "사용성",
+      "headingMid": "AI로 대체하는 ",
+      "headingAccent2": "전문성",
+      "headingSuffix": " 서류업무시간 ",
+      "headingAccent3": "10배 절감",
+      "workflowAlt": "현장에서 앱으로 기록하고 PC로 리포트를 확인하는 워크플로우"
+    },
+    "product": {
+      "features": {
+        "0": {
+          "subtitle": "Preventing serious industrial accidents",
+          "title": "Safety Inspection Checklist",
+          "body1": "Pre-inspect key hazards on each site to prevent serious accidents.",
+          "body2": "Risk assessment records are managed with digital signatures for legal proof, and the process for reporting and responding to hazards is streamlined.",
+          "imageAlt": "Safety inspection checklist feature screen"
+        },
+        "1": {
+          "subtitle": "Track construction and defect records on drawings",
+          "title": "Project Management",
+          "body1": "Review and update detailed task records and photo logs, and systematically manage photo information by structure.",
+          "body2": "Real-time drawing access lets you view construction records and defect repair history at a glance.",
+          "imageAlt": "Drawing-based project management feature screen"
+        }
+      }
+    },
+    "news": {
+      "headingPart1": "현장 디지털전환",
+      "headingPart2a": " 더 이상 ",
+      "headingPart2b": "선택이 아니라 ",
+      "headingPart3": "생존 전략",
+      "headingPart4": "입니다.",
+      "subHeadingPart1": "문제는 ",
+      "subHeadingPart2": "규제 대응 리소스",
+      "subHeadingPart3": "입니다.",
+      "bodyLine1": "최근 규제 강화와 영상 촬영·모니터링 의무화로 현장에서는 더 많은 기록과 대응이 요구되고 있습니다.",
+      "bodyLine2": "RENAME DP는 현장에서 생성되는 사진, 영상, 기록을 정리해 규제 대응과 보고에 필요한 정보를 한눈에 관리할 수 있도록 돕습니다.",
+      "bodyLine3": "이를 통해 반복적인 업무를 줄이고, 프로젝트 전반의 흐름과 중요한 정보에 보다 집중할 수 있도록 돕습니다.",
+      "cards": {
+        "0": {
+          "title": "100억 이상 건설현장, 영상 촬영 의무 부담… 비용 부담은 누구 몫?",
+          "date": "2023.03",
+          "imageAlt": "공사 중인 아파트 건설현장"
+        },
+        "1": {
+          "title": "국토부, 건설현장 영상 촬영의무화, 모니터링 체계 구축 추진",
+          "date": "2024.04",
+          "imageAlt": "카메라로 촬영되는 건설현장"
+        },
+        "2": {
+          "title": "李 정부 산업안전 규제 강화… 건설업계 초긴장",
+          "date": "2025.08",
+          "imageAlt": "위험! 추락주의 표지판이 걸린 건설현장"
+        }
+      }
+    }
   }
 }
