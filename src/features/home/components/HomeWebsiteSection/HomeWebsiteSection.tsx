@@ -11,7 +11,7 @@ export function HomeWebsiteSection() {
           <div className={styles.imageAlign}>
             <div className={styles.imageWrapper}>
               <Image
-                src="/images/section13-website.png"
+                src="/images/section13-website.jpg"
                 alt="웹사이트 구축 서비스를 소개하는 캡처 화면"
                 fill
                 className={styles.image}
