@@ -1,6 +1,7 @@
 // app/[locale]/page.tsx
 
 import { HomeApprovalSection } from '@/src/features/home/components/HomeApprovalSection/HomeApprovalSection';
+import { HomeEmployeeSection } from '@/src/features/home/components/HomeEmployeeSection/HomeEmployeeSection';
 import { HomeDashboardSection } from '@/src/features/home/components/HomeDashboardSection/HomeDashboardSection';
 import { HomeFeatureSection } from '@/src/features/home/components/HomeFeatureSection/HomeFeatureSection';
 import { HomeHero } from '@/src/features/home/components/HomeHero/HomeHero';
@@ -22,6 +23,7 @@ export default function HomePage() {
       <HomeMessengerSection />
       <HomeDashboardSection />
       <HomeApprovalSection />
+      <HomeEmployeeSection />
     </main>
   );
 }
