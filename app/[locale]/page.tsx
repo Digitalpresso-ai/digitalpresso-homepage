@@ -27,6 +27,7 @@ export default function HomePage() {
       <HomeApprovalSection />
       <HomeEmployeeSection />
       <HomeAiReportSection />
+      <HomeCctvSection />
     </main>
   );
 }
