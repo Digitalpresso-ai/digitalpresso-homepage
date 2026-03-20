@@ -3,6 +3,8 @@
 import { HomeAiReportSection } from '@/src/features/home/components/HomeAiReportSection/HomeAiReportSection';
 import { HomeApprovalSection } from '@/src/features/home/components/HomeApprovalSection/HomeApprovalSection';
 import { HomeCctvSection } from '@/src/features/home/components/HomeCctvSection/HomeCctvSection';
+import { HomeWebsiteSection } from '@/src/features/home/components/HomeWebsiteSection/HomeWebsiteSection';
+import { HomePricingSection } from '@/src/features/home/components/HomePricingSection/HomePricingSection';
 import { HomeEmployeeSection } from '@/src/features/home/components/HomeEmployeeSection/HomeEmployeeSection';
 import { HomeDashboardSection } from '@/src/features/home/components/HomeDashboardSection/HomeDashboardSection';
 import { HomeFeatureSection } from '@/src/features/home/components/HomeFeatureSection/HomeFeatureSection';
@@ -28,6 +30,8 @@ export default function HomePage() {
       <HomeEmployeeSection />
       <HomeAiReportSection />
       <HomeCctvSection />
+      <HomeWebsiteSection />
+      <HomePricingSection />
     </main>
   );
 }
