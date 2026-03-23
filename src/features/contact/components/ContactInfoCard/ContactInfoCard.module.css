@@ -1,0 +1,143 @@
+/* src/features/contact/components/ContactInfoCard/ContactInfoCard.module.css */
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #1a2340;
+  border-radius: var(--spacing-4, 1rem);
+  overflow: hidden;
+  min-height: 480px;
+  padding: var(--spacing-6, 24px);
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+}
+
+.title {
+  font-family: "Noto Sans", sans-serif;
+  font-size: var(--spacing-7, 1.75rem);
+  font-style: normal;
+  font-weight: 600;
+  line-height: 3rem; /* 48px */
+  color: var(--white, #fff);
+  margin-bottom: 8px;
+  word-break: keep-all;
+  text-shadow: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.subtitle {
+  font-family: "Noto Sans", sans-serif;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 145%; /* 2.175rem */
+  letter-spacing: -0.0075rem;
+  color: var(--white, #fff);
+  margin-bottom: 32px;
+  word-break: keep-all;
+  text-shadow: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.infoList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.infoItem {
+  display: flex;
+  gap: 16px;
+}
+
+.infoItemCenter {
+  align-items: center;
+}
+
+.infoItemStart {
+  align-items: flex-start;
+}
+
+.infoIcon {
+  color: var(--white, #fff);
+  flex-shrink: 0;
+}
+
+.infoIconTop {
+  padding-top: var(--spacing-1, 0.25rem);
+}
+
+.infoText {
+  font-family: "Noto Sans", sans-serif;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 145%;
+  letter-spacing: -0.00625rem;
+  color: var(--white, #fff);
+  word-break: keep-all;
+  text-shadow: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.imageWrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.buildingImage {
+  object-fit: cover;
+  object-position: center;
+}
+
+.imageOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%);
+}
+
+.logoWrapper {
+  position: relative;
+  z-index: 2;
+  align-self: flex-end;
+}
+
+.logo {
+  object-fit: contain;
+  object-position: right bottom;
+}
+
+/* Tablet */
+@media (max-width: 800px) {
+  .card {
+    min-height: 360px;
+    padding: 40px 32px 32px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .card {
+    min-height: 320px;
+    padding: 32px 24px 28px;
+  }
+
+  .title {
+    font-size: 22px;
+    margin-bottom: 12px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    margin-bottom: 28px;
+  }
+}

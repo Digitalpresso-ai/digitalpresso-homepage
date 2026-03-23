@@ -1,0 +1,260 @@
+/* src/features/contact/components/ContactForm/ContactForm.module.css */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 48px 40px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  height: 100%;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-heading);
+  word-break: keep-all;
+}
+
+.required {
+  color: var(--color-accent);
+  margin-left: 2px;
+}
+
+/* ---- 칩 선택 UI ---- */
+
+.chipGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-body);
+  background-color: #f7f8fa;
+  border: 1.5px solid #e2e5ec;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
+  word-break: keep-all;
+  line-height: 1.4;
+}
+
+.chip:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.chipSelected {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background-color: rgba(43, 127, 255, 0.08);
+  font-weight: 600;
+}
+
+/* ---- 텍스트 입력 ---- */
+
+.input,
+.textarea {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 14px;
+  color: var(--color-heading);
+  background-color: #f7f8fa;
+  border: 1px solid #e2e5ec;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.15s ease;
+  font-family: inherit;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: rgba(0, 0, 0, 0.35);
+}
+
+.input:focus,
+.textarea:focus {
+  border-color: var(--color-accent);
+  background-color: #ffffff;
+}
+
+.input[aria-invalid='true'],
+.textarea[aria-invalid='true'] {
+  border-color: #e53935;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 140px;
+  line-height: 1.6;
+}
+
+.errorText {
+  font-size: 12px;
+  color: #e53935;
+  word-break: keep-all;
+}
+
+/* ---- 개인정보 동의 ---- */
+
+.privacyRow {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.privacyLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  accent-color: var(--color-accent);
+  cursor: pointer;
+}
+
+.privacyText {
+  font-size: 14px;
+  color: var(--color-heading);
+  word-break: keep-all;
+  line-height: 1.5;
+}
+
+/* ---- 제출 오류 ---- */
+
+.submitError {
+  font-size: 13px;
+  color: #e53935;
+  word-break: keep-all;
+  padding: 10px 14px;
+  background-color: rgba(229, 57, 53, 0.06);
+  border-radius: 6px;
+  border-left: 3px solid #e53935;
+}
+
+/* ---- 제출 버튼 ---- */
+
+.submitButton {
+  margin-top: 8px;
+  padding: 14px 32px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: var(--color-accent);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, opacity 0.15s ease;
+  align-self: flex-start;
+  word-break: keep-all;
+}
+
+.submitButton:hover:not(:disabled) {
+  background-color: #1a6ae0;
+}
+
+.submitButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ---- 성공 화면 ---- */
+
+.successWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 48px 40px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  height: 100%;
+  min-height: 400px;
+  text-align: center;
+}
+
+.successIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.successMessage {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-heading);
+  word-break: keep-all;
+}
+
+.successSubMessage {
+  font-size: 14px;
+  color: var(--color-body);
+  word-break: keep-all;
+}
+
+/* ---- Tablet ---- */
+@media (max-width: 800px) {
+  .form {
+    padding: 40px 32px;
+    gap: 20px;
+  }
+
+  .successWrapper {
+    padding: 40px 32px;
+  }
+}
+
+/* ---- Mobile ---- */
+@media (max-width: 600px) {
+  .form {
+    padding: 32px 24px;
+    gap: 16px;
+  }
+
+  .row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .successWrapper {
+    padding: 32px 24px;
+    min-height: 300px;
+  }
+
+  .submitButton {
+    width: 100%;
+    text-align: center;
+  }
+
+  .chipGroup {
+    gap: 6px;
+  }
+
+  .chip {
+    font-size: 12px;
+    padding: 7px 13px;
+  }
+}

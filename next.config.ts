@@ -8,6 +8,14 @@ const nextConfig: NextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
   },
+  turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: [{ loader: '@svgr/webpack', options: { exportType: 'default' } }],
+        as: '*.js',
+      },
+    },
+  },
 };
 
 export default withNextIntl(nextConfig);

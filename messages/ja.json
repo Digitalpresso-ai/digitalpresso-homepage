@@ -77,5 +77,58 @@
         }
       }
     }
+  },
+  "contact": {
+    "title": "お問い合わせ",
+    "subtitle": "ご質問やご要望がございましたら、お気軽にお問い合わせください。",
+    "email": "digitalpresso@digitalpresso.ai",
+    "address": "韓国ソウル特別市江南区江南大路112길47",
+    "logoAlt": "Digital Presso ロゴ",
+    "buildingImageAlt": "Digital Presso オフィスビル",
+    "form": {
+      "inquiryType": {
+        "label": "お問い合わせの種類",
+        "options": {
+          "investment": "投資のお問い合わせ",
+          "service": "サービス導入のお問い合わせ",
+          "feature": "機能のお問い合わせ",
+          "error": "サービスエラーのお問い合わせ",
+          "other": "その他のお問い合わせ"
+        }
+      },
+      "organization": { "label": "所属", "placeholder": "会社・機関名を入力してください" },
+      "name": { "label": "お名前", "placeholder": "お名前を入力してください" },
+      "email": { "label": "メールアドレス", "placeholder": "メールアドレスを入力してください" },
+      "phone": { "label": "電話番号", "placeholder": "電話番号を入力してください（任意）" },
+      "source": {
+        "label": "お知りになったきっかけ",
+        "options": {
+          "exhibition": "展示会・見本市",
+          "sns": "SNS・E-mail",
+          "marketing": "マーケティング・広報",
+          "referral": "知人の紹介",
+          "other": "その他のチャネル"
+        }
+      },
+      "message": { "label": "お問い合わせ内容", "placeholder": "お問い合わせ内容を入力してください" },
+      "privacy": {
+        "label": "個人情報の収集・利用に同意します。",
+        "required": "個人情報への同意が必要です"
+      },
+      "submit": "送信する",
+      "errors": {
+        "inquiryTypeRequired": "お問い合わせの種類を選択してください",
+        "organizationRequired": "所属を入力してください",
+        "nameRequired": "お名前を入力してください",
+        "emailRequired": "メールアドレスを入力してください",
+        "emailInvalid": "有効なメールアドレスを入力してください",
+        "sourceRequired": "お知りになったきっかけを選択してください",
+        "messageRequired": "お問い合わせ内容を入力してください",
+        "privacyRequired": "個人情報への同意が必要です"
+      },
+      "successMessage": "お問い合わせが送信されました。",
+      "successSubMessage": "できるだけ早くご返答いたします。",
+      "errorMessage": "送信中にエラーが発生しました。もう一度お試しください。"
+    }
   }
 }
