@@ -1,1 +1,134 @@
-{}
+{
+  "common": {
+    "footer": {
+      "copyright": "Copyright ⓒ 2025 Digitalpresso All rights reserved.",
+      "nav": {
+        "aboutUs": "会社紹介",
+        "references": "導入事例",
+        "news": "ニュース",
+        "termsOfService": "利用規約",
+        "privacyPolicy": "プライバシーポリシー"
+      }
+    }
+  },
+  "home": {
+    "hero": {
+      "heading": "현장 기록의 새로운 표준,",
+      "body": "시공 품질과 안전 관리를 위한 데이터를 기록해 프로젝트 전반의 업무를 체계적으로 관리할 수 있습니다.",
+      "ctaButton": "문의하기",
+      "imageAlt": "건설현장 작업자가 리네임 DP 화면이 열린 휴대폰을 가리키는 모습",
+      "logoAlt": "RENAME DP 로고"
+    },
+    "feature": {
+      "headingPre": "현장인력이 바로 쓸 수",
+      "headingPost": " 있는 ",
+      "headingAccent1": "사용성",
+      "headingMid": "AI로 대체하는 ",
+      "headingAccent2": "전문성",
+      "headingSuffix": " 서류업무시간 ",
+      "headingAccent3": "10배 절감",
+      "workflowAlt": "현장에서 앱으로 기록하고 PC로 리포트를 확인하는 워크플로우"
+    },
+    "product": {
+      "features": {
+        "0": {
+          "subtitle": "重大災害の発生を予防する",
+          "title": "安全点検チェックリスト",
+          "body1": "現場ごとの主要な危険要素を事前に点検し、重大災害を予防します。",
+          "body2": "リスク評価の記録は電子署名で管理され、法的証明が可能です。また、危険要素の報告と対応プロセスを短縮します。",
+          "imageAlt": "安全点検チェックリスト機能の画面"
+        },
+        "1": {
+          "subtitle": "図面で施工・不具合記録を確認する",
+          "title": "プロジェクト管理",
+          "body1": "作業ごとの詳細内容や写真記録などのデータを補完・修正し、構造物別の写真情報を体系的に管理します。",
+          "body2": "リアルタイムの図面閲覧により、施工記録と不具合・補修履歴を一目で確認できます。",
+          "imageAlt": "図面ベースのプロジェクト管理機能の画面"
+        }
+      }
+    },
+    "news": {
+      "headingPart1": "현장 디지털전환",
+      "headingPart2a": " 더 이상 ",
+      "headingPart2b": "선택이 아니라 ",
+      "headingPart3": "생존 전략",
+      "headingPart4": "입니다.",
+      "subHeadingPart1": "문제는 ",
+      "subHeadingPart2": "규제 대응 리소스",
+      "subHeadingPart3": "입니다.",
+      "bodyLine1": "최근 규제 강화와 영상 촬영·모니터링 의무화로 현장에서는 더 많은 기록과 대응이 요구되고 있습니다.",
+      "bodyLine2": "RENAME DP는 현장에서 생성되는 사진, 영상, 기록을 정리해 규제 대응과 보고에 필요한 정보를 한눈에 관리할 수 있도록 돕습니다.",
+      "bodyLine3": "이를 통해 반복적인 업무를 줄이고, 프로젝트 전반의 흐름과 중요한 정보에 보다 집중할 수 있도록 돕습니다.",
+      "cards": {
+        "0": {
+          "title": "100억 이상 건설현장, 영상 촬영 의무 부담… 비용 부담은 누구 몫?",
+          "date": "2023.03",
+          "imageAlt": "공사 중인 아파트 건설현장"
+        },
+        "1": {
+          "title": "국토부, 건설현장 영상 촬영의무화, 모니터링 체계 구축 추진",
+          "date": "2024.04",
+          "imageAlt": "카메라로 촬영되는 건설현장"
+        },
+        "2": {
+          "title": "李 정부 산업안전 규제 강화… 건설업계 초긴장",
+          "date": "2025.08",
+          "imageAlt": "위험! 추락주의 표지판이 걸린 건설현장"
+        }
+      }
+    }
+  },
+  "contact": {
+    "title": "お問い合わせ",
+    "subtitle": "ご質問やご要望がございましたら、お気軽にお問い合わせください。",
+    "email": "digitalpresso@digitalpresso.ai",
+    "address": "ソウル特別市光津区光なる路478、光津経済ハブセンター 跳躍館 402号",
+    "logoAlt": "Digital Presso ロゴ",
+    "buildingImageAlt": "Digital Presso オフィスビル",
+    "form": {
+      "inquiryType": {
+        "label": "お問い合わせの種類",
+        "options": {
+          "investment": "投資のお問い合わせ",
+          "service": "サービス導入のお問い合わせ",
+          "feature": "機能のお問い合わせ",
+          "error": "サービスエラーのお問い合わせ",
+          "other": "その他のお問い合わせ"
+        }
+      },
+      "organization": { "label": "所属", "placeholder": "会社・機関名を入力してください" },
+      "name": { "label": "お名前", "placeholder": "お名前を入力してください" },
+      "email": { "label": "メールアドレス", "placeholder": "メールアドレスを入力してください" },
+      "phone": { "label": "電話番号", "placeholder": "電話番号を入力してください（任意）" },
+      "source": {
+        "label": "お知りになったきっかけ",
+        "options": {
+          "exhibition": "展示会・見本市",
+          "sns": "SNS・E-mail",
+          "marketing": "マーケティング・広報",
+          "referral": "知人の紹介",
+          "other": "その他のチャネル"
+        }
+      },
+      "message": { "label": "お問い合わせ内容", "placeholder": "お問い合わせ内容を入力してください" },
+      "privacy": {
+        "label": "個人情報の収集・利用に同意します。",
+        "required": "個人情報への同意が必要です"
+      },
+      "submit": "送信する",
+      "errors": {
+        "inquiryTypeRequired": "お問い合わせの種類を選択してください",
+        "organizationRequired": "所属を入力してください",
+        "nameRequired": "お名前を入力してください",
+        "emailRequired": "メールアドレスを入力してください",
+        "emailInvalid": "有効なメールアドレスを入力してください",
+        "sourceRequired": "お知りになったきっかけを選択してください",
+        "messageRequired": "お問い合わせ内容を入力してください",
+        "privacyRequired": "個人情報への同意が必要です"
+      },
+      "successMessage": "お問い合わせが送信されました。",
+      "successSubMessage": "できるだけ早くご返答いたします。",
+      "errorMessage": "送信中にエラーが発生しました。もう一度お試しください。"
+    }
+  }
+}

@@ -1,8 +1,21 @@
 import type { NextConfig } from "next";
+import createNextIntlPlugin from 'next-intl/plugin';
+
+const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 
 const nextConfig: NextConfig = {
-  /* config options here */
   reactCompiler: true,
+  images: {
+    formats: ['image/avif', 'image/webp'],
+  },
+  turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: [{ loader: '@svgr/webpack', options: { exportType: 'default' } }],
+        as: '*.js',
+      },
+    },
+  },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);

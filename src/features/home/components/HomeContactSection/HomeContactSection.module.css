@@ -1,0 +1,180 @@
+/* src/features/home/components/HomeContactSection/HomeContactSection.module.css */
+
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 64px;
+  padding: 160px 64px;
+  background: linear-gradient(to bottom, #eff6ff, #bedbff);
+  width: 100%;
+}
+
+/* ── 이미지 영역 ── */
+.imageWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0 160px;
+  width: 100%;
+  max-width: 1280px;
+}
+
+.mockupImage {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── 콘텐츠 영역 ── */
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 80px;
+}
+
+.textGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.heading {
+  font-family: 'Noto Sans KR', 'Noto Sans', sans-serif;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 1.4;
+  letter-spacing: 0px;
+  color: #1e2939;
+  text-align: center;
+  word-break: keep-all;
+}
+
+.contactList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.contactText {
+  font-family: 'Noto Sans KR', 'Noto Sans', sans-serif;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.45;
+  letter-spacing: -0.12px;
+  color: #1e2939;
+  word-break: keep-all;
+}
+
+/* ── CTA 버튼 ── */
+.ctaButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 32px;
+  background: #ffffff;
+  border-radius: 4px;
+  font-family: 'Noto Sans KR', 'Noto Sans', sans-serif;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 48px;
+  letter-spacing: 0px;
+  color: #193cb8;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+/* ── 태블릿 (800px ~ 1279px) ── */
+@media (min-width: 800px) and (max-width: 1279px) {
+  .section {
+    padding: 120px 64px 80px;
+  }
+
+  .imageWrapper {
+    padding: 0;
+  }
+
+  .content {
+    gap: 80px;
+  }
+
+  .heading {
+    font-size: 28px;
+    line-height: 1.5;
+    letter-spacing: -2px;
+    font-weight: 700;
+  }
+
+  .ctaButton {
+    font-size: 14px;
+    line-height: 24px;
+    padding: 8px 16px;
+    font-weight: 700;
+  }
+}
+
+/* ── 모바일 (≤799px) ── */
+@media (max-width: 799px) {
+  .section {
+    padding: 120px 20px 80px;
+    align-items: flex-start;
+  }
+
+  .imageWrapper {
+    padding: 0;
+  }
+
+  .content {
+    align-items: flex-start;
+    gap: 32px;
+    width: 100%;
+  }
+
+  .textGroup {
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .heading {
+    font-size: 28px;
+    line-height: 1.5;
+    letter-spacing: -2px;
+    font-weight: 700;
+    text-align: left;
+  }
+
+  .contactList {
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .contactItem {
+    width: 100%;
+  }
+
+  .ctaButton {
+    font-size: 14px;
+    line-height: 24px;
+    padding: 8px 16px;
+    font-weight: 700;
+    width: 100%;
+    white-space: normal;
+  }
+}
