@@ -1,0 +1,189 @@
+/* src/features/home/components/HomeFeatureSection/HomeFeatureSection.module.css */
+
+/* ── Section & Background ── */
+
+.section {
+  position: relative;
+  background: #eff6ff;
+  overflow: hidden;
+}
+
+.bgTexture {
+  object-fit: cover;
+  opacity: 0.4;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ── Inner container ── */
+
+.inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 80px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ── Text container ── */
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+/* ── Heading ── */
+
+.heading {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 48px;
+  color: var(--color-heading);
+  font-family: var(--font-noto-sans-kr), sans-serif;
+  margin: 0;
+}
+
+.accent {
+  color: var(--color-accent);
+}
+
+/* br visibility helpers */
+
+.brMobileOnly {
+  display: none;
+}
+
+.brTabletMobile {
+  display: none;
+}
+
+/* ── Tag list ── */
+
+.tagList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-start;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tag {
+  background: #dbeafe;
+  border: 0.75px solid #8ec5ff;
+  border-radius: 9999px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--color-heading);
+  line-height: 24px;
+  white-space: nowrap;
+  font-family: var(--font-noto-sans-kr), sans-serif;
+}
+
+.dotIndicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  height: 40px;
+  padding: 0 8px;
+}
+
+.dot {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 6px;
+  background: #99a1af;
+  flex-shrink: 0;
+}
+
+/* ── Workflow image (desktop / tablet) ── */
+
+.workflowImageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4096 / 1048;
+}
+
+.workflowImage {
+  object-fit: cover;
+}
+
+/* ── Flow image (mobile only) ── */
+
+.flowImageWrapper {
+  display: none;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 522 / 4096;
+}
+
+.flowImage {
+  object-fit: cover;
+}
+
+/* ── Tablet (800px ~ 1279px) ── */
+
+@media (min-width: 800px) and (max-width: 1279px) {
+  .heading {
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: -2px;
+  }
+
+  .brTabletMobile {
+    display: block;
+  }
+
+  .tagList {
+    gap: 8px;
+  }
+}
+
+/* ── Mobile (≤799px) ── */
+
+@media (max-width: 799px) {
+  .inner {
+    padding: 80px 32px;
+  }
+
+  .textContainer {
+    align-items: center;
+  }
+
+  .heading {
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: -2px;
+    text-align: center;
+  }
+
+  .brMobileOnly {
+    display: block;
+  }
+
+  .brTabletMobile {
+    display: block;
+  }
+
+  .tagList {
+    gap: 8px;
+    justify-content: center;
+  }
+
+  .workflowImageWrapper {
+    display: none;
+  }
+
+  .flowImageWrapper {
+    display: block;
+  }
+}

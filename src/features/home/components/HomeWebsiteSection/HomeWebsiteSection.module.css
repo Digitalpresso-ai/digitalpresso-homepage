@@ -1,0 +1,220 @@
+/* src/features/home/components/HomeWebsiteSection/HomeWebsiteSection.module.css */
+
+.section {
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 32px 64px 0px;
+  align-items: flex-end;
+}
+
+/* 이미지 컬럼 — 왼쪽 */
+.imageColumn {
+  flex: 1 0 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  min-width: 0;
+}
+
+.imageAlign {
+  flex: 1 0 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-top: 80px;
+  padding-left: 80px;
+  padding-right: 80px;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 478 / 798;
+  background: #ffffff;
+  box-shadow:
+    0px 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0px 10px 10px -5px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+.image {
+  object-fit: cover;
+  object-position: top;
+}
+
+/* 텍스트 컬럼 — 오른쪽 */
+.textColumn {
+  flex: 1 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  padding-bottom: 80px;
+}
+
+.textBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 454px;
+  max-width: 100%;
+}
+
+.headerContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.badge {
+  font-family: var(--font-noto-sans-kr), 'Noto Sans KR', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0px;
+  color: #ff6900;
+  word-break: keep-all;
+  margin: 0;
+}
+
+.titleGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.subtitle {
+  font-family: var(--font-noto-sans-kr), 'Noto Sans KR', sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 48px;
+  letter-spacing: 0px;
+  color: var(--color-heading);
+  word-break: keep-all;
+  margin: 0;
+}
+
+.title {
+  font-family: var(--font-noto-sans-kr), 'Noto Sans KR', sans-serif;
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0px;
+  color: #ff6900;
+  word-break: keep-all;
+  margin: 0;
+}
+
+.body {
+  font-family: var(--font-noto-sans-kr), 'Noto Sans KR', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: -0.12px;
+  color: var(--color-body);
+  word-break: keep-all;
+  margin: 0;
+}
+
+/* 태블릿 */
+@media (min-width: 800px) and (max-width: 1279px) {
+  .container {
+    padding: 32px 48px 0px;
+    gap: 32px;
+  }
+
+  .imageAlign {
+    padding-top: 32px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .textColumn {
+    flex: 0 0 305px;
+    padding-bottom: 40px;
+  }
+
+  .textBlock {
+    width: 100%;
+  }
+
+  .badge {
+    font-size: 14px;
+  }
+
+  .subtitle {
+    font-size: 18px;
+    line-height: 32px;
+  }
+
+  .title {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: -2px;
+  }
+
+  .body {
+    font-size: 16px;
+  }
+}
+
+/* 모바일 */
+@media (max-width: 799px) {
+  .container {
+    flex-direction: column;
+    gap: 32px;
+    padding: 16px 20px 0px;
+    align-items: flex-start;
+  }
+
+  .imageColumn {
+    width: 100%;
+    order: 2;
+  }
+
+  .imageAlign {
+    padding-top: 32px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .textColumn {
+    width: 100%;
+    order: 1;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding-bottom: 0;
+  }
+
+  .textBlock {
+    width: 100%;
+  }
+
+  .badge {
+    font-size: 14px;
+  }
+
+  .subtitle {
+    font-size: 18px;
+    line-height: 32px;
+  }
+
+  .title {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: -2px;
+  }
+
+  .body {
+    font-size: 16px;
+  }
+}
