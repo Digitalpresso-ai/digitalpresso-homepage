@@ -5,6 +5,7 @@ import { HomeApprovalSection } from '@/src/features/home/components/HomeApproval
 import { HomeCctvSection } from '@/src/features/home/components/HomeCctvSection/HomeCctvSection';
 import { HomeWebsiteSection } from '@/src/features/home/components/HomeWebsiteSection/HomeWebsiteSection';
 import { HomePricingSection } from '@/src/features/home/components/HomePricingSection/HomePricingSection';
+import { HomeContactSection } from '@/src/features/home/components/HomeContactSection/HomeContactSection';
 import { HomeEmployeeSection } from '@/src/features/home/components/HomeEmployeeSection/HomeEmployeeSection';
 import { HomeDashboardSection } from '@/src/features/home/components/HomeDashboardSection/HomeDashboardSection';
 import { HomeFeatureSection } from '@/src/features/home/components/HomeFeatureSection/HomeFeatureSection';
@@ -30,8 +31,9 @@ export default function HomePage() {
       <HomeEmployeeSection />
       <HomeAiReportSection />
       <HomeCctvSection />
-      <HomeWebsiteSection />
       <HomePricingSection />
+      <HomeWebsiteSection />
+      <HomeContactSection />
     </main>
   );
 }

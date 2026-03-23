@@ -1,0 +1,287 @@
+/* src/features/home/components/HomePricingSection/HomePricingSection.module.css */
+
+/* ===== Section ===== */
+.section {
+  background: #ffffff;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 48px 64px 64px;
+}
+
+/* ===== Header ===== */
+.headerContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.headerLine1 {
+  font-family: var(--font-noto-sans-kr), 'Noto Sans KR', sans-serif;
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 32px;
+  letter-spacing: 0px;
+  color: var(--color-heading);
+  word-break: keep-all;
+  margin: 0;
+  padding-bottom: 8px;
+}
+
+.headerLine2 {
+  font-family: var(--font-noto-sans-kr), 'Noto Sans KR', sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 48px;
+  letter-spacing: 0px;
+  color: var(--color-heading);
+  word-break: keep-all;
+  margin: 0;
+}
+
+.headerAccent {
+  color: var(--color-accent);
+}
+
+/* ===== Cards Grid ===== */
+.cardsContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  align-items: stretch;
+}
+
+/* ===== Card ===== */
+.card {
+  flex: 1 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 16px 24px 24px;
+  border-radius: 16px;
+  border-width: 1px;
+  border-style: solid;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.cardBlue {
+  background-color: #eff6ff;
+  border-color: #2b7fff;
+}
+
+.cardOrange {
+  background-color: #fff7ed;
+  border-color: #ff6900;
+}
+
+.cardGreen {
+  background-color: #f0fdf4;
+  border-color: #00a63e;
+}
+
+/* ===== Card Title ===== */
+.cardTitle {
+  font-family: var(--font-noto-sans-kr), 'Noto Sans KR', sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 48px;
+  letter-spacing: 0px;
+  word-break: keep-all;
+  margin: 0;
+}
+
+.colorBlue {
+  color: #2b7fff;
+}
+
+.colorOrange {
+  color: #ff6900;
+}
+
+.colorGreen {
+  color: #00a63e;
+}
+
+/* ===== Recommend Section ===== */
+.recommendSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-family: var(--font-noto-sans-kr), 'Noto Sans KR', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--color-body);
+  word-break: keep-all;
+  margin: 0;
+}
+
+.recommendText {
+  font-family: var(--font-noto-sans-kr), 'Noto Sans KR', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--color-body);
+  word-break: keep-all;
+  margin: 0;
+}
+
+.indented {
+  padding-left: 40px;
+}
+
+/* ===== Feature Section ===== */
+.featureSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.featureList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.featureItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.featureText {
+  font-family: var(--font-noto-sans-kr), 'Noto Sans KR', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--color-body);
+  word-break: keep-all;
+}
+
+/* ===== Check Icon ===== */
+.checkIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 9999px;
+  flex-shrink: 0;
+}
+
+.checkBlue {
+  background-color: #2b7fff;
+}
+
+.checkOrange {
+  background-color: #ff6900;
+}
+
+.checkGreen {
+  background-color: #00a63e;
+}
+
+/* ===== 태블릿 (800px ~ 1279px) ===== */
+@media (min-width: 800px) and (max-width: 1279px) {
+  .container {
+    padding: 32px 48px 32px;
+  }
+
+  .headerLine1 {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: -2px;
+  }
+
+  .headerLine2 {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 32px;
+    letter-spacing: 0px;
+  }
+
+  .cardTitle {
+    font-size: 18px;
+    line-height: 32px;
+  }
+
+  .label,
+  .recommendText,
+  .featureText {
+    font-size: 14px;
+  }
+
+  .checkIcon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .indented {
+    padding-left: 28px;
+  }
+}
+
+/* ===== 모바일 (~ 799px) ===== */
+@media (max-width: 799px) {
+  .container {
+    padding: 48px 20px 64px;
+  }
+
+  .headerLine1 {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: -2px;
+  }
+
+  .headerLine2 {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 32px;
+    letter-spacing: 0px;
+  }
+
+  .cardsContainer {
+    flex-direction: column;
+  }
+
+  .card {
+    flex: none;
+    width: 100%;
+    gap: 16px;
+  }
+
+  .cardTitle {
+    font-size: 18px;
+    line-height: 32px;
+  }
+
+  .label,
+  .recommendText,
+  .featureText {
+    font-size: 14px;
+  }
+
+  .checkIcon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .indented {
+    padding-left: 28px;
+  }
+}
