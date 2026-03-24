@@ -77,5 +77,58 @@
         }
       }
     }
+  },
+  "contact": {
+    "title": "문의하기",
+    "subtitle": "궁금하신 점이나 요청 사항을 남겨주시면 빠르게 답변드리겠습니다.",
+    "email": "digitalpresso@digitalpresso.ai",
+    "address": "서울특별시 광진구 광나루로 478, 광진경제허브센터 도약관 402호",
+    "logoAlt": "Digital Presso 로고",
+    "buildingImageAlt": "Digital Presso 사옥 건물",
+    "form": {
+      "inquiryType": {
+        "label": "문의 유형",
+        "options": {
+          "investment": "투자 문의",
+          "service": "서비스 도입 문의",
+          "feature": "기능 문의",
+          "error": "서비스 오류 문의",
+          "other": "기타 문의"
+        }
+      },
+      "organization": { "label": "소속", "placeholder": "회사/기관명을 입력해 주세요" },
+      "name": { "label": "이름", "placeholder": "이름을 입력해 주세요" },
+      "email": { "label": "이메일", "placeholder": "이메일을 입력해 주세요" },
+      "phone": { "label": "연락처", "placeholder": "연락처를 입력해 주세요 (선택)" },
+      "source": {
+        "label": "유입 경로",
+        "options": {
+          "exhibition": "전시/박람회",
+          "sns": "SNS·E-mail",
+          "marketing": "마케팅&홍보",
+          "referral": "지인소개",
+          "other": "기타채널"
+        }
+      },
+      "message": { "label": "문의 내용", "placeholder": "문의 내용을 입력해 주세요" },
+      "privacy": {
+        "label": "개인정보 수집 및 이용에 동의합니다.",
+        "required": "개인정보 동의가 필요합니다"
+      },
+      "submit": "문의 보내기",
+      "errors": {
+        "inquiryTypeRequired": "문의 유형을 선택해 주세요",
+        "organizationRequired": "소속을 입력해 주세요",
+        "nameRequired": "이름을 입력해 주세요",
+        "emailRequired": "이메일을 입력해 주세요",
+        "emailInvalid": "올바른 이메일 형식이 아닙니다",
+        "sourceRequired": "유입 경로를 선택해 주세요",
+        "messageRequired": "문의 내용을 입력해 주세요",
+        "privacyRequired": "개인정보 동의가 필요합니다"
+      },
+      "successMessage": "문의가 성공적으로 전송되었습니다.",
+      "successSubMessage": "빠른 시일 내에 답변드리겠습니다.",
+      "errorMessage": "전송 중 오류가 발생했습니다. 다시 시도해 주세요."
+    }
   }
 }

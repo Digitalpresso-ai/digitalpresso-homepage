@@ -1,0 +1,56 @@
+/* app/[locale]/contact/ContactPage.module.css */
+
+.page {
+  min-height: 100vh;
+  background-color: #f4f6fb;
+  padding: 80px 0 120px;
+}
+
+.inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-16, 4rem);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-8, 2rem);
+  align-items: stretch;
+}
+
+/* Tablet: 800px */
+@media (max-width: 1024px) {
+  .inner {
+    padding: 0 32px;
+  }
+
+  .grid {
+    grid-template-columns: 360px 1fr;
+  }
+}
+
+@media (max-width: 800px) {
+  .page {
+    padding: 60px 0 80px;
+  }
+
+  .inner {
+    padding: 0 24px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile: 320px */
+@media (max-width: 480px) {
+  .page {
+    padding: 40px 0 60px;
+  }
+
+  .inner {
+    padding: 0 16px;
+  }
+}
