@@ -21,14 +21,16 @@ export async function Footer() {
     <footer className={styles.footer}>
       <div className={styles.inner}>
         <div className={styles.content}>
-          <Image
-            src="/images/dp_logo_eng.svg"
-            alt="디지털프레소 로고"
-            width={264}
-            height={93}
-            sizes="(max-width: 1279px) 200px, 264px"
-            className={styles.logo}
-          />
+          <Link href="/">
+            <Image
+              src="/images/dp_logo_eng.svg"
+              alt="디지털프레소 로고"
+              width={264}
+              height={93}
+              sizes="(max-width: 1279px) 200px, 264px"
+              className={styles.logo}
+            />
+          </Link>
           <small className={styles.copyright}>{t("copyright")}</small>
         </div>
 
