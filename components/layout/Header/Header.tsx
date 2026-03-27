@@ -6,7 +6,7 @@ import { Link } from '@/i18n/navigation';
 import styles from './Header.module.css';
 
 const NAV_LINKS = [
-  { label: '제품 소개', href: '/products' },
+  { label: '제품 소개', href: '/' },
   { label: '회사 소개', href: '/about-us' },
   { label: '고객 사례', href: '/references' },
   { label: '소식', href: '/news' },
