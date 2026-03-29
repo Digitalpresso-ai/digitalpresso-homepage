@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Noto_Sans_KR } from "next/font/google";
+import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
+import GAPageTracker from "@/components/analytics/GAPageTracker";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -31,6 +33,8 @@ export default function RootLayout({
   return (
     <html>
       <body className={`${geistSans.variable} ${geistMono.variable} ${notoSansKR.variable}`}>
+        <GoogleAnalytics />
+        <GAPageTracker />
         {children}
       </body>
     </html>
