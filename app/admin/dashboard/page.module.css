@@ -1,0 +1,236 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+  max-width: 1100px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-heading);
+}
+
+/* Stats */
+.period {
+  font-size: 0.8125rem;
+  color: var(--color-body);
+}
+
+.gaError {
+  background: #fff5f5;
+  border: 1px solid #fed7d7;
+  border-radius: 8px;
+  padding: var(--spacing-4);
+  font-size: 0.875rem;
+  color: #c53030;
+}
+
+.gaError code {
+  background: #fff;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 0.8125rem;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--spacing-3);
+}
+
+.statCard {
+  background: #fff;
+  border-radius: 10px;
+  padding: var(--spacing-6);
+  border-top: 3px solid transparent;
+}
+
+.statCard_blue { border-color: var(--color-brand); }
+.statCard_green { border-color: #38a169; }
+.statCard_gray { border-color: #a0aec0; }
+
+.statValue {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--color-heading);
+  line-height: 1;
+  margin-bottom: var(--spacing-2);
+}
+
+.statLabel {
+  font-size: 0.875rem;
+  color: var(--color-body);
+}
+
+/* GA Placeholder */
+.gaPlaceholder {
+  background: #fff;
+  border-radius: 10px;
+  border: 1.5px dashed #e2e8f0;
+}
+
+.gaPlaceholderInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-12) var(--spacing-8);
+  text-align: center;
+  gap: var(--spacing-3);
+}
+
+.gaIcon { font-size: 2.5rem; }
+
+.gaTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-heading);
+}
+
+.gaDesc {
+  font-size: 0.875rem;
+  color: var(--color-body);
+  max-width: 480px;
+  line-height: 1.65;
+}
+
+.gaDesc code {
+  background: #f1f5f9;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-size: 0.8125rem;
+}
+
+.gaCode {
+  background: #1e2939;
+  color: #a0aec0;
+  padding: var(--spacing-2) var(--spacing-4);
+  border-radius: 6px;
+  font-size: 0.8125rem;
+  margin-top: var(--spacing-2);
+}
+
+/* Recent articles */
+.recentSection {
+  background: #fff;
+  border-radius: 10px;
+  padding: var(--spacing-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-5);
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sectionTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-heading);
+}
+
+.newBtn {
+  padding: var(--spacing-2) var(--spacing-4);
+  background: var(--color-brand);
+  color: #fff;
+  border-radius: 6px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.newBtn:hover { background: #1431a0; }
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-10) 0;
+  color: var(--color-body);
+  font-size: 0.9375rem;
+}
+
+.emptyLink {
+  color: var(--color-accent);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.table th {
+  text-align: left;
+  padding: var(--spacing-2) var(--spacing-3);
+  color: var(--color-body);
+  font-weight: 500;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.table td {
+  padding: var(--spacing-3) var(--spacing-3);
+  border-bottom: 1px solid #f7fafc;
+  color: var(--color-heading);
+}
+
+.table tr:last-child td { border-bottom: none; }
+
+.titleCell {
+  font-weight: 500;
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.category {
+  background: #eef2ff;
+  color: var(--color-brand);
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.status {
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.published {
+  background: #f0fff4;
+  color: #276749;
+}
+
+.draft {
+  background: #f7fafc;
+  color: #718096;
+}
+
+.dateCell { color: var(--color-body); }
+
+.editLink {
+  color: var(--color-accent);
+  font-weight: 500;
+  font-size: 0.8125rem;
+  text-decoration: none;
+}
+
+.editLink:hover { text-decoration: underline; }
