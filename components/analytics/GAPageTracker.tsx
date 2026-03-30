@@ -17,6 +17,7 @@ function Tracker() {
 
   useEffect(() => {
     if (!GA_ID || typeof window?.gtag === 'undefined') return;
+    if (pathname.startsWith('/admin')) return;
     const url = pathname + (searchParams.toString() ? `?${searchParams.toString()}` : '');
     window.gtag('config', GA_ID, { page_path: url });
   }, [pathname, searchParams]);
