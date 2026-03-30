@@ -1,11 +1,11 @@
 // src/features/news/components/NewsArticleGrid/NewsArticleGrid.tsx
 
 import { NewsArticleCard } from '../NewsArticleCard/NewsArticleCard';
-import type { Article } from '../../types/article.types';
+import type { NewsArticle } from '../../types/article.types';
 import styles from './NewsArticleGrid.module.css';
 
 interface NewsArticleGridProps {
-  articles: Article[];
+  articles: NewsArticle[];
 }
 
 export function NewsArticleGrid({ articles }: NewsArticleGridProps) {

@@ -2,11 +2,11 @@
 
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
-import type { Article } from "../../types/article.types";
+import type { NewsArticle } from "../../types/article.types";
 import styles from "./NewsArticleCard.module.css";
 
 interface NewsArticleCardProps {
-  article: Article;
+  article: NewsArticle;
 }
 
 export function NewsArticleCard({ article }: NewsArticleCardProps) {

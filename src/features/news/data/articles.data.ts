@@ -1,8 +1,9 @@
 // src/features/news/data/articles.data.ts — static article data (추후 API로 교체)
 
-import type { Article } from "../types/article.types";
+import type { StaticCompanyArticle, NewsArticle } from "../types/article.types";
+import { mapStaticCompanyArticleToNewsArticle } from "../mappers/article.mapper";
 
-export const articles: Article[] = [
+const articles: StaticCompanyArticle[] = [
   {
     id: "11",
     title:
@@ -355,12 +356,15 @@ export const articles: Article[] = [
   },
 ];
 
-export function getArticleById(id: string): Article | undefined {
-  return articles.find((a) => a.id === id);
+export function getArticleById(id: string): NewsArticle | undefined {
+  const found = articles.find((a) => a.id === id);
+  return found ? mapStaticCompanyArticleToNewsArticle(found) : undefined;
 }
 
-export function getArticlesByCategory(category: string): Article[] {
-  return articles.filter((a) => a.category === category);
+export function getArticlesByCategory(category: string): NewsArticle[] {
+  return articles
+    .filter((a) => a.category === category)
+    .map(mapStaticCompanyArticleToNewsArticle);
 }
 
 export function getAdjacentArticles(id: string, category: string) {

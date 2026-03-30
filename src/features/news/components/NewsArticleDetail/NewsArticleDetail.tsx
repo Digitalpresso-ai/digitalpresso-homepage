@@ -4,13 +4,13 @@ import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import { getTranslations } from 'next-intl/server';
 import { ArticleNavLink } from '../ArticleNavLink/ArticleNavLink';
-import type { Article } from '../../types/article.types';
+import type { NewsArticle } from '../../types/article.types';
 import styles from './NewsArticleDetail.module.css';
 
 interface NewsArticleDetailProps {
-  article: Article;
-  prevArticle?: Article;
-  nextArticle?: Article;
+  article: NewsArticle;
+  prevArticle?: NewsArticle;
+  nextArticle?: NewsArticle;
 }
 
 export async function NewsArticleDetail({
