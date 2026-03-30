@@ -7,11 +7,11 @@ import Link from '@tiptap/extension-link';
 import Placeholder from '@tiptap/extension-placeholder';
 import { useState, useTransition } from 'react';
 import { createArticle, updateArticle } from '@/src/features/admin/actions/article.actions';
-import type { Article, ArticleFormData } from '@/src/features/news/types/article.types';
+import type { ArticleEntity, ArticleFormData } from '@/src/features/news/types/article.types';
 import styles from './ArticleEditor.module.css';
 
 interface Props {
-  article?: Article;
+  article?: ArticleEntity;
 }
 
 function slugify(text: string) {

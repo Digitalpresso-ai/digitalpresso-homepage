@@ -1,7 +1,7 @@
 import { createClient } from '@/lib/supabase/server';
-import type { Article } from '../types/article.types';
+import type { ArticleEntity } from '../types/article.types';
 
-export async function getPublishedArticles(): Promise<Article[]> {
+export async function getPublishedArticles(): Promise<ArticleEntity[]> {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from('articles')
@@ -13,7 +13,7 @@ export async function getPublishedArticles(): Promise<Article[]> {
   return data ?? [];
 }
 
-export async function getArticleBySlug(slug: string): Promise<Article | null> {
+export async function getArticleBySlug(slug: string): Promise<ArticleEntity | null> {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from('articles')
@@ -26,7 +26,7 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
   return data;
 }
 
-export async function getArticleById(id: string): Promise<Article | null> {
+export async function getArticleById(id: string): Promise<ArticleEntity | null> {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from('articles')

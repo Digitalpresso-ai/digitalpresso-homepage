@@ -78,6 +78,23 @@
       }
     }
   },
+  "newsPage": {
+    "hero": {
+      "headingLine1": "Stay Informed with",
+      "headingLine2": "Our Latest Updates",
+      "subtitleLine1": "우리 팀이 전하는 최신 뉴스, 혁신 소식 및 업계 인사이트를 만나보세요.",
+      "subtitleLine2": "중요한 업데이트를 빠르게 확인하고 앞서 나가세요.",
+      "tabs": {
+        "company": "회사 소식",
+        "construction": "건설 소식",
+        "technology": "기술 소식"
+      }
+    },
+    "detail": {
+      "sourceLabel": "원문보기 : ",
+      "listButton": "목록"
+    }
+  },
   "contact": {
     "title": "문의하기",
     "subtitle": "궁금하신 점이나 요청 사항을 남겨주시면 빠르게 답변드리겠습니다.",

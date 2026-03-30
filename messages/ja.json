@@ -78,6 +78,23 @@
       }
     }
   },
+  "newsPage": {
+    "hero": {
+      "headingLine1": "Stay Informed with",
+      "headingLine2": "Our Latest Updates",
+      "subtitleLine1": "チームからの最新ニュース、イノベーション、業界インサイトをお届けします。",
+      "subtitleLine2": "重要なアップデートをいち早くチェックしましょう。",
+      "tabs": {
+        "company": "企業ニュース",
+        "construction": "建設ニュース",
+        "technology": "技術ニュース"
+      }
+    },
+    "detail": {
+      "sourceLabel": "原文を見る：",
+      "listButton": "一覧"
+    }
+  },
   "contact": {
     "title": "お問い合わせ",
     "subtitle": "ご質問やご要望がございましたら、お気軽にお問い合わせください。",
