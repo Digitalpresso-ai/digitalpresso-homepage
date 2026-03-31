@@ -7,21 +7,13 @@ export interface ArticleImage {
   height: number;
 }
 
-export type ArticleStatus = "draft" | "published";
-
 // CMS(Supabase) 엔티티 — DB 응답 기준
 export interface ArticleEntity {
   id: string;
   title: string;
-  slug: string;
   content: string;
-  excerpt: string | null;
-  category: string;
-  status: ArticleStatus;
-  cover_image_url: string | null;
-  published_at: string | null;
   created_at: string;
-  updated_at: string;
+  cover_img_url: string | null;
 }
 
 // 회사 소식 정적 데이터 기준
@@ -61,10 +53,6 @@ export interface NewsArticle {
 export type ArticleFormData = Pick<
   ArticleEntity,
   | "title"
-  | "slug"
   | "content"
-  | "excerpt"
-  | "category"
-  | "status"
-  | "cover_image_url"
+  | "cover_img_url"
 >;

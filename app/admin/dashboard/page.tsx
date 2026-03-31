@@ -58,7 +58,6 @@ export default async function DashboardPage() {
           <StatCard label="페이지뷰" value={ga.overview.pageViews.toLocaleString()} />
           <StatCard label="이탈률" value={`${ga.overview.bounceRate}%`} />
           <StatCard label="전체 아티클" value={String(articleStats.total)} />
-          <StatCard label="발행됨" value={String(articleStats.published)} color="green" />
         </section>
       )}
 
@@ -83,8 +82,6 @@ export default async function DashboardPage() {
             <thead>
               <tr>
                 <th>제목</th>
-                <th>카테고리</th>
-                <th>상태</th>
                 <th>작성일</th>
                 <th></th>
               </tr>
@@ -93,12 +90,6 @@ export default async function DashboardPage() {
               {recentArticles.map((article) => (
                 <tr key={article.id}>
                   <td className={styles.titleCell}>{article.title}</td>
-                  <td><span className={styles.category}>{article.category}</span></td>
-                  <td>
-                    <span className={`${styles.status} ${styles[article.status]}`}>
-                      {article.status === 'published' ? '발행됨' : '임시저장'}
-                    </span>
-                  </td>
                   <td className={styles.dateCell}>
                     {new Date(article.created_at).toLocaleDateString('ko-KR')}
                   </td>

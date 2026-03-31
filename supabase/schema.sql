@@ -4,35 +4,13 @@
 CREATE TABLE IF NOT EXISTS articles (
   id             UUID        DEFAULT gen_random_uuid() PRIMARY KEY,
   title          TEXT        NOT NULL,
-  slug           TEXT        NOT NULL UNIQUE,
   content        TEXT        NOT NULL DEFAULT '',
-  excerpt        TEXT,
-  category       TEXT        NOT NULL DEFAULT 'news',
-  status         TEXT        NOT NULL DEFAULT 'draft'
-                             CHECK (status IN ('draft', 'published')),
-  cover_image_url TEXT,
-  published_at   TIMESTAMPTZ,
-  created_at     TIMESTAMPTZ DEFAULT NOW(),
-  updated_at     TIMESTAMPTZ DEFAULT NOW()
+  cover_img_url  TEXT,
+  created_at     TIMESTAMPTZ DEFAULT NOW()
 );
 
--- updated_at 자동 갱신 트리거
-CREATE OR REPLACE FUNCTION update_updated_at_column()
-RETURNS TRIGGER AS $$
-BEGIN
-  NEW.updated_at = NOW();
-  RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE OR REPLACE TRIGGER update_articles_updated_at
-  BEFORE UPDATE ON articles
-  FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
-
 -- 인덱스
-CREATE INDEX IF NOT EXISTS articles_status_idx ON articles (status);
-CREATE INDEX IF NOT EXISTS articles_slug_idx   ON articles (slug);
-CREATE INDEX IF NOT EXISTS articles_published_at_idx ON articles (published_at DESC);
+CREATE INDEX IF NOT EXISTS articles_created_at_idx ON articles (created_at DESC);
 
 -- RLS (Row Level Security)
 ALTER TABLE articles ENABLE ROW LEVEL SECURITY;
@@ -45,7 +23,34 @@ CREATE POLICY "Authenticated users can manage articles"
   WITH CHECK (true);
 
 -- 비로그인 사용자는 published 아티클만 조회 가능
-CREATE POLICY "Public can read published articles"
+CREATE POLICY "Public can read articles"
   ON articles FOR SELECT
   TO anon
-  USING (status = 'published');
+  USING (true);
+
+-- =====================================================
+-- Article images (TipTap uploads)
+CREATE TABLE IF NOT EXISTS article_images (
+  id uuid primary key default gen_random_uuid(),
+  article_id uuid references articles(id) on delete cascade,
+  image_url text not null,
+  alt text,
+  width integer,
+  height integer,
+  caption text,
+  sort_order integer not null default 0,
+  created_at timestamptz default now()
+);
+
+CREATE INDEX IF NOT EXISTS article_images_article_id_idx
+  ON article_images (article_id);
+CREATE INDEX IF NOT EXISTS article_images_sort_order_idx
+  ON article_images (article_id, sort_order);
+
+ALTER TABLE article_images ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Authenticated users can manage article_images"
+  ON article_images FOR ALL
+  TO authenticated
+  USING (true)
+  WITH CHECK (true);

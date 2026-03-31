@@ -144,6 +144,78 @@
   color: #cbd5e0;
 }
 
+/* Cover image selector */
+.coverSection {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: var(--spacing-3);
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.coverHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.coverTitle {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-heading);
+}
+
+.coverClearBtn {
+  background: transparent;
+  border: none;
+  color: #718096;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.coverClearBtn:hover {
+  text-decoration: underline;
+}
+
+.coverHint {
+  font-size: 0.85rem;
+  color: #a0aec0;
+  margin: 0;
+}
+
+.coverGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: var(--spacing-3);
+}
+
+.coverItem {
+  border: 2px solid transparent;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 0;
+  background: #f7fafc;
+  cursor: pointer;
+  transition: border-color 0.15s, transform 0.15s;
+}
+
+.coverItem img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  display: block;
+}
+
+.coverItem:hover {
+  transform: translateY(-1px);
+}
+
+.coverItemActive {
+  border-color: var(--color-brand);
+}
+
 /* Editor */
 .editorWrapper {
   border: 1px solid #e2e8f0;
