@@ -1,34 +1,35 @@
 // src/features/references/components/ReferencesIndustriesSection/ReferencesIndustriesSection.tsx
 
+import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import styles from './ReferencesIndustriesSection.module.css';
 
-const ROW1 = [
-  { src: '/images/references-industry-manufacturing.png', alt: '제조업 현장을 보여주는 배경' },
-  { src: '/images/references-industry-construction.png',  alt: '건설자재 현장을 보여주는 배경' },
+const ROW1_SOURCES = [
+  '/images/references-industry-manufacturing.png',
+  '/images/references-industry-construction.png',
 ];
 
-const ROW2 = [
-  { src: '/images/references-industry-logistics.png',     alt: '물류 현장을 보여주는 배경' },
-  { src: '/images/references-industry-semiconductor.png', alt: '반도체 현장을 보여주는 배경' },
+const ROW2_SOURCES = [
+  '/images/references-industry-logistics.png',
+  '/images/references-industry-semiconductor.png',
 ];
 
-export function ReferencesIndustriesSection() {
+export async function ReferencesIndustriesSection() {
+  const t = await getTranslations('referencesPage.industries');
+  const row1Alts = t.raw('row1Alts') as string[];
+  const row2Alts = t.raw('row2Alts') as string[];
+
   return (
     <section className={styles.section}>
       <div className={styles.container}>
-        <h2 className={styles.heading}>
-          제조, 물류, 건설자재, 불량검출 등 다양한 산업 영역에서 적용 가능하여,
-          <br />
-          운영 효율성과 품질 관리를 동시에 향상 시킬 수 있습니다.
-        </h2>
+        <h2 className={styles.heading}>{t('heading')}</h2>
 
         <div className={styles.row}>
-          {ROW1.map((img) => (
-            <div key={img.src} className={styles.item}>
+          {ROW1_SOURCES.map((src, index) => (
+            <div key={src} className={styles.item}>
               <Image
-                src={img.src}
-                alt={img.alt}
+                src={src}
+                alt={row1Alts[index]}
                 width={600}
                 height={400}
                 className={styles.image}
@@ -39,11 +40,11 @@ export function ReferencesIndustriesSection() {
         </div>
 
         <div className={styles.row}>
-          {ROW2.map((img) => (
-            <div key={img.src} className={styles.item}>
+          {ROW2_SOURCES.map((src, index) => (
+            <div key={src} className={styles.item}>
               <Image
-                src={img.src}
-                alt={img.alt}
+                src={src}
+                alt={row2Alts[index]}
                 width={600}
                 height={400}
                 className={styles.image}

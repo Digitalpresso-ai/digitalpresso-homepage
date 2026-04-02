@@ -1,65 +1,37 @@
 // src/features/home/components/HomePricingSection/HomePricingSection.tsx
 
+import { getTranslations } from 'next-intl/server';
 import styles from './HomePricingSection.module.css';
 
-interface PlanFeature {
-  text: string;
-}
-
 interface PricingPlan {
-  id: string;
+  id: 'basic' | 'premium' | 'enterprise';
   tier: string;
-  name: string;
   colorClass: string;
   cardClass: string;
   checkClass: string;
-  recommendation: string;
-  features: PlanFeature[];
 }
 
 const PRICING_PLANS: PricingPlan[] = [
   {
     id: 'basic',
     tier: 'BASIC',
-    name: '기본형',
     colorClass: styles.colorBlue,
     cardClass: styles.cardBlue,
     checkClass: styles.checkBlue,
-    recommendation: '단일 프로젝트 진행자, 소규모 시공사',
-    features: [
-      { text: '프로젝트 현황·진척 관리' },
-      { text: '프로젝트 행정·문서 관리' },
-      { text: '품질·하자 관리' },
-    ],
   },
   {
     id: 'premium',
     tier: 'PREMIUM',
-    name: '고급형',
     colorClass: styles.colorOrange,
     cardClass: styles.cardOrange,
     checkClass: styles.checkOrange,
-    recommendation: '복수 프로젝트, 중견 건설사',
-    features: [
-      { text: '기본형 주요 기능 탑재' },
-      { text: '현장 커뮤니케이션' },
-      { text: '안전 관리' },
-      { text: 'AI 자동 작성 전자 결재 시스템' },
-    ],
   },
   {
     id: 'enterprise',
     tier: 'ENTERPRISE',
-    name: '기업맞춤형',
     colorClass: styles.colorGreen,
     cardClass: styles.cardGreen,
     checkClass: styles.checkGreen,
-    recommendation: '대형 건설사, 공공기관 등',
-    features: [
-      { text: '고급형 주요 기능 탑재' },
-      { text: 'AI 위험관리 시스템' },
-      { text: '고객 맞춤형 기능' },
-    ],
   },
 ];
 
@@ -79,27 +51,29 @@ function CheckIcon({ className }: { className: string }) {
   );
 }
 
-function PricingCard({ plan }: { plan: PricingPlan }) {
+function PricingCard({ plan, t }: { plan: PricingPlan; t: Awaited<ReturnType<typeof getTranslations>> }) {
+  const features = t.raw(`plans.${plan.id}.features`) as string[];
+
   return (
     <div className={`${styles.card} ${plan.cardClass}`}>
       <h3 className={`${styles.cardTitle} ${plan.colorClass}`}>
-        {plan.tier} - {plan.name}
+        {plan.tier} - {t(`plans.${plan.id}.name`)}
       </h3>
 
       <div className={styles.recommendSection}>
-        <p className={styles.label}>이런 분들에게 추천해요:</p>
+        <p className={styles.label}>{t('labels.recommendation')}</p>
         <p className={`${styles.recommendText} ${styles.indented}`}>
-          {plan.recommendation}
+          {t(`plans.${plan.id}.recommendation`)}
         </p>
       </div>
 
       <div className={styles.featureSection}>
-        <p className={styles.label}>주요 기능:</p>
+        <p className={styles.label}>{t('labels.features')}</p>
         <ul className={styles.featureList}>
-          {plan.features.map((feature) => (
-            <li key={feature.text} className={styles.featureItem}>
+          {features.map((feature) => (
+            <li key={feature} className={styles.featureItem}>
               <CheckIcon className={plan.checkClass} />
-              <span className={styles.featureText}>{feature.text}</span>
+              <span className={styles.featureText}>{feature}</span>
             </li>
           ))}
         </ul>
@@ -108,21 +82,23 @@ function PricingCard({ plan }: { plan: PricingPlan }) {
   );
 }
 
-export function HomePricingSection() {
+export async function HomePricingSection() {
+  const t = await getTranslations('home.pricing');
+
   return (
     <section className={styles.section}>
       <div className={styles.container}>
         <div className={styles.headerContainer}>
-          <p className={styles.headerLine1}>최적의 요금제로</p>
+          <p className={styles.headerLine1}>{t('headingLine1')}</p>
           <p className={styles.headerLine2}>
             <span className={styles.headerAccent}>RENAME DP</span>
-            를 만나보세요.
+            {t('headingLine2')}
           </p>
         </div>
 
         <div className={styles.cardsContainer}>
           {PRICING_PLANS.map((plan) => (
-            <PricingCard key={plan.id} plan={plan} />
+            <PricingCard key={plan.id} plan={plan} t={t} />
           ))}
         </div>
       </div>

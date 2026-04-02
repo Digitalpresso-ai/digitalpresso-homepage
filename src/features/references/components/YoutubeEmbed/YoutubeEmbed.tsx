@@ -4,6 +4,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import styles from './YoutubeEmbed.module.css';
 
 interface YoutubeEmbedProps {
@@ -12,6 +13,7 @@ interface YoutubeEmbedProps {
 }
 
 export function YoutubeEmbed({ videoId, title = 'YouTube video' }: YoutubeEmbedProps) {
+  const t = useTranslations('referencesPage.youtube');
   const [activated, setActivated] = useState(false);
 
   if (activated) {
@@ -33,7 +35,7 @@ export function YoutubeEmbed({ videoId, title = 'YouTube video' }: YoutubeEmbedP
       type="button"
       className={styles.wrapper}
       onClick={() => setActivated(true)}
-      aria-label={`${title} 재생`}
+      aria-label={`${title} ${t('playSuffix')}`}
     >
       <Image
         src={`https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`}

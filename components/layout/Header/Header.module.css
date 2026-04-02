@@ -89,6 +89,121 @@
   opacity: 0.85;
 }
 
+/* ─── 언어 드롭다운 ─────────────────────────────────────────── */
+.languageDropdown {
+  position: relative;
+  width: 153px;
+  flex-shrink: 0;
+}
+
+.languageLabel {
+  position: absolute;
+  top: 0;
+  left: 12px;
+  transform: translateY(-50%);
+  z-index: 2;
+  padding: 0 4px;
+  background: #ffffff;
+  color: #1e2939;
+  font-family: var(--font-noto-sans-kr), 'Noto Sans KR', 'Noto Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.languageButton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 64px;
+  padding: 16px;
+  border: 1px solid #99a1af;
+  border-radius: 4px;
+  background-color: #ffffff;
+  color: #1e2939;
+  cursor: pointer;
+}
+
+.languageButtonContent {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.languageFlag {
+  width: 48px;
+  height: 32px;
+  object-fit: cover;
+  border: 0.04px solid #c5c5c5;
+}
+
+.languageCode {
+  font-family: var(--font-noto-sans-kr), 'Noto Sans KR', 'Noto Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #1e2939;
+}
+
+.languageChevron {
+  color: #9ca3af;
+  transition: transform 0.2s ease;
+}
+
+.languageChevronOpen {
+  transform: rotate(180deg);
+}
+
+.languageList {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 110;
+  width: 100%;
+  padding: 4px 12px;
+  border: 1px solid #99a1af;
+  border-radius: 8px;
+  background-color: #ffffff;
+  list-style: none;
+  margin: 0;
+  box-shadow: var(--shadow-header);
+}
+
+.languageOption {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 56px;
+  padding: 12px 8px;
+  border: none;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.languageOption:hover {
+  background: rgba(25, 60, 184, 0.06);
+}
+
+.languageOptionActive {
+  background: rgba(25, 60, 184, 0.1);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* ─── 햄버거 버튼 (모바일 전용, 기본 숨김) ──────────────────── */
 .hamburger {
   display: none;
