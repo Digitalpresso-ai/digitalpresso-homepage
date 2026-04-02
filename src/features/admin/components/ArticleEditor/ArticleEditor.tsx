@@ -2,11 +2,13 @@
 
 import { useEditor, EditorContent, type Editor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-import Image from '@tiptap/extension-image';
+import TiptapImage from '@tiptap/extension-image';
 import Link from '@tiptap/extension-link';
 import Placeholder from '@tiptap/extension-placeholder';
-import { useState, useTransition } from 'react';
-import { createArticle, updateArticle } from '@/src/features/admin/actions/article.actions';
+import { useEffect, useRef, useState, useTransition, type ChangeEvent } from 'react';
+import { useRouter } from 'next/navigation';
+import { createClient as createBrowserClient } from '@/lib/supabase/client';
+import { createArticleShell, updateArticle } from '@/src/features/admin/actions/article.actions';
 import type { ArticleEntity, ArticleFormData } from '@/src/features/news/types/article.types';
 import styles from './ArticleEditor.module.css';
 
@@ -14,74 +16,256 @@ interface Props {
   article?: ArticleEntity;
 }
 
-function slugify(text: string) {
-  return text
-    .toLowerCase()
-    .trim()
-    .replace(/[^\w\s-]/g, '')
-    .replace(/[\s_-]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-}
-
 export default function ArticleEditor({ article }: Props) {
   const isEdit = !!article;
   const [isPending, startTransition] = useTransition();
+  const router = useRouter();
   const [serverError, setServerError] = useState<string | null>(null);
   const [saveSuccess, setSaveSuccess] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadError, setUploadError] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const editorRef = useRef<Editor | null>(null);
+  const [pendingImages, setPendingImages] = useState<Record<string, File>>({});
+  const [coverSelection, setCoverSelection] = useState<
+    { type: 'url'; value: string } | { type: 'temp'; value: string } | null
+  >(article?.cover_img_url ? { type: 'url', value: article.cover_img_url } : null);
+  const [imagesInEditor, setImagesInEditor] = useState<
+    { src: string; alt: string; tempId: string | null }[]
+  >([]);
 
   const [title, setTitle] = useState(article?.title ?? '');
-  // slugOverride: null이면 title에서 자동 생성, 문자열이면 직접 입력한 값
-  const [slugOverride, setSlugOverride] = useState<string | null>(
-    article?.slug ?? null
-  );
-  const [excerpt, setExcerpt] = useState(article?.excerpt ?? '');
-  const [category, setCategory] = useState(article?.category ?? 'news');
 
-  const slug = slugOverride ?? slugify(title);
+  const ImageWithTemp = TiptapImage.extend({
+    addAttributes() {
+      return {
+        ...this.parent?.(),
+        'data-temp-id': { default: null },
+      };
+    },
+  });
+
+  const handleImageUpload = async (file: File) => {
+    const activeEditor = editorRef.current;
+    if (!activeEditor) return;
+    setUploadError(null);
+
+    const tempId = crypto.randomUUID();
+    const tempUrl = URL.createObjectURL(file);
+    setPendingImages((prev) => ({ ...prev, [tempId]: file }));
+
+    activeEditor
+      .chain()
+      .focus()
+      .setImage({ src: tempUrl, alt: file.name, 'data-temp-id': tempId })
+      .run();
+  };
 
   const editor = useEditor({
     immediatelyRender: false,
     extensions: [
       StarterKit,
-      Image,
+      ImageWithTemp,
       Link.configure({ openOnClick: false }),
       Placeholder.configure({ placeholder: '본문을 작성하세요...' }),
     ],
     content: article?.content ?? '',
+    onCreate: ({ editor }) => {
+      editorRef.current = editor;
+    },
+    onDestroy: () => {
+      editorRef.current = null;
+    },
     editorProps: {
       attributes: { class: styles.editorContent },
+      handlePaste: (_view, event) => {
+        const items = Array.from(event.clipboardData?.items ?? []);
+        const imageItem = items.find((item) => item.type.startsWith('image/'));
+        if (!imageItem) return false;
+        const file = imageItem.getAsFile();
+        if (!file) return false;
+        event.preventDefault();
+        void handleImageUpload(file);
+        return true;
+      },
+      handleDrop: (_view, event) => {
+        const files = Array.from(event.dataTransfer?.files ?? []);
+        const imageFile = files.find((file) => file.type.startsWith('image/'));
+        if (!imageFile) return false;
+        event.preventDefault();
+        void handleImageUpload(imageFile);
+        return true;
+      },
     },
   });
 
-  const handleSubmit = (submitStatus: 'draft' | 'published') => {
+  useEffect(() => {
+    if (!editor) return;
+
+    const updateImages = () => {
+      const html = editor.getHTML();
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      const imgs = Array.from(doc.querySelectorAll('img')).map((img) => ({
+        src: img.getAttribute('src') ?? '',
+        alt: img.getAttribute('alt') ?? '',
+        tempId: img.getAttribute('data-temp-id'),
+      }));
+      setImagesInEditor(imgs.filter((img) => img.src));
+    };
+
+    updateImages();
+    editor.on('update', updateImages);
+
+    return () => {
+      editor.off('update', updateImages);
+    };
+  }, [editor]);
+
+  const handleFileInputChange = async (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    await handleImageUpload(file);
+    event.target.value = '';
+  };
+
+  const handleSubmit = () => {
     const content = editor?.getHTML() ?? '';
     if (!title.trim()) { setServerError('제목을 입력해주세요.'); return; }
-    if (!slug.trim()) { setServerError('슬러그를 입력해주세요.'); return; }
     if (!content || content === '<p></p>') { setServerError('본문을 작성해주세요.'); return; }
 
     setServerError(null);
     setSaveSuccess(false);
 
-    const formData: ArticleFormData = {
-      title,
-      slug,
-      content,
-      excerpt: excerpt || null,
-      category,
-      status: submitStatus,
-      cover_image_url: null,
-    };
-
     startTransition(async () => {
-      const result = isEdit
-        ? await updateArticle(article.id, formData)
-        : await createArticle(formData);
+      let createdArticleId: string | null = null;
+      try {
+        setIsUploading(true);
+        setUploadError(null);
 
-      if (result && 'error' in result) {
-        setServerError(result.error);
-      } else if (isEdit) {
+        const supabase = createBrowserClient();
+        let articleId = article?.id;
+
+        if (!articleId) {
+          const created = await createArticleShell(title);
+          if (created && 'error' in created) {
+            setServerError(created.error);
+            return;
+          }
+          articleId = created.id;
+          createdArticleId = created.id;
+        }
+
+        let nextContent = content;
+        let resolvedCoverUrl =
+          coverSelection?.type === 'url' ? coverSelection.value : null;
+        const tempImages = Object.keys(pendingImages);
+
+        if (tempImages.length > 0) {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(content, 'text/html');
+          const imgNodes = Array.from(doc.querySelectorAll('img[data-temp-id]'));
+
+          for (const img of imgNodes) {
+            const tempId = img.getAttribute('data-temp-id');
+            if (!tempId) continue;
+            const file = pendingImages[tempId];
+            if (!file) throw new Error('업로드할 이미지 파일을 찾을 수 없습니다.');
+
+            const objectKey = crypto.randomUUID();
+            const ext = file.name.split('.').pop() || 'png';
+            const filePath = `articles/${articleId}/${objectKey}.${ext}`;
+
+            const { error: uploadError } = await supabase
+              .storage
+              .from('article-images')
+              .upload(filePath, file, { upsert: false, contentType: file.type });
+
+            if (uploadError) throw uploadError;
+
+            const { data: publicData } = supabase
+              .storage
+              .from('article-images')
+              .getPublicUrl(filePath);
+
+            const imageUrl = publicData?.publicUrl;
+            if (!imageUrl) throw new Error('이미지 URL을 가져오지 못했습니다.');
+
+            const dimensions = await new Promise<{ width: number; height: number }>((resolve, reject) => {
+              const imgEl = new window.Image();
+              imgEl.onload = () => {
+                URL.revokeObjectURL(imgEl.src);
+                resolve({ width: imgEl.width, height: imgEl.height });
+              };
+              imgEl.onerror = () => reject(new Error('이미지 정보를 읽지 못했습니다.'));
+              imgEl.src = URL.createObjectURL(file);
+            });
+
+            const { error: insertError } = await supabase
+              .from('article_images')
+              .insert({
+                article_id: articleId,
+                image_url: imageUrl,
+                alt: file.name,
+                width: dimensions.width,
+                height: dimensions.height,
+                caption: null,
+                sort_order: 0,
+              });
+
+            if (insertError) throw insertError;
+
+            img.setAttribute('src', imageUrl);
+            img.removeAttribute('data-temp-id');
+
+            if (coverSelection?.type === 'temp' && coverSelection.value === tempId) {
+              resolvedCoverUrl = imageUrl;
+            }
+          }
+
+          nextContent = doc.body.innerHTML;
+        }
+
+        const formData: ArticleFormData = {
+          title,
+          content: nextContent,
+          cover_img_url: resolvedCoverUrl,
+        };
+
+        const result = await updateArticle(articleId, formData);
+
+        if (result && 'error' in result) {
+          setServerError(result.error);
+          return;
+        }
+
+        if (editor && nextContent !== content) {
+          editor.commands.setContent(nextContent);
+        }
+
+        setPendingImages({});
+        if (resolvedCoverUrl) {
+          setCoverSelection({ type: 'url', value: resolvedCoverUrl });
+        } else {
+          setCoverSelection(null);
+        }
         setSaveSuccess(true);
         setTimeout(() => setSaveSuccess(false), 3000);
+
+        if (!isEdit) {
+          router.replace(`/admin/articles/${articleId}/edit`);
+        }
+      } catch (error) {
+        const message = error instanceof Error ? error.message : '저장에 실패했습니다.';
+        setUploadError(message);
+
+        if (!isEdit && createdArticleId) {
+          await createBrowserClient()
+            .from('articles')
+            .delete()
+            .eq('id', createdArticleId);
+        }
+      } finally {
+        setIsUploading(false);
       }
     });
   };
@@ -89,36 +273,17 @@ export default function ArticleEditor({ article }: Props) {
   return (
     <div className={styles.container}>
       <div className={styles.topBar}>
-        <div className={styles.meta}>
-          <select
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            className={styles.select}
-          >
-            <option value="news">뉴스</option>
-            <option value="update">업데이트</option>
-            <option value="case-study">케이스 스터디</option>
-            <option value="insight">인사이트</option>
-          </select>
-        </div>
+        <div className={styles.meta} />
         <div className={styles.actions}>
           {serverError && <span className={styles.errorMsg}>{serverError}</span>}
           {saveSuccess && <span className={styles.successMsg}>저장됨 ✓</span>}
           <button
             type="button"
-            onClick={() => handleSubmit('draft')}
-            disabled={isPending}
-            className={styles.draftBtn}
-          >
-            {isPending ? '저장 중...' : '임시저장'}
-          </button>
-          <button
-            type="button"
-            onClick={() => handleSubmit('published')}
-            disabled={isPending}
+            onClick={() => handleSubmit()}
+            disabled={isPending || isUploading}
             className={styles.publishBtn}
           >
-            {isPending ? '발행 중...' : '발행'}
+            {isPending || isUploading ? '저장 중...' : '저장'}
           </button>
         </div>
       </div>
@@ -131,42 +296,94 @@ export default function ArticleEditor({ article }: Props) {
           placeholder="아티클 제목"
           className={styles.titleInput}
         />
-        <div className={styles.slugRow}>
-          <span className={styles.slugPrefix}>/news/</span>
-          <input
-            type="text"
-            value={slug}
-            onChange={(e) => setSlugOverride(e.target.value)}
-            placeholder="url-slug"
-            className={styles.slugInput}
-          />
-        </div>
       </div>
 
-      <input
-        type="text"
-        value={excerpt}
-        onChange={(e) => setExcerpt(e.target.value)}
-        placeholder="요약 (검색 결과 및 목록에 표시됩니다)"
-        className={styles.excerptInput}
-      />
+      <div className={styles.coverSection}>
+        <div className={styles.coverHeader}>
+          <span className={styles.coverTitle}>대표 이미지</span>
+          <button
+            type="button"
+            className={styles.coverClearBtn}
+            onClick={() => setCoverSelection(null)}
+          >
+            없음
+          </button>
+        </div>
+        {imagesInEditor.length === 0 ? (
+          <p className={styles.coverHint}>본문에 이미지가 있어야 선택할 수 있습니다.</p>
+        ) : (
+          <div className={styles.coverGrid}>
+            {imagesInEditor.map((img, index) => {
+              const isSelected = coverSelection
+                ? coverSelection.type === 'temp'
+                  ? coverSelection.value === img.tempId
+                  : coverSelection.value === img.src
+                : false;
+              return (
+                <button
+                  key={`${img.src}-${index}`}
+                  type="button"
+                  className={`${styles.coverItem} ${isSelected ? styles.coverItemActive : ''}`}
+                  onClick={() => {
+                    if (img.tempId) {
+                      setCoverSelection({ type: 'temp', value: img.tempId });
+                    } else {
+                      setCoverSelection({ type: 'url', value: img.src });
+                    }
+                  }}
+                >
+                  <img src={img.src} alt={img.alt || 'cover'} />
+                </button>
+              );
+            })}
+          </div>
+        )}
+      </div>
 
       <div className={styles.editorWrapper}>
-        <Toolbar editor={editor} />
+        <Toolbar
+          editor={editor}
+          onUploadClick={() => fileInputRef.current?.click()}
+          isUploading={isUploading}
+          uploadError={uploadError}
+        />
         <EditorContent editor={editor} className={styles.editorArea} />
       </div>
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/*"
+        style={{ display: 'none' }}
+        onChange={handleFileInputChange}
+      />
     </div>
   );
 }
 
-function Toolbar({ editor }: { editor: Editor | null }) {
+function Toolbar({
+  editor,
+  onUploadClick,
+  isUploading,
+  uploadError,
+}: {
+  editor: Editor | null;
+  onUploadClick: () => void;
+  isUploading: boolean;
+  uploadError: string | null;
+}) {
   if (!editor) return null;
 
-  const btn = (label: string, action: () => void, active?: boolean) => (
+  const btn = (
+    label: string,
+    action: () => void,
+    active?: boolean,
+    disabled?: boolean
+  ) => (
     <button
       key={label}
       type="button"
       onMouseDown={(e) => { e.preventDefault(); action(); }}
+      disabled={disabled}
       className={`${styles.toolbarBtn} ${active ? styles.toolbarBtnActive : ''}`}
     >
       {label}
@@ -189,6 +406,13 @@ function Toolbar({ editor }: { editor: Editor | null }) {
       {btn('{ }', () => editor.chain().focus().toggleCodeBlock().run(), editor.isActive('codeBlock'))}
       <span className={styles.divider} />
       {btn('—', () => editor.chain().focus().setHorizontalRule().run())}
+      {btn(
+        isUploading ? '이미지 업로드 중...' : '이미지 업로드',
+        onUploadClick,
+        false,
+        isUploading
+      )}
+      {uploadError && <span className={styles.errorMsg}>{uploadError}</span>}
     </div>
   );
 }

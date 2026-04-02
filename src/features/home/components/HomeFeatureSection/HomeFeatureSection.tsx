@@ -4,23 +4,9 @@ import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import styles from './HomeFeatureSection.module.css';
 
-const FEATURE_TAGS = [
-  '중대재해 예방 점검표',
-  '안전관리 계획서',
-  '시공검측 확인서',
-  '주/월간 공정표',
-  '공사일보',
-  '시공사진 관리대장',
-  '준공검사보고서',
-  '일일 안전점검 일지',
-  'PPE 착용점검',
-  '하자보수 이행보고서',
-  '현장점검 결과보고서',
-  '주간 안전/품질보고',
-] as const;
-
 export async function HomeFeatureSection() {
   const t = await getTranslations('home.feature');
+  const featureTags = t.raw('tags') as string[];
 
   return (
     <section className={styles.section}>
@@ -51,7 +37,7 @@ export async function HomeFeatureSection() {
           </h2>
 
           <ul className={styles.tagList}>
-            {FEATURE_TAGS.map((tag) => (
+            {featureTags.map((tag) => (
               <li key={tag} className={styles.tag}>
                 {tag}
               </li>

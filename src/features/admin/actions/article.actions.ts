@@ -1,17 +1,17 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 import type { ArticleFormData } from '@/src/features/news/types/article.types';
 
 type ActionResult = { error: string } | { success: true };
+type CreateResult = { error: string } | { success: true; id: string };
 
 export async function getArticles() {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from('articles')
-    .select('id, title, slug, status, category, published_at, created_at, updated_at')
+    .select('id, title, created_at, cover_img_url')
     .order('created_at', { ascending: false });
 
   if (error) throw new Error(error.message);
@@ -30,12 +30,12 @@ export async function getArticleForEdit(id: string) {
   return data;
 }
 
-export async function createArticle(formData: ArticleFormData): Promise<ActionResult> {
+export async function createArticleShell(title: string): Promise<CreateResult> {
   const supabase = await createClient();
-
   const payload = {
-    ...formData,
-    published_at: formData.status === 'published' ? new Date().toISOString() : null,
+    title,
+    content: '',
+    cover_img_url: null,
   };
 
   const { data, error } = await supabase
@@ -48,15 +48,13 @@ export async function createArticle(formData: ArticleFormData): Promise<ActionRe
 
   revalidatePath('/admin/articles');
   revalidatePath('/[locale]/news', 'page');
-  redirect(`/admin/articles/${data.id}/edit`);
+  return { success: true, id: data.id };
 }
 
 export async function updateArticle(id: string, formData: ArticleFormData): Promise<ActionResult> {
   const supabase = await createClient();
-
   const payload = {
     ...formData,
-    published_at: formData.status === 'published' ? new Date().toISOString() : null,
   };
 
   const { error } = await supabase
@@ -86,13 +84,10 @@ export async function getArticleStats() {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from('articles')
-    .select('status, created_at');
+    .select('id');
 
-  if (error) return { total: 0, published: 0, draft: 0 };
+  if (error) return { total: 0 };
 
   const total = data.length;
-  const published = data.filter((a) => a.status === 'published').length;
-  const draft = data.filter((a) => a.status === 'draft').length;
-
-  return { total, published, draft };
+  return { total };
 }

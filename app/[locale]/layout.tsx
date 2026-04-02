@@ -18,12 +18,15 @@ export default async function LocaleLayout({ children, params }: Props) {
   }
 
   const messages = await getMessages();
+  const localeClass = locale === 'ja' ? 'locale-ja' : undefined;
 
   return (
     <NextIntlClientProvider messages={messages}>
-      <Header />
-      {children}
-      <Footer />
+      <div className={localeClass}>
+        <Header />
+        {children}
+        <Footer />
+      </div>
     </NextIntlClientProvider>
   );
 }

@@ -23,11 +23,7 @@ export default async function ArticlesPage() {
             <thead>
               <tr>
                 <th>제목</th>
-                <th>슬러그</th>
-                <th>카테고리</th>
-                <th>상태</th>
                 <th>작성일</th>
-                <th>수정일</th>
                 <th></th>
               </tr>
             </thead>
@@ -35,18 +31,8 @@ export default async function ArticlesPage() {
               {articles.map((article) => (
                 <tr key={article.id}>
                   <td className={styles.titleCell}>{article.title}</td>
-                  <td className={styles.slugCell}>{article.slug}</td>
-                  <td><span className={styles.category}>{article.category}</span></td>
-                  <td>
-                    <span className={`${styles.status} ${styles[article.status]}`}>
-                      {article.status === 'published' ? '발행됨' : '임시저장'}
-                    </span>
-                  </td>
                   <td className={styles.dateCell}>
                     {new Date(article.created_at).toLocaleDateString('ko-KR')}
-                  </td>
-                  <td className={styles.dateCell}>
-                    {new Date(article.updated_at).toLocaleDateString('ko-KR')}
                   </td>
                   <td className={styles.actionsCell}>
                     <Link href={`/admin/articles/${article.id}/edit`} className={styles.editLink}>
