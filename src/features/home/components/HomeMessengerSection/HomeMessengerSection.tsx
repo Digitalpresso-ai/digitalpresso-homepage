@@ -1,9 +1,12 @@
 // src/features/home/components/HomeMessengerSection/HomeMessengerSection.tsx
 
+import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import styles from './HomeMessengerSection.module.css';
 
-export function HomeMessengerSection() {
+export async function HomeMessengerSection() {
+  const t = await getTranslations('home.messenger');
+
   return (
     <section className={styles.section}>
       <div className={styles.container}>
@@ -11,7 +14,7 @@ export function HomeMessengerSection() {
           <div className={styles.imageWrapper}>
             <Image
               src="/images/section7-messenger.png"
-              alt="AI 메신저 시공톡 앱 화면 캡처 이미지"
+              alt={t('imageAlt')}
               fill
               className={styles.image}
               loading="lazy"
@@ -21,15 +24,15 @@ export function HomeMessengerSection() {
         <div className={styles.textColumn}>
           <div className={styles.textBlock}>
             <div className={styles.headerContainer}>
-              <p className={styles.planLabel}>PREMIUM PLAN +</p>
+              <p className={styles.planLabel}>{t('planLabel')}</p>
               <div className={styles.titleGroup}>
-                <p className={styles.subtitle}>현장의 대화를 자동으로 정리하는</p>
+                <p className={styles.subtitle}>{t('subtitle')}</p>
                 <div className={styles.titleRow}>
-                  <h2 className={styles.title}>AI 메신저</h2>
+                  <h2 className={styles.title}>{t('title')}</h2>
                   <div className={styles.logoWrapper}>
                     <Image
                       src="/images/sigongtalk-logo.png"
-                      alt="시공톡"
+                      alt={t('logoAlt')}
                       fill
                       className={styles.logoImage}
                     />
@@ -37,12 +40,8 @@ export function HomeMessengerSection() {
                 </div>
               </div>
             </div>
-            <p className={styles.body}>
-              각 공정의 TBM 내용과 공정별 주요 사항을 현장에서 바로 기록하고 공유할 수 있습니다.
-            </p>
-            <p className={styles.body}>
-              현장의 대화는 자동으로 정리되어 매일 일일보고의 형식으로 제공됩니다.
-            </p>
+            <p className={styles.body}>{t('body1')}</p>
+            <p className={styles.body}>{t('body2')}</p>
           </div>
         </div>
       </div>

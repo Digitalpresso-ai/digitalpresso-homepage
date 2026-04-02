@@ -1,8 +1,11 @@
 // src/features/references/components/ReferencesHero/ReferencesHero.tsx
 
+import { getTranslations } from 'next-intl/server';
 import styles from './ReferencesHero.module.css';
 
-export function ReferencesHero() {
+export async function ReferencesHero() {
+  const t = await getTranslations('referencesPage.hero');
+
   return (
     <section className={styles.section}>
       {/* LCP: fetchPriority="high" */}
@@ -21,15 +24,13 @@ export function ReferencesHero() {
         <div className={styles.inner}>
           <div className={styles.content}>
             <div className={styles.textGroup}>
-              <span className={styles.eyebrow}>고객사례</span>
-              <h1 className={styles.heading}>
-                Innovating with Partners Across Industries
-              </h1>
+              <span className={styles.eyebrow}>{t('eyebrow')}</span>
+              <h1 className={styles.heading}>{t('heading')}</h1>
             </div>
             <p className={styles.body}>
-              고객의 문제를 해결하고 가치를 더하는 프로젝트,
+              {t('bodyLine1')}
               <br />
-              그 여정에 함께한 기업들의 이야기를 소개합니다.
+              {t('bodyLine2')}
             </p>
           </div>
           {/* 태블릿+ 에서 텍스트를 좌측으로 밀어주는 우측 스페이서 */}

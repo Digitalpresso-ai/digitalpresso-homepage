@@ -1,0 +1,17 @@
+# robots.txt for digitalPresso website
+# Last updated: 2026-04-02
+
+User-agent: *
+Allow: /
+
+# Restricted areas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+Disallow: /_next/
+
+# Public machine-readable policy files
+Allow: /ai.txt
+Allow: /llms.txt
+
+Sitemap: https://digitalpresso.ai/sitemap.xml
