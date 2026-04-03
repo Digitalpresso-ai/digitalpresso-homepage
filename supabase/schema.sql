@@ -4,13 +4,19 @@
 CREATE TABLE IF NOT EXISTS articles (
   id             UUID        DEFAULT gen_random_uuid() PRIMARY KEY,
   title          TEXT        NOT NULL,
+  title_en       TEXT        NOT NULL DEFAULT '',
+  title_ja       TEXT        NOT NULL DEFAULT '',
   content        TEXT        NOT NULL DEFAULT '',
+  content_en     TEXT        NOT NULL DEFAULT '',
+  content_ja     TEXT        NOT NULL DEFAULT '',
   cover_img_url  TEXT,
+  category       TEXT        NOT NULL DEFAULT 'company',
   created_at     TIMESTAMPTZ DEFAULT NOW()
 );
 
 -- 인덱스
 CREATE INDEX IF NOT EXISTS articles_created_at_idx ON articles (created_at DESC);
+CREATE INDEX IF NOT EXISTS articles_category_idx ON articles (category);
 
 -- RLS (Row Level Security)
 ALTER TABLE articles ENABLE ROW LEVEL SECURITY;

@@ -2,25 +2,26 @@
 
 import { getTranslations } from 'next-intl/server';
 import { CategoryTabs } from './CategoryTabs';
-import { getArticlesByCategory } from '../../data/articles.data';
 import type { NewsCategory } from '../../types/article.types';
 import styles from './NewsHero.module.css';
 
 interface NewsHeroProps {
   activeCategory?: NewsCategory;
   showTabs?: boolean;
+  articleCounts?: { company: number; construction: number; technology: number };
 }
 
 export async function NewsHero({
   activeCategory = 'company',
   showTabs = true,
+  articleCounts = { company: 0, construction: 0, technology: 0 },
 }: NewsHeroProps) {
   const t = await getTranslations('newsPage.hero');
 
   const tabs: { key: NewsCategory; label: string; count: number }[] = [
-    { key: 'company', label: t('tabs.company'), count: getArticlesByCategory('company').length },
-    { key: 'construction', label: t('tabs.construction'), count: getArticlesByCategory('construction').length },
-    { key: 'technology', label: t('tabs.technology'), count: getArticlesByCategory('technology').length },
+    { key: 'company', label: t('tabs.company'), count: articleCounts.company },
+    { key: 'construction', label: t('tabs.construction'), count: articleCounts.construction },
+    { key: 'technology', label: t('tabs.technology'), count: articleCounts.technology },
   ];
 
   return (

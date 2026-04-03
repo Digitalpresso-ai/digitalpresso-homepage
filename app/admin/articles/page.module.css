@@ -28,7 +28,38 @@
   transition: background 0.15s;
 }
 
-.newBtn:hover { background: #1431a0; }
+.newBtn:hover {
+  background: #1431a0;
+}
+
+.filterBar {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.filterBtn {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--color-body);
+  transition: color 0.15s;
+}
+
+.filterBtn:hover {
+  color: var(--color-brand);
+}
+
+.filterBtnActive {
+  color: var(--color-brand);
+  font-weight: 700;
+}
+
+.filterDivider {
+  color: #d1d5db;
+  font-size: 0.875rem;
+  user-select: none;
+}
 
 .empty {
   display: flex;
@@ -76,8 +107,12 @@
   vertical-align: middle;
 }
 
-.table tr:last-child td { border-bottom: none; }
-.table tr:hover td { background: #fafbff; }
+.table tr:last-child td {
+  border-bottom: none;
+}
+.table tr:hover td {
+  background: #fafbff;
+}
 
 .titleCell {
   font-weight: 500;
@@ -112,12 +147,23 @@
   font-weight: 500;
 }
 
-.published { background: #f0fff4; color: #276749; }
-.draft { background: #f7fafc; color: #718096; }
+.published {
+  background: #f0fff4;
+  color: #276749;
+}
+.draft {
+  background: #f7fafc;
+  color: #718096;
+}
 
-.dateCell { color: var(--color-body); white-space: nowrap; }
+.dateCell {
+  color: var(--color-body);
+  white-space: nowrap;
+}
 
-.actionsCell { white-space: nowrap; }
+.actionsCell {
+  white-space: nowrap;
+}
 
 .editLink {
   color: var(--color-accent);
@@ -126,4 +172,6 @@
   text-decoration: none;
 }
 
-.editLink:hover { text-decoration: underline; }
+.editLink:hover {
+  text-decoration: underline;
+}
