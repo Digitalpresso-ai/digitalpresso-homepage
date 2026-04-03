@@ -11,7 +11,12 @@ export interface ArticleImage {
 export interface ArticleEntity {
   id: string;
   title: string;
+  title_en: string;
+  title_ja: string;
   content: string;
+  content_en: string;
+  content_ja: string;
+  category: string;
   created_at: string;
   cover_img_url: string | null;
 }
@@ -48,11 +53,17 @@ export interface NewsArticle {
   bodyImages: ArticleImage[];
   bodyParagraphs: string[];
   sourceUrl?: string;
+  isHtmlContent?: boolean;
 }
 
 export type ArticleFormData = Pick<
   ArticleEntity,
   | "title"
+  | "title_en"
+  | "title_ja"
   | "content"
+  | "content_en"
+  | "content_ja"
   | "cover_img_url"
+  | "category"
 >;

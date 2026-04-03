@@ -8,6 +8,7 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+  overflow: hidden;
 }
 
 /* --- Header --- */
@@ -42,6 +43,7 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+  min-width: 0;
 }
 
 .mainImage {
@@ -169,6 +171,98 @@
   background: #1530a0;
 }
 
+/* --- HTML content (TipTap CMS) --- */
+.htmlContent {
+  font-family: var(--font-noto-sans-kr), sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: #1e2939;
+  line-height: 1.45;
+  letter-spacing: -0.1px;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.htmlContent p {
+  margin: 0 0 24px;
+}
+
+.htmlContent h1,
+.htmlContent h2,
+.htmlContent h3 {
+  font-family: var(--font-noto-sans-kr), sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: #1e2939;
+  line-height: 48px;
+  margin: 16px 0 24px;
+}
+
+.htmlContent ul,
+.htmlContent ol {
+  font-family: var(--font-noto-sans-kr), sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: #1e2939;
+  line-height: 1.45;
+  letter-spacing: -0.1px;
+  margin: 0 0 24px;
+  padding-left: 30px;
+}
+
+.htmlContent ul {
+  list-style: disc;
+}
+
+.htmlContent ol {
+  list-style: decimal;
+}
+
+.htmlContent li {
+  margin-bottom: 0;
+}
+
+.htmlContent img {
+  max-width: 70% !important;
+  width: auto !important;
+  height: auto !important;
+  display: block;
+  margin: 0 0 24px;
+}
+
+.htmlContent a {
+  color: #2b7fff;
+  text-decoration: underline;
+  word-break: break-all;
+}
+
+.htmlContent a:hover {
+  color: #193cb8;
+}
+
+.htmlContent blockquote {
+  border-left: 3px solid #929292;
+  padding-left: 16px;
+  margin: 0 0 24px;
+  color: #4a4a4a;
+}
+
+.htmlContent pre {
+  background: #f5f5f5;
+  padding: 16px;
+  border-radius: 4px;
+  overflow-x: auto;
+  margin: 0 0 24px;
+}
+
+.htmlContent hr {
+  border: none;
+  border-top: 1px solid #929292;
+  margin: 24px 0;
+}
+
 /* --- Tablet (800px – 1279px) --- */
 @media (min-width: 800px) and (max-width: 1279px) {
   .container {
@@ -185,6 +279,10 @@
   }
 
   .sourceLink {
+    font-size: 18px;
+  }
+
+  .htmlContent {
     font-size: 18px;
   }
 }
@@ -217,5 +315,13 @@
     height: 44px;
     font-size: 14px;
     padding: 8px 20px;
+  }
+
+  .htmlContent {
+    font-size: 16px;
+  }
+
+  .htmlContent p {
+    margin-bottom: 16px;
   }
 }

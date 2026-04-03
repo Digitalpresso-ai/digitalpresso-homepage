@@ -9,7 +9,7 @@ import { useEffect, useRef, useState, useTransition, type ChangeEvent } from 're
 import { useRouter } from 'next/navigation';
 import { createClient as createBrowserClient } from '@/lib/supabase/client';
 import { createArticleShell, updateArticle } from '@/src/features/admin/actions/article.actions';
-import type { ArticleEntity, ArticleFormData } from '@/src/features/news/types/article.types';
+import type { ArticleEntity, ArticleFormData, NewsCategory } from '@/src/features/news/types/article.types';
 import styles from './ArticleEditor.module.css';
 
 interface Props {
@@ -35,6 +35,12 @@ export default function ArticleEditor({ article }: Props) {
   >([]);
 
   const [title, setTitle] = useState(article?.title ?? '');
+  const [titleEn, setTitleEn] = useState(article?.title_en ?? '');
+  const [titleJa, setTitleJa] = useState(article?.title_ja ?? '');
+  const [activeLocale, setActiveLocale] = useState<'ko' | 'en' | 'ja'>('ko');
+  const [category, setCategory] = useState<NewsCategory>(
+    (article?.category as NewsCategory) ?? 'company'
+  );
 
   const ImageWithTemp = TiptapImage.extend({
     addAttributes() {
@@ -57,16 +63,21 @@ export default function ArticleEditor({ article }: Props) {
     activeEditor
       .chain()
       .focus()
-      .setImage({ src: tempUrl, alt: file.name, 'data-temp-id': tempId })
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .setImage({ src: tempUrl, alt: file.name, 'data-temp-id': tempId } as any)
       .run();
   };
+
+  const sharedExtensions = [
+    StarterKit,
+    ImageWithTemp,
+    Link.configure({ openOnClick: false }),
+  ];
 
   const editor = useEditor({
     immediatelyRender: false,
     extensions: [
-      StarterKit,
-      ImageWithTemp,
-      Link.configure({ openOnClick: false }),
+      ...sharedExtensions,
       Placeholder.configure({ placeholder: '본문을 작성하세요...' }),
     ],
     content: article?.content ?? '',
@@ -97,6 +108,26 @@ export default function ArticleEditor({ article }: Props) {
         return true;
       },
     },
+  });
+
+  const editorEn = useEditor({
+    immediatelyRender: false,
+    extensions: [
+      ...sharedExtensions,
+      Placeholder.configure({ placeholder: 'Enter article content in English...' }),
+    ],
+    content: article?.content_en ?? '',
+    editorProps: { attributes: { class: styles.editorContent } },
+  });
+
+  const editorJa = useEditor({
+    immediatelyRender: false,
+    extensions: [
+      ...sharedExtensions,
+      Placeholder.configure({ placeholder: '日本語で記事の内容を入力してください...' }),
+    ],
+    content: article?.content_ja ?? '',
+    editorProps: { attributes: { class: styles.editorContent } },
   });
 
   useEffect(() => {
@@ -146,7 +177,7 @@ export default function ArticleEditor({ article }: Props) {
         let articleId = article?.id;
 
         if (!articleId) {
-          const created = await createArticleShell(title);
+          const created = await createArticleShell(title, category);
           if (created && 'error' in created) {
             setServerError(created.error);
             return;
@@ -157,7 +188,9 @@ export default function ArticleEditor({ article }: Props) {
 
         let nextContent = content;
         let resolvedCoverUrl =
-          coverSelection?.type === 'url' ? coverSelection.value : null;
+          coverSelection?.type === 'url' ? coverSelection.value
+          : coverSelection?.type === 'temp' ? null
+          : null;
         const tempImages = Object.keys(pendingImages);
 
         if (tempImages.length > 0) {
@@ -227,8 +260,13 @@ export default function ArticleEditor({ article }: Props) {
 
         const formData: ArticleFormData = {
           title,
+          title_en: titleEn,
+          title_ja: titleJa,
           content: nextContent,
+          content_en: editorEn?.getHTML() ?? '',
+          content_ja: editorJa?.getHTML() ?? '',
           cover_img_url: resolvedCoverUrl,
+          category,
         };
 
         const result = await updateArticle(articleId, formData);
@@ -273,7 +311,17 @@ export default function ArticleEditor({ article }: Props) {
   return (
     <div className={styles.container}>
       <div className={styles.topBar}>
-        <div className={styles.meta} />
+        <div className={styles.meta}>
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value as NewsCategory)}
+            className={styles.select}
+          >
+            <option value="company">회사소식</option>
+            <option value="construction">건설소식</option>
+            <option value="technology">기술소식</option>
+          </select>
+        </div>
         <div className={styles.actions}>
           {serverError && <span className={styles.errorMsg}>{serverError}</span>}
           {saveSuccess && <span className={styles.successMsg}>저장됨 ✓</span>}
@@ -288,15 +336,71 @@ export default function ArticleEditor({ article }: Props) {
         </div>
       </div>
 
-      <div className={styles.titleRow}>
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="아티클 제목"
-          className={styles.titleInput}
-        />
+      <div className={styles.localeTabs}>
+        <button type="button" className={`${styles.localeTab} ${activeLocale === 'ko' ? styles.localeTabActive : ''}`} onClick={() => setActiveLocale('ko')}>KR</button>
+        <span className={styles.localeDivider}>|</span>
+        <button type="button" className={`${styles.localeTab} ${activeLocale === 'en' ? styles.localeTabActive : ''}`} onClick={() => {
+          if (editorEn && editor) {
+            const enHtml = editorEn.getHTML();
+            if (!enHtml || enHtml === '<p></p>') {
+              editorEn.commands.setContent(editor.getHTML());
+            }
+          }
+          setActiveLocale('en');
+        }}>EN</button>
+        <span className={styles.localeDivider}>|</span>
+        <button type="button" className={`${styles.localeTab} ${activeLocale === 'ja' ? styles.localeTabActive : ''}`} onClick={() => {
+          if (editorJa && editor) {
+            const jaHtml = editorJa.getHTML();
+            if (!jaHtml || jaHtml === '<p></p>') {
+              editorJa.commands.setContent(editor.getHTML());
+            }
+          }
+          setActiveLocale('ja');
+        }}>JP</button>
       </div>
+
+      {activeLocale === 'ko' && (
+        <>
+          <div className={styles.titleRow}>
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="아티클 제목 (한국어)"
+              className={styles.titleInput}
+            />
+          </div>
+        </>
+      )}
+
+      {activeLocale === 'en' && (
+        <>
+          <div className={styles.titleRow}>
+            <input
+              type="text"
+              value={titleEn}
+              onChange={(e) => setTitleEn(e.target.value)}
+              placeholder="Article Title (English)"
+              className={styles.titleInput}
+            />
+          </div>
+        </>
+      )}
+
+      {activeLocale === 'ja' && (
+        <>
+          <div className={styles.titleRow}>
+            <input
+              type="text"
+              value={titleJa}
+              onChange={(e) => setTitleJa(e.target.value)}
+              placeholder="記事タイトル (日本語)"
+              className={styles.titleInput}
+            />
+          </div>
+        </>
+      )}
 
       <div className={styles.coverSection}>
         <div className={styles.coverHeader}>
@@ -340,15 +444,32 @@ export default function ArticleEditor({ article }: Props) {
         )}
       </div>
 
-      <div className={styles.editorWrapper}>
-        <Toolbar
-          editor={editor}
-          onUploadClick={() => fileInputRef.current?.click()}
-          isUploading={isUploading}
-          uploadError={uploadError}
-        />
-        <EditorContent editor={editor} className={styles.editorArea} />
-      </div>
+      {activeLocale === 'ko' && (
+        <div className={styles.editorWrapper}>
+          <Toolbar
+            editor={editor}
+            onUploadClick={() => fileInputRef.current?.click()}
+            isUploading={isUploading}
+            uploadError={uploadError}
+          />
+          <EditorContent editor={editor} className={styles.editorArea} />
+        </div>
+      )}
+
+      {activeLocale === 'en' && (
+        <div className={styles.editorWrapper}>
+          <Toolbar editor={editorEn} onUploadClick={() => {}} isUploading={false} uploadError={null} />
+          <EditorContent editor={editorEn} className={styles.editorArea} />
+        </div>
+      )}
+
+      {activeLocale === 'ja' && (
+        <div className={styles.editorWrapper}>
+          <Toolbar editor={editorJa} onUploadClick={() => {}} isUploading={false} uploadError={null} />
+          <EditorContent editor={editorJa} className={styles.editorArea} />
+        </div>
+      )}
+
       <input
         ref={fileInputRef}
         type="file"
@@ -405,6 +526,19 @@ function Toolbar({
       {btn('" "', () => editor.chain().focus().toggleBlockquote().run(), editor.isActive('blockquote'))}
       {btn('{ }', () => editor.chain().focus().toggleCodeBlock().run(), editor.isActive('codeBlock'))}
       <span className={styles.divider} />
+      {btn(
+        '🔗 링크',
+        () => {
+          if (editor.isActive('link')) {
+            editor.chain().focus().unsetLink().run();
+            return;
+          }
+          const url = window.prompt('URL을 입력하세요');
+          if (!url) return;
+          editor.chain().focus().extendMarkRange('link').setLink({ href: url, target: '_blank' }).run();
+        },
+        editor.isActive('link'),
+      )}
       {btn('—', () => editor.chain().focus().setHorizontalRule().run())}
       {btn(
         isUploading ? '이미지 업로드 중...' : '이미지 업로드',

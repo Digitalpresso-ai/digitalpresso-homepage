@@ -1,18 +1,25 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 import type { ArticleFormData } from '@/src/features/news/types/article.types';
 
 type ActionResult = { error: string } | { success: true };
 type CreateResult = { error: string } | { success: true; id: string };
 
-export async function getArticles() {
+export async function getArticles(category?: string) {
   const supabase = await createClient();
-  const { data, error } = await supabase
+  let query = supabase
     .from('articles')
-    .select('id, title, created_at, cover_img_url')
+    .select('id, title, category, created_at, cover_img_url')
     .order('created_at', { ascending: false });
+
+  if (category) {
+    query = query.eq('category', category);
+  }
+
+  const { data, error } = await query;
 
   if (error) throw new Error(error.message);
   return data ?? [];
@@ -30,12 +37,17 @@ export async function getArticleForEdit(id: string) {
   return data;
 }
 
-export async function createArticleShell(title: string): Promise<CreateResult> {
+export async function createArticleShell(title: string, category: string = 'company'): Promise<CreateResult> {
   const supabase = await createClient();
   const payload = {
     title,
+    title_en: '',
+    title_ja: '',
     content: '',
+    content_en: '',
+    content_ja: '',
     cover_img_url: null,
+    category,
   };
 
   const { data, error } = await supabase
