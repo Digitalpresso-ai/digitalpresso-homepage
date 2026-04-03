@@ -367,6 +367,10 @@ export function getArticlesByCategory(category: string): NewsArticle[] {
     .map(mapStaticCompanyArticleToNewsArticle);
 }
 
+export function getAllArticles(): NewsArticle[] {
+  return articles.map(mapStaticCompanyArticleToNewsArticle);
+}
+
 export function getAdjacentArticles(id: string, category: string) {
   const categoryArticles = getArticlesByCategory(category);
   const index = categoryArticles.findIndex((a) => a.id === id);

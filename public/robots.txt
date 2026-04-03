@@ -14,4 +14,4 @@ Disallow: /_next/
 Allow: /ai.txt
 Allow: /llms.txt
 
-Sitemap: https://digitalpresso.ai/sitemap.xml
+Sitemap: https://digitalpresso-homepage.vercel.app/sitemap.xml
