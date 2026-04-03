@@ -288,3 +288,27 @@
     height: auto;
   }
 }
+
+/* Japanese layout fixes */
+:global(.locale-ja) .eyebrow,
+:global(.locale-ja) .heading,
+:global(.locale-ja) .body,
+:global(.locale-ja) .partnersHeading,
+:global(.locale-ja) .cardText,
+:global(.locale-ja) .cardAuthor,
+:global(.locale-ja) .cardRole {
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: anywhere;
+  letter-spacing: 0;
+}
+
+:global(.locale-ja) .cardList {
+  height: auto;
+  overflow: visible;
+  align-items: stretch;
+}
+
+:global(.locale-ja) .card {
+  height: auto;
+}

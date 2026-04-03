@@ -163,3 +163,13 @@
     display: none;
   }
 }
+
+/* Japanese layout fixes */
+:global(.locale-ja) .eyebrow,
+:global(.locale-ja) .heading,
+:global(.locale-ja) .body {
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: anywhere;
+  letter-spacing: 0;
+}
