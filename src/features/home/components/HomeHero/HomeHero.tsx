@@ -32,12 +32,14 @@ export async function HomeHero() {
 
         <div className={styles.imageColumn}>
           <div className={styles.imageWrapper}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src="/images/hero-worker.png"
               alt={t('imageAlt')}
+              width={576}
+              height={486}
+              sizes="(max-width: 799px) 100vw, (max-width: 1279px) 336px, 576px"
               className={styles.heroImage}
-              fetchPriority="high"
+              priority
             />
           </div>
         </div>

@@ -1,5 +1,6 @@
 // src/features/references/components/ReferencesHero/ReferencesHero.tsx
 
+import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import styles from './ReferencesHero.module.css';
 
@@ -8,15 +9,14 @@ export async function ReferencesHero() {
 
   return (
     <section className={styles.section}>
-      {/* LCP: fetchPriority="high" */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      <Image
         src="/images/references-hero-bg.png"
         alt=""
         aria-hidden="true"
+        fill
+        sizes="100vw"
         className={styles.bgImage}
-        fetchPriority="high"
-        decoding="async"
+        priority
       />
       <div className={styles.overlay} aria-hidden="true" />
 

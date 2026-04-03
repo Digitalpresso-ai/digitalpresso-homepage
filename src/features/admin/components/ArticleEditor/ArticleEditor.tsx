@@ -6,6 +6,7 @@ import TiptapImage from '@tiptap/extension-image';
 import Link from '@tiptap/extension-link';
 import Placeholder from '@tiptap/extension-placeholder';
 import { useEffect, useRef, useState, useTransition, type ChangeEvent } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { createClient as createBrowserClient } from '@/lib/supabase/client';
 import { createArticleShell, updateArticle } from '@/src/features/admin/actions/article.actions';
@@ -436,7 +437,15 @@ export default function ArticleEditor({ article }: Props) {
                     }
                   }}
                 >
-                  <img src={img.src} alt={img.alt || 'cover'} />
+                  <Image
+                    src={img.src}
+                    alt={img.alt || 'cover'}
+                    width={160}
+                    height={100}
+                    sizes="160px"
+                    style={{ width: '100%', height: '100px', objectFit: 'cover', display: 'block' }}
+                    unoptimized
+                  />
                 </button>
               );
             })}
