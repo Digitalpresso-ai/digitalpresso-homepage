@@ -6,29 +6,31 @@ import { NewsArticleDetail } from '@/src/features/news/components/NewsArticleDet
 import {
   getArticleById,
   getAdjacentArticles,
-} from '@/src/features/news/data/articles.data';
+} from '@/src/features/news/api/news.api';
+import { mapCmsArticleToNewsArticle } from '@/src/features/news/mappers/article.mapper';
 
 interface Props {
-  params: Promise<{ id: string }>;
+  params: Promise<{ locale: string; id: string }>;
 }
 
 export default async function NewsArticlePage({ params }: Props) {
-  const { id } = await params;
-  const article = getArticleById(id);
+  const { locale, id } = await params;
+  const entity = await getArticleById(id);
 
-  if (!article) {
+  if (!entity) {
     notFound();
   }
 
-  const { prev, next } = getAdjacentArticles(id, article.category);
+  const article = mapCmsArticleToNewsArticle(entity, locale);
+  const { prev, next } = await getAdjacentArticles(id);
 
   return (
     <main>
       <NewsHero showTabs={false} />
       <NewsArticleDetail
         article={article}
-        prevArticle={prev}
-        nextArticle={next}
+        prevArticle={prev ? mapCmsArticleToNewsArticle(prev, locale) : undefined}
+        nextArticle={next ? mapCmsArticleToNewsArticle(next, locale) : undefined}
       />
     </main>
   );

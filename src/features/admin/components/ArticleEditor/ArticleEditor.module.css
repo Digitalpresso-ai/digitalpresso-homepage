@@ -308,6 +308,56 @@
 .editorContent hr { border: none; border-top: 1px solid #e2e8f0; margin: 1.5em 0; }
 .editorContent a { color: var(--color-accent); text-decoration: underline; }
 
+/* Locale tabs */
+.localeTabs {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.localeTab {
+  padding: 0;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  border: none;
+  background: transparent;
+  color: var(--color-body);
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.localeTab:hover {
+  color: var(--color-brand);
+}
+
+.localeTabActive {
+  color: var(--color-brand);
+  font-weight: 700;
+}
+
+.localeDivider {
+  color: #d1d5db;
+  font-size: 0.875rem;
+  user-select: none;
+}
+
+.localeTextarea {
+  width: 100%;
+  min-height: 480px;
+  padding: var(--spacing-5) var(--spacing-6);
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--color-heading);
+  border: none;
+  outline: none;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.localeTextarea::placeholder {
+  color: #cbd5e0;
+}
+
 /* Placeholder */
 .editorContent p.is-editor-empty:first-child::before {
   content: attr(data-placeholder);
