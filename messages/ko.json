@@ -237,6 +237,7 @@
   },
   "newsPage": {
     "hero": {
+      "label": "소식",
       "headingLine1": "Stay Informed with",
       "headingLine2": "Our Latest Updates",
       "subtitleLine1": "우리 팀이 전하는 최신 뉴스, 혁신 소식 및 업계 인사이트를 만나보세요.",
@@ -245,6 +246,14 @@
         "company": "회사 소식",
         "construction": "건설 소식",
         "technology": "기술 소식"
+      },
+      "searchLabel": "소식 이름",
+      "searchPlaceholder": "소식 이름을 검색해 주세요.",
+      "viewButton": "확인하기",
+      "countSuffix": "개",
+      "pagination": {
+        "prev": "이전",
+        "next": "다음"
       }
     },
     "detail": {
