@@ -16,10 +16,10 @@ import styles from './ContactForm.module.css';
 
 const INQUIRY_TYPE_OPTIONS: { value: InquiryType; labelKey: string }[] = [
   { value: InquiryType.INVESTMENT, labelKey: 'investment' },
-  { value: InquiryType.SERVICE, labelKey: 'service' },
-  { value: InquiryType.FEATURE, labelKey: 'feature' },
-  { value: InquiryType.ERROR, labelKey: 'error' },
-  { value: InquiryType.OTHER, labelKey: 'other' },
+  { value: InquiryType.SERVICE_INTRODUCE, labelKey: 'service' },
+  { value: InquiryType.FUNCTION, labelKey: 'feature' },
+  { value: InquiryType.SERVICE_ERROR, labelKey: 'error' },
+  { value: InquiryType.ETC, labelKey: 'other' },
 ];
 
 const SOURCE_TYPE_OPTIONS: { value: SourceType; labelKey: string }[] = [
@@ -98,20 +98,13 @@ export function ContactForm() {
   const onSubmit = async (data: ContactFormData) => {
     setSubmitError(null);
 
-    const formData = new FormData();
-    formData.append('inquiryType', data.inquiryType);
-    formData.append('organization', data.organization);
-    formData.append('name', data.name);
-    formData.append('email', data.email);
-    if (data.phone) formData.append('phone', data.phone);
-    formData.append('source', data.source);
-    formData.append('message', data.message);
-    formData.append('privacyConsent', String(data.privacyConsent));
-
     try {
-      const response = await fetch('https://api.renamedp.ai/v1/inquery', {
+      const response = await fetch('/api/contact', {
         method: 'POST',
-        body: formData,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
       });
 
       if (!response.ok) {
