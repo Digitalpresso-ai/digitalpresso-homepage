@@ -1,135 +1,122 @@
 /* src/features/news/components/NewsHero/NewsHero.module.css */
 
+/* ─── Section ───────────────────────────────────────────── */
 .section {
-  background: #fff;
+  position: relative;
+  overflow: hidden;
+  background-image: url('/images/newsheader.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
+.section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(30, 41, 80, 0.65);
+}
+
+/* ─── Inner container ───────────────────────────────────── */
 .inner {
+  position: relative;
+  z-index: 1;
   max-width: 1280px;
   width: 100%;
   margin: 0 auto;
-  padding: 80px 64px 40px;
+  padding: 80px 64px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 12px;
+  align-items: flex-start;
+  gap: 16px;
 }
 
-/* --- Heading --- */
+/* ─── Text group (label + heading) ──────────────────────── */
+.textGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* ─── Label ─────────────────────────────────────────────── */
+.label {
+  font-family: var(--font-noto-sans-kr), sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 48px;
+  color: #ffffff;
+  margin: 0;
+  word-break: keep-all;
+}
+
+/* ─── Heading ───────────────────────────────────────────── */
 .heading {
   font-family: var(--font-noto-sans-kr), sans-serif;
   font-size: 40px;
   font-weight: 600;
-  color: #193cb8;
-  line-height: 1.2;
-  text-align: center;
+  color: #ffffff;
+  line-height: 1.5;
+  text-align: left;
   margin: 0;
 }
 
-/* --- Subtitle --- */
+/* ─── Subtitle ──────────────────────────────────────────── */
 .subtitle {
   font-family: var(--font-noto-sans-kr), sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400;
-  color: #1e2939;
+  color: rgba(255, 255, 255, 0.85);
   line-height: 24px;
-  text-align: center;
+  text-align: left;
   margin: 0;
+  word-break: keep-all;
+  max-width: 512px;
 }
 
-/* --- Tab bar --- */
-.tabList {
-  display: flex;
-  gap: 24px;
-  align-items: center;
-  margin-top: 4px;
-}
-
-/* --- Tab (inactive) --- */
-.tab {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 4px 0;
-  font-family: var(--font-noto-sans-kr), sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  color: #6a7282;
-  line-height: 24px;
-  white-space: nowrap;
-  transition: color 0.15s ease;
-}
-
-.tab:hover {
-  color: #1e2939;
-}
-
-/* --- Tab (active) --- */
-.tabActive {
-  background: #dbeafe;
-  border: none;
-  cursor: pointer;
-  padding: 4px 12px;
-  border-radius: 9999px;
-  font-family: var(--font-noto-sans-kr), sans-serif;
-  font-size: 18px;
-  font-weight: 600;
-  color: #1e2939;
-  line-height: 28px;
-  white-space: nowrap;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-/* --- Count badge --- */
-.count {
-  color: #2b7fff;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 28px;
-}
-
-/* --- Tablet (800px – 1279px) --- */
+/* ─── Tablet (800px – 1279px) ───────────────────────────── */
 @media (min-width: 800px) and (max-width: 1279px) {
   .inner {
-    padding: 64px 40px 32px;
+    padding: 64px 40px;
   }
 
-  .heading {
-    font-size: 32px;
-  }
-}
-
-/* --- Mobile (≤ 799px) --- */
-@media (max-width: 799px) {
-  .inner {
-    padding: 48px 20px 24px;
+  .label {
+    font-size: 18px;
+    line-height: 32px;
   }
 
   .heading {
     font-size: 28px;
+    line-height: 1.5;
+    letter-spacing: -2px;
+  }
+}
+
+/* ─── Mobile (≤ 799px) ──────────────────────────────────── */
+@media (max-width: 799px) {
+  .inner {
+    padding: 48px 20px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .textGroup {
+    align-items: center;
+  }
+
+  .label {
+    font-size: 18px;
+    line-height: 32px;
+  }
+
+  .heading {
+    font-size: 24px;
+    letter-spacing: -1px;
+    line-height: 1.5;
+    text-align: center;
   }
 
   .subtitle {
-    font-size: 14px;
-    line-height: 22px;
-  }
-
-  .tabList {
-    gap: 16px;
-  }
-
-  .tab {
-    font-size: 14px;
-  }
-
-  .tabActive {
-    font-size: 16px;
-  }
-
-  .count {
-    font-size: 16px;
+    max-width: 100%;
+    text-align: center;
   }
 }

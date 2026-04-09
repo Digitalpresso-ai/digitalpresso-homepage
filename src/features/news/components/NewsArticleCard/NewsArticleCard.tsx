@@ -7,12 +7,13 @@ import styles from "./NewsArticleCard.module.css";
 
 interface NewsArticleCardProps {
   article: NewsArticle;
+  viewButtonText: string;
 }
 
-export function NewsArticleCard({ article }: NewsArticleCardProps) {
+export function NewsArticleCard({ article, viewButtonText }: NewsArticleCardProps) {
   return (
     <Link href={`/news/article/${article.id}`} className={styles.card}>
-      <div className={`${styles.imageWrapper}${article.thumbnailBorder ? ` ${styles.imageWrapperBorder}` : ''}`}>
+      <div className={styles.imageWrapper}>
         {article.thumbnail ? (
           <Image
             src={article.thumbnail}
@@ -25,6 +26,9 @@ export function NewsArticleCard({ article }: NewsArticleCardProps) {
         ) : (
           <div className={styles.imagePlaceholder} />
         )}
+        <div className={styles.hoverOverlay}>
+          <span className={styles.hoverButton}>{viewButtonText}</span>
+        </div>
       </div>
       <div className={styles.content}>
         <h3 className={styles.title}>{article.title}</h3>

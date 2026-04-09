@@ -1,0 +1,55 @@
+/* src/features/news/components/NewsPagination/NewsPagination.module.css */
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: #1e2939;
+  transition: color 0.15s ease;
+}
+
+.arrow:hover {
+  color: #193cb8;
+}
+
+.arrow:disabled {
+  color: #d1d5db;
+  cursor: default;
+}
+
+.arrowIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.pageInfo {
+  display: flex;
+  align-items: center;
+}
+
+.pageCurrent {
+  font-family: var(--font-pretendard), var(--font-noto-sans-kr), sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e2939;
+  line-height: 24px;
+}
+
+.pageSeparator {
+  font-family: var(--font-pretendard), var(--font-noto-sans-kr), sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #d1d5dc;
+  line-height: 24px;
+}

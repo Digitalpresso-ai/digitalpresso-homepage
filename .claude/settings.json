@@ -4,7 +4,11 @@
       "Bash(npm run:*)",
       "Bash(export PATH=\"/usr/local/bin:/opt/homebrew/bin:$PATH\")",
       "Bash(npx tsc:*)",
-      "Bash(ls /Users/rch/digitalpresso-homepage/public/images/article*)"
+      "Bash(ls /Users/rch/digitalpresso-homepage/public/images/article*)",
+      "Bash(ls -la /Users/rch/digitalpresso-homepage/app/[locale]/)",
+      "WebFetch(domain:www.figma.com)",
+      "mcp__figma-developer__get_figma_data",
+      "mcp__figma-developer__download_figma_images"
     ]
   }
 }

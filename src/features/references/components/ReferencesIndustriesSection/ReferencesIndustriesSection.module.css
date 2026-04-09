@@ -67,19 +67,19 @@
 /* ─── Mobile (≤799px) ───────────────────────────────── */
 @media (max-width: 799px) {
   .container {
-    padding: 48px 20px;
-    gap: 16px;
+    padding: 48px 20px 64px;
+    gap: 32px;
   }
 
   .heading {
-    font-size: 16px;
-    line-height: 1.55;
+    font-size: 18px;
+    line-height: 1.78;
     white-space: normal;
   }
 
   .row {
     flex-direction: column;
-    gap: 16px;
+    gap: 24px;
   }
 
   .item {

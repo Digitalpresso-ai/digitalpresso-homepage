@@ -1,7 +1,9 @@
 // app/[locale]/news/page.tsx
 
 import type { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 import { NewsHero } from '@/src/features/news/components/NewsHero/NewsHero';
+import { NewsFilterBar } from '@/src/features/news/components/NewsFilterBar/NewsFilterBar';
 import { NewsArticleGrid } from '@/src/features/news/components/NewsArticleGrid/NewsArticleGrid';
 import { getPublishedArticles } from '@/src/features/news/api/news.api';
 import { mapCmsArticleToNewsArticle } from '@/src/features/news/mappers/article.mapper';
@@ -10,7 +12,7 @@ import { buildPageMetadata, isAppLocale, type AppLocale } from '@/lib/seo';
 
 interface Props {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ category?: string }>;
+  searchParams: Promise<{ category?: string; search?: string }>;
 }
 
 const VALID_CATEGORIES: NewsCategory[] = [
@@ -53,7 +55,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function NewsPage({ params, searchParams }: Props) {
   const { locale } = await params;
-  const { category } = await searchParams;
+  const { category, search } = await searchParams;
+  const t = await getTranslations('newsPage.hero');
   const activeCategory: NewsCategory = VALID_CATEGORIES.includes(
     category as NewsCategory,
   )
@@ -62,7 +65,20 @@ export default async function NewsPage({ params, searchParams }: Props) {
 
   const entities = await getPublishedArticles();
   const allArticles = entities.map((e) => mapCmsArticleToNewsArticle(e, locale));
-  const articles = allArticles.filter((a) => a.category === activeCategory);
+
+  // Filter by category
+  let filteredArticles = allArticles.filter((a) => a.category === activeCategory);
+
+  // Filter by search query
+  const searchQuery = search?.trim() || '';
+  if (searchQuery) {
+    const q = searchQuery.toLowerCase();
+    filteredArticles = filteredArticles.filter(
+      (a) =>
+        a.title.toLowerCase().includes(q) ||
+        a.description.toLowerCase().includes(q),
+    );
+  }
 
   const articleCounts = {
     company: allArticles.filter((a) => a.category === 'company').length,
@@ -72,8 +88,16 @@ export default async function NewsPage({ params, searchParams }: Props) {
 
   return (
     <main>
-      <NewsHero activeCategory={activeCategory} articleCounts={articleCounts} />
-      <NewsArticleGrid articles={articles} />
+      <NewsHero />
+      <NewsFilterBar
+        activeCategory={activeCategory}
+        articleCounts={articleCounts}
+        searchQuery={searchQuery}
+      />
+      <NewsArticleGrid
+        articles={filteredArticles}
+        viewButtonText={t('viewButton')}
+      />
     </main>
   );
 }

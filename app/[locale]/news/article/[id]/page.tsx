@@ -2,7 +2,6 @@
 
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { NewsHero } from '@/src/features/news/components/NewsHero/NewsHero';
 import { NewsArticleDetail } from '@/src/features/news/components/NewsArticleDetail/NewsArticleDetail';
 import {
   getArticleById,
@@ -55,7 +54,6 @@ export default async function NewsArticlePage({ params }: Props) {
 
   return (
     <main>
-      <NewsHero showTabs={false} />
       <NewsArticleDetail
         article={article}
         prevArticle={prev ? mapCmsArticleToNewsArticle(prev, locale) : undefined}

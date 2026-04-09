@@ -47,6 +47,17 @@ export default function Header() {
     closeLanguageMenu();
   };
 
+  // 데스크톱 크기로 돌아가면 모바일 메뉴 자동 닫기
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1280) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   useEffect(() => {
     if (!isLanguageMenuOpen) {
       return;
@@ -116,8 +127,8 @@ export default function Header() {
                 <Image
                   src={selectedLanguage.flagSrc}
                   alt=""
-                  width={48}
-                  height={32}
+                  width={36}
+                  height={24}
                   className={styles.languageFlag}
                 />
                 <span className={styles.languageCode}>{selectedLanguage.code}</span>
@@ -164,8 +175,8 @@ export default function Header() {
                       <Image
                         src={item.flagSrc}
                         alt=""
-                        width={48}
-                        height={32}
+                        width={36}
+                        height={24}
                         className={styles.languageFlag}
                       />
                       <span className={styles.languageCode}>{item.code}</span>
@@ -178,52 +189,55 @@ export default function Header() {
           </div>
         </nav>
 
-        {/* 모바일 햄버거 버튼 */}
-        <button
-          className={styles.hamburger}
-          onClick={toggleMobileMenu}
-          aria-label={isMobileMenuOpen ? t('aria.menuClose') : t('aria.menuOpen')}
-          aria-expanded={isMobileMenuOpen}
-          aria-controls="mobile-menu"
-        >
-          {isMobileMenuOpen ? (
-            // 닫기 아이콘 (✕)
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-            >
-              <path
-                d="M18 6L6 18M6 6L18 18"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          ) : (
-            // 메뉴 아이콘 (☰)
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-            >
-              <path
-                d="M3 12H21M3 6H21M3 18H21"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          )}
-        </button>
+        {/* 태블릿·모바일: CTA + 햄버거 */}
+        <div className={styles.mobileActions}>
+          <Link href={CTA_HREF} className={styles.mobileCtaInline} onClick={closeMobileMenu}>
+            {t('cta')}
+          </Link>
+          <button
+            className={styles.hamburger}
+            onClick={toggleMobileMenu}
+            aria-label={isMobileMenuOpen ? t('aria.menuClose') : t('aria.menuOpen')}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-menu"
+          >
+            {isMobileMenuOpen ? (
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path
+                  d="M18 6L6 18M6 6L18 18"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            ) : (
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path
+                  d="M3 12H21M3 6H21M3 18H21"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            )}
+          </button>
+        </div>
       </div>
 
       {/* 모바일 드롭다운 메뉴 */}
@@ -233,28 +247,95 @@ export default function Header() {
           className={styles.mobileNav}
           aria-label={t('aria.mobileNav')}
         >
-          <ul className={styles.mobileNavList}>
-            {navLinks.map(({ label, href }) => (
-              <li key={href}>
-                <Link
-                  href={href}
-                  className={styles.mobileNavLink}
-                  onClick={closeMobileMenu}
-                >
-                  {label}
-                </Link>
-              </li>
-            ))}
-            <li>
-              <Link
-                href={CTA_HREF}
-                className={styles.mobileCtaButton}
-                onClick={closeMobileMenu}
+          <div className={styles.mobileMenuContent}>
+            <ul className={styles.mobileNavList}>
+              {navLinks.map(({ label, href }) => (
+                <li key={href}>
+                  <Link
+                    href={href}
+                    className={styles.mobileNavLink}
+                    onClick={closeMobileMenu}
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            <div className={styles.mobileLanguageDropdown} ref={languageRef}>
+              <span className={styles.mobileLanguageLabel}>{t('language.label')}</span>
+              <button
+                type="button"
+                className={styles.mobileLanguageButton}
+                aria-expanded={isLanguageMenuOpen}
+                aria-haspopup="listbox"
+                aria-label={t('language.aria.button')}
+                onClick={toggleLanguageMenu}
               >
-                {t('cta')}
-              </Link>
-            </li>
-          </ul>
+                <span className={styles.languageButtonContent}>
+                  <Image
+                    src={selectedLanguage.flagSrc}
+                    alt=""
+                    width={36}
+                    height={24}
+                    className={styles.languageFlag}
+                  />
+                  <span className={styles.languageCode}>{selectedLanguage.code}</span>
+                </span>
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className={`${styles.languageChevron} ${
+                    isLanguageMenuOpen ? styles.languageChevronOpen : ''
+                  }`}
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M6 9L12 15L18 9"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+
+              {isLanguageMenuOpen && (
+                <ul
+                  className={styles.mobileLanguageList}
+                  role="listbox"
+                  aria-label={t('language.aria.list')}
+                >
+                  {languageOptions.map((item) => (
+                    <li key={item.locale}>
+                      <button
+                        type="button"
+                        className={`${styles.languageOption} ${
+                          item.locale === locale ? styles.languageOptionActive : ''
+                        }`}
+                        role="option"
+                        aria-selected={item.locale === locale}
+                        onClick={() => handleLocaleChange(item.locale)}
+                      >
+                        <Image
+                          src={item.flagSrc}
+                          alt=""
+                          width={36}
+                          height={24}
+                          className={styles.languageFlag}
+                        />
+                        <span className={styles.languageCode}>{item.code}</span>
+                        <span className={styles.srOnly}>{item.name}</span>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
         </nav>
       )}
     </header>

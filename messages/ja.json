@@ -237,6 +237,7 @@
   },
   "newsPage": {
     "hero": {
+      "label": "ニュース",
       "headingLine1": "Stay Informed with",
       "headingLine2": "Our Latest Updates",
       "subtitleLine1": "チームからの最新ニュース、イノベーション、業界インサイトをお届けします。",
@@ -245,6 +246,14 @@
         "company": "企業ニュース",
         "construction": "建設ニュース",
         "technology": "技術ニュース"
+      },
+      "searchLabel": "記事名",
+      "searchPlaceholder": "記事名で検索してください。",
+      "viewButton": "確認する",
+      "countSuffix": "件",
+      "pagination": {
+        "prev": "前へ",
+        "next": "次へ"
       }
     },
     "detail": {

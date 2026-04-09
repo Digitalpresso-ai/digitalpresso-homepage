@@ -237,6 +237,7 @@
   },
   "newsPage": {
     "hero": {
+      "label": "News",
       "headingLine1": "Stay Informed with",
       "headingLine2": "Our Latest Updates",
       "subtitleLine1": "Discover the latest news, innovations, and industry insights from our team.",
@@ -245,6 +246,14 @@
         "company": "Company News",
         "construction": "Construction News",
         "technology": "Technology News"
+      },
+      "searchLabel": "Article name",
+      "searchPlaceholder": "Search articles by name.",
+      "viewButton": "View",
+      "countSuffix": "",
+      "pagination": {
+        "prev": "Previous",
+        "next": "Next"
       }
     },
     "detail": {
