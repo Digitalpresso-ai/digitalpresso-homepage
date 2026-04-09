@@ -190,3 +190,18 @@
     display: none;
   }
 }
+
+/* Japanese layout fixes */
+:global(.locale-ja) .eyebrowRow {
+  flex-wrap: wrap;
+}
+
+:global(.locale-ja) .eyebrow,
+:global(.locale-ja) .eyebrowSub,
+:global(.locale-ja) .heading,
+:global(.locale-ja) .body {
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: anywhere;
+  letter-spacing: 0;
+}

@@ -87,3 +87,11 @@
     width: 100%;
   }
 }
+
+/* Japanese layout fixes */
+:global(.locale-ja) .heading {
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: anywhere;
+  letter-spacing: 0;
+}
