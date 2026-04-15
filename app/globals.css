@@ -32,14 +32,86 @@
   --color-white-overlay: rgba(255, 255, 255, 0.8);
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
-  max-width: 100vw;
   overflow-x: hidden;
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-noto-sans-kr), Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.locale-ja {
+  font-family: var(--font-noto-sans-jp), var(--font-noto-sans-kr), Arial, Helvetica, sans-serif;
+}
+
+/* Japanese locale typography guardrails:
+   Many section styles use keep-all/nowrap and aggressive negative tracking,
+   which can cause overflow with longer Japanese copy. */
+.locale-ja :where(
+  .heading,
+  .title,
+  .subtitle,
+  .body,
+  .cardTitle,
+  .headerLine1,
+  .headerLine2,
+  .eyebrow,
+  .eyebrowSub,
+  .partnersHeading,
+  .contactText,
+  .featureText,
+  .recommendText,
+  .label,
+  .tag,
+  .cardText,
+  .cardAuthor,
+  .cardRole,
+  .navLink,
+  .mobileNavLink,
+  .ctaButton,
+  .mobileCtaButton
+) {
+  word-break: normal;
+  line-break: strict;
+  overflow-wrap: anywhere;
+}
+
+.locale-ja :where(
+  .heading,
+  .title,
+  .subtitle,
+  .cardTitle,
+  .headerLine1,
+  .headerLine2,
+  .eyebrow,
+  .eyebrowSub,
+  .partnersHeading
+) {
+  letter-spacing: 0 !important;
+}
+
+.locale-ja :where(
+  .heading,
+  .title,
+  .subtitle,
+  .eyebrow,
+  .eyebrowSub,
+  .partnersHeading,
+  .tag,
+  .ctaButton,
+  .mobileCtaButton
+) {
+  white-space: normal !important;
+}
+
+.locale-ja :where(.titleRow) {
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 * {

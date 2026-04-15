@@ -89,6 +89,121 @@
   opacity: 0.85;
 }
 
+/* ─── 언어 드롭다운 ─────────────────────────────────────────── */
+.languageDropdown {
+  position: relative;
+  width: 116px;
+  flex-shrink: 0;
+}
+
+.languageLabel {
+  position: absolute;
+  top: 0;
+  left: 12px;
+  transform: translateY(-50%);
+  z-index: 2;
+  padding: 0 4px;
+  background: #ffffff;
+  color: #1e2939;
+  font-family: var(--font-noto-sans-kr), 'Noto Sans KR', 'Noto Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.languageButton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 12px 8px 8px;
+  border: 1px solid #99a1af;
+  border-radius: 4px;
+  background-color: #ffffff;
+  color: #1e2939;
+  cursor: pointer;
+}
+
+.languageButtonContent {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.languageFlag {
+  width: 36px;
+  height: 24px;
+  object-fit: cover;
+  border: 0.75px solid #c5c5c5;
+}
+
+.languageCode {
+  font-family: var(--font-noto-sans-kr), 'Noto Sans KR', 'Noto Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #1e2939;
+}
+
+.languageChevron {
+  color: #9ca3af;
+  transition: transform 0.2s ease;
+}
+
+.languageChevronOpen {
+  transform: rotate(180deg);
+}
+
+.languageList {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 110;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+  border: 1px solid #99a1af;
+  border-radius: 8px;
+  background-color: #ffffff;
+  list-style: none;
+  margin: 0;
+  box-shadow: var(--shadow-header);
+}
+
+.languageOption {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.languageOption:hover {
+  background: rgba(25, 60, 184, 0.06);
+}
+
+.languageOptionActive {
+  background: rgba(25, 60, 184, 0.1);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* ─── 햄버거 버튼 (모바일 전용, 기본 숨김) ──────────────────── */
 .hamburger {
   display: none;
@@ -112,67 +227,128 @@
   right: 0;
   z-index: 99;
   background-color: #ffffff;
-  box-shadow: var(--shadow-header);
+  box-shadow: 0px 4px 6px -2px rgba(0, 0, 0, 0.05), 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 8px 8px;
+  padding: 16px 16px 24px;
+}
+
+.mobileMenuContent {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
 
 .mobileNavList {
   display: flex;
   flex-direction: column;
   list-style: none;
-  padding: 8px 24px 16px;
+  padding: 0;
   margin: 0;
   gap: 4px;
 }
 
 .mobileNavLink {
-  display: block;
-  padding: 12px 4px;
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 4px;
+  border-radius: 4px;
   color: var(--color-brand);
   font-family: var(--font-noto-sans-kr), 'Noto Sans KR', 'Noto Sans', sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
   text-decoration: none;
-  border-bottom: 1px solid rgba(25, 60, 184, 0.1);
 }
 
 .mobileNavLink:hover {
   opacity: 0.75;
 }
 
-.mobileCtaButton {
+/* ─── 모바일 메뉴 내 언어 드롭다운 ──────────────────────────── */
+.mobileLanguageDropdown {
+  position: relative;
+  width: 100%;
+}
+
+.mobileLanguageLabel {
+  position: absolute;
+  top: 0;
+  left: 12px;
+  transform: translateY(-50%);
+  z-index: 2;
+  padding: 0 4px;
+  background: #ffffff;
+  color: #1e2939;
+  font-family: var(--font-pretendard), var(--font-noto-sans-kr), sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.mobileLanguageButton {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 12px 8px 8px;
+  border: 1px solid #99a1af;
+  border-radius: 4px;
+  background-color: #ffffff;
+  color: #1e2939;
+  cursor: pointer;
+}
+
+.mobileLanguageList {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 110;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+  border: 1px solid #99a1af;
+  border-radius: 8px;
+  background-color: #ffffff;
+  list-style: none;
+  margin: 0;
+  box-shadow: var(--shadow-header);
+}
+
+/* ─── 모바일 CTA (태블릿·모바일에서만 노출) ─────────────────── */
+.mobileCtaInline {
+  display: none;
+  align-items: center;
   justify-content: center;
-  height: 48px;
-  margin-top: 12px;
-  padding: 8px 24px;
+  height: 40px;
+  padding: 8px 16px;
   border-radius: 4px;
   background-color: var(--color-brand);
   color: #ffffff;
   font-family: var(--font-noto-sans-kr), 'Noto Sans KR', 'Noto Sans', sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
   line-height: 24px;
   text-decoration: none;
+  white-space: nowrap;
   transition: opacity 0.15s ease;
 }
 
-.mobileCtaButton:hover {
+.mobileCtaInline:hover {
   opacity: 0.85;
 }
 
-/* ─── 반응형: 태블릿 (800px – 1279px) ───────────────────────── */
+.mobileActions {
+  display: none;
+  align-items: center;
+  gap: 16px;
+}
+
+/* ─── 반응형: 태블릿 (≤1279px) → 햄버거 전환 ────────────────── */
 @media (max-width: 1279px) {
   .inner {
     padding: 16px 40px;
-  }
-}
-
-/* ─── 반응형: 모바일 (<800px) ────────────────────────────────── */
-@media (max-width: 799px) {
-  .inner {
-    padding: 16px 24px;
   }
 
   .desktopNav {
@@ -181,6 +357,21 @@
 
   .hamburger {
     display: flex;
+  }
+
+  .mobileActions {
+    display: flex;
+  }
+
+  .mobileCtaInline {
+    display: inline-flex;
+  }
+}
+
+/* ─── 반응형: 모바일 (<800px) ────────────────────────────────── */
+@media (max-width: 799px) {
+  .inner {
+    padding: 16px 20px;
   }
 }
 

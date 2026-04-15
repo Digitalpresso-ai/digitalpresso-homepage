@@ -1,0 +1,322 @@
+/* src/features/references/components/ReferencesElectricalSection/ReferencesElectricalSection.module.css */
+
+.section {
+  background: #eff6ff;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 48px 64px 64px;
+}
+
+/* ─── Feature: 2열 텍스트 좌 / 비디오 우 ─────────────── */
+.featureRow {
+  display: flex;
+  flex-direction: row;
+  gap: 48px;
+  align-items: center;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* 텍스트: flex-1, min-height 410px, w-560 */
+.featureTextCol {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-height: 410px;
+  justify-content: center;
+  max-width: 560px;
+}
+
+.headerGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.badgeRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 데스크탑 로고: w-158 h-54 */
+.renameLogo {
+  width: 158px;
+  height: 54px;
+  object-fit: contain;
+}
+
+.eyebrow {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--color-heading);
+  line-height: 48px;
+  word-break: keep-all;
+  white-space: nowrap;
+}
+
+.heading {
+  font-size: 40px;
+  font-weight: 600;
+  color: var(--color-accent);
+  line-height: 1.3;
+  letter-spacing: 0;
+  margin: 0;
+  word-break: keep-all;
+}
+
+.body {
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--color-body);
+  line-height: 1.45;
+  letter-spacing: -0.12px;
+  word-break: keep-all;
+}
+
+/* 비디오: flex-1, 16:9 */
+.videoWrapper {
+  flex: 1;
+  min-width: 0;
+  max-width: 1440px;
+}
+
+
+/* ─── Partners 헤더 ──────────────────────────────────── */
+.partnersContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.partnersHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.partnersEyebrow {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-brand);
+  line-height: 24px;
+}
+
+.partnersHeading {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--color-heading);
+  line-height: 48px;
+  margin: 0;
+  word-break: keep-all;
+  white-space: nowrap;
+}
+
+/* ─── 데스크탑: 4열, 고정 높이 345px ──────────────────── */
+.cardList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  height: 345px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.card {
+  flex: 1;
+  min-width: 0;
+  background: #dbeafe;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.stars {
+  flex-shrink: 0;
+}
+
+.cardText {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--color-heading);
+  line-height: 1.6;
+  word-break: keep-all;
+  margin: 0;
+}
+
+.cardCustomer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cardAuthor {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-heading);
+  line-height: 28px;
+  word-break: keep-all;
+}
+
+.cardRole {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--color-heading);
+  line-height: 24px;
+}
+
+/* ─── Tablet (800px – 1279px) ───────────────────────── */
+@media (min-width: 800px) and (max-width: 1279px) {
+  .section {
+    padding: 32px 48px;
+  }
+
+  .featureRow {
+    gap: 32px;
+  }
+
+  .renameLogo {
+    width: 102px;
+    height: 35px;
+  }
+
+  .eyebrow {
+    font-size: 18px;
+    line-height: 32px;
+  }
+
+  .heading {
+    font-size: 28px;
+    line-height: 1.5;
+    letter-spacing: -2px;
+  }
+
+  .body {
+    font-size: 16px;
+  }
+
+  .featureTextCol {
+    min-height: 314px;
+    max-width: none;
+  }
+
+  .partnersHeading {
+    font-size: 18px;
+    line-height: 32px;
+    white-space: normal;
+  }
+
+  /* 태블릿: 단일 열 */
+  .cardList {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .card {
+    height: auto;
+  }
+}
+
+/* ─── Mobile (≤799px) ───────────────────────────────── */
+@media (max-width: 799px) {
+  .section {
+    padding: 48px 20px 64px;
+  }
+
+  /* 모바일: 2열 → 1열 */
+  .featureRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .featureTextCol {
+    min-height: unset;
+    max-width: none;
+    width: 100%;
+  }
+
+  .videoWrapper {
+    width: 100%;
+  }
+
+  .renameLogo {
+    width: 98px;
+    height: 34px;
+  }
+
+  .eyebrow {
+    font-size: 18px;
+    line-height: 32px;
+  }
+
+  .heading {
+    font-size: 28px;
+    line-height: 1.5;
+    letter-spacing: -2px;
+  }
+
+  .body {
+    font-size: 16px;
+  }
+
+  .partnersHeading {
+    font-size: 18px;
+    line-height: 32px;
+    white-space: normal;
+  }
+
+  /* 모바일: 단일 열 */
+  .cardList {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .card {
+    height: auto;
+  }
+}
+
+/* Japanese layout fixes */
+:global(.locale-ja) .eyebrow,
+:global(.locale-ja) .heading,
+:global(.locale-ja) .body,
+:global(.locale-ja) .partnersHeading,
+:global(.locale-ja) .cardText,
+:global(.locale-ja) .cardAuthor,
+:global(.locale-ja) .cardRole {
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: anywhere;
+  letter-spacing: 0;
+}
+
+:global(.locale-ja) .cardList {
+  height: auto;
+  overflow: visible;
+  align-items: stretch;
+}
+
+:global(.locale-ja) .card {
+  height: auto;
+}

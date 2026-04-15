@@ -1,0 +1,179 @@
+/* src/features/references/components/ReferencesServiceSection/ReferencesServiceSection.module.css */
+
+.section {
+  background: #ffffff;
+}
+
+/* ─── Desktop (≥1280px): 2열 가로 ─────────────────────── */
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  align-items: center;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 80px 64px;
+}
+
+/* 텍스트: flex-1 */
+.textCol {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+}
+
+.textInner {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.headerGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.eyebrow {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--color-heading);
+  line-height: 48px;
+  word-break: keep-all;
+}
+
+.heading {
+  font-size: 40px;
+  font-weight: 600;
+  color: var(--color-accent);
+  line-height: 1.3;
+  letter-spacing: 0;
+  margin: 0;
+  word-break: keep-all;
+}
+
+.body {
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--color-body);
+  line-height: 1.45;
+  letter-spacing: -0.12px;
+  word-break: keep-all;
+}
+
+/* 이미지: flex-1 */
+.imageCol {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 0 16px;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.desktopBreak {
+  display: inline;
+}
+
+/* ─── Tablet (800px – 1279px): 세로 쌓임 ──────────────── */
+@media (min-width: 800px) and (max-width: 1279px) {
+  .container {
+    flex-direction: column;
+    gap: 0;
+    padding: 32px 48px;
+  }
+
+  .textCol {
+    width: 100%;
+    align-self: auto;
+  }
+
+  .textInner {
+    min-height: 314px;
+    justify-content: center;
+  }
+
+  .eyebrow {
+    font-size: 18px;
+    line-height: 32px;
+  }
+
+  .heading {
+    font-size: 28px;
+    line-height: 1.5;
+    letter-spacing: -2px;
+  }
+
+  .body {
+    font-size: 16px;
+  }
+
+  .imageCol {
+    width: 100%;
+    padding: 32px 0 16px;
+  }
+
+  .desktopBreak {
+    display: none;
+  }
+}
+
+/* ─── Mobile (≤799px): 세로 쌓임 ──────────────────────── */
+@media (max-width: 799px) {
+  .container {
+    flex-direction: column;
+    gap: 0;
+    padding: 48px 20px;
+  }
+
+  .textCol {
+    width: 100%;
+    align-self: auto;
+  }
+
+  .textInner {
+    gap: 24px;
+  }
+
+  .eyebrow {
+    font-size: 18px;
+    line-height: 32px;
+  }
+
+  .heading {
+    font-size: 28px;
+    line-height: 1.5;
+    letter-spacing: -2px;
+  }
+
+  .body {
+    font-size: 16px;
+  }
+
+  .imageCol {
+    width: 100%;
+    padding: 24px 0 0;
+  }
+
+  .desktopBreak {
+    display: none;
+  }
+}
+
+/* Japanese layout fixes */
+:global(.locale-ja) .eyebrow,
+:global(.locale-ja) .heading,
+:global(.locale-ja) .body {
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: anywhere;
+  letter-spacing: 0;
+}

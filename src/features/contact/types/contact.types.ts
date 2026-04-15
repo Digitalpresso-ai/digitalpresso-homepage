@@ -4,10 +4,10 @@ import { z } from 'zod';
 
 export enum InquiryType {
   INVESTMENT = 'INVESTMENT',
-  SERVICE = 'SERVICE',
-  FEATURE = 'FEATURE',
-  ERROR = 'ERROR',
-  OTHER = 'OTHER',
+  SERVICE_INTRODUCE = 'SERVICE_INTRODUCE',
+  FUNCTION = 'FUNCTION',
+  SERVICE_ERROR = 'SERVICE_ERROR',
+  ETC = 'ETC',
 }
 
 export enum SourceType {
@@ -20,7 +20,7 @@ export enum SourceType {
 
 export const contactFormSchema = z.object({
   inquiryType: z
-    .enum(['INVESTMENT', 'SERVICE', 'FEATURE', 'ERROR', 'OTHER'] as const)
+    .enum(['INVESTMENT', 'SERVICE_INTRODUCE', 'FUNCTION', 'SERVICE_ERROR', 'ETC'] as const)
     .refine((val) => val !== undefined, { message: 'inquiryTypeRequired' }),
   organization: z.string().min(1, 'organizationRequired'),
   name: z.string().min(1, 'nameRequired'),

@@ -7,6 +7,24 @@ const nextConfig: NextConfig = {
   reactCompiler: true,
   images: {
     formats: ['image/avif', 'image/webp'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'i.ytimg.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'jgjxmewzandjsorsnjbu.supabase.co',
+      },
+    ],
+  },
+  turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: [{ loader: '@svgr/webpack', options: { exportType: 'default' } }],
+        as: '*.js',
+      },
+    },
   },
   turbopack: {
     rules: {

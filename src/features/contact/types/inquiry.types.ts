@@ -1,7 +1,15 @@
-// src/features/contact/types/inquiry.types.ts — contact inquiry type definitions (stub)
+// src/features/contact/types/inquiry.types.ts
 
-export interface Inquiry {
-  name: string;
+export interface InquiryRequestPayload {
   email: string;
-  message: string;
+  name: string;
+  content: string;
+  from: string;
+  organization: string;
+  consent: string;
+  type: string;
+}
+
+export interface InquiryApiResponse {
+  message?: string;
 }

@@ -1,0 +1,46 @@
+/* src/features/news/components/NewsArticleGrid/NewsArticleGrid.module.css */
+
+.gridWrapper {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 16px 64px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 20px;
+  column-gap: 32px;
+}
+
+.empty {
+  font-family: var(--font-noto-sans-kr), sans-serif;
+  font-size: 16px;
+  color: #6a7282;
+  text-align: center;
+  padding: 80px 0;
+}
+
+/* ─── Tablet (800px – 1279px) ───────────────────────────── */
+@media (min-width: 800px) and (max-width: 1279px) {
+  .gridWrapper {
+    padding: 16px 40px 64px;
+  }
+}
+
+/* ─── Mobile (≤ 799px) ──────────────────────────────────── */
+@media (max-width: 799px) {
+  .gridWrapper {
+    padding: 24px 20px 64px;
+    gap: 24px;
+  }
+
+  .grid {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
