@@ -35,13 +35,7 @@ export const metadata: Metadata = {
   description:
     "건설 현장 기록, 안전·품질 관리, 보고 자동화를 지원하는 AI 기반 현장 운영 솔루션",
   openGraph: {
-    type: "website",
-    locale: "ko_KR",
-    url: "https://digitalpresso-homepage.vercel.app",
     siteName: "digitalPresso",
-    title: "digitalPresso | RENAME DP",
-    description:
-      "건설 현장 기록, 안전·품질 관리, 보고 자동화를 지원하는 AI 기반 현장 운영 솔루션",
     images: [
       {
         url: "/images/header-background.png",
@@ -53,9 +47,6 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "digitalPresso | RENAME DP",
-    description:
-      "건설 현장 기록, 안전·품질 관리, 보고 자동화를 지원하는 AI 기반 현장 운영 솔루션",
     images: ["/images/header-background.png"],
   },
   robots: {
