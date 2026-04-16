@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Noto_Sans_JP, Noto_Sans_KR } from "next/font/google";
+import { getLocale } from "next-intl/server";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import GAPageTracker from "@/components/analytics/GAPageTracker";
+import { routing, type Locale } from "@/i18n/routing";
+import { getSiteOrigin } from "@/lib/site-url";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -27,7 +30,7 @@ const notoSansJP = Noto_Sans_JP({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://digitalpresso-homepage.vercel.app"),
+  metadataBase: getSiteOrigin(),
   title: {
     default: "digitalPresso | RENAME DP",
     template: "%s | digitalPresso",
@@ -55,13 +58,23 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+const HTML_LANG: Record<Locale, string> = {
+  ko: "ko-KR",
+  en: "en",
+  ja: "ja-JP",
+};
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+  const htmlLang =
+    routing.locales.includes(locale as Locale) ? HTML_LANG[locale as Locale] : HTML_LANG.ko;
+
   return (
-    <html>
+    <html lang={htmlLang}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${notoSansKR.variable} ${notoSansJP.variable}`}
       >
