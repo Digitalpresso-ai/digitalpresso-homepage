@@ -4,7 +4,7 @@ import { getLocale } from "next-intl/server";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import GAPageTracker from "@/components/analytics/GAPageTracker";
 import { routing, type Locale } from "@/i18n/routing";
-import { getSiteOrigin } from "@/lib/site-url";
+import { getSiteUrl, getSiteOrigin } from "@/lib/site-url";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -32,19 +32,19 @@ const notoSansJP = Noto_Sans_JP({
 export const metadata: Metadata = {
   metadataBase: getSiteOrigin(),
   title: {
-    default: "digitalPresso | RENAME DP",
-    template: "%s | digitalPresso",
+    default: "디지털프레소 DigitalPresso | RENAME DP",
+    template: "%s | DigitalPresso",
   },
   description:
-    "건설 현장 기록, 안전·품질 관리, 보고 자동화를 지원하는 AI 기반 현장 운영 솔루션",
+    "디지털프레소 DigitalPresso는 건설 현장 기록, 안전·품질 관리, 보고 자동화를 지원하는 AI 기반 현장 운영 솔루션을 제공합니다.",
   openGraph: {
-    siteName: "digitalPresso",
+    siteName: "DigitalPresso",
     images: [
       {
         url: "/images/header-background.png",
         width: 1200,
         height: 630,
-        alt: "digitalPresso RENAME DP",
+        alt: "디지털프레소 DigitalPresso RENAME DP",
       },
     ],
   },
@@ -72,12 +72,24 @@ export default async function RootLayout({
   const locale = await getLocale();
   const htmlLang =
     routing.locales.includes(locale as Locale) ? HTML_LANG[locale as Locale] : HTML_LANG.ko;
+  const organizationJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "DigitalPresso",
+    alternateName: "디지털프레소",
+    url: getSiteUrl(),
+    logo: `${getSiteUrl()}/images/dp_logo_eng.svg`,
+  };
 
   return (
     <html lang={htmlLang}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${notoSansKR.variable} ${notoSansJP.variable}`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
         <GoogleAnalytics />
         <GAPageTracker />
         {children}

@@ -89,7 +89,7 @@ export function buildPageMetadata({
       type: "website",
       locale: OG_LOCALE[locale],
       url,
-      siteName: "digitalPresso",
+      siteName: "DigitalPresso",
       title,
       description,
       images,

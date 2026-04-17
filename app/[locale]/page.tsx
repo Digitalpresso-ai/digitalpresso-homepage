@@ -24,19 +24,19 @@ interface HomePageProps {
 
 const HOME_META: Record<AppLocale, { title: string; description: string }> = {
   ko: {
-    title: "RENAME DP | 현장 기록·안전·품질 관리 솔루션",
+    title: "RENAME DP | 디지털프레소 DigitalPresso 현장 기록·안전·품질 관리 솔루션",
     description:
-      "건설 현장 데이터를 AI로 자동 정리해 기록, 보고, 안전·품질 관리를 효율화하는 digitalPresso의 RENAME DP를 소개합니다.",
+      "디지털프레소 DigitalPresso의 RENAME DP는 건설 현장 데이터를 AI로 자동 정리해 기록, 보고, 안전·품질 관리를 효율화하는 현장 운영 솔루션입니다.",
   },
   en: {
     title: "RENAME DP | Field Record, Safety, and Quality Platform",
     description:
-      "Discover digitalPresso's AI-powered platform that automates field records, reporting, and safety-quality operations for construction teams.",
+      "Discover DigitalPresso's AI-powered platform that automates field records, reporting, and safety-quality operations for construction teams.",
   },
   ja: {
     title: "RENAME DP | 現場記録・安全・品質管理プラットフォーム",
     description:
-      "digitalPressoのAIプラットフォームで、建設現場の記録・報告・安全品質管理を自動化し、業務効率を高めます。",
+      "DigitalPressoのAIプラットフォームで、建設現場の記録・報告・安全品質管理を自動化し、業務効率を高めます。",
   },
 };
 
