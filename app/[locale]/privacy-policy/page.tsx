@@ -16,19 +16,19 @@ interface PrivacyPolicyPageProps {
 
 const PRIVACY_META: Record<AppLocale, { title: string; description: string }> = {
   ko: {
-    title: "개인정보처리방침 | digitalPresso",
+    title: "개인정보처리방침 | 디지털프레소 DigitalPresso",
     description:
-      "digitalPresso의 개인정보 수집, 이용, 보관, 보호 조치 및 정보주체 권리에 대한 정책입니다.",
+      "디지털프레소 DigitalPresso의 개인정보 수집, 이용, 보관, 보호 조치 및 정보주체 권리에 대한 정책입니다.",
   },
   en: {
-    title: "Privacy Policy | digitalPresso",
+    title: "Privacy Policy | DigitalPresso",
     description:
-      "Review digitalPresso's policy on personal data collection, use, retention, protection measures, and user rights.",
+      "Review DigitalPresso's policy on personal data collection, use, retention, protection measures, and user rights.",
   },
   ja: {
-    title: "プライバシーポリシー | digitalPresso",
+    title: "プライバシーポリシー | DigitalPresso",
     description:
-      "digitalPressoにおける個人情報の収集、利用、保管、保護措置、および情報主体の権利に関する方針です。",
+      "DigitalPressoにおける個人情報の収集、利用、保管、保護措置、および情報主体の権利に関する方針です。",
   },
 };
 

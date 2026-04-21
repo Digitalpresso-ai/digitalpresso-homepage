@@ -8,7 +8,8 @@ import {
   getAdjacentArticles,
 } from '@/src/features/news/api/news.api';
 import { mapCmsArticleToNewsArticle } from '@/src/features/news/mappers/article.mapper';
-import { buildPageMetadata, isAppLocale, type AppLocale } from '@/lib/seo';
+import { buildPageMetadata, isAppLocale, localizedPath, type AppLocale } from '@/lib/seo';
+import { getSiteUrl } from '@/lib/site-url';
 
 interface Props {
   params: Promise<{ locale: string; id: string }>;
@@ -23,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return buildPageMetadata({
       locale: safeLocale,
       path: `/news/article/${id}`,
-      title: 'Article Not Found | digitalPresso',
+      title: 'Article Not Found | DigitalPresso',
       description: '요청한 뉴스 아티클을 찾을 수 없습니다.',
       noIndex: true,
     });
@@ -35,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return buildPageMetadata({
     locale: safeLocale,
     path: `/news/article/${article.id}`,
-    title: `${cleanTitle} | digitalPresso`,
+    title: `${cleanTitle} | DigitalPresso`,
     description: article.description,
     image: article.mainImage.src || '/images/news-card-1.png',
   });
@@ -51,9 +52,38 @@ export default async function NewsArticlePage({ params }: Props) {
 
   const article = mapCmsArticleToNewsArticle(entity, locale);
   const { prev, next } = await getAdjacentArticles(id);
+  const safeLocale: AppLocale = isAppLocale(locale) ? locale : 'ko';
+  const articleUrl = `${getSiteUrl()}${localizedPath(safeLocale, `/news/article/${article.id}`)}`;
+  const articleJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'NewsArticle',
+    headline: article.title.replace(/\n/g, ' ').trim(),
+    description: article.description,
+    datePublished: article.publishedAtIso,
+    dateModified: article.publishedAtIso,
+    inLanguage: safeLocale,
+    mainEntityOfPage: articleUrl,
+    url: articleUrl,
+    articleSection: article.categoryLabel,
+    publisher: {
+      '@type': 'Organization',
+      name: 'DigitalPresso',
+      alternateName: '디지털프레소',
+      url: getSiteUrl(),
+      logo: {
+        '@type': 'ImageObject',
+        url: `${getSiteUrl()}/images/dp_logo_eng.svg`,
+      },
+    },
+    image: article.mainImage.src ? [article.mainImage.src] : undefined,
+  };
 
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       <NewsArticleDetail
         article={article}
         prevArticle={prev ? mapCmsArticleToNewsArticle(prev, locale) : undefined}
