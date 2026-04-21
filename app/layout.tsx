@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Noto_Sans_JP, Noto_Sans_KR } from "next/font/google";
-import { getLocale } from "next-intl/server";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import GAPageTracker from "@/components/analytics/GAPageTracker";
-import { routing, type Locale } from "@/i18n/routing";
-import { getSiteUrl, getSiteOrigin } from "@/lib/site-url";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -30,26 +27,35 @@ const notoSansJP = Noto_Sans_JP({
 });
 
 export const metadata: Metadata = {
-  metadataBase: getSiteOrigin(),
+  metadataBase: new URL("https://digitalpresso-homepage.vercel.app"),
   title: {
-    default: "디지털프레소 DigitalPresso | RENAME DP",
-    template: "%s | DigitalPresso",
+    default: "digitalPresso | RENAME DP",
+    template: "%s | digitalPresso",
   },
   description:
-    "디지털프레소 DigitalPresso는 건설 현장 기록, 안전·품질 관리, 보고 자동화를 지원하는 AI 기반 현장 운영 솔루션을 제공합니다.",
+    "건설 현장 기록, 안전·품질 관리, 보고 자동화를 지원하는 AI 기반 현장 운영 솔루션",
   openGraph: {
-    siteName: "DigitalPresso",
+    type: "website",
+    locale: "ko_KR",
+    url: "https://digitalpresso-homepage.vercel.app",
+    siteName: "digitalPresso",
+    title: "digitalPresso | RENAME DP",
+    description:
+      "건설 현장 기록, 안전·품질 관리, 보고 자동화를 지원하는 AI 기반 현장 운영 솔루션",
     images: [
       {
         url: "/images/header-background.png",
         width: 1200,
         height: 630,
-        alt: "디지털프레소 DigitalPresso RENAME DP",
+        alt: "digitalPresso RENAME DP",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
+    title: "digitalPresso | RENAME DP",
+    description:
+      "건설 현장 기록, 안전·품질 관리, 보고 자동화를 지원하는 AI 기반 현장 운영 솔루션",
     images: ["/images/header-background.png"],
   },
   robots: {
@@ -58,38 +64,16 @@ export const metadata: Metadata = {
   },
 };
 
-const HTML_LANG: Record<Locale, string> = {
-  ko: "ko-KR",
-  en: "en",
-  ja: "ja-JP",
-};
-
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const locale = await getLocale();
-  const htmlLang =
-    routing.locales.includes(locale as Locale) ? HTML_LANG[locale as Locale] : HTML_LANG.ko;
-  const organizationJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "DigitalPresso",
-    alternateName: "디지털프레소",
-    url: getSiteUrl(),
-    logo: `${getSiteUrl()}/images/dp_logo_eng.svg`,
-  };
-
   return (
-    <html lang={htmlLang}>
+    <html>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${notoSansKR.variable} ${notoSansJP.variable}`}
       >
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
-        />
         <GoogleAnalytics />
         <GAPageTracker />
         {children}

@@ -4,12 +4,6 @@ export type AppLocale = "ko" | "en" | "ja";
 
 const DEFAULT_LOCALE: AppLocale = "ko";
 const SUPPORTED_LOCALES: AppLocale[] = ["ko", "en", "ja"];
-const HREFLANG_LOCALE: Record<AppLocale, string> = {
-  ko: "ko-KR",
-  en: "en",
-  ja: "ja-JP",
-};
-const X_DEFAULT_LOCALE: AppLocale = "en";
 
 const OG_LOCALE: Record<AppLocale, string> = {
   ko: "ko_KR",
@@ -51,10 +45,10 @@ export function buildLanguageAlternates(path: string): Record<string, string> {
   const normalizedPath = normalizePath(path);
 
   return {
-    [HREFLANG_LOCALE.ko]: localizedPath("ko", normalizedPath),
-    [HREFLANG_LOCALE.en]: localizedPath("en", normalizedPath),
-    [HREFLANG_LOCALE.ja]: localizedPath("ja", normalizedPath),
-    "x-default": localizedPath(X_DEFAULT_LOCALE, normalizedPath),
+    ko: localizedPath("ko", normalizedPath),
+    en: localizedPath("en", normalizedPath),
+    ja: localizedPath("ja", normalizedPath),
+    "x-default": localizedPath(DEFAULT_LOCALE, normalizedPath),
   };
 }
 
@@ -89,7 +83,7 @@ export function buildPageMetadata({
       type: "website",
       locale: OG_LOCALE[locale],
       url,
-      siteName: "DigitalPresso",
+      siteName: "digitalPresso",
       title,
       description,
       images,
