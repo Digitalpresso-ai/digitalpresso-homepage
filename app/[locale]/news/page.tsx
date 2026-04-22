@@ -23,19 +23,19 @@ const VALID_CATEGORIES: NewsCategory[] = [
 
 const NEWS_META: Record<AppLocale, { title: string; description: string }> = {
   ko: {
-    title: '뉴스 | 디지털프레소 DigitalPresso',
+    title: '뉴스 | digitalPresso',
     description:
-      '건설·안전·AI 현장 운영과 관련된 디지털프레소 DigitalPresso의 최신 소식과 인사이트를 확인하세요.',
+      '건설·안전·AI 현장 운영과 관련된 digitalPresso의 최신 소식과 인사이트를 확인하세요.',
   },
   en: {
-    title: 'News | DigitalPresso',
+    title: 'News | digitalPresso',
     description:
-      'Read the latest updates and insights from DigitalPresso on construction, safety, and AI-powered field operations.',
+      'Read the latest updates and insights from digitalPresso on construction, safety, and AI-powered field operations.',
   },
   ja: {
-    title: 'ニュース | DigitalPresso',
+    title: 'ニュース | digitalPresso',
     description:
-      '建設・安全・AI現場運用に関するDigitalPressoの最新ニュースとインサイトをご覧ください。',
+      '建設・安全・AI現場運用に関するdigitalPressoの最新ニュースとインサイトをご覧ください。',
   },
 };
 

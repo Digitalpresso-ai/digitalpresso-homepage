@@ -14,19 +14,19 @@ interface ReferencesPageProps {
 
 const REFERENCES_META: Record<AppLocale, { title: string; description: string }> = {
   ko: {
-    title: "고객 사례 | 디지털프레소 DigitalPresso",
+    title: "고객 사례 | digitalPresso",
     description:
-      "디지털프레소 DigitalPresso가 건설·전기·인프라 현장에서 만든 실제 도입 사례와 성과를 확인해보세요.",
+      "digitalPresso가 건설·전기·인프라 현장에서 만든 실제 도입 사례와 성과를 확인해보세요.",
   },
   en: {
-    title: "References | DigitalPresso",
+    title: "References | digitalPresso",
     description:
-      "Explore real implementation cases and outcomes delivered by DigitalPresso across construction, electrical, and infrastructure projects.",
+      "Explore real implementation cases and outcomes delivered by digitalPresso across construction, electrical, and infrastructure projects.",
   },
   ja: {
-    title: "導入事例 | DigitalPresso",
+    title: "導入事例 | digitalPresso",
     description:
-      "建設・電気・インフラ分野でDigitalPressoが実現した導入事例と成果をご覧ください。",
+      "建設・電気・インフラ分野でdigitalPressoが実現した導入事例と成果をご覧ください。",
   },
 };
 

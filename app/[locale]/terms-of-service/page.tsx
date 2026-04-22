@@ -16,19 +16,19 @@ interface TermsOfServicePageProps {
 
 const TERMS_META: Record<AppLocale, { title: string; description: string }> = {
   ko: {
-    title: '이용 약관 | 디지털프레소 DigitalPresso',
+    title: '이용 약관 | digitalPresso',
     description:
-      '디지털프레소 DigitalPresso 서비스 이용 약관과 관련된 권리, 의무, 책임 사항을 확인할 수 있습니다.',
+      'digitalPresso 서비스 이용 약관과 관련된 권리, 의무, 책임 사항을 확인할 수 있습니다.',
   },
   en: {
-    title: 'Terms of Service | DigitalPresso',
+    title: 'Terms of Service | digitalPresso',
     description:
-      'Read the terms, conditions, rights, and responsibilities for using DigitalPresso services.',
+      'Read the terms, conditions, rights, and responsibilities for using digitalPresso services.',
   },
   ja: {
-    title: '利用規約 | DigitalPresso',
+    title: '利用規約 | digitalPresso',
     description:
-      'DigitalPressoサービス利用に関する条件、権利、義務、責任事項をご確認いただけます。',
+      'digitalPressoサービス利用に関する条件、権利、義務、責任事項をご確認いただけます。',
   },
 };
 

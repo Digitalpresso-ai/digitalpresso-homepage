@@ -1,7 +1,7 @@
 {
   "common": {
     "header": {
-      "logoAlt": "디지털프레소 DigitalPresso 로고",
+      "logoAlt": "digitalPresso 로고",
       "nav": {
         "product": "제품 소개",
         "aboutUs": "회사 소개",
@@ -34,7 +34,7 @@
       }
     },
     "footer": {
-      "copyright": "Copyright ⓒ 2025 디지털프레소 DigitalPresso All rights reserved.",
+      "copyright": "Copyright ⓒ 2025 Digitalpresso All rights reserved.",
       "nav": {
         "aboutUs": "회사 소개",
         "references": "고객 사례",
