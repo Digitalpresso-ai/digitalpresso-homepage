@@ -12,19 +12,19 @@ interface ContactPageProps {
 
 const CONTACT_META: Record<AppLocale, { title: string; description: string }> = {
   ko: {
-    title: "문의하기 | digitalPresso",
+    title: "문의하기 | 디지털프레소 DigitalPresso",
     description:
-      "RENAME DP 도입 상담과 서비스 문의를 남겨주세요. 현장 업무 환경에 맞는 도입 방안을 안내해드립니다.",
+      "디지털프레소 DigitalPresso의 RENAME DP 도입 상담과 서비스 문의를 남겨주세요. 현장 업무 환경에 맞는 도입 방안을 안내해드립니다.",
   },
   en: {
-    title: "Contact | digitalPresso",
+    title: "Contact | DigitalPresso",
     description:
-      "Get in touch for RENAME DP adoption and service inquiries. We will guide you with a rollout plan tailored to your field operations.",
+      "Get in touch with DigitalPresso for RENAME DP adoption and service inquiries. We will guide you with a rollout plan tailored to your field operations.",
   },
   ja: {
-    title: "お問い合わせ | digitalPresso",
+    title: "お問い合わせ | DigitalPresso",
     description:
-      "RENAME DP導入相談やサービスに関するお問い合わせはこちら。現場運用に合わせた導入プランをご案内します。",
+      "DigitalPressoのRENAME DP導入相談やサービスに関するお問い合わせはこちら。現場運用に合わせた導入プランをご案内します。",
   },
 };
 

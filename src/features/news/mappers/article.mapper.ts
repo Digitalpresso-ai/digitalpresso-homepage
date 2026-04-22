@@ -53,6 +53,7 @@ export function mapCmsArticleToNewsArticle(
     category: (entity.category || "company") as NewsCategory,
     categoryLabel: getCategoryLabel(entity.category, locale),
     publishedAt: formatPublishedAt(entity.created_at),
+    publishedAtIso: entity.created_at,
     thumbnail: entity.cover_img_url ?? "",
     mainImage: {
       src: entity.cover_img_url ?? "",

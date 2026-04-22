@@ -33,19 +33,22 @@ export async function NewsArticleDetail({
   let imageIndex = 0;
 
   return (
-    <div className={styles.container}>
+    <article className={styles.container}>
       {/* Header: title + category */}
-      <div className={styles.header}>
-        <h2 className={styles.title}>
+      <header className={styles.header}>
+        <h1 className={styles.title}>
           {article.title.split('\n').map((line, i, arr) => (
             <span key={i}>
               {line}
               {i < arr.length - 1 && <br />}
             </span>
           ))}
-        </h2>
+        </h1>
         <p className={styles.categoryLabel}>{article.categoryLabel}</p>
-      </div>
+        <time dateTime={article.publishedAtIso} className={styles.categoryLabel}>
+          {article.publishedAt}
+        </time>
+      </header>
 
       {/* Body content */}
       <div className={styles.body}>
@@ -154,7 +157,7 @@ export async function NewsArticleDetail({
       </div>
 
       {/* Navigation */}
-      <div className={styles.navigation}>
+      <nav className={styles.navigation} aria-label={t('listButton')}>
         {(nextArticle || prevArticle) && (
           <div className={styles.navLinks}>
             {prevArticle && (
@@ -177,7 +180,7 @@ export async function NewsArticleDetail({
         <Link href="/news" className={styles.listButton}>
           {t('listButton')}
         </Link>
-      </div>
-    </div>
+      </nav>
+    </article>
   );
 }

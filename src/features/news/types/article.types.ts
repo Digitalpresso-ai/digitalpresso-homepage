@@ -46,6 +46,7 @@ export interface NewsArticle {
   category: NewsCategory;
   categoryLabel: string;
   publishedAt: string;
+  publishedAtIso: string;
   thumbnail: string;
   thumbnailFit?: "cover" | "contain";
   thumbnailBorder?: boolean;
