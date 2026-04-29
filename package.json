@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "mcp": "tsx src/mcp/server.ts",
+    "test:notion-draft": "tsx scripts/test-notion-to-draft.ts",
+    "verify:deploy": "tsx scripts/verify-deploy.ts"
   },
   "dependencies": {
     "@google-analytics/data": "^5.2.1",
