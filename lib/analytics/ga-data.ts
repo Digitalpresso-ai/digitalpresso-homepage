@@ -1,10 +1,55 @@
 import { BetaAnalyticsDataClient } from '@google-analytics/data';
 
+type ServiceAccountCredentials = {
+  client_email?: string;
+  private_key?: string;
+  [key: string]: unknown;
+};
+
+function parseServiceAccountCredentials(raw: string): ServiceAccountCredentials {
+  const trimmed = raw.trim();
+  const unwrapped =
+    (trimmed.startsWith("'") && trimmed.endsWith("'")) ||
+    (trimmed.startsWith('"') && trimmed.endsWith('"'))
+      ? trimmed.slice(1, -1)
+      : trimmed;
+
+  const parseAttempts = [
+    () => JSON.parse(unwrapped),
+    () => JSON.parse(Buffer.from(unwrapped, 'base64').toString('utf8')),
+  ];
+
+  let parsed: ServiceAccountCredentials | null = null;
+  for (const parse of parseAttempts) {
+    try {
+      const value = parse();
+      if (value && typeof value === 'object' && !Array.isArray(value)) {
+        parsed = value as ServiceAccountCredentials;
+        break;
+      }
+    } catch {
+      // 다음 파싱 방식 시도
+    }
+  }
+
+  if (!parsed) {
+    throw new Error(
+      'GA_SERVICE_ACCOUNT_KEY_JSON parse failed. JSON(중괄호 포함) 또는 base64(JSON) 형식인지 확인해주세요.',
+    );
+  }
+
+  if (typeof parsed.private_key === 'string') {
+    parsed.private_key = parsed.private_key.replace(/\\n/g, '\n');
+  }
+
+  return parsed;
+}
+
 function getClient() {
   const raw = process.env.GA_SERVICE_ACCOUNT_KEY_JSON;
   if (!raw) throw new Error('GA_SERVICE_ACCOUNT_KEY_JSON is not set');
 
-  const credentials = JSON.parse(raw);
+  const credentials = parseServiceAccountCredentials(raw);
   return new BetaAnalyticsDataClient({ credentials });
 }
 
