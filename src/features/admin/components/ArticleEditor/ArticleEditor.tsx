@@ -39,6 +39,8 @@ export default function ArticleEditor({ article }: Props) {
   const [titleEn, setTitleEn] = useState(article?.title_en ?? '');
   const [titleJa, setTitleJa] = useState(article?.title_ja ?? '');
   const [activeLocale, setActiveLocale] = useState<'ko' | 'en' | 'ja'>('ko');
+  const [isTranslating, setIsTranslating] = useState(false);
+  const [translateError, setTranslateError] = useState<string | null>(null);
   const [category, setCategory] = useState<NewsCategory>(
     (article?.category as NewsCategory) ?? 'company'
   );
@@ -158,6 +160,48 @@ export default function ArticleEditor({ article }: Props) {
     if (!file) return;
     await handleImageUpload(file);
     event.target.value = '';
+  };
+
+  const handleTranslate = async () => {
+    const content = editor?.getHTML() ?? '';
+    if (!title.trim()) { setTranslateError('한국어 제목을 입력해주세요.'); return; }
+    if (!content || content === '<p></p>') { setTranslateError('한국어 본문을 작성해주세요.'); return; }
+
+    const hasExistingEn = titleEn.trim() || (editorEn?.getHTML() && editorEn.getHTML() !== '<p></p>');
+    const hasExistingJa = titleJa.trim() || (editorJa?.getHTML() && editorJa.getHTML() !== '<p></p>');
+    if (hasExistingEn || hasExistingJa) {
+      const ok = window.confirm('영어/일본어에 이미 작성된 내용이 있으면 덮어씁니다. 계속하시겠습니까?');
+      if (!ok) return;
+    }
+
+    setTranslateError(null);
+    setIsTranslating(true);
+
+    try {
+      const response = await fetch('/api/admin/translate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title, content }),
+      });
+
+      if (!response.ok) {
+        const detail = await response.json().catch(() => null);
+        throw new Error(detail?.message ?? '번역 요청이 실패했습니다.');
+      }
+
+      const { titleEn: translatedTitleEn, titleJa: translatedTitleJa, contentEn, contentJa } =
+        await response.json();
+
+      setTitleEn(translatedTitleEn);
+      setTitleJa(translatedTitleJa);
+      editorEn?.commands.setContent(contentEn);
+      editorJa?.commands.setContent(contentJa);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : '번역 중 오류가 발생했습니다.';
+      setTranslateError(message);
+    } finally {
+      setIsTranslating(false);
+    }
   };
 
   const handleSubmit = () => {
@@ -325,11 +369,20 @@ export default function ArticleEditor({ article }: Props) {
         </div>
         <div className={styles.actions}>
           {serverError && <span className={styles.errorMsg}>{serverError}</span>}
+          {translateError && <span className={styles.errorMsg}>{translateError}</span>}
           {saveSuccess && <span className={styles.successMsg}>저장됨 ✓</span>}
           <button
             type="button"
+            onClick={() => handleTranslate()}
+            disabled={isTranslating || isPending || isUploading}
+            className={styles.translateBtn}
+          >
+            {isTranslating ? '번역 중...' : '🌐 자동번역'}
+          </button>
+          <button
+            type="button"
             onClick={() => handleSubmit()}
-            disabled={isPending || isUploading}
+            disabled={isPending || isUploading || isTranslating}
             className={styles.publishBtn}
           >
             {isPending || isUploading ? '저장 중...' : '저장'}
