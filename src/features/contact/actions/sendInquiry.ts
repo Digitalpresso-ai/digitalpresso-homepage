@@ -1,24 +1,25 @@
 // src/features/contact/actions/sendInquiry.ts
 
+import { getSiteUrl } from '@/lib/site-url';
 import type { ContactFormData } from '../types/contact.types';
 import type { InquiryApiResponse, InquiryRequestPayload } from '../types/inquiry.types';
 
-const INQUIRY_API_URL =
-  process.env.RENAMEDP_INQUIRY_API_URL ?? 'https://api.renamedp.ai/v1/inquery';
+const INQUIRY_API_URL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/inquery`;
 
 export async function sendInquiry(data: ContactFormData): Promise<void> {
-  const content = data.phone
-    ? `${data.message}\n\n[phone] ${data.phone}`
-    : data.message;
+  const parts = [data.message];
+  if (data.source) parts.push(`[유입경로] ${data.source}`);
+  const content = parts.join('\n\n');
 
   const payload: InquiryRequestPayload = {
     email: data.email,
     name: data.name,
     content,
-    from: data.source,
+    from: getSiteUrl(),
     organization: data.organization,
     consent: data.privacyConsent ? 'Y' : 'N',
     type: data.inquiryType,
+    phoneNumber: data.phone ?? '',
   };
 
   const response = await fetch(INQUIRY_API_URL, {

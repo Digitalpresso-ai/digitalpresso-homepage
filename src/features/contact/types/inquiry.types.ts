@@ -8,6 +8,7 @@ export interface InquiryRequestPayload {
   organization: string;
   consent: string;
   type: string;
+  phoneNumber: string;
 }
 
 export interface InquiryApiResponse {
