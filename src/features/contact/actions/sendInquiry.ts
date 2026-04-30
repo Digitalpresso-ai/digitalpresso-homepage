@@ -3,22 +3,18 @@
 import type { ContactFormData } from '../types/contact.types';
 import type { InquiryApiResponse, InquiryRequestPayload } from '../types/inquiry.types';
 
-const INQUIRY_API_URL =
-  process.env.RENAMEDP_INQUIRY_API_URL ?? 'https://api.renamedp.ai/v1/inquery';
+const INQUIRY_API_URL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/inquery`;
 
 export async function sendInquiry(data: ContactFormData): Promise<void> {
-  const content = data.phone
-    ? `${data.message}\n\n[phone] ${data.phone}`
-    : data.message;
-
   const payload: InquiryRequestPayload = {
     email: data.email,
     name: data.name,
-    content,
+    content: data.message,
     from: data.source,
     organization: data.organization,
     consent: data.privacyConsent ? 'Y' : 'N',
     type: data.inquiryType,
+    phoneNumber: data.phone ?? '',
   };
 
   const response = await fetch(INQUIRY_API_URL, {
