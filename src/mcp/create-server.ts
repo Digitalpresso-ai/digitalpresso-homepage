@@ -1,25 +1,20 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
 import { readFileSync } from 'fs'
-import { dirname, join } from 'path'
-import { fileURLToPath } from 'url'
+import { join } from 'path'
 import { z } from 'zod'
 import { getScraps } from '@/src/services/notion.service'
 import { fetchArticleContent } from '@/src/services/crawler.service'
 import { uploadArticleDraft } from '@/src/services/article-upload.service'
 import { generateNewsletterDraft } from '@/src/services/draft-generator.service'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
+const contentRoot = join(process.cwd(), 'content')
 
-const companyServices = readFileSync(
-  join(__dirname, '../../content/company-services.md'),
-  'utf-8'
-)
-const brandVoice = readFileSync(join(__dirname, '../../content/mcp-context/brand-voice.md'), 'utf-8')
-const icp = readFileSync(join(__dirname, '../../content/mcp-context/icp.md'), 'utf-8')
-const proofPoints = readFileSync(join(__dirname, '../../content/mcp-context/proof-points.md'), 'utf-8')
-const ctaPolicy = readFileSync(join(__dirname, '../../content/mcp-context/cta-policy.md'), 'utf-8')
-const claimsGuard = readFileSync(join(__dirname, '../../content/mcp-context/claims-guard.md'), 'utf-8')
+const companyServices = readFileSync(join(contentRoot, 'company-services.md'), 'utf-8')
+const brandVoice = readFileSync(join(contentRoot, 'mcp-context/brand-voice.md'), 'utf-8')
+const icp = readFileSync(join(contentRoot, 'mcp-context/icp.md'), 'utf-8')
+const proofPoints = readFileSync(join(contentRoot, 'mcp-context/proof-points.md'), 'utf-8')
+const ctaPolicy = readFileSync(join(contentRoot, 'mcp-context/cta-policy.md'), 'utf-8')
+const claimsGuard = readFileSync(join(contentRoot, 'mcp-context/claims-guard.md'), 'utf-8')
 
 export function createServer() {
   const server = new McpServer({

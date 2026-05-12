@@ -16,6 +16,7 @@ async function handleRequest(req: Request): Promise<Response> {
   const server = createServer()
   const transport = new WebStandardStreamableHTTPServerTransport({
     sessionIdGenerator: undefined,
+    enableJsonResponse: true,
   })
   await server.connect(transport)
   return transport.handleRequest(req)

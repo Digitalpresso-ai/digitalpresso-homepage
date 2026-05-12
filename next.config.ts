@@ -5,6 +5,9 @@ const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
+  outputFileTracingIncludes: {
+    '/api/mcp': ['./content/**/*.md'],
+  },
   images: {
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [
