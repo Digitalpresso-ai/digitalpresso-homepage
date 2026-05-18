@@ -1,10 +1,28 @@
 import { BetaAnalyticsDataClient } from '@google-analytics/data';
 
+function parseServiceAccountKey(raw: string): Record<string, unknown> {
+  const trimmed = raw.trim();
+  const jsonText = trimmed.startsWith('{')
+    ? trimmed
+    : Buffer.from(trimmed, 'base64').toString('utf8');
+
+  try {
+    return JSON.parse(jsonText);
+  } catch {
+    const escaped = jsonText.replace(/\r/g, '').replace(/\n/g, '\\n');
+    const parsed = JSON.parse(escaped) as Record<string, unknown>;
+    if (typeof parsed.private_key === 'string') {
+      parsed.private_key = (parsed.private_key as string).replace(/\\n/g, '\n');
+    }
+    return parsed;
+  }
+}
+
 function getClient() {
   const raw = process.env.GA_SERVICE_ACCOUNT_KEY_JSON;
   if (!raw) throw new Error('GA_SERVICE_ACCOUNT_KEY_JSON is not set');
 
-  const credentials = JSON.parse(raw);
+  const credentials = parseServiceAccountKey(raw);
   return new BetaAnalyticsDataClient({ credentials });
 }
 

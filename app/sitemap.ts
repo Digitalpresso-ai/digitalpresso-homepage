@@ -1,8 +1,9 @@
 import type { MetadataRoute } from 'next';
 import { localizedPath, type AppLocale } from '@/lib/seo';
+import { getSiteUrl } from '@/lib/site-url';
 import { getPublishedArticles } from '@/src/features/news/api/news.api';
 
-const BASE_URL = 'https://digitalpresso-homepage.vercel.app';
+const BASE_URL = getSiteUrl();
 const LOCALES: AppLocale[] = ['ko', 'en', 'ja'];
 
 const STATIC_PATHS = [

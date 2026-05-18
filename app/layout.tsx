@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Noto_Sans_JP, Noto_Sans_KR } from "next/font/google";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import GAPageTracker from "@/components/analytics/GAPageTracker";
+import { getSiteUrl } from "@/lib/site-url";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -26,8 +27,10 @@ const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
 });
 
+const siteUrl = getSiteUrl();
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://digitalpresso-homepage.vercel.app"),
+  metadataBase: new URL(siteUrl),
   title: {
     default: "digitalPresso | RENAME DP",
     template: "%s | digitalPresso",
@@ -37,7 +40,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "ko_KR",
-    url: "https://digitalpresso-homepage.vercel.app",
+    url: siteUrl,
     siteName: "digitalPresso",
     title: "digitalPresso | RENAME DP",
     description:

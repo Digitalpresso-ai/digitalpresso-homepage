@@ -19,16 +19,18 @@ export enum SourceType {
 }
 
 export const contactFormSchema = z.object({
-  inquiryType: z
-    .enum(['INVESTMENT', 'SERVICE_INTRODUCE', 'FUNCTION', 'SERVICE_ERROR', 'ETC'] as const)
-    .refine((val) => val !== undefined, { message: 'inquiryTypeRequired' }),
+  inquiryType: z.enum(
+    ['INVESTMENT', 'SERVICE_INTRODUCE', 'FUNCTION', 'SERVICE_ERROR', 'ETC'] as const,
+    { message: 'inquiryTypeRequired' },
+  ),
   organization: z.string().min(1, 'organizationRequired'),
   name: z.string().min(1, 'nameRequired'),
   email: z.string().min(1, 'emailRequired').email('emailInvalid'),
   phone: z.string().optional(),
-  source: z
-    .enum(['EXHIBITION', 'SNS', 'MARKETING', 'REFERRAL', 'OTHER_CHANNEL'] as const)
-    .refine((val) => val !== undefined, { message: 'sourceRequired' }),
+  source: z.enum(
+    ['EXHIBITION', 'SNS', 'MARKETING', 'REFERRAL', 'OTHER_CHANNEL'] as const,
+    { message: 'sourceRequired' },
+  ),
   message: z.string().min(1, 'messageRequired'),
   privacyConsent: z.boolean().refine((val) => val === true, {
     message: 'privacyRequired',

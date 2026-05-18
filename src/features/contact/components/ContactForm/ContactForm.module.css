@@ -7,7 +7,7 @@
   padding: 48px 40px;
   background-color: #ffffff;
   border-radius: 16px;
-  height: 100%;
+  align-self: stretch;
 }
 
 .row {
@@ -191,7 +191,7 @@
   padding: 48px 40px;
   background-color: #ffffff;
   border-radius: 16px;
-  height: 100%;
+  align-self: stretch;
   min-height: 400px;
   text-align: center;
 }
