@@ -60,3 +60,29 @@ CREATE POLICY "Authenticated users can manage article_images"
   TO authenticated
   USING (true)
   WITH CHECK (true);
+
+-- =====================================================
+-- Storage bucket: article-images
+-- 먼저 Supabase Dashboard > Storage 에서 'article-images' 버킷을 생성하고 Public 으로 설정하세요.
+-- 그 다음 아래 정책을 실행해 storage.objects RLS 를 설정합니다.
+
+CREATE POLICY "Public can read article-images"
+  ON storage.objects FOR SELECT
+  TO anon, authenticated
+  USING (bucket_id = 'article-images');
+
+CREATE POLICY "Authenticated users can upload article-images"
+  ON storage.objects FOR INSERT
+  TO authenticated
+  WITH CHECK (bucket_id = 'article-images');
+
+CREATE POLICY "Authenticated users can update article-images"
+  ON storage.objects FOR UPDATE
+  TO authenticated
+  USING (bucket_id = 'article-images')
+  WITH CHECK (bucket_id = 'article-images');
+
+CREATE POLICY "Authenticated users can delete article-images"
+  ON storage.objects FOR DELETE
+  TO authenticated
+  USING (bucket_id = 'article-images');
