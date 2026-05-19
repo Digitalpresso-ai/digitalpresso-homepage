@@ -36,6 +36,7 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
   width: 100%;
+  list-style: none;
 }
 
 .card {
@@ -60,7 +61,15 @@
   padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
+}
+
+.cardSubtitle {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #8ec5ff;
+  word-break: keep-all;
 }
 
 .cardTitle {
@@ -71,10 +80,11 @@
   word-break: keep-all;
 }
 
-.cardDate {
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.8);
-  letter-spacing: 0.04em;
+.cardDescription {
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.82);
+  word-break: keep-all;
 }
 
 @media (max-width: 1279px) {

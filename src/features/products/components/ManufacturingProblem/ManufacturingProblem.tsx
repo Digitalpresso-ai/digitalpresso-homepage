@@ -2,9 +2,9 @@ import { getTranslations } from "next-intl/server";
 import styles from "./ManufacturingProblem.module.css";
 
 type Card = {
-  tag: string;
   title: string;
-  date: string;
+  subtitle: string;
+  description: string;
 };
 
 const CARD_IMAGES = [
@@ -37,9 +37,9 @@ export async function ManufacturingProblem() {
                 }}
               >
                 <div className={styles.cardContent}>
-                  <span className="dp-tag dp-tag--ghost">{c.tag}</span>
+                  <span className={styles.cardSubtitle}>{c.subtitle}</span>
                   <h3 className={styles.cardTitle}>{c.title}</h3>
-                  <span className={styles.cardDate}>{c.date}</span>
+                  <p className={styles.cardDescription}>{c.description}</p>
                 </div>
               </article>
             </li>

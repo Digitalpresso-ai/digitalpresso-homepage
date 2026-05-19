@@ -256,27 +256,27 @@
         "headingLogoSuffix": " builds",
         "headingMid": "the first layer of measurement",
         "headingLine2": "together with you",
-        "body": "We turn the losses and gains that used to go unseen into digital signals, step by step — making the manufacturing floor predictable.",
+        "body": "We turn losses and gains that used to go unseen into digital signals, step by step — and let AI make the manufacturing floor predictable.",
         "cta": "Contact Sales"
       },
       "problem": {
-        "heading": "<accent>Invisible losses</accent>,<br></br>an <accent>unmeasured</accent> shop floor.",
-        "sub": "Unrecorded process data, unstandardized inspection routines, decisions tied to specific people — all three repeat across every manufacturing site, never quite getting priced into the books.",
+        "heading": "If it isn't <accent>measured</accent>,<br></br><accent>losses stay invisible.</accent>",
+        "sub": "Unrecorded process data, unstandardized problem-solving routines, decisions tied to a veteran's tacit knowledge — all three repeat across every manufacturing site, never quite getting priced into the books.",
         "cards": [
           {
-            "tag": "Report",
-            "title": "Korea's manufacturing digital transformation rate trails the OECD average — and the gap is widening.",
-            "date": "2024.11"
+            "title": "Unrecorded processes",
+            "subtitle": "Data that's neither measured nor entered",
+            "description": "If measurement never happens in the first place, no data is ever left behind."
           },
           {
-            "tag": "Field Data",
-            "title": "Unmeasured line losses are estimated at 12–18% of average uptime.",
-            "date": "2025.03"
+            "title": "Floor records that evaporate",
+            "subtitle": "Information left on paper or spoken aloud",
+            "description": "Paper documents go unsearched and get lost; verbal reports disappear along with memory."
           },
           {
-            "tag": "Regulation",
-            "title": "One year after Korea's Serious Accident Act, the drop in manufacturing incident rates has stalled.",
-            "date": "2025.06"
+            "title": "Know-how tied to individuals",
+            "subtitle": "Tacit knowledge that walks out with veterans",
+            "description": "How a veteran solved a problem stays with the person, not the company — and leaves the moment they do."
           }
         ]
       },
