@@ -20,6 +20,8 @@
   word-break: keep-all;
 }
 
+.accent { color: var(--dp-brand); }
+
 .feature {
   padding: 32px var(--dp-gutter-lg);
 }

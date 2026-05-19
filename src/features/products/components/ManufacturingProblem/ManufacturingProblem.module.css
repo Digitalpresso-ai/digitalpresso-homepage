@@ -19,6 +19,8 @@
   word-break: keep-all;
 }
 
+.accent { color: var(--dp-brand); }
+
 .sub {
   max-width: 720px;
   text-align: center;

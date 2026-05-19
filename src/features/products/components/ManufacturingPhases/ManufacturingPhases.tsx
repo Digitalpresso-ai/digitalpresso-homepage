@@ -17,7 +17,7 @@ function Check() {
       height={18}
       viewBox="0 0 24 24"
       fill="none"
-      stroke="#2b7fff"
+      stroke="#193cb8"
       strokeWidth={2.5}
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -38,7 +38,7 @@ export async function ManufacturingPhases() {
           <span className="dp-tag">{t("tag")}</span>
           <h2 className={styles.heading}>
             {t.rich("heading", {
-              accent: (chunks) => <span className="dp-accent">{chunks}</span>,
+              accent: (chunks) => <span className={styles.accent}>{chunks}</span>,
               br: () => <br />,
             })}
           </h2>

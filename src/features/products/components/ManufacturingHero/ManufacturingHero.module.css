@@ -103,11 +103,11 @@
   line-height: 1;
   border: 1px solid rgba(255, 255, 255, 0.16);
   transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-  box-shadow: 0 10px 32px rgba(43, 127, 255, 0.35);
+  box-shadow: 0 10px 32px rgba(25, 60, 184, 0.35);
 }
 .cta:hover {
   background: var(--dp-brand-hover);
-  box-shadow: 0 14px 36px rgba(43, 127, 255, 0.45);
+  box-shadow: 0 14px 36px rgba(25, 60, 184, 0.45);
 }
 .cta:active { transform: translateY(1px); }
 .cta svg { transition: transform 0.25s ease; }
