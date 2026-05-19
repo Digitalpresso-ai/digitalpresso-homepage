@@ -1,0 +1,85 @@
+.problem { background: #fff; }
+
+.inner {
+  max-width: var(--dp-container);
+  margin: 0 auto;
+  padding: 120px var(--dp-gutter-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+}
+
+.heading {
+  font-size: 44px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--dp-heading);
+  text-align: center;
+  word-break: keep-all;
+}
+
+.sub {
+  max-width: 720px;
+  text-align: center;
+  font-size: 20px;
+  line-height: 1.6;
+  letter-spacing: -0.1px;
+  color: var(--dp-body);
+  word-break: keep-all;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  width: 100%;
+}
+
+.card {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 36px rgba(11, 23, 70, 0.18);
+}
+
+.cardContent {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.cardTitle {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #fff;
+  word-break: keep-all;
+}
+
+.cardDate {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 1279px) {
+  .inner { padding: 96px var(--dp-gutter-md); }
+  .heading { font-size: 32px; }
+}
+@media (max-width: 799px) {
+  .inner { padding: 64px var(--dp-gutter-sm); }
+  .cards { grid-template-columns: 1fr; }
+}

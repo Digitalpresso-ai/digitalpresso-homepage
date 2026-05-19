@@ -20,7 +20,7 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
   const navLinks = [
-    { href: '/', label: t('nav.product') },
+    { href: '/products', label: t('nav.product') },
     { href: '/about-us', label: t('nav.aboutUs') },
     { href: '/references', label: t('nav.references') },
     { href: '/news', label: t('nav.news') },

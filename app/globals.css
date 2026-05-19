@@ -30,7 +30,84 @@
   --color-heading: #1e2939;
   --color-body: rgba(0, 0, 0, 0.55);
   --color-white-overlay: rgba(255, 255, 255, 0.8);
+
+  /* DigitalPresso design tokens (manufacturing sections) */
+  --dp-brand: #193cb8;
+  --dp-brand-hover: #143093;
+  --dp-accent: #2b7fff;
+
+  --dp-heading: #1e2939;
+  --dp-body: rgba(0, 0, 0, 0.55);
+  --dp-muted: #6a7282;
+  --dp-border: #e5e7eb;
+  --dp-border-strong: #99a1af;
+
+  --dp-surface-tint: #eff6ff;
+  --dp-surface-tint-2: #dbeafe;
+  --dp-surface-tint-3: #bedbff;
+  --dp-pill-border: #8ec5ff;
+
+  --dp-overlay-dim: rgba(0, 0, 0, 0.55);
+  --dp-overlay-strong: rgba(0, 0, 0, 0.8);
+  --dp-overlay-navy-1: rgba(11, 23, 70, 0.85);
+  --dp-overlay-navy-2: rgba(11, 23, 70, 0.35);
+  --dp-on-dark-strong: #ffffff;
+  --dp-on-dark-muted: rgba(255, 255, 255, 0.8);
+
+  --dp-container: 1280px;
+  --dp-gutter-lg: 64px;
+  --dp-gutter-md: 40px;
+  --dp-gutter-sm: 20px;
+
+  --dp-radius-xs: 4px;
+  --dp-radius-sm: 8px;
+  --dp-radius-md: 16px;
+  --dp-radius-pill: 9999px;
+
+  --dp-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --dp-dur-fast: 0.15s;
+  --dp-dur-base: 0.2s;
+
+  --dp-shadow-header: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+  --dp-shadow-popover: 0 4px 6px -2px rgba(0, 0, 0, 0.05), 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
+
+/* DigitalPresso utility classes */
+.dp-accent { color: var(--dp-accent); }
+
+.dp-tag {
+  display: inline-flex;
+  align-items: center;
+  background: var(--dp-surface-tint-2);
+  border: 0.75px solid var(--dp-pill-border);
+  border-radius: var(--dp-radius-pill);
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--dp-heading);
+  line-height: 24px;
+  white-space: nowrap;
+}
+.dp-tag--ghost {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.45);
+  color: var(--dp-on-dark-strong);
+}
+
+.dp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 48px;
+  padding: 8px 24px;
+  border-radius: var(--dp-radius-xs);
+  background: var(--dp-brand);
+  color: #fff;
+  font-weight: 700;
+  transition: background var(--dp-dur-base) var(--dp-ease);
+}
+.dp-btn:hover { background: var(--dp-brand-hover); }
 
 html {
   overflow-x: hidden;
