@@ -253,7 +253,8 @@
       "hero": {
         "tag": "製造業 DX・AX ソリューション",
         "logoAlt": "digitalPresso",
-        "headingAfterLogo": "が「測る」最初の領域を",
+        "headingLogoSuffix": "が",
+        "headingMid": "「測る」最初の領域を",
         "headingLine2": "ともに築きます",
         "body": "見えなかった損失と成果を段階的にデジタル化し、予測可能な製造現場を実現します。",
         "cta": "導入のお問い合わせ"

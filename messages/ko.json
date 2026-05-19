@@ -253,7 +253,8 @@
       "hero": {
         "tag": "제조업 DX · AX 솔루션",
         "logoAlt": "디지털프레소",
-        "headingAfterLogo": "가 측정의 첫 영역을",
+        "headingLogoSuffix": "가",
+        "headingMid": "측정의 첫 영역을",
         "headingLine2": "함께 만들겠습니다",
         "body": "눈에 보이지 않던 손실과 성과를 단계적으로 디지털로 전환하고, 예측 가능한 제조 현장을 실현합니다.",
         "cta": "도입 문의하기"

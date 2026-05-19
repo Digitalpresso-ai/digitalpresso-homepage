@@ -253,7 +253,8 @@
       "hero": {
         "tag": "Manufacturing DX · AX Solution",
         "logoAlt": "digitalPresso",
-        "headingAfterLogo": " builds the first layer of measurement",
+        "headingLogoSuffix": " builds",
+        "headingMid": "the first layer of measurement",
         "headingLine2": "together with you",
         "body": "We turn the losses and gains that used to go unseen into digital signals, step by step — making the manufacturing floor predictable.",
         "cta": "Contact Sales"

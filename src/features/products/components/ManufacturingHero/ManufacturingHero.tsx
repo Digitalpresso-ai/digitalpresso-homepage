@@ -1,10 +1,13 @@
 import Image from "next/image";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { ScrollLink } from "@/src/features/products/components/ScrollLink/ScrollLink";
 import styles from "./ManufacturingHero.module.css";
 
 export async function ManufacturingHero() {
   const t = await getTranslations("productsPage.manufacturing.hero");
+  const locale = await getLocale();
+  const logoSrc =
+    locale === "ko" ? "/images/logos/dp_logo_kor.png" : "/images/dp_logo_eng.svg";
 
   return (
     <section className={styles.hero}>
@@ -29,14 +32,15 @@ export async function ManufacturingHero() {
             <span className={styles.line}>
               <span className={styles.inlineLogo}>
                 <Image
-                  src="/images/dp_logo_eng.svg"
+                  src={logoSrc}
                   alt={t("logoAlt")}
                   width={180}
                   height={40}
                 />
               </span>
-              {t("headingAfterLogo")}
+              {t("headingLogoSuffix")}
             </span>
+            <span className={styles.line}>{t("headingMid")}</span>
             <span className={styles.line}>{t("headingLine2")}</span>
           </h1>
 
