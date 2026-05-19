@@ -294,32 +294,44 @@
             "title": "Process data capture",
             "body1": "Operators inspect and measure as they always have, while photos, readings, and metadata are automatically structured and stored.",
             "body2": "PLC, SCADA, and MES signals join the same data layer to create one source of truth.",
-            "bullets": ["Digital checklists by process", "Auto metadata tagging for photos and readings", "PLC / SCADA signal integration"],
-            "alt": "Process data capture screen"
+            "bullets": [
+              "Digital checklists by process",
+              "Auto metadata tagging for photos and readings",
+              "PLC / SCADA signal integration"
+            ]
           },
           {
             "subtitle": "Compare across lines, shifts, and SKUs",
             "title": "Real-time monitoring",
             "body1": "Compare uptime, yield, and cycle time on a single screen, with deviations from the normal range surfaced immediately.",
             "body2": "Managers can act before anomalies pile up, and the floor stays focused on execution.",
-            "bullets": ["Line uptime dashboard", "KPI comparison by shift", "Automatic anomaly highlighting"],
-            "alt": "Real-time monitoring dashboard"
+            "bullets": [
+              "Line uptime dashboard",
+              "KPI comparison by shift",
+              "Automatic anomaly highlighting"
+            ]
           },
           {
             "subtitle": "See operator behavior and equipment signals together",
             "title": "Anomaly detection",
             "body1": "Analyze CCTV footage alongside equipment vibration and temperature data to catch safety hazards and quality issues at once.",
             "body2": "Missing safety helmets, restricted-zone entry, abnormal vibrations — we identify diverse anomaly patterns with pretrained models.",
-            "bullets": ["CCTV-based safety hazard detection", "Equipment vibration and temperature anomalies", "Automatic video clips for each event"],
-            "alt": "Anomaly detection monitoring screen"
+            "bullets": [
+              "CCTV-based safety hazard detection",
+              "Equipment vibration and temperature anomalies",
+              "Automatic video clips for each event"
+            ]
           },
           {
             "subtitle": "Reports drafted automatically from accumulated data",
             "title": "AI predictive reports",
             "body1": "AI drafts daily, weekly, and monthly operating reports automatically, leaving review and revision to managers.",
             "body2": "Equipment failure timing, quality risks, and material depletion are flagged in advance with response scenarios attached.",
-            "bullets": ["Automated daily, weekly, monthly reports", "Predictive maintenance for equipment", "Custom report template learning"],
-            "alt": "AI predictive report screen"
+            "bullets": [
+              "Automated daily, weekly, monthly reports",
+              "Predictive maintenance for equipment",
+              "Custom report template learning"
+            ]
           }
         ]
       },
@@ -333,7 +345,11 @@
             "title": "Measure",
             "sub": "Structure data from the floor",
             "body": "Digitize per-process checklists, and load equipment, operator, and quality data into the same model. Information once scattered across paper and chat is aligned to a single source of truth.",
-            "bullets": ["Digital checklists by process", "Equipment signal capture (PLC · IoT)", "Automatic logging of quality and defect data"]
+            "bullets": [
+              "Digital checklists by process",
+              "Equipment signal capture (PLC · IoT)",
+              "Automatic logging of quality and defect data"
+            ]
           },
           {
             "n": "02",
@@ -341,7 +357,11 @@
             "title": "Analyze",
             "sub": "Surface patterns and losses",
             "body": "Compare loaded data across lines, shifts, SKUs, and time windows to find the root cause of losses, and automatically flag deviations from normal operation.",
-            "bullets": ["Line uptime dashboard", "Quality anomaly analysis", "KPI comparison reports by shift"]
+            "bullets": [
+              "Line uptime dashboard",
+              "Quality anomaly analysis",
+              "KPI comparison reports by shift"
+            ]
           },
           {
             "n": "03",
@@ -349,7 +369,11 @@
             "title": "Predict",
             "sub": "Let AI suggest the next move",
             "body": "AI trained on accumulated operational data flags equipment failure timing, quality risks, and material depletion in advance, alongside response scenarios.",
-            "bullets": ["Predictive maintenance for equipment", "Early warnings for quality anomalies", "AI daily operating reports"]
+            "bullets": [
+              "Predictive maintenance for equipment",
+              "Early warnings for quality anomalies",
+              "AI daily operating reports"
+            ]
           }
         ]
       },
@@ -357,10 +381,30 @@
         "tag": "Impact",
         "heading": "The more data accumulates, the more <accent>losses shrink</accent><br></br>and decisions speed up.",
         "stats": [
-          { "value": "32", "unit": "%", "label": "Reduction in line losses", "sub": "Average over 6 months of pilot" },
-          { "value": "4.5", "unit": "hr", "label": "Saved on daily reporting", "sub": "Per manager" },
-          { "value": "−87", "unit": "%", "label": "Delay in responding to quality issues", "sub": "Versus pre-adoption" },
-          { "value": "14", "unit": "days", "label": "Average lead time for equipment failure alerts", "sub": "From predictive maintenance models" }
+          {
+            "value": "32",
+            "unit": "%",
+            "label": "Reduction in line losses",
+            "sub": "Average over 6 months of pilot"
+          },
+          {
+            "value": "4.5",
+            "unit": "hr",
+            "label": "Saved on daily reporting",
+            "sub": "Per manager"
+          },
+          {
+            "value": "−87",
+            "unit": "%",
+            "label": "Delay in responding to quality issues",
+            "sub": "Versus pre-adoption"
+          },
+          {
+            "value": "14",
+            "unit": "days",
+            "label": "Average lead time for equipment failure alerts",
+            "sub": "From predictive maintenance models"
+          }
         ],
         "note": "These numbers reflect averages across pilot customers and will vary depending on process characteristics and data maturity."
       },
@@ -370,9 +414,18 @@
         "headingLine2": "manufacturing DX adoption?",
         "body": "We design a staged adoption scenario that matches your current data maturity. We typically reply within three business days.",
         "items": [
-          { "label": "Email", "value": "digitalpresso@digitalpresso.ai" },
-          { "label": "Phone", "value": "+82-2-455-5796" },
-          { "label": "Office", "value": "Room 402, Doyak-gwan, 478 Gwangnaru-ro, Gwangjin-gu, Seoul" }
+          {
+            "label": "Email",
+            "value": "digitalpresso@digitalpresso.ai"
+          },
+          {
+            "label": "Phone",
+            "value": "+82-2-455-5796"
+          },
+          {
+            "label": "Office",
+            "value": "Room 402, Doyak-gwan, 478 Gwangnaru-ro, Gwangjin-gu, Seoul"
+          }
         ],
         "cta": "Contact Sales"
       }

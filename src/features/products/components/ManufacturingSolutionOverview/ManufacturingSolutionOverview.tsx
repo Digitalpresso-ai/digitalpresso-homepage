@@ -10,7 +10,7 @@ export async function ManufacturingSolutionOverview() {
     <section
       className={styles.overview}
       style={{
-        backgroundImage: "url(/images/references-industry-manufacturing.png)",
+        backgroundImage: "url(/images/manufacturing-solution-overview.png)",
       }}
     >
       <div className={styles.overlay} aria-hidden />

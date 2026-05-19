@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import styles from "./ManufacturingFeatures.module.css";
 
@@ -8,15 +7,7 @@ type Block = {
   body1: string;
   body2: string;
   bullets: string[];
-  alt: string;
 };
-
-const BLOCK_IMAGES = [
-  "/images/section6-upload.png",
-  "/images/section5-project.png",
-  "/images/section4-checklist.png",
-  "/images/section11-ai-report.png",
-];
 
 function Check() {
   return (
@@ -50,46 +41,26 @@ export async function ManufacturingFeatures() {
         </h2>
       </div>
 
-      {blocks.map((block, idx) => {
-        const reverse = idx % 2 === 1;
-        return (
-          <article
-            key={block.title}
-            className={`${styles.feature} ${reverse ? styles.reverse : ""}`}
-          >
-            <div className={styles.container}>
-              <div className={styles.textColumn}>
-                <div className={styles.text}>
-                  <p className={styles.subtitle}>{block.subtitle}</p>
-                  <h3 className={styles.title}>{block.title}</h3>
-                  <p className={styles.body}>{block.body1}</p>
-                  <p className={styles.body}>{block.body2}</p>
-                  {block.bullets && (
-                    <ul className={styles.bullets}>
-                      {block.bullets.map((b) => (
-                        <li key={b}>
-                          <Check />
-                          <span>{b}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              </div>
-              <div className={styles.imageColumn}>
-                <div className={styles.imageWrap}>
-                  <Image
-                    src={BLOCK_IMAGES[idx]}
-                    alt={block.alt}
-                    width={520}
-                    height={390}
-                  />
-                </div>
-              </div>
-            </div>
-          </article>
-        );
-      })}
+      <ul className={styles.blocks}>
+        {blocks.map((block) => (
+          <li key={block.title} className={styles.block}>
+            <p className={styles.subtitle}>{block.subtitle}</p>
+            <h3 className={styles.title}>{block.title}</h3>
+            <p className={styles.body}>{block.body1}</p>
+            <p className={styles.body}>{block.body2}</p>
+            {block.bullets && (
+              <ul className={styles.bullets}>
+                {block.bullets.map((b) => (
+                  <li key={b}>
+                    <Check />
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }
