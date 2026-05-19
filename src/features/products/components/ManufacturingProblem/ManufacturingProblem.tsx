@@ -8,9 +8,9 @@ type Card = {
 };
 
 const CARD_IMAGES = [
-  "/images/news-card-1.png",
-  "/images/references-industry-manufacturing.png",
-  "/images/references-industry-semiconductor.png",
+  "/images/manufacturing-problem-1.png",
+  "/images/manufacturing-problem-2.png",
+  "/images/manufacturing-problem-3.png",
 ];
 
 export async function ManufacturingProblem() {
