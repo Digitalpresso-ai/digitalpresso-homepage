@@ -343,11 +343,11 @@
             "n": "01",
             "label": "PHASE 1",
             "title": "Measure",
-            "sub": "Structure data from the floor",
-            "body": "Digitize per-process checklists, and load equipment, operator, and quality data into the same model. Information once scattered across paper and chat is aligned to a single source of truth.",
+            "sub": "Turn unstructured data into structured data",
+            "body": "Convert paper forms and verbal records from each process into data, and load them as data that can actually be used, not just stored. Information once scattered across paper and chat is aligned to a single source of truth.",
             "bullets": [
-              "Digital checklists by process",
-              "Equipment signal capture (PLC · IoT)",
+              "Digitization of paper forms by process",
+              "Collection of equipment signals and numeric data",
               "Automatic logging of quality and defect data"
             ]
           },
@@ -355,22 +355,22 @@
             "n": "02",
             "label": "PHASE 2",
             "title": "Analyze",
-            "sub": "Surface patterns and losses",
-            "body": "Compare loaded data across lines, shifts, SKUs, and time windows to find the root cause of losses, and automatically flag deviations from normal operation.",
+            "sub": "Find losses in accumulated records",
+            "body": "As process data accumulates, teams can monitor the floor in real time from the office and quantitatively compare time spent on processes and issue handling. Repeating patterns and deviations from the average become visible in the data.",
             "bullets": [
-              "Line uptime dashboard",
-              "Quality anomaly analysis",
-              "KPI comparison reports by shift"
+              "Real-time operations dashboard",
+              "Issue timeline and handling-time analysis",
+              "Raw material and output trend reports by process"
             ]
           },
           {
             "n": "03",
             "label": "PHASE 3",
             "title": "Predict",
-            "sub": "Let AI suggest the next move",
-            "body": "AI trained on accumulated operational data flags equipment failure timing, quality risks, and material depletion in advance, alongside response scenarios.",
+            "sub": "Apply AI on top of accumulated data",
+            "body": "Using accumulated structured data, the system immediately suggests similar past cases when a new issue occurs and detects anomalies in raw materials and processes in advance. Voice and image recognition also reduce data-entry workload on the floor.",
             "bullets": [
-              "Predictive maintenance for equipment",
+              "Automatic matching of similar issues",
               "Early warnings for quality anomalies",
               "AI daily operating reports"
             ]
@@ -413,20 +413,6 @@
         "headingLine1": "Ready to discuss",
         "headingLine2": "manufacturing DX adoption?",
         "body": "We design a staged adoption scenario that matches your current data maturity. We typically reply within three business days.",
-        "items": [
-          {
-            "label": "Email",
-            "value": "digitalpresso@digitalpresso.ai"
-          },
-          {
-            "label": "Phone",
-            "value": "+82-2-455-5796"
-          },
-          {
-            "label": "Office",
-            "value": "Room 402, Doyak-gwan, 478 Gwangnaru-ro, Gwangjin-gu, Seoul"
-          }
-        ],
         "cta": "Contact Sales"
       }
     }

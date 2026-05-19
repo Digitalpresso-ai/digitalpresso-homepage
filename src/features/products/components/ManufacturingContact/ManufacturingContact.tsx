@@ -1,25 +1,12 @@
-import Image from "next/image";
 import { getTranslations } from "next-intl/server";
-import { ScrollLink } from "@/src/features/products/components/ScrollLink/ScrollLink";
+import { Link } from "@/i18n/navigation";
 import styles from "./ManufacturingContact.module.css";
-
-type ContactItem = {
-  label: string;
-  value: string;
-};
-
-const ITEM_ICONS = [
-  "/icons/mail.svg",
-  "/icons/phone.svg",
-  "/icons/building.svg",
-];
 
 export async function ManufacturingContact() {
   const t = await getTranslations("productsPage.manufacturing.contact");
-  const items = t.raw("items") as ContactItem[];
 
   return (
-    <section id="contact" className={styles.contact}>
+    <section className={styles.contact}>
       <div className={styles.inner}>
         <div className={styles.textgroup}>
           <span className="dp-tag">{t("tag")}</span>
@@ -31,27 +18,7 @@ export async function ManufacturingContact() {
           <p className={styles.sub}>{t("body")}</p>
         </div>
 
-        <div className={styles.list}>
-          {items.map((item, idx) => (
-            <div key={item.label} className={styles.item}>
-              <span className={styles.iconwrap}>
-                <Image
-                  className={styles.icon}
-                  src={ITEM_ICONS[idx]}
-                  alt=""
-                  width={22}
-                  height={22}
-                />
-              </span>
-              <div>
-                <div className={styles.label}>{item.label}</div>
-                <span className={styles.value}>{item.value}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <ScrollLink targetId="contact" className={styles.cta}>
+        <Link href="/contact" className={styles.cta}>
           {t("cta")}
           <svg
             width={22}
@@ -65,7 +32,7 @@ export async function ManufacturingContact() {
           >
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
-        </ScrollLink>
+        </Link>
       </div>
     </section>
   );

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { getLocale, getTranslations } from "next-intl/server";
-import { ScrollLink } from "@/src/features/products/components/ScrollLink/ScrollLink";
+import { Link } from "@/i18n/navigation";
 import styles from "./ManufacturingHero.module.css";
 
 export async function ManufacturingHero() {
@@ -46,7 +46,7 @@ export async function ManufacturingHero() {
 
           <p className={styles.sub}>{t("body")}</p>
 
-          <ScrollLink targetId="contact" className={styles.cta}>
+          <Link href="/contact" className={styles.cta}>
             <span>{t("cta")}</span>
             <svg
               width={18}
@@ -60,7 +60,7 @@ export async function ManufacturingHero() {
             >
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
-          </ScrollLink>
+          </Link>
         </div>
       </div>
     </section>
