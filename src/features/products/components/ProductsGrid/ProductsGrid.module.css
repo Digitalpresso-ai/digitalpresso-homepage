@@ -1,0 +1,83 @@
+/* src/features/products/components/ProductsGrid/ProductsGrid.module.css */
+
+.section {
+  background: #ffffff;
+}
+
+.inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 96px 64px;
+}
+
+.grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 32px;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  background: #ffffff;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.card:hover {
+  border-color: #1e2950;
+  transform: translateY(-2px);
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e2950;
+  letter-spacing: 0.04em;
+}
+
+.title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  color: #111827;
+  word-break: keep-all;
+}
+
+.description {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #4b5563;
+  word-break: keep-all;
+}
+
+.cta {
+  margin-top: auto;
+  align-self: flex-start;
+  padding-top: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e2950;
+  text-decoration: none;
+}
+
+.cta::after {
+  content: ' →';
+}
+
+@media (max-width: 768px) {
+  .inner {
+    padding: 64px 24px;
+  }
+
+  .card {
+    padding: 24px;
+  }
+}

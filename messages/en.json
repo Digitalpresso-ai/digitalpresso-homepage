@@ -235,6 +235,157 @@
       }
     }
   },
+  "productsPage": {
+    "hub": {
+      "eyebrow": "Products",
+      "heading": "Industrial AI solutions proven in the field",
+      "body": "digitalPresso captures and structures field data across industries, then layers AI on top to streamline operations. Explore our industry-tailored solutions.",
+      "items": {
+        "manufacturing": {
+          "label": "Manufacturing",
+          "title": "Manufacturing DX · AX Solution",
+          "description": "Automate process data capture and apply AI analytics to lift productivity, quality, and safety together.",
+          "cta": "Learn more"
+        }
+      }
+    },
+    "manufacturing": {
+      "hero": {
+        "tag": "Manufacturing DX · AX Solution",
+        "logoAlt": "digitalPresso",
+        "headingLogoSuffix": " builds",
+        "headingMid": "the first layer of measurement",
+        "headingLine2": "together with you",
+        "body": "We turn losses and gains that used to go unseen into digital signals, step by step — and let AI make the manufacturing floor predictable.",
+        "cta": "Contact Sales"
+      },
+      "problem": {
+        "heading": "If it isn't <accent>measured</accent>,<br></br><accent>losses stay invisible.</accent>",
+        "sub": "Unrecorded process data, unstandardized problem-solving routines, decisions tied to a veteran's tacit knowledge — all three repeat across every manufacturing site, never quite getting priced into the books.",
+        "cards": [
+          {
+            "title": "Unrecorded processes",
+            "subtitle": "Data that's neither measured nor entered",
+            "description": "If measurement never happens in the first place, no data is ever left behind."
+          },
+          {
+            "title": "Floor records that evaporate",
+            "subtitle": "Information left on paper or spoken aloud",
+            "description": "Paper documents go unsearched and get lost; verbal reports disappear along with memory."
+          },
+          {
+            "title": "Know-how tied to individuals",
+            "subtitle": "Tacit knowledge that walks out with veterans",
+            "description": "How a veteran solved a problem stays with the person, not the company — and leaves the moment they do."
+          }
+        ]
+      },
+      "solutionOverview": {
+        "tag": "Manufacturing DX · AX Solution",
+        "heading": "Every piece of data generated on the line, turned into<br></br><accent>a measurable asset</accent>.",
+        "body": "From operator checks to machine signals to quality results — we unify scattered data into a single operating layer and stack analytics and prediction on top, step by step."
+      },
+      "features": {
+        "tag": "DP Builder",
+        "heading": "Lock in <accent>the project's first agreement</accent><br></br>on a single canvas.",
+        "lead": "<strong>DP Builder</strong> is a collaboration canvas that turns ambiguous pre-sales conversations into a structured workflow. Customer requirements become visual nodes, customer and vendor draw the flow together on the same screen, and scope and intent align precisely before work begins.",
+        "points": [
+          {
+            "title": "Requirements as a picture",
+            "body": "Scattered documents and chat threads are structured into input, processing, and integration nodes."
+          },
+          {
+            "title": "Agreement on a single screen",
+            "body": "Customer and vendor draw together on the same canvas and speak with the same vocabulary."
+          },
+          {
+            "title": "Straight into the spec",
+            "body": "The agreed flow becomes the spec itself, removing the cost of reinterpretation after kickoff."
+          }
+        ]
+      },
+      "phases": {
+        "tag": "Phased digital transformation",
+        "heading": "We don't change everything at once.<br></br>We stack <accent>Measure → Analyze → Predict</accent>, in that order.",
+        "items": [
+          {
+            "n": "01",
+            "label": "PHASE 1",
+            "title": "Measure",
+            "sub": "Turn unstructured data into structured data",
+            "body": "Convert paper forms and verbal records from each process into data, and load them as data that can actually be used, not just stored. Information once scattered across paper and chat is aligned to a single source of truth.",
+            "bullets": [
+              "Digitization of paper forms by process",
+              "Collection of equipment signals and numeric data",
+              "Automatic logging of quality and defect data"
+            ]
+          },
+          {
+            "n": "02",
+            "label": "PHASE 2",
+            "title": "Analyze",
+            "sub": "Find losses in accumulated records",
+            "body": "As process data accumulates, teams can monitor the floor in real time from the office and quantitatively compare time spent on processes and issue handling. Repeating patterns and deviations from the average become visible in the data.",
+            "bullets": [
+              "Real-time operations dashboard",
+              "Issue timeline and handling-time analysis",
+              "Raw material and output trend reports by process"
+            ]
+          },
+          {
+            "n": "03",
+            "label": "PHASE 3",
+            "title": "Predict",
+            "sub": "Apply AI on top of accumulated data",
+            "body": "Using accumulated structured data, the system immediately suggests similar past cases when a new issue occurs and detects anomalies in raw materials and processes in advance. Voice and image recognition also reduce data-entry workload on the floor.",
+            "bullets": [
+              "Automatic matching of similar issues",
+              "Early warnings for quality anomalies",
+              "AI daily operating reports"
+            ]
+          }
+        ]
+      },
+      "results": {
+        "tag": "Expected Impact",
+        "heading": "Once data accumulates, <accent>losses shrink</accent><br></br>and decisions speed up.",
+        "stats": [
+          {
+            "value": "83",
+            "unit": "%",
+            "label": "Faster issue detection",
+            "sub": "30 min → within 5 min (target)"
+          },
+          {
+            "value": "0",
+            "unit": "hr",
+            "label": "Office re-entry",
+            "sub": "5 min → 0 min per item (target)"
+          },
+          {
+            "value": "10+",
+            "unit": "",
+            "label": "Measurable operating metrics",
+            "sub": "Versus pre-adoption"
+          },
+          {
+            "value": "Up to 72",
+            "unit": "%",
+            "label": "Estimated loss recovery rate",
+            "sub": "Recover up to 72% of estimated losses (target)"
+          }
+        ],
+        "note": "These figures are targets at the end of the pilot operation period and will vary depending on process characteristics and data maturity."
+      },
+      "contact": {
+        "tag": "Talk to us",
+        "headingLine1": "Ready to discuss",
+        "headingLine2": "manufacturing DX / AX adoption?",
+        "body": "We design a staged adoption scenario that matches your current data maturity. We typically reply within three business days.",
+        "cta": "Contact Sales"
+      }
+    }
+  },
   "newsPage": {
     "hero": {
       "label": "News",
