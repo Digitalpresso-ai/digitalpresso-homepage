@@ -1,110 +1,156 @@
-.features {
-  background: var(--dp-surface-tint);
+.builder {
+  position: relative;
+  background: #fff;
+  overflow: hidden;
+  isolation: isolate;
+  min-height: 720px;
+  display: flex;
+  align-items: center;
 }
 
-.headerArea {
+.bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center right;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+
+/* 좌측은 깨끗한 흰색, 우측은 다이어그램이 노출되도록
+   좌→우 white→투명 그라데이션 + 하단 옅은 surface-tint 페이드 */
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(95deg,
+      #ffffff 0%,
+      #ffffff 44%,
+      rgba(255, 255, 255, 0.7) 54%,
+      rgba(255, 255, 255, 0.2) 64%,
+      rgba(255, 255, 255, 0) 72%,
+      rgba(255, 255, 255, 0) 100%
+    ),
+    linear-gradient(180deg,
+      rgba(255, 255, 255, 0) 75%,
+      rgba(239, 246, 255, 0.5) 100%
+    );
+}
+
+.inner {
+  position: relative;
+  z-index: 2;
   max-width: var(--dp-container);
+  width: 100%;
   margin: 0 auto;
-  padding: 120px var(--dp-gutter-lg) 48px;
+  padding: 120px var(--dp-gutter-lg);
+}
+
+.content {
+  max-width: 560px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  align-items: flex-start;
+  gap: 24px;
+}
+
+/* dp-tag는 글로벌 .dp-tag(인라인-flex 칩). 부모 flex column 안에서 stretch되지 않도록 고정. */
+.tag {
+  align-self: flex-start;
 }
 
 .heading {
-  font-size: 44px;
-  font-weight: 600;
-  line-height: 1.35;
-  color: var(--dp-heading);
-  word-break: keep-all;
-}
-
-.accent { color: var(--dp-brand); }
-
-.blocks {
-  max-width: var(--dp-container);
-  margin: 0 auto;
-  padding: 0 var(--dp-gutter-lg) 120px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 48px 64px;
-  list-style: none;
-}
-
-.block {
-  background: #fff;
-  border: 1px solid var(--dp-border);
-  border-radius: 16px;
-  padding: 36px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  transition: transform 0.25s ease, box-shadow 0.25s ease,
-    border-color 0.25s ease;
-}
-.block:hover {
-  transform: translateY(-3px);
-  border-color: rgba(25, 60, 184, 0.35);
-  box-shadow: 0 18px 36px rgba(11, 23, 70, 0.08);
-}
-
-.subtitle {
-  font-size: 18px;
-  font-weight: 500;
-  color: var(--dp-brand);
-  line-height: 1.4;
-  word-break: keep-all;
-}
-
-.title {
-  font-size: 32px;
+  font-size: 48px;
   font-weight: 700;
   color: var(--dp-heading);
-  line-height: 1.2;
-  letter-spacing: -0.3px;
+  line-height: 1.3;
+  letter-spacing: -0.4px;
   word-break: keep-all;
 }
 
-.body {
-  font-size: 16px;
-  line-height: 1.6;
+.lead {
+  font-size: 18px;
+  line-height: 1.7;
   letter-spacing: -0.1px;
+  color: var(--dp-body);
+  word-break: keep-all;
+  max-width: 520px;
+}
+.lead strong {
+  color: var(--dp-brand);
+  font-weight: 700;
+}
+
+.points {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 16px;
+  padding-top: 28px;
+  border-top: 1px solid var(--dp-border);
+  list-style: none;
+  width: 100%;
+}
+
+.points li {
+  position: relative;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--dp-accent);
+}
+
+.pointTitle {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--dp-heading);
+  letter-spacing: -0.1px;
+}
+
+.pointBody {
+  font-size: 15px;
+  line-height: 1.55;
   color: var(--dp-body);
   word-break: keep-all;
 }
 
-.bullets {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding-top: 8px;
-  border-top: 1px solid var(--dp-border);
-  margin-top: 8px;
-  list-style: none;
-}
-.bullets li {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 14px;
-  color: var(--dp-heading);
+@media (max-width: 1279px) {
+  .builder { min-height: 640px; }
+  .inner { padding: 96px var(--dp-gutter-md); }
+  .heading { font-size: 36px; }
 }
 
-@media (max-width: 1279px) {
-  .headerArea { padding: 96px var(--dp-gutter-md) 32px; }
-  .blocks { padding: 0 var(--dp-gutter-md) 96px; gap: 32px; }
-  .heading { font-size: 32px; }
-  .title { font-size: 26px; }
-  .block { padding: 28px; }
-}
 @media (max-width: 799px) {
-  .headerArea { padding: 64px var(--dp-gutter-sm) 24px; }
-  .blocks {
-    padding: 0 var(--dp-gutter-sm) 80px;
-    grid-template-columns: 1fr;
-    gap: 20px;
+  .builder { min-height: 0; }
+  .bg {
+    /* 좁은 폭에서는 다이어그램이 잘리므로 카피 아래 분리해 배치 */
+    background-position: center bottom;
+    background-size: 140% auto;
+    top: auto;
+    bottom: 0;
+    height: 320px;
   }
-  .title { font-size: 22px; }
-  .block { padding: 24px; }
+  .overlay {
+    background:
+      linear-gradient(180deg,
+        #ffffff 0%,
+        rgba(255, 255, 255, 0.96) 50%,
+        rgba(255, 255, 255, 0.55) 75%,
+        rgba(255, 255, 255, 0) 100%
+      );
+  }
+  .inner { padding: 64px var(--dp-gutter-sm) 360px; }
+  .heading { font-size: 28px; line-height: 1.35; }
+  .lead { font-size: 15px; }
 }

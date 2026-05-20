@@ -1,66 +1,48 @@
 import { getTranslations } from "next-intl/server";
 import styles from "./ManufacturingFeatures.module.css";
 
-type Block = {
-  subtitle: string;
-  title: string;
-  body1: string;
-  body2: string;
-  bullets: string[];
-};
-
-function Check() {
-  return (
-    <svg
-      width={16}
-      height={16}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="#193cb8"
-      strokeWidth={2.5}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M5 13l4 4L19 7" />
-    </svg>
-  );
-}
+type Point = { title: string; body: string };
 
 export async function ManufacturingFeatures() {
   const t = await getTranslations("productsPage.manufacturing.features");
-  const blocks = t.raw("blocks") as Block[];
+  const points = t.raw("points") as Point[];
 
   return (
-    <section className={styles.features}>
-      <div className={styles.headerArea}>
-        <span className="dp-tag">{t("tag")}</span>
-        <h2 className={styles.heading}>
-          {t.rich("heading", {
-            accent: (chunks) => <span className={styles.accent}>{chunks}</span>,
-          })}
-        </h2>
-      </div>
+    <section className={styles.builder} id="dp-builder">
+      <div
+        className={styles.bg}
+        style={{ backgroundImage: "url(/images/dp_builder.png)" }}
+        aria-hidden
+      />
+      <div className={styles.overlay} aria-hidden />
 
-      <ul className={styles.blocks}>
-        {blocks.map((block) => (
-          <li key={block.title} className={styles.block}>
-            <p className={styles.subtitle}>{block.subtitle}</p>
-            <h3 className={styles.title}>{block.title}</h3>
-            <p className={styles.body}>{block.body1}</p>
-            <p className={styles.body}>{block.body2}</p>
-            {block.bullets && (
-              <ul className={styles.bullets}>
-                {block.bullets.map((b) => (
-                  <li key={b}>
-                    <Check />
-                    <span>{b}</span>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </li>
-        ))}
-      </ul>
+      <div className={styles.inner}>
+        <div className={styles.content}>
+          <span className={`dp-tag ${styles.tag}`}>{t("tag")}</span>
+
+          <h2 className={styles.heading}>
+            {t.rich("heading", {
+              accent: (chunks) => <span className="dp-accent">{chunks}</span>,
+              br: () => <br />,
+            })}
+          </h2>
+
+          <p className={styles.lead}>
+            {t.rich("lead", {
+              strong: (chunks) => <strong>{chunks}</strong>,
+            })}
+          </p>
+
+          <ul className={styles.points}>
+            {points.map((p) => (
+              <li key={p.title}>
+                <span className={styles.pointTitle}>{p.title}</span>
+                <span className={styles.pointBody}>{p.body}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </section>
   );
 }

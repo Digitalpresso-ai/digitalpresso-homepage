@@ -286,52 +286,21 @@
         "body": "From operator checks to machine signals to quality results — we unify scattered data into a single operating layer and stack analytics and prediction on top, step by step."
       },
       "features": {
-        "tag": "Key features",
-        "heading": "<accent>Digitize</accent> the work without breaking its flow.",
-        "blocks": [
+        "tag": "Pre-sales collaboration tool",
+        "heading": "Lock in <accent>the project's first agreement</accent><br></br>on a single canvas.",
+        "lead": "<strong>DP Builder</strong> is a collaboration canvas that turns ambiguous pre-sales conversations into a structured workflow. Customer requirements become visual nodes, customer and vendor draw the flow together on the same screen, and scope and intent align precisely before work begins.",
+        "points": [
           {
-            "subtitle": "Capture data with minimal input",
-            "title": "Process data capture",
-            "body1": "Operators inspect and measure as they always have, while photos, readings, and metadata are automatically structured and stored.",
-            "body2": "PLC, SCADA, and MES signals join the same data layer to create one source of truth.",
-            "bullets": [
-              "Digital checklists by process",
-              "Auto metadata tagging for photos and readings",
-              "PLC / SCADA signal integration"
-            ]
+            "title": "Requirements as a picture",
+            "body": "Scattered documents and chat threads are structured into input, processing, and integration nodes."
           },
           {
-            "subtitle": "Compare across lines, shifts, and SKUs",
-            "title": "Real-time monitoring",
-            "body1": "Compare uptime, yield, and cycle time on a single screen, with deviations from the normal range surfaced immediately.",
-            "body2": "Managers can act before anomalies pile up, and the floor stays focused on execution.",
-            "bullets": [
-              "Line uptime dashboard",
-              "KPI comparison by shift",
-              "Automatic anomaly highlighting"
-            ]
+            "title": "Agreement on a single screen",
+            "body": "Customer and vendor draw together on the same canvas and speak with the same vocabulary."
           },
           {
-            "subtitle": "See operator behavior and equipment signals together",
-            "title": "Anomaly detection",
-            "body1": "Analyze CCTV footage alongside equipment vibration and temperature data to catch safety hazards and quality issues at once.",
-            "body2": "Missing safety helmets, restricted-zone entry, abnormal vibrations — we identify diverse anomaly patterns with pretrained models.",
-            "bullets": [
-              "CCTV-based safety hazard detection",
-              "Equipment vibration and temperature anomalies",
-              "Automatic video clips for each event"
-            ]
-          },
-          {
-            "subtitle": "Reports drafted automatically from accumulated data",
-            "title": "AI predictive reports",
-            "body1": "AI drafts daily, weekly, and monthly operating reports automatically, leaving review and revision to managers.",
-            "body2": "Equipment failure timing, quality risks, and material depletion are flagged in advance with response scenarios attached.",
-            "bullets": [
-              "Automated daily, weekly, monthly reports",
-              "Predictive maintenance for equipment",
-              "Custom report template learning"
-            ]
+            "title": "Straight into the spec",
+            "body": "The agreed flow becomes the spec itself, removing the cost of reinterpretation after kickoff."
           }
         ]
       },
