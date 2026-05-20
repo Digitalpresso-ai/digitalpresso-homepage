@@ -5,6 +5,9 @@ import StarterKit from '@tiptap/starter-kit';
 import TiptapImage from '@tiptap/extension-image';
 import Link from '@tiptap/extension-link';
 import Placeholder from '@tiptap/extension-placeholder';
+import { DOMParser as PMDOMParser } from '@tiptap/pm/model';
+import type { EditorView } from '@tiptap/pm/view';
+import { marked } from 'marked';
 import { useEffect, useRef, useState, useTransition, type ChangeEvent } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -15,6 +18,23 @@ import styles from './ArticleEditor.module.css';
 
 interface Props {
   article?: ArticleEntity;
+}
+
+function pasteMarkdown(view: EditorView, event: ClipboardEvent): boolean {
+  const clipboard = event.clipboardData;
+  if (!clipboard) return false;
+  if (clipboard.getData('text/html')) return false;
+  const plain = clipboard.getData('text/plain');
+  if (!plain) return false;
+
+  const html = marked.parse(plain, { async: false, gfm: true, breaks: false }) as string;
+
+  const dom = document.createElement('div');
+  dom.innerHTML = html;
+  const slice = PMDOMParser.fromSchema(view.state.schema).parseSlice(dom);
+  view.dispatch(view.state.tr.replaceSelection(slice).scrollIntoView());
+  event.preventDefault();
+  return true;
 }
 
 export default function ArticleEditor({ article }: Props) {
@@ -92,15 +112,18 @@ export default function ArticleEditor({ article }: Props) {
     },
     editorProps: {
       attributes: { class: styles.editorContent },
-      handlePaste: (_view, event) => {
+      handlePaste: (view, event) => {
         const items = Array.from(event.clipboardData?.items ?? []);
         const imageItem = items.find((item) => item.type.startsWith('image/'));
-        if (!imageItem) return false;
-        const file = imageItem.getAsFile();
-        if (!file) return false;
-        event.preventDefault();
-        void handleImageUpload(file);
-        return true;
+        if (imageItem) {
+          const file = imageItem.getAsFile();
+          if (file) {
+            event.preventDefault();
+            void handleImageUpload(file);
+            return true;
+          }
+        }
+        return pasteMarkdown(view, event);
       },
       handleDrop: (_view, event) => {
         const files = Array.from(event.dataTransfer?.files ?? []);
@@ -120,7 +143,10 @@ export default function ArticleEditor({ article }: Props) {
       Placeholder.configure({ placeholder: 'Enter article content in English...' }),
     ],
     content: article?.content_en ?? '',
-    editorProps: { attributes: { class: styles.editorContent } },
+    editorProps: {
+      attributes: { class: styles.editorContent },
+      handlePaste: (view, event) => pasteMarkdown(view, event),
+    },
   });
 
   const editorJa = useEditor({
@@ -130,7 +156,10 @@ export default function ArticleEditor({ article }: Props) {
       Placeholder.configure({ placeholder: '日本語で記事の内容を入力してください...' }),
     ],
     content: article?.content_ja ?? '',
-    editorProps: { attributes: { class: styles.editorContent } },
+    editorProps: {
+      attributes: { class: styles.editorContent },
+      handlePaste: (view, event) => pasteMarkdown(view, event),
+    },
   });
 
   useEffect(() => {
