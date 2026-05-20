@@ -35,7 +35,7 @@ export async function AboutHero() {
           <Link href="/contact" className={styles.ctaButton}>
             {t('cta')}
           </Link>
-          <Link href="/" className={styles.outlineButton}>
+          <Link href="/products" className={styles.outlineButton}>
             {t('secondaryCta')}
           </Link>
         </div>
