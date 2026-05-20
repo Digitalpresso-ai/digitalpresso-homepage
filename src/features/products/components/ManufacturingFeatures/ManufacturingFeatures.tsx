@@ -22,7 +22,7 @@ export async function ManufacturingFeatures() {
 
           <h2 className={styles.heading}>
             {t.rich("heading", {
-              accent: (chunks) => <span className="dp-accent">{chunks}</span>,
+              accent: (chunks) => <span className={styles.accent}>{chunks}</span>,
               br: () => <br />,
             })}
           </h2>

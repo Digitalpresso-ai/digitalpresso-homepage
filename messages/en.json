@@ -286,7 +286,7 @@
         "body": "From operator checks to machine signals to quality results — we unify scattered data into a single operating layer and stack analytics and prediction on top, step by step."
       },
       "features": {
-        "tag": "Pre-sales collaboration tool",
+        "tag": "DP Builder",
         "heading": "Lock in <accent>the project's first agreement</accent><br></br>on a single canvas.",
         "lead": "<strong>DP Builder</strong> is a collaboration canvas that turns ambiguous pre-sales conversations into a structured workflow. Customer requirements become visual nodes, customer and vendor draw the flow together on the same screen, and scope and intent align precisely before work begins.",
         "points": [
@@ -347,40 +347,40 @@
         ]
       },
       "results": {
-        "tag": "Impact",
-        "heading": "The more data accumulates, the more <accent>losses shrink</accent><br></br>and decisions speed up.",
+        "tag": "Expected Impact",
+        "heading": "Once data accumulates, <accent>losses shrink</accent><br></br>and decisions speed up.",
         "stats": [
           {
-            "value": "32",
+            "value": "83",
             "unit": "%",
-            "label": "Reduction in line losses",
-            "sub": "Average over 6 months of pilot"
+            "label": "Faster issue detection",
+            "sub": "30 min → within 5 min (target)"
           },
           {
-            "value": "4.5",
+            "value": "0",
             "unit": "hr",
-            "label": "Saved on daily reporting",
-            "sub": "Per manager"
+            "label": "Office re-entry",
+            "sub": "5 min → 0 min per item (target)"
           },
           {
-            "value": "−87",
-            "unit": "%",
-            "label": "Delay in responding to quality issues",
+            "value": "10+",
+            "unit": "",
+            "label": "Measurable operating metrics",
             "sub": "Versus pre-adoption"
           },
           {
-            "value": "14",
-            "unit": "days",
-            "label": "Average lead time for equipment failure alerts",
-            "sub": "From predictive maintenance models"
+            "value": "Up to 72",
+            "unit": "%",
+            "label": "Estimated loss recovery rate",
+            "sub": "Recover up to 72% of estimated losses (target)"
           }
         ],
-        "note": "These numbers reflect averages across pilot customers and will vary depending on process characteristics and data maturity."
+        "note": "These figures are targets at the end of the pilot operation period and will vary depending on process characteristics and data maturity."
       },
       "contact": {
         "tag": "Talk to us",
         "headingLine1": "Ready to discuss",
-        "headingLine2": "manufacturing DX adoption?",
+        "headingLine2": "manufacturing DX / AX adoption?",
         "body": "We design a staged adoption scenario that matches your current data maturity. We typically reply within three business days.",
         "cta": "Contact Sales"
       }

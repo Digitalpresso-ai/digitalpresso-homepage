@@ -7,7 +7,7 @@ export async function ManufacturingHero() {
   const t = await getTranslations("productsPage.manufacturing.hero");
   const locale = await getLocale();
   const logoSrc =
-    locale === "ko" ? "/images/logos/dp_logo_kor.png" : "/images/dp_logo_eng.svg";
+    locale === "ko" ? "/images/logos/dp_logo_kor.svg" : "/images/dp_logo_eng.svg";
 
   return (
     <section className={styles.hero}>
@@ -34,7 +34,7 @@ export async function ManufacturingHero() {
                 <Image
                   src={logoSrc}
                   alt={t("logoAlt")}
-                  width={180}
+                  width={276}
                   height={40}
                 />
               </span>

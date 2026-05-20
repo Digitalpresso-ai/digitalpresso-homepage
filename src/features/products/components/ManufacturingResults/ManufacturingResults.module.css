@@ -60,7 +60,7 @@
   font-size: 72px;
   font-weight: 800;
   line-height: 1;
-  color: #fff;
+  color: #8ec5ff;
   letter-spacing: -0.04em;
   font-feature-settings: "tnum";
 }
@@ -68,7 +68,7 @@
 .unit {
   font-size: 24px;
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.85);
+  color: #8ec5ff;
 }
 
 .label {

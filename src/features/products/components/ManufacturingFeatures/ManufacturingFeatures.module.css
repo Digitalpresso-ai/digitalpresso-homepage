@@ -68,6 +68,10 @@
   word-break: keep-all;
 }
 
+.accent {
+  color: var(--dp-brand);
+}
+
 .lead {
   font-size: 18px;
   line-height: 1.7;
