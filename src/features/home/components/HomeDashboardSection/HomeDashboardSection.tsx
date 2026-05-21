@@ -23,7 +23,7 @@ export async function HomeDashboardSection() {
         <div className={styles.imageColumn}>
           <div className={styles.imageWrapper}>
             <Image
-              src="/images/section7-dashboard.png"
+              src="/images/section-dashboard.png"
               alt={t('imageAlt')}
               fill
               className={styles.image}

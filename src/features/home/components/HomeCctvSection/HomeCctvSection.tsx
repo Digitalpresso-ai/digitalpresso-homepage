@@ -23,7 +23,7 @@ export async function HomeCctvSection() {
         <div className={styles.imageColumn}>
           <div className={styles.imageWrapper}>
             <Image
-              src="/images/section11-cctv.png"
+              src="/images/section-cctv.png"
               alt={t('imageAlt')}
               fill
               className={styles.image}

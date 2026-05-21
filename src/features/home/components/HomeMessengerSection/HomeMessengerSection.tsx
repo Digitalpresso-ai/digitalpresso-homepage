@@ -13,7 +13,7 @@ export async function HomeMessengerSection() {
         <div className={styles.imageColumn}>
           <div className={styles.imageWrapper}>
             <Image
-              src="/images/section6-messenger.png"
+              src="/images/section-messenger.png"
               alt={t('imageAlt')}
               fill
               className={styles.image}

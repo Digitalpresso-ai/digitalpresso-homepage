@@ -13,7 +13,7 @@ export async function HomeAiReportSection() {
         <div className={styles.imageColumn}>
           <div className={styles.imageWrapper}>
             <Image
-              src="/images/section10-ai-report.png"
+              src="/images/section-ai-report.png"
               alt={t('imageAlt')}
               fill
               className={styles.image}
