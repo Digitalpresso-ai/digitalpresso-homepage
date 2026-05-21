@@ -18,6 +18,7 @@ export async function HomeContactSection() {
           width={2197}
           height={1702}
           className={styles.mockupImage}
+          priority
         />
       </div>
 
