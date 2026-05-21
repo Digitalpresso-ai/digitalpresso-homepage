@@ -110,11 +110,11 @@
 .dp-btn:hover { background: var(--dp-brand-hover); }
 
 html {
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
-  overflow-x: hidden;
+  overflow-x: clip;
   color: var(--foreground);
   background: var(--background);
   font-family: var(--font-noto-sans-kr), Arial, Helvetica, sans-serif;

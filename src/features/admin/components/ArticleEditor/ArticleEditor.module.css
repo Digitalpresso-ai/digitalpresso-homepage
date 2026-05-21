@@ -179,53 +179,76 @@
   color: var(--color-heading);
 }
 
+.coverActions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.coverUploadBtn {
+  padding: 4px 12px;
+  background: var(--color-brand);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.coverUploadBtn:hover {
+  opacity: 0.85;
+}
+
 .coverClearBtn {
   background: transparent;
-  border: none;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
   color: #718096;
   font-size: 0.8rem;
+  padding: 4px 10px;
   cursor: pointer;
+  transition: background 0.15s;
 }
 
 .coverClearBtn:hover {
-  text-decoration: underline;
+  background: #f7fafc;
+}
+
+.coverPreview {
+  position: relative;
+  display: inline-block;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid var(--color-brand);
+  max-width: 320px;
+}
+
+.coverPreviewImg {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  height: 180px;
+  object-fit: cover;
+}
+
+.coverPendingBadge {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(25, 60, 184, 0.75);
+  color: #fff;
+  font-size: 0.75rem;
+  text-align: center;
+  padding: 4px 8px;
 }
 
 .coverHint {
   font-size: 0.85rem;
   color: #a0aec0;
   margin: 0;
-}
-
-.coverGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: var(--spacing-3);
-}
-
-.coverItem {
-  border: 2px solid transparent;
-  border-radius: 8px;
-  overflow: hidden;
-  padding: 0;
-  background: #f7fafc;
-  cursor: pointer;
-  transition: border-color 0.15s, transform 0.15s;
-}
-
-.coverItem img {
-  width: 100%;
-  height: 100px;
-  object-fit: cover;
-  display: block;
-}
-
-.coverItem:hover {
-  transform: translateY(-1px);
-}
-
-.coverItemActive {
-  border-color: var(--color-brand);
 }
 
 /* Editor */

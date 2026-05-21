@@ -1,14 +1,14 @@
 // src/features/about/components/AboutOffice/AboutOffice.tsx
 
 import { getTranslations } from 'next-intl/server';
-import Image from 'next/image';
 import styles from './AboutOffice.module.css';
+import { AboutOfficeGallery } from './AboutOfficeGallery';
 
 const GALLERY_IMAGE_SOURCES = [
-  '/images/about-section1.png',
-  '/images/about-section2.png',
-  '/images/about-section3.png',
-  '/images/about-section4.png',
+  '/images/about-us1.png',
+  '/images/about-us2.png',
+  '/images/about-us3.png',
+  '/images/about-us4.png',
 ] as const;
 
 export async function AboutOffice() {
@@ -27,23 +27,7 @@ export async function AboutOffice() {
           </div>
         </div>
 
-        <div className={styles.gallery}>
-          {GALLERY_IMAGE_SOURCES.map((src, index) => (
-            <div key={src} className={styles.galleryItem}>
-              <div className={styles.imageWrapper}>
-                <Image
-                  src={src}
-                  alt={captions[index]}
-                  fill
-                  className={styles.image}
-                  sizes="(max-width: 799px) 100vw, 50vw"
-                  loading="lazy"
-                />
-              </div>
-              <span className={styles.caption}>{captions[index]}</span>
-            </div>
-          ))}
-        </div>
+        <AboutOfficeGallery images={GALLERY_IMAGE_SOURCES} captions={captions} />
       </div>
     </section>
   );
