@@ -15,6 +15,7 @@ import { HomeMessengerSection } from '@/src/features/home/components/HomeMesseng
 import { HomeNewsSection } from '@/src/features/home/components/HomeNewsSection/HomeNewsSection';
 import { HomeProductSection } from '@/src/features/home/components/HomeProductSection/HomeProductSection';
 import { HomeUploadSection } from '@/src/features/home/components/HomeUploadSection/HomeUploadSection';
+import { HomeDefectSection } from '@/src/features/home/components/HomeDefectSection/HomeDefectSection';
 import { buildPageMetadata, isAppLocale, type AppLocale } from '@/lib/seo';
 
 interface HomePageProps {
@@ -63,6 +64,7 @@ export default function HomePage() {
       <HomeImpactSection />
       <HomeProductSection />
       <HomeUploadSection />
+      <HomeDefectSection />
       <HomeMessengerSection />
       <HomeDashboardSection />
       <HomeApprovalSection />

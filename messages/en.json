@@ -129,6 +129,13 @@
       "body2": "Quickly identify and respond when defects occur in a specific process step.",
       "imageAlt": "App screen showing process-based capture and upload"
     },
+    "defect": {
+      "subtitle": "Resolving defect disputes with transparency",
+      "title": "Defect Repair Request Management",
+      "body1": "Transparent defect records based on location and time metadata prevent substandard construction at its source.",
+      "body2": "VLM reads text and field information in photos in real time and converts it into data, shortening the process of drafting defect repair reports.",
+      "imageAlt": "App screen showing defect repair request management"
+    },
     "messenger": {
       "planLabel": "PREMIUM PLAN +",
       "subtitle": "Automatically organizing on-site conversations",
