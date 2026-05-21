@@ -52,34 +52,32 @@
   "home": {
     "hero": {
       "heading": "A New Standard for Field Records,",
-      "body": "Capture data for construction quality and safety management to run workflows across the entire project in a structured way.",
+      "body": "We collect and structure construction quality and safety inspection data to prove jobsite credibility and support on-site decisions.",
       "ctaButton": "Contact Us",
-      "imageAlt": "A construction worker pointing to a phone showing the RENAME DP screen",
       "logoAlt": "RENAME DP logo"
     },
-    "feature": {
-      "headingPre": "Built for immediate use",
-      "headingPost": " with practical ",
-      "headingAccent1": "usability",
-      "headingMid": "AI-enabled ",
-      "headingAccent2": "expertise",
-      "headingSuffix": " and paperwork time reduced by ",
-      "headingAccent3": "10x",
-      "workflowAlt": "Workflow of recording in the field app and reviewing reports on PC",
-      "tags": [
-        "Major Accident Prevention Checklist",
-        "Safety Management Plan",
-        "Construction Inspection Report",
-        "Weekly/Monthly Schedule",
-        "Daily Work Log",
-        "Construction Photo Ledger",
-        "Completion Inspection Report",
-        "Daily Safety Checklist",
-        "PPE Compliance Check",
-        "Defect Repair Report",
-        "Site Inspection Result Report",
-        "Weekly Safety/Quality Report"
-      ]
+    "impact": {
+      "heading": "Standardized evidence data builds <accent>operational trust</accent>,<br></br>and systemizes <accent>post-verification and dispute response</accent>.",
+      "cards": {
+        "reportTime": {
+          "title": "Reporting time reduction",
+          "value": "70",
+          "suffix": "%",
+          "description": "Automating paperwork frees the field to focus on quality control"
+        },
+        "disputeLeadTime": {
+          "title": "Dispute response lead time cut",
+          "value": "80",
+          "suffix": "%",
+          "description": "Structured evidence data enables fast, clear accountability"
+        },
+        "fastOnboarding": {
+          "title": "Ultra-fast field onboarding",
+          "value": "1",
+          "suffix": "day",
+          "description": "A messenger/photo-album-style UX minimizes the learning curve"
+        }
+      }
     },
     "product": {
       "features": {
@@ -129,13 +127,6 @@
         }
       }
     },
-    "project": {
-      "subtitle": "Track construction and defect records on drawings",
-      "title": "Project Management",
-      "body1": "Manage construction status and progress records in a structured way based on project drawings.",
-      "body2": "View construction records and defect/repair history at a glance through real-time drawing access.",
-      "imageAlt": "Project management screen capture"
-    },
     "upload": {
       "subtitle": "Record work items by process step",
       "title": "Process-based Capture & Upload",
@@ -143,8 +134,14 @@
       "body2": "Quickly identify and respond when defects occur in a specific process step.",
       "imageAlt": "App screen showing process-based capture and upload"
     },
+    "defect": {
+      "subtitle": "Resolving defect disputes with transparency",
+      "title": "Defect Repair Request Management",
+      "body1": "Transparent defect records based on location and time metadata prevent substandard construction at its source.",
+      "body2": "VLM reads text and field information in photos in real time and converts it into data, shortening the process of drafting defect repair reports.",
+      "imageAlt": "App screen showing defect repair request management"
+    },
     "messenger": {
-      "planLabel": "PREMIUM PLAN +",
       "subtitle": "Automatically organizing on-site conversations",
       "title": "AI Messenger",
       "body1": "Record and share TBM content and key updates for each process directly from the field.",
@@ -154,46 +151,31 @@
     },
     "dashboard": {
       "subtitle": "A complete view of project status",
-      "title": "Company-wide Dashboard",
-      "body1": "Understand core indicators and project flow at a glance, including progress, schedule, budget status, and issues.",
-      "body2": "Supports faster understanding and smoother decision-making.",
-      "imageAlt": "Company-wide dashboard screen capture"
+      "title": "Cash Flow & Schedule",
+      "body1": "Visualize cash flow based on project document data to support decision-making.",
+      "body2": "A structured schedule centered on trade and process work lets you see major milestones and remaining tasks at a glance.",
+      "imageAlt": "Cash flow and schedule screen capture"
     },
-    "approval": {
-      "subtitle": "Draft, review, and approve documents online",
-      "title": "E-Approval System",
-      "body1": "Handle documents online to speed up approval workflows.",
-      "body2": "Track approval status in one place and manage work in a structured way.",
-      "imageAlt": "E-approval document screen capture"
+    "blueprint": {
+      "subtitle": "Browse site information by location",
+      "title": "Project Drawing Management",
+      "body1": "Track drawing versions and revisions, and send location-tagged construction records, defect updates, and messages.",
+      "body2": "Project drawing management that integrates region-based marker navigation with simple lookup.",
+      "imageAlt": "Project drawing management screen capture"
     },
-    "employee": {
-      "subtitle": "Integrate and manage employee information",
-      "title": "Employee Management System",
-      "body1": "Gather employee information in one place to easily monitor attendance and HR status.",
-      "body2": "Organize required data systematically to support efficient workforce management.",
-      "imageAlt": "Employee management system screen"
+    "documents": {
+      "subtitle": "Fill in without tedious manual entry",
+      "title": "Project Document Management",
+      "body1": "Systematically manage critical documents such as construction ledgers and progress invoices.",
+      "body2": "Automate document-based data entry with AI to maximize the efficiency and accuracy of paperwork.",
+      "imageAlt": "Project document management screen"
     },
-    "aiReport": {
+    "workReports": {
       "subtitle": "Automatically generated from collected data",
-      "title": "AI Reports",
+      "title": "Auto-generated Daily Work Reports",
       "body1": "AI analyzes accumulated data and automatically completes reports.",
       "body2": "Users can customize content and formats by setting fields directly or attaching files.",
-      "imageAlt": "AI report auto-generation screen capture"
-    },
-    "cctv": {
-      "subtitle": "Automatically analyzed by AI",
-      "title": "Real-time CCTV Risk Detection",
-      "body1": "AI analyzes multiple CCTV feeds in real time and quickly detects abnormal events such as missing helmets or restricted-area intrusion.",
-      "body2": "Review past footage and event history to quickly understand site safety conditions.",
-      "imageAlt": "Real-time CCTV risk detection screen"
-    },
-    "website": {
-      "badge": "PREMIUM PLAN +",
-      "subtitle": "Introduce and promote your company",
-      "title": "Website Development",
-      "body1": "For Pro plan and above, we build websites that reflect your branding and requested requirements.",
-      "body2": "Promote your business effectively with professional design and web implementation.",
-      "imageAlt": "Screen introducing website development service"
+      "imageAlt": "Auto-generated daily work report screen capture"
     },
     "contactSection": {
       "headingLine1": "Consulting for RENAME DP adoption,",
@@ -202,41 +184,30 @@
       "imageAlt": "RENAME DP app mockup"
     },
     "pricing": {
-      "headingLine1": "With the optimal pricing plan",
-      "headingLine2": " for your team.",
-      "labels": {
-        "recommendation": "Recommended for:",
-        "features": "Key features:"
+      "heading": "Zero site risk at just <accent>0.5% of construction cost</accent>",
+      "subheading": "For public projects over KRW 500M, cover every cost of site management at a reasonable price.",
+      "setup": {
+        "label": "Initial setup",
+        "title": "Setup Fee",
+        "price": "₩ 500,000",
+        "unit": "/ one-time (per site)",
+        "features": [
+          "Site data environment setup and drawing/BOQ structuring",
+          "Migration support for existing construction data",
+          "Onboarding training for site managers and supervisors"
+        ]
       },
-      "plans": {
-        "basic": {
-          "name": "Basic",
-          "recommendation": "Single-project operators, small contractors",
-          "features": [
-            "Project status and progress tracking",
-            "Project administration and document management",
-            "Quality and defect management"
-          ]
-        },
-        "premium": {
-          "name": "Advanced",
-          "recommendation": "Multiple projects, mid-sized construction firms",
-          "features": [
-            "Includes key Basic features",
-            "Field communication",
-            "Safety management",
-            "AI-powered e-approval automation"
-          ]
-        },
-        "enterprise": {
-          "name": "Enterprise Custom",
-          "recommendation": "Large construction firms, public institutions, etc.",
-          "features": [
-            "Includes key Advanced features",
-            "AI risk management system",
-            "Custom features for your organization"
-          ]
-        }
+      "monthly": {
+        "label": "Monthly subscription",
+        "title": "Monthly Fee",
+        "price": "₩ 2,100,000",
+        "unit": "/ month (per site)",
+        "features": [
+          "Unlimited accounts for participants (prime/subcontractor)",
+          "Unlimited VLM/voice AI auto-records and audit reports",
+          "Real-time process dashboard and owner view",
+          "Dedicated manager and 24/7 technical support"
+        ]
       }
     }
   },

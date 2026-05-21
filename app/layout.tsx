@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Noto_Sans_JP, Noto_Sans_KR } from "next/font/google";
+import localFont from "next/font/local";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import GAPageTracker from "@/components/analytics/GAPageTracker";
 import { getSiteUrl } from "@/lib/site-url";
@@ -25,6 +26,13 @@ const notoSansJP = Noto_Sans_JP({
   variable: "--font-noto-sans-jp",
   weight: ["400", "500", "700"],
   subsets: ["latin"],
+});
+
+const pretendard = localFont({
+  src: "../public/fonts/PretendardVariable.woff2",
+  variable: "--font-pretendard",
+  weight: "100 900",
+  display: "swap",
 });
 
 const siteUrl = getSiteUrl();
@@ -75,7 +83,7 @@ export default function RootLayout({
   return (
     <html>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${notoSansKR.variable} ${notoSansJP.variable}`}
+        className={`${geistSans.variable} ${geistMono.variable} ${notoSansKR.variable} ${notoSansJP.variable} ${pretendard.variable}`}
       >
         <GoogleAnalytics />
         <GAPageTracker />
