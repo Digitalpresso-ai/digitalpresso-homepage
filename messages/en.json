@@ -146,46 +146,31 @@
     },
     "dashboard": {
       "subtitle": "A complete view of project status",
-      "title": "Company-wide Dashboard",
-      "body1": "Understand core indicators and project flow at a glance, including progress, schedule, budget status, and issues.",
-      "body2": "Supports faster understanding and smoother decision-making.",
-      "imageAlt": "Company-wide dashboard screen capture"
+      "title": "Cash Flow & Schedule",
+      "body1": "Visualize cash flow based on project document data to support decision-making.",
+      "body2": "A structured schedule centered on trade and process work lets you see major milestones and remaining tasks at a glance.",
+      "imageAlt": "Cash flow and schedule screen capture"
     },
-    "approval": {
-      "subtitle": "Draft, review, and approve documents online",
-      "title": "E-Approval System",
-      "body1": "Handle documents online to speed up approval workflows.",
-      "body2": "Track approval status in one place and manage work in a structured way.",
-      "imageAlt": "E-approval document screen capture"
+    "blueprint": {
+      "subtitle": "Browse site information by location",
+      "title": "Project Drawing Management",
+      "body1": "Track drawing versions and revisions, and send location-tagged construction records, defect updates, and messages.",
+      "body2": "Project drawing management that integrates region-based marker navigation with simple lookup.",
+      "imageAlt": "Project drawing management screen capture"
     },
-    "employee": {
-      "subtitle": "Integrate and manage employee information",
-      "title": "Employee Management System",
-      "body1": "Gather employee information in one place to easily monitor attendance and HR status.",
-      "body2": "Organize required data systematically to support efficient workforce management.",
-      "imageAlt": "Employee management system screen"
+    "documents": {
+      "subtitle": "Fill in without tedious manual entry",
+      "title": "Project Document Management",
+      "body1": "Systematically manage critical documents such as construction ledgers and progress invoices.",
+      "body2": "Automate document-based data entry with AI to maximize the efficiency and accuracy of paperwork.",
+      "imageAlt": "Project document management screen"
     },
-    "aiReport": {
+    "workReports": {
       "subtitle": "Automatically generated from collected data",
-      "title": "AI Reports",
+      "title": "Auto-generated Daily Work Reports",
       "body1": "AI analyzes accumulated data and automatically completes reports.",
       "body2": "Users can customize content and formats by setting fields directly or attaching files.",
-      "imageAlt": "AI report auto-generation screen capture"
-    },
-    "cctv": {
-      "subtitle": "Automatically analyzed by AI",
-      "title": "Real-time CCTV Risk Detection",
-      "body1": "AI analyzes multiple CCTV feeds in real time and quickly detects abnormal events such as missing helmets or restricted-area intrusion.",
-      "body2": "Review past footage and event history to quickly understand site safety conditions.",
-      "imageAlt": "Real-time CCTV risk detection screen"
-    },
-    "website": {
-      "badge": "PREMIUM PLAN +",
-      "subtitle": "Introduce and promote your company",
-      "title": "Website Development",
-      "body1": "For Pro plan and above, we build websites that reflect your branding and requested requirements.",
-      "body2": "Promote your business effectively with professional design and web implementation.",
-      "imageAlt": "Screen introducing website development service"
+      "imageAlt": "Auto-generated daily work report screen capture"
     },
     "contactSection": {
       "headingLine1": "Consulting for RENAME DP adoption,",

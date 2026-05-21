@@ -1,11 +1,11 @@
-// src/features/home/components/HomeAiReportSection/HomeAiReportSection.tsx
+// src/features/home/components/HomeBlueprintSection/HomeBlueprintSection.tsx
 
 import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
-import styles from './HomeAiReportSection.module.css';
+import styles from './HomeBlueprintSection.module.css';
 
-export async function HomeAiReportSection() {
-  const t = await getTranslations('home.aiReport');
+export async function HomeBlueprintSection() {
+  const t = await getTranslations('home.blueprint');
 
   return (
     <section className={styles.section}>
@@ -13,7 +13,7 @@ export async function HomeAiReportSection() {
         <div className={styles.imageColumn}>
           <div className={styles.imageWrapper}>
             <Image
-              src="/images/section-ai-report.png"
+              src="/images/section-blueprint.png"
               alt={t('imageAlt')}
               fill
               className={styles.image}

@@ -1,13 +1,11 @@
 // app/[locale]/page.tsx
 
 import type { Metadata } from "next";
-import { HomeAiReportSection } from '@/src/features/home/components/HomeAiReportSection/HomeAiReportSection';
-import { HomeApprovalSection } from '@/src/features/home/components/HomeApprovalSection/HomeApprovalSection';
-import { HomeCctvSection } from '@/src/features/home/components/HomeCctvSection/HomeCctvSection';
-import { HomeWebsiteSection } from '@/src/features/home/components/HomeWebsiteSection/HomeWebsiteSection';
+import { HomeWorkReportsSection } from '@/src/features/home/components/HomeWorkReportsSection/HomeWorkReportsSection';
+import { HomeBlueprintSection } from '@/src/features/home/components/HomeBlueprintSection/HomeBlueprintSection';
 import { HomePricingSection } from '@/src/features/home/components/HomePricingSection/HomePricingSection';
 import { HomeContactSection } from '@/src/features/home/components/HomeContactSection/HomeContactSection';
-import { HomeEmployeeSection } from '@/src/features/home/components/HomeEmployeeSection/HomeEmployeeSection';
+import { HomeDocumentsSection } from '@/src/features/home/components/HomeDocumentsSection/HomeDocumentsSection';
 import { HomeDashboardSection } from '@/src/features/home/components/HomeDashboardSection/HomeDashboardSection';
 import { HomeImpactSection } from '@/src/features/home/components/HomeImpactSection/HomeImpactSection';
 import { HomeHero } from '@/src/features/home/components/HomeHero/HomeHero';
@@ -67,12 +65,10 @@ export default function HomePage() {
       <HomeDefectSection />
       <HomeMessengerSection />
       <HomeDashboardSection />
-      <HomeApprovalSection />
-      <HomeEmployeeSection />
-      <HomeAiReportSection />
-      <HomeCctvSection />
+      <HomeBlueprintSection />
+      <HomeDocumentsSection />
+      <HomeWorkReportsSection />
       <HomePricingSection />
-      <HomeWebsiteSection />
       <HomeContactSection />
     </main>
   );

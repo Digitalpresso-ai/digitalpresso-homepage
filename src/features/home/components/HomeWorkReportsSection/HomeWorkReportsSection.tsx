@@ -1,11 +1,11 @@
-// src/features/home/components/HomeApprovalSection/HomeApprovalSection.tsx
+// src/features/home/components/HomeWorkReportsSection/HomeWorkReportsSection.tsx
 
 import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
-import styles from './HomeApprovalSection.module.css';
+import styles from './HomeWorkReportsSection.module.css';
 
-export async function HomeApprovalSection() {
-  const t = await getTranslations('home.approval');
+export async function HomeWorkReportsSection() {
+  const t = await getTranslations('home.workReports');
 
   return (
     <section className={styles.section}>
@@ -13,7 +13,7 @@ export async function HomeApprovalSection() {
         <div className={styles.imageColumn}>
           <div className={styles.imageWrapper}>
             <Image
-              src="/images/section-approval.png"
+              src="/images/section-work-reports.png"
               alt={t('imageAlt')}
               fill
               className={styles.image}

@@ -1,11 +1,11 @@
-// src/features/home/components/HomeEmployeeSection/HomeEmployeeSection.tsx
+// src/features/home/components/HomeDocumentsSection/HomeDocumentsSection.tsx
 
 import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
-import styles from './HomeEmployeeSection.module.css';
+import styles from './HomeDocumentsSection.module.css';
 
-export async function HomeEmployeeSection() {
-  const t = await getTranslations('home.employee');
+export async function HomeDocumentsSection() {
+  const t = await getTranslations('home.documents');
 
   return (
     <section className={styles.section}>
@@ -23,7 +23,7 @@ export async function HomeEmployeeSection() {
         <div className={styles.imageColumn}>
           <div className={styles.imageWrapper}>
             <Image
-              src="/images/section-employee.png"
+              src="/images/section-documents.png"
               alt={t('imageAlt')}
               fill
               className={styles.image}
