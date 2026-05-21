@@ -52,7 +52,7 @@ export async function generateMetadata({
     path: "/",
     title: content.title,
     description: content.description,
-    image: "/images/hero-worker.png",
+    image: "/images/bg_main_hero.png",
   });
 }
 

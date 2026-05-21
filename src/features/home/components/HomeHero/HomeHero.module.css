@@ -1,68 +1,112 @@
-/* src/features/home/components/HomeHero/HomeHero.module.css */
-
-/* ─── Design tokens ─────────────────────────────────────── */
-.section {
-  --hero-gradient-start: #eff6ff;
-  --hero-brand: #193cb8;
-  --hero-brand-hover: #143093;
-  --hero-heading-color: #1e2939;
-  --hero-body-color: rgba(0, 0, 0, 0.55);
-}
-
 /* ─── Section ───────────────────────────────────────────── */
 .section {
-  background: linear-gradient(to bottom, var(--hero-gradient-start), white);
+  position: relative;
+  min-height: 524px;
+  background-color: #1a4acd;
+  overflow: hidden;
+}
+
+/* ─── Background picture / image ───────────────────────── */
+.bgPicture {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+/* ─── Overlay ────────────────────────────────────────────── */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.05);
+  pointer-events: none;
+}
+
+/* ─── Bottom fade to white ───────────────────────────────── */
+.section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, #fff);
+  pointer-events: none;
 }
 
 /* ─── Inner container ───────────────────────────────────── */
 .inner {
+  position: relative;
   display: flex;
   align-items: center;
-  max-width: 1280px;
   width: 100%;
-  margin: 0 auto;
-  padding: 0 64px;
+  min-height: 524px;
+  padding: 0 var(--dp-gutter-lg) var(--spacing-8);
 }
 
-/* ─── Left: Content ─────────────────────────────────────── */
+/* ─── Content column ─────────────────────────────────────── */
 .content {
-  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 48px;
-  padding: 48px 0;
+  gap: var(--spacing-8);
+  max-width: 576px;
 }
 
+/* ─── Text group ─────────────────────────────────────────── */
 .textGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+/* ─── Header container ───────────────────────────────────── */
+.headerContainer {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
+/* ─── Heading ────────────────────────────────────────────── */
 .heading {
   font-size: 40px;
   font-weight: 600;
-  color: var(--hero-heading-color);
+  color: #fff;
   line-height: 32px;
   margin: 0;
+  white-space: nowrap;
+  word-break: keep-all;
 }
 
+/* ─── Logo ───────────────────────────────────────────────── */
 .logoWrapper {
   display: block;
+  width: 370px;
+  height: 64px;
 }
 
 .logoWrapper img {
   width: 370px;
-  height: 91px;
+  height: 64px;
 }
 
+/* ─── Body ───────────────────────────────────────────────── */
 .body {
-  font-size: 20px;
-  color: var(--hero-body-color);
-  width: 525px;
-  letter-spacing: -0.1px;
-  line-height: 1.45;
+  font-family: var(--font-pretendard), var(--font-noto-sans-kr), sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  color: #fff;
+  line-height: 32px;
   margin: 0;
+  word-break: keep-all;
+  white-space: pre-line;
 }
 
 /* ─── CTA Button ────────────────────────────────────────── */
@@ -71,142 +115,78 @@
   align-items: center;
   justify-content: center;
   align-self: flex-start;
-  background: var(--hero-brand);
+  background: #fff;
   height: 48px;
   padding: 8px 24px;
-  border-radius: 4px;
+  border-radius: var(--dp-radius-xs);
   font-size: 16px;
   font-weight: 700;
-  color: white;
+  color: var(--dp-brand);
   cursor: pointer;
-  border: none;
   text-decoration: none;
-  transition: background 0.2s ease;
+  transition: background var(--dp-dur-base) var(--dp-ease);
+  white-space: nowrap;
 }
 
 .ctaButton:hover {
-  background: var(--hero-brand-hover);
-}
-
-/* ─── Right: Image column ───────────────────────────────── */
-.imageColumn {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 24px 0 24px 0;
-}
-
-.imageWrapper {
-  width: 100%;
-  aspect-ratio: 576 / 486;
-  border-radius: 16px;
-  overflow: hidden;
-}
-
-/* Figma crop: show right portion of image (worker is on the right) */
-.heroImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 70% center;
-  display: block;
+  background: rgba(255, 255, 255, 0.92);
 }
 
 /* ─── Tablet (800px – 1279px) ───────────────────────────── */
 @media (min-width: 800px) and (max-width: 1279px) {
-  .inner {
-    padding: 0 40px;
-  }
-
-  .content {
-    gap: 32px;
-    padding-right: 16px;
-  }
-
-  .heading {
-    font-size: 28px;
-    font-weight: 700;
-    letter-spacing: -2px;
-    line-height: 1.5;
-  }
-
-  .logoWrapper img {
-    width: 280px;
-    height: 69px;
+  .bg {
+    object-position: center center;
   }
 
   .body {
-    width: 311px;
-    font-size: 20px;
-  }
-
-  .ctaButton {
-    padding: 8px 16px;
-    font-size: 14px;
-    height: auto;
-  }
-
-  .imageWrapper {
-    aspect-ratio: 336 / 283.5;
-    border-radius: 8px;
+    max-width: 300px;
+    white-space: normal;
   }
 }
 
 /* ─── Mobile (≤799px) ───────────────────────────────────── */
 @media (max-width: 799px) {
+  .section {
+    min-height: 639px;
+  }
+
+  .bg {
+    object-position: center bottom;
+  }
+
   .inner {
-    flex-direction: column-reverse;
-    padding: 20px 20px 0;
+    min-height: 639px;
+    padding: var(--spacing-8) var(--dp-gutter-sm);
+    align-items: flex-start;
   }
 
   .content {
-    align-items: center;
-    padding: 48px 0;
-    text-align: center;
-    width: 100%;
-    gap: 32px;
+    gap: var(--spacing-6);
+    max-width: 100%;
   }
 
   .heading {
-    font-size: 28px;
-    text-align: center;
-    line-height: 1.4;
+    font-family: var(--font-pretendard), var(--font-noto-sans-kr), sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 32px;
+    white-space: normal;
   }
 
   .logoWrapper {
-    margin: 0 auto;
+    width: 277.5px;
+    height: 48px;
   }
 
   .logoWrapper img {
-    width: 272px;
-    height: 67px;
+    width: 277.5px;
+    height: 48px;
   }
 
   .body {
-    text-align: center;
-    width: 100%;
-    font-size: 16px;
-  }
-
-  .ctaButton {
-    align-self: stretch;
-    width: 100%;
-    height: 40px;
-    font-size: 14px;
-    border-radius: 4px;
-  }
-
-  .imageColumn {
-    padding: 0;
-    width: 100%;
-  }
-
-  .imageWrapper {
-    aspect-ratio: 192 / 162;
-    width: 100%;
-    border-radius: 16px;
-    margin-bottom: 0;
+    font-size: 18px;
+    line-height: 28px;
+    max-width: 300px;
+    white-space: normal;
   }
 }
