@@ -23,20 +23,17 @@ export async function HomeMessengerSection() {
         </div>
         <div className={styles.textColumn}>
           <div className={styles.textBlock}>
-            <div className={styles.headerContainer}>
-              <p className={styles.planLabel}>{t('planLabel')}</p>
-              <div className={styles.titleGroup}>
-                <p className={styles.subtitle}>{t('subtitle')}</p>
-                <div className={styles.titleRow}>
-                  <h2 className={styles.title}>{t('title')}</h2>
-                  <div className={styles.logoWrapper}>
-                    <Image
-                      src="/images/sigongtalk-logo.png"
-                      alt={t('logoAlt')}
-                      fill
-                      className={styles.logoImage}
-                    />
-                  </div>
+            <div className={styles.titleGroup}>
+              <p className={styles.subtitle}>{t('subtitle')}</p>
+              <div className={styles.titleRow}>
+                <h2 className={styles.title}>{t('title')}</h2>
+                <div className={styles.logoWrapper}>
+                  <Image
+                    src="/images/sigongtalk-logo.png"
+                    alt={t('logoAlt')}
+                    fill
+                    className={styles.logoImage}
+                  />
                 </div>
               </div>
             </div>
