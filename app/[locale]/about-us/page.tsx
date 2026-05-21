@@ -40,7 +40,7 @@ export async function generateMetadata({
     path: "/about-us",
     title: content.title,
     description: content.description,
-    image: "/images/about-section1.png",
+    image: "/images/about-us1.png",
   });
 }
 
