@@ -1,6 +1,5 @@
 /* src/features/home/components/HomePricingSection/HomePricingSection.module.css */
 
-/* ===== Section ===== */
 .section {
   background: #ffffff;
 }
@@ -11,155 +10,170 @@
   gap: 32px;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 48px 64px 64px;
+  padding: 48px 64px;
 }
 
 /* ===== Header ===== */
-.headerContainer {
+.header {
   display: flex;
   flex-direction: column;
   gap: 0;
 }
 
-.headerLine1 {
+.heading {
   font-family: var(--font-noto-sans-kr), 'Noto Sans KR', sans-serif;
   font-size: 40px;
   font-weight: 600;
-  line-height: 32px;
-  letter-spacing: 0px;
-  color: var(--color-heading);
-  word-break: keep-all;
-  margin: 0;
-  padding-bottom: 8px;
-}
-
-.headerLine2 {
-  font-family: var(--font-noto-sans-kr), 'Noto Sans KR', sans-serif;
-  font-size: 28px;
-  font-weight: 600;
-  line-height: 48px;
-  letter-spacing: 0px;
+  line-height: 52px;
   color: var(--color-heading);
   word-break: keep-all;
   margin: 0;
 }
 
-.headerAccent {
+.accent {
   color: var(--color-accent);
 }
 
-/* ===== Cards Grid ===== */
-.cardsContainer {
+.subheading {
+  font-family: var(--font-noto-sans-kr), 'Noto Sans KR', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 35px;
+  color: rgba(0, 0, 0, 0.55);
+  word-break: keep-all;
+  margin: 0;
+}
+
+/* ===== Cards ===== */
+.cards {
   display: flex;
   flex-direction: row;
   gap: 16px;
   align-items: stretch;
 }
 
-/* ===== Card ===== */
 .card {
   flex: 1 0 0;
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
   padding: 16px 24px 24px;
   border-radius: 16px;
-  border-width: 1px;
-  border-style: solid;
-  min-width: 0;
-  overflow: hidden;
+  border: 1px solid;
 }
 
-.cardBlue {
-  background-color: #eff6ff;
-  border-color: #2b7fff;
+.cardSetup {
+  background: #ffffff;
+  border-color: #e5e7eb;
 }
 
-.cardOrange {
-  background-color: #fff7ed;
-  border-color: #ff6900;
+.cardMonthly {
+  background: #eff6ff;
+  border-color: #bedbff;
 }
 
-.cardGreen {
-  background-color: #f0fdf4;
-  border-color: #00a63e;
+/* ===== Card Header (label/title + price/unit) ===== */
+.cardHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
 }
 
-/* ===== Card Title ===== */
-.cardTitle {
-  font-family: var(--font-noto-sans-kr), 'Noto Sans KR', sans-serif;
-  font-size: 28px;
-  font-weight: 600;
-  line-height: 48px;
-  letter-spacing: 0px;
-  word-break: keep-all;
-  margin: 0;
-}
-
-.colorBlue {
-  color: #2b7fff;
-}
-
-.colorOrange {
-  color: #ff6900;
-}
-
-.colorGreen {
-  color: #00a63e;
-}
-
-/* ===== Recommend Section ===== */
-.recommendSection {
+.titleBlock {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0;
+}
+
+.priceBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0;
 }
 
 .label {
   font-family: var(--font-noto-sans-kr), 'Noto Sans KR', sans-serif;
   font-size: 16px;
   font-weight: 400;
-  line-height: 24px;
+  line-height: 28px;
   color: var(--color-body);
-  word-break: keep-all;
   margin: 0;
 }
 
-.recommendText {
+.title {
+  font-family: var(--font-noto-sans-kr), 'Noto Sans KR', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 42px;
+  color: var(--color-heading);
+  margin: 0;
+}
+
+.cardMonthly .title {
+  color: var(--color-accent);
+}
+
+.price {
+  font-family: var(--font-noto-sans-kr), 'Noto Sans KR', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 42px;
+  color: var(--color-heading);
+  margin: 0;
+}
+
+.unit {
   font-family: var(--font-noto-sans-kr), 'Noto Sans KR', sans-serif;
   font-size: 16px;
   font-weight: 400;
-  line-height: 24px;
+  line-height: 28px;
   color: var(--color-body);
-  word-break: keep-all;
   margin: 0;
 }
 
-.indented {
-  padding-left: 40px;
+/* ===== Divider ===== */
+.divider {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  margin: 0;
+  width: 100%;
 }
 
-/* ===== Feature Section ===== */
-.featureSection {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+.cardMonthly .divider {
+  border-top-color: #bedbff;
 }
 
-.featureList {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+/* ===== Features ===== */
+.features {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .featureItem {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
+}
+
+.checkIcon {
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  color: #9ca3af;
+}
+
+.cardMonthly .checkIcon {
+  color: var(--color-accent);
 }
 
 .featureText {
@@ -171,117 +185,76 @@
   word-break: keep-all;
 }
 
-/* ===== Check Icon ===== */
-.checkIcon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 9999px;
-  flex-shrink: 0;
-}
-
-.checkBlue {
-  background-color: #2b7fff;
-}
-
-.checkOrange {
-  background-color: #ff6900;
-}
-
-.checkGreen {
-  background-color: #00a63e;
-}
-
-/* ===== 태블릿 (800px ~ 1279px) ===== */
+/* ===== Tablet (800px ~ 1279px) ===== */
 @media (min-width: 800px) and (max-width: 1279px) {
   .container {
-    padding: 32px 48px 32px;
+    padding: 32px 48px;
+    gap: 32px;
   }
 
-  .headerLine1 {
+  .heading {
     font-size: 28px;
-    font-weight: 700;
-    line-height: 1.5;
-    letter-spacing: -2px;
+    line-height: 42px;
   }
 
-  .headerLine2 {
-    font-size: 18px;
-    font-weight: 600;
-    line-height: 32px;
-    letter-spacing: 0px;
+  .subheading {
+    font-size: 16px;
+    line-height: 23px;
   }
 
-  .cardTitle {
-    font-size: 18px;
+  .title,
+  .price {
+    font-size: 22px;
     line-height: 32px;
   }
 
   .label,
-  .recommendText,
+  .unit {
+    font-size: 14px;
+    line-height: 24px;
+  }
+
   .featureText {
     font-size: 14px;
-  }
-
-  .checkIcon {
-    width: 20px;
-    height: 20px;
-  }
-
-  .indented {
-    padding-left: 28px;
+    line-height: 20px;
   }
 }
 
-/* ===== 모바일 (~ 799px) ===== */
+/* ===== Mobile (≤ 799px) ===== */
 @media (max-width: 799px) {
   .container {
-    padding: 48px 20px 64px;
+    padding: 48px 20px;
+    gap: 32px;
   }
 
-  .headerLine1 {
+  .heading {
     font-size: 28px;
-    font-weight: 700;
-    line-height: 1.5;
-    letter-spacing: -2px;
+    line-height: 42px;
   }
 
-  .headerLine2 {
-    font-size: 18px;
-    font-weight: 600;
-    line-height: 32px;
-    letter-spacing: 0px;
+  .subheading {
+    font-size: 16px;
+    line-height: 26px;
   }
 
-  .cardsContainer {
+  .cards {
     flex-direction: column;
   }
 
-  .card {
-    flex: none;
-    width: 100%;
-    gap: 16px;
-  }
-
-  .cardTitle {
-    font-size: 18px;
+  .title,
+  .price {
+    font-size: 22px;
     line-height: 32px;
   }
 
   .label,
-  .recommendText,
+  .unit {
+    font-size: 14px;
+    line-height: 24px;
+  }
+
   .featureText {
     font-size: 14px;
-  }
-
-  .checkIcon {
-    width: 24px;
-    height: 24px;
-  }
-
-  .indented {
-    padding-left: 28px;
+    line-height: 20px;
   }
 }

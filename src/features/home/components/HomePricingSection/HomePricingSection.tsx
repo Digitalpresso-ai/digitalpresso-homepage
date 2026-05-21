@@ -3,81 +3,65 @@
 import { getTranslations } from 'next-intl/server';
 import styles from './HomePricingSection.module.css';
 
-interface PricingPlan {
-  id: 'basic' | 'premium' | 'enterprise';
-  tier: string;
-  colorClass: string;
-  cardClass: string;
-  checkClass: string;
-}
+type PlanId = 'setup' | 'monthly';
 
-const PRICING_PLANS: PricingPlan[] = [
-  {
-    id: 'basic',
-    tier: 'BASIC',
-    colorClass: styles.colorBlue,
-    cardClass: styles.cardBlue,
-    checkClass: styles.checkBlue,
-  },
-  {
-    id: 'premium',
-    tier: 'PREMIUM',
-    colorClass: styles.colorOrange,
-    cardClass: styles.cardOrange,
-    checkClass: styles.checkOrange,
-  },
-  {
-    id: 'enterprise',
-    tier: 'ENTERPRISE',
-    colorClass: styles.colorGreen,
-    cardClass: styles.cardGreen,
-    checkClass: styles.checkGreen,
-  },
-];
+const PLANS: readonly PlanId[] = ['setup', 'monthly'];
 
-function CheckIcon({ className }: { className: string }) {
+function CheckIcon() {
   return (
-    <span className={`${styles.checkIcon} ${className}`} aria-hidden="true">
-      <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M1.5 5.5L5.5 9.5L12.5 1.5"
-          stroke="white"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    </span>
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="12" r="12" fill="currentColor" />
+      <path
+        d="M7 12.5L10.5 16L17 9"
+        stroke="white"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }
 
-function PricingCard({ plan, t }: { plan: PricingPlan; t: Awaited<ReturnType<typeof getTranslations>> }) {
-  const features = t.raw(`plans.${plan.id}.features`) as string[];
+function PricingCard({
+  plan,
+  t,
+}: {
+  plan: PlanId;
+  t: Awaited<ReturnType<typeof getTranslations>>;
+}) {
+  const features = t.raw(`${plan}.features`) as string[];
+  const cardClass = plan === 'monthly' ? styles.cardMonthly : styles.cardSetup;
 
   return (
-    <div className={`${styles.card} ${plan.cardClass}`}>
-      <h3 className={`${styles.cardTitle} ${plan.colorClass}`}>
-        {plan.tier} - {t(`plans.${plan.id}.name`)}
-      </h3>
-
-      <div className={styles.recommendSection}>
-        <p className={styles.label}>{t('labels.recommendation')}</p>
-        <p className={`${styles.recommendText} ${styles.indented}`}>
-          {t(`plans.${plan.id}.recommendation`)}
-        </p>
+    <div className={`${styles.card} ${cardClass}`}>
+      <div className={styles.cardHeader}>
+        <div className={styles.titleBlock}>
+          <p className={styles.label}>{t(`${plan}.label`)}</p>
+          <h3 className={styles.title}>{t(`${plan}.title`)}</h3>
+        </div>
+        <div className={styles.priceBlock}>
+          <p className={styles.price}>{t(`${plan}.price`)}</p>
+          <p className={styles.unit}>{t(`${plan}.unit`)}</p>
+        </div>
       </div>
-
-      <div className={styles.featureSection}>
-        <p className={styles.label}>{t('labels.features')}</p>
-        <ul className={styles.featureList}>
-          {features.map((feature) => (
-            <li key={feature} className={styles.featureItem}>
-              <CheckIcon className={plan.checkClass} />
-              <span className={styles.featureText}>{feature}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <hr className={styles.divider} />
+      <ul className={styles.features}>
+        {features.map((feature) => (
+          <li key={feature} className={styles.featureItem}>
+            <span className={styles.checkIcon}>
+              <CheckIcon />
+            </span>
+            <span className={styles.featureText}>{feature}</span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
@@ -88,17 +72,17 @@ export async function HomePricingSection() {
   return (
     <section className={styles.section}>
       <div className={styles.container}>
-        <div className={styles.headerContainer}>
-          <p className={styles.headerLine1}>{t('headingLine1')}</p>
-          <p className={styles.headerLine2}>
-            <span className={styles.headerAccent}>RENAME DP</span>
-            {t('headingLine2')}
-          </p>
+        <div className={styles.header}>
+          <h2 className={styles.heading}>
+            {t.rich('heading', {
+              accent: (chunks) => <span className={styles.accent}>{chunks}</span>,
+            })}
+          </h2>
+          <p className={styles.subheading}>{t('subheading')}</p>
         </div>
-
-        <div className={styles.cardsContainer}>
-          {PRICING_PLANS.map((plan) => (
-            <PricingCard key={plan.id} plan={plan} t={t} />
+        <div className={styles.cards}>
+          {PLANS.map((plan) => (
+            <PricingCard key={plan} plan={plan} t={t} />
           ))}
         </div>
       </div>

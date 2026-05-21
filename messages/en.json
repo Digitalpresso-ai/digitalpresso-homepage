@@ -179,41 +179,30 @@
       "imageAlt": "RENAME DP app mockup"
     },
     "pricing": {
-      "headingLine1": "With the optimal pricing plan",
-      "headingLine2": " for your team.",
-      "labels": {
-        "recommendation": "Recommended for:",
-        "features": "Key features:"
+      "heading": "Zero site risk at just <accent>0.5% of construction cost</accent>",
+      "subheading": "For public projects over KRW 500M, cover every cost of site management at a reasonable price.",
+      "setup": {
+        "label": "Initial setup",
+        "title": "Setup Fee",
+        "price": "₩ 500,000",
+        "unit": "/ one-time (per site)",
+        "features": [
+          "Site data environment setup and drawing/BOQ structuring",
+          "Migration support for existing construction data",
+          "Onboarding training for site managers and supervisors"
+        ]
       },
-      "plans": {
-        "basic": {
-          "name": "Basic",
-          "recommendation": "Single-project operators, small contractors",
-          "features": [
-            "Project status and progress tracking",
-            "Project administration and document management",
-            "Quality and defect management"
-          ]
-        },
-        "premium": {
-          "name": "Advanced",
-          "recommendation": "Multiple projects, mid-sized construction firms",
-          "features": [
-            "Includes key Basic features",
-            "Field communication",
-            "Safety management",
-            "AI-powered e-approval automation"
-          ]
-        },
-        "enterprise": {
-          "name": "Enterprise Custom",
-          "recommendation": "Large construction firms, public institutions, etc.",
-          "features": [
-            "Includes key Advanced features",
-            "AI risk management system",
-            "Custom features for your organization"
-          ]
-        }
+      "monthly": {
+        "label": "Monthly subscription",
+        "title": "Monthly Fee",
+        "price": "₩ 2,100,000",
+        "unit": "/ month (per site)",
+        "features": [
+          "Unlimited accounts for participants (prime/subcontractor)",
+          "Unlimited VLM/voice AI auto-records and audit reports",
+          "Real-time process dashboard and owner view",
+          "Dedicated manager and 24/7 technical support"
+        ]
       }
     }
   },
