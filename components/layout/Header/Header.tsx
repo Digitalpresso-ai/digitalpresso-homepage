@@ -19,11 +19,21 @@ export default function Header() {
   const languageRef = useRef<HTMLDivElement>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
+  const [isProductMenuOpen, setIsProductMenuOpen] = useState(false);
+  const [isMobileProductOpen, setIsMobileProductOpen] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
+  const lastScrollY = useRef(0);
+  const hideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const productMenuRef = useRef<HTMLLIElement>(null);
   const navLinks = [
-    { href: '/products', label: t('nav.product') },
     { href: '/about-us', label: t('nav.aboutUs') },
     { href: '/references', label: t('nav.references') },
     { href: '/news', label: t('nav.news') },
+  ] as const;
+  const productSubLinks = [
+    { href: '/', label: t('nav.productSub.renameDP'), external: false },
+    { href: 'https://sigongtalk.com', label: t('nav.productSub.sigongtalk'), external: true },
+    { href: '/products/manufacturing', label: t('nav.productSub.renameDX'), external: false },
   ] as const;
   const languageOptions = routing.locales.map((item) => ({
     locale: item,
@@ -36,9 +46,13 @@ export default function Header() {
     languageOptions.find((item) => item.locale === locale) ?? languageOptions[0];
 
   const toggleMobileMenu = () => setIsMobileMenuOpen((prev) => !prev);
-  const closeMobileMenu = () => setIsMobileMenuOpen(false);
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+    setIsMobileProductOpen(false);
+  };
   const toggleLanguageMenu = () => setIsLanguageMenuOpen((prev) => !prev);
   const closeLanguageMenu = () => setIsLanguageMenuOpen(false);
+  const closeProductMenu = () => setIsProductMenuOpen(false);
 
   const handleLocaleChange = (nextLocale: Locale) => {
     if (nextLocale !== locale) {
@@ -46,6 +60,39 @@ export default function Header() {
     }
     closeLanguageMenu();
   };
+
+  useEffect(() => {
+    const HIDE_THRESHOLD = 80;
+    const SHOW_DELAY = 800;
+
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+      const scrollingDown = currentY > lastScrollY.current;
+      lastScrollY.current = currentY;
+
+      if (hideTimer.current) {
+        clearTimeout(hideTimer.current);
+        hideTimer.current = null;
+      }
+
+      if (scrollingDown && currentY > HIDE_THRESHOLD) {
+        setIsHidden(true);
+      } else if (!scrollingDown) {
+        setIsHidden(false);
+      }
+
+      // 스크롤 멈추면 SHOW_DELAY ms 후 헤더 다시 표시
+      hideTimer.current = setTimeout(() => {
+        setIsHidden(false);
+      }, SHOW_DELAY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (hideTimer.current) clearTimeout(hideTimer.current);
+    };
+  }, []);
 
   // 데스크톱 크기로 돌아가면 모바일 메뉴 자동 닫기
   useEffect(() => {
@@ -57,6 +104,24 @@ export default function Header() {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  useEffect(() => {
+    if (!isProductMenuOpen) return;
+    const handlePointerDown = (event: MouseEvent) => {
+      if (!productMenuRef.current?.contains(event.target as Node)) {
+        closeProductMenu();
+      }
+    };
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') closeProductMenu();
+    };
+    document.addEventListener('mousedown', handlePointerDown);
+    document.addEventListener('keydown', handleEscape);
+    return () => {
+      document.removeEventListener('mousedown', handlePointerDown);
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [isProductMenuOpen]);
 
   useEffect(() => {
     if (!isLanguageMenuOpen) {
@@ -85,7 +150,7 @@ export default function Header() {
   }, [isLanguageMenuOpen]);
 
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${isHidden ? styles.headerHidden : ''}`}>
       <div className={styles.inner}>
         <Link href="/" className={styles.logoLink} onClick={closeMobileMenu}>
           <Image
@@ -101,6 +166,57 @@ export default function Header() {
         {/* 데스크탑 / 태블릿 네비게이션 */}
         <nav className={styles.desktopNav} aria-label={t('aria.mainNav')}>
           <ul className={styles.navList}>
+            <li className={styles.productMenuItem} ref={productMenuRef}>
+              <button
+                type="button"
+                className={styles.navLink}
+                aria-expanded={isProductMenuOpen}
+                aria-haspopup="true"
+                onClick={() => setIsProductMenuOpen((prev) => !prev)}
+              >
+                {t('nav.product')}
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className={`${styles.productChevron} ${isProductMenuOpen ? styles.productChevronOpen : ''}`}
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M6 9L12 15L18 9"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+              {isProductMenuOpen && (
+                <ul className={styles.productDropdown}>
+                  {productSubLinks.map(({ href, label, external }) => (
+                    <li key={label}>
+                      {external ? (
+                        <a
+                          href={href}
+                          className={styles.productDropdownLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={closeProductMenu}
+                        >
+                          {label}
+                        </a>
+                      ) : (
+                        <Link href={href} className={styles.productDropdownLink} onClick={closeProductMenu}>
+                          {label}
+                        </Link>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
             {navLinks.map(({ label, href }) => (
               <li key={href}>
                 <Link href={href} className={styles.navLink}>
@@ -249,6 +365,56 @@ export default function Header() {
         >
           <div className={styles.mobileMenuContent}>
             <ul className={styles.mobileNavList}>
+              <li>
+                <button
+                  type="button"
+                  className={styles.mobileNavLink}
+                  onClick={() => setIsMobileProductOpen((prev) => !prev)}
+                  aria-expanded={isMobileProductOpen}
+                >
+                  {t('nav.product')}
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className={`${styles.productChevron} ${isMobileProductOpen ? styles.productChevronOpen : ''}`}
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M6 9L12 15L18 9"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
+                {isMobileProductOpen && (
+                  <ul className={styles.mobileProductSubList}>
+                    {productSubLinks.map(({ href, label, external }) => (
+                      <li key={label}>
+                        {external ? (
+                          <a
+                            href={href}
+                            className={styles.mobileProductSubLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={closeMobileMenu}
+                          >
+                            {label}
+                          </a>
+                        ) : (
+                          <Link href={href} className={styles.mobileProductSubLink} onClick={closeMobileMenu}>
+                            {label}
+                          </Link>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
               {navLinks.map(({ label, href }) => (
                 <li key={href}>
                   <Link

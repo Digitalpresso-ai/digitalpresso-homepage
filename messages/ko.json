@@ -6,7 +6,12 @@
         "product": "제품 소개",
         "aboutUs": "회사 소개",
         "references": "고객 사례",
-        "news": "소식"
+        "news": "소식",
+        "productSub": {
+          "renameDP": "RenameDP",
+          "sigongtalk": "시공톡",
+          "renameDX": "RenameDX"
+        }
       },
       "cta": "문의하기",
       "language": {

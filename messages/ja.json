@@ -6,7 +6,12 @@
         "product": "製品紹介",
         "aboutUs": "会社紹介",
         "references": "導入事例",
-        "news": "ニュース"
+        "news": "ニュース",
+        "productSub": {
+          "renameDP": "RenameDP",
+          "sigongtalk": "施工トーク",
+          "renameDX": "RenameDX"
+        }
       },
       "cta": "お問い合わせ",
       "language": {
