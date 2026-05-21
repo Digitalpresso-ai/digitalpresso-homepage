@@ -1,0 +1,106 @@
+.root {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.frame {
+  position: relative;
+  width: var(--badge-frame);
+  height: var(--badge-frame);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arcsWrapper {
+  position: absolute;
+  inset: 0;
+  display: block;
+  color: var(--badge-arc-color);
+  pointer-events: none;
+}
+
+.arcs {
+  display: block;
+}
+
+.outerRing {
+  width: var(--badge-outer);
+  height: var(--badge-outer);
+  border-radius: 9999px;
+  border: var(--badge-border) solid var(--badge-ring-color);
+  padding: var(--badge-padding);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.innerCircle {
+  width: var(--badge-inner);
+  height: var(--badge-inner);
+  border-radius: 9999px;
+  background: var(--badge-bg-color);
+  color: var(--badge-content-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.text {
+  font-family: var(--font-pretendard), var(--font-noto-sans-kr), sans-serif;
+  font-size: var(--badge-content-size);
+  font-weight: 600;
+  color: inherit;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.label {
+  font-family: var(--font-pretendard), var(--font-noto-sans-kr), sans-serif;
+  font-size: 16px;
+  color: #1e2939;
+  text-align: center;
+}
+
+/* Variants */
+
+.variant-active {
+  --badge-ring-color: #2b7fff;
+  --badge-bg-color: #2b7fff;
+  --badge-arc-color: #2b7fff;
+  --badge-content-color: #ffffff;
+}
+
+.variant-disabled {
+  --badge-ring-color: #bedbff;
+  --badge-bg-color: #bedbff;
+  --badge-arc-color: #bedbff;
+  --badge-content-color: #4a5565;
+}
+
+.variant-light {
+  --badge-ring-color: #dbeafe;
+  --badge-bg-color: #dbeafe;
+  --badge-arc-color: #dbeafe;
+  --badge-content-color: #2b7fff;
+}
+
+.variant-neutral {
+  --badge-ring-color: #d1d5dc;
+  --badge-bg-color: #d1d5dc;
+  --badge-arc-color: #d1d5dc;
+  --badge-content-color: #4a5565;
+}
+
+.variant-sky {
+  --badge-ring-color: #8ec5ff;
+  --badge-bg-color: #8ec5ff;
+  --badge-arc-color: #bedbff;
+  --badge-content-color: #ffffff;
+}
