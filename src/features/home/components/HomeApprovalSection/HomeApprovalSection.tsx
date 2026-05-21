@@ -13,7 +13,7 @@ export async function HomeApprovalSection() {
         <div className={styles.imageColumn}>
           <div className={styles.imageWrapper}>
             <Image
-              src="/images/section9-approval.png"
+              src="/images/section8-approval.png"
               alt={t('imageAlt')}
               fill
               className={styles.image}

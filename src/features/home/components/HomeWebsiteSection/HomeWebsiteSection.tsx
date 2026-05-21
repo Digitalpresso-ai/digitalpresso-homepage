@@ -14,7 +14,7 @@ export async function HomeWebsiteSection() {
           <div className={styles.imageAlign}>
             <div className={styles.imageWrapper}>
               <Image
-                src="/images/section13-website.jpg"
+                src="/images/section12-website.jpg"
                 alt={t('imageAlt')}
                 fill
                 className={styles.image}

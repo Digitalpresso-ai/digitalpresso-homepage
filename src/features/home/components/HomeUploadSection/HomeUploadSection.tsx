@@ -21,7 +21,7 @@ export async function HomeUploadSection() {
         <div className={styles.imageColumn}>
           <div className={styles.imageWrapper}>
             <Image
-              src="/images/section6-upload.png"
+              src="/images/section5-upload.png"
               alt={t('imageAlt')}
               fill
               className={styles.image}

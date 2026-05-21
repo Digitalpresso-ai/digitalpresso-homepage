@@ -122,13 +122,6 @@
         }
       }
     },
-    "project": {
-      "subtitle": "Track construction and defect records on drawings",
-      "title": "Project Management",
-      "body1": "Manage construction status and progress records in a structured way based on project drawings.",
-      "body2": "View construction records and defect/repair history at a glance through real-time drawing access.",
-      "imageAlt": "Project management screen capture"
-    },
     "upload": {
       "subtitle": "Record work items by process step",
       "title": "Process-based Capture & Upload",

@@ -14,7 +14,6 @@ import { HomeHero } from '@/src/features/home/components/HomeHero/HomeHero';
 import { HomeMessengerSection } from '@/src/features/home/components/HomeMessengerSection/HomeMessengerSection';
 import { HomeNewsSection } from '@/src/features/home/components/HomeNewsSection/HomeNewsSection';
 import { HomeProductSection } from '@/src/features/home/components/HomeProductSection/HomeProductSection';
-import { HomeProjectSection } from '@/src/features/home/components/HomeProjectSection/HomeProjectSection';
 import { HomeUploadSection } from '@/src/features/home/components/HomeUploadSection/HomeUploadSection';
 import { buildPageMetadata, isAppLocale, type AppLocale } from '@/lib/seo';
 
@@ -63,7 +62,6 @@ export default function HomePage() {
       <HomeNewsSection />
       <HomeImpactSection />
       <HomeProductSection />
-      <HomeProjectSection />
       <HomeUploadSection />
       <HomeMessengerSection />
       <HomeDashboardSection />

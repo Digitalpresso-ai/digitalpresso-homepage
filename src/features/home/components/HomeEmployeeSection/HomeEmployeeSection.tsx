@@ -23,7 +23,7 @@ export async function HomeEmployeeSection() {
         <div className={styles.imageColumn}>
           <div className={styles.imageWrapper}>
             <Image
-              src="/images/section10-employee.png"
+              src="/images/section9-employee.png"
               alt={t('imageAlt')}
               fill
               className={styles.image}
