@@ -9,7 +9,7 @@ import { HomePricingSection } from '@/src/features/home/components/HomePricingSe
 import { HomeContactSection } from '@/src/features/home/components/HomeContactSection/HomeContactSection';
 import { HomeEmployeeSection } from '@/src/features/home/components/HomeEmployeeSection/HomeEmployeeSection';
 import { HomeDashboardSection } from '@/src/features/home/components/HomeDashboardSection/HomeDashboardSection';
-import { HomeFeatureSection } from '@/src/features/home/components/HomeFeatureSection/HomeFeatureSection';
+import { HomeImpactSection } from '@/src/features/home/components/HomeImpactSection/HomeImpactSection';
 import { HomeHero } from '@/src/features/home/components/HomeHero/HomeHero';
 import { HomeMessengerSection } from '@/src/features/home/components/HomeMessengerSection/HomeMessengerSection';
 import { HomeNewsSection } from '@/src/features/home/components/HomeNewsSection/HomeNewsSection';
@@ -61,7 +61,7 @@ export default function HomePage() {
     <main>
       <HomeHero />
       <HomeNewsSection />
-      <HomeFeatureSection />
+      <HomeImpactSection />
       <HomeProductSection />
       <HomeProjectSection />
       <HomeUploadSection />

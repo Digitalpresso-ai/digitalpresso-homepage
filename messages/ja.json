@@ -51,29 +51,28 @@
       "ctaButton": "お問い合わせ",
       "logoAlt": "RENAME DP ロゴ"
     },
-    "feature": {
-      "headingPre": "現場ですぐ使える",
-      "headingPost": " 実用的な ",
-      "headingAccent1": "使いやすさ",
-      "headingMid": "AIで実現する ",
-      "headingAccent2": "専門性",
-      "headingSuffix": " と書類業務時間を ",
-      "headingAccent3": "10分の1に削減",
-      "workflowAlt": "現場アプリで記録し、PCでレポートを確認するワークフロー",
-      "tags": [
-        "重大災害予防チェックリスト",
-        "安全管理計画書",
-        "施工検測確認書",
-        "週次/月次工程表",
-        "工事日報",
-        "施工写真管理台帳",
-        "竣工検査報告書",
-        "日次安全点検日誌",
-        "PPE着用点検",
-        "不具合補修履行報告書",
-        "現場点検結果報告書",
-        "週次安全/品質レポート"
-      ]
+    "impact": {
+      "heading": "標準化された証憑データで<accent>運用の信頼を構築</accent>し、<br></br><accent>事後検証と紛争対応をシステム化</accent>します。",
+      "cards": {
+        "reportTime": {
+          "title": "報告時間の削減",
+          "value": "70",
+          "suffix": "%",
+          "description": "書類業務の自動化で、現場本来の品質管理に集中できます"
+        },
+        "disputeLeadTime": {
+          "title": "紛争対応リードタイムの短縮",
+          "value": "80",
+          "suffix": "%",
+          "description": "構造化された証憑データで、迅速かつ明確な責任所在の特定"
+        },
+        "fastOnboarding": {
+          "title": "超高速の現場オンボーディング",
+          "value": "1",
+          "suffix": "日",
+          "description": "既存のメッセンジャー／フォトアルバム方式に近いUXで学習コストを最小化"
+        }
+      }
     },
     "product": {
       "features": {

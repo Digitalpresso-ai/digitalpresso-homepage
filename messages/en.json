@@ -51,29 +51,28 @@
       "ctaButton": "Contact Us",
       "logoAlt": "RENAME DP logo"
     },
-    "feature": {
-      "headingPre": "Built for immediate use",
-      "headingPost": " with practical ",
-      "headingAccent1": "usability",
-      "headingMid": "AI-enabled ",
-      "headingAccent2": "expertise",
-      "headingSuffix": " and paperwork time reduced by ",
-      "headingAccent3": "10x",
-      "workflowAlt": "Workflow of recording in the field app and reviewing reports on PC",
-      "tags": [
-        "Major Accident Prevention Checklist",
-        "Safety Management Plan",
-        "Construction Inspection Report",
-        "Weekly/Monthly Schedule",
-        "Daily Work Log",
-        "Construction Photo Ledger",
-        "Completion Inspection Report",
-        "Daily Safety Checklist",
-        "PPE Compliance Check",
-        "Defect Repair Report",
-        "Site Inspection Result Report",
-        "Weekly Safety/Quality Report"
-      ]
+    "impact": {
+      "heading": "Standardized evidence data builds <accent>operational trust</accent>,<br></br>and systemizes <accent>post-verification and dispute response</accent>.",
+      "cards": {
+        "reportTime": {
+          "title": "Reporting time reduction",
+          "value": "70",
+          "suffix": "%",
+          "description": "Automating paperwork frees the field to focus on quality control"
+        },
+        "disputeLeadTime": {
+          "title": "Dispute response lead time cut",
+          "value": "80",
+          "suffix": "%",
+          "description": "Structured evidence data enables fast, clear accountability"
+        },
+        "fastOnboarding": {
+          "title": "Ultra-fast field onboarding",
+          "value": "1",
+          "suffix": "day",
+          "description": "A messenger/photo-album-style UX minimizes the learning curve"
+        }
+      }
     },
     "product": {
       "features": {

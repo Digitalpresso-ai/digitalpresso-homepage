@@ -51,29 +51,28 @@
       "ctaButton": "문의하기",
       "logoAlt": "RENAME DP 로고"
     },
-    "feature": {
-      "headingPre": "현장인력이 바로 쓸 수",
-      "headingPost": " 있는 ",
-      "headingAccent1": "사용성",
-      "headingMid": "AI로 대체하는 ",
-      "headingAccent2": "전문성",
-      "headingSuffix": " 서류업무시간 ",
-      "headingAccent3": "10배 절감",
-      "workflowAlt": "현장에서 앱으로 기록하고 PC로 리포트를 확인하는 워크플로우",
-      "tags": [
-        "중대재해 예방 점검표",
-        "안전관리 계획서",
-        "시공검측 확인서",
-        "주/월간 공정표",
-        "공사일보",
-        "시공사진 관리대장",
-        "준공검사보고서",
-        "일일 안전점검 일지",
-        "PPE 착용점검",
-        "하자보수 이행보고서",
-        "현장점검 결과보고서",
-        "주간 안전/품질보고"
-      ]
+    "impact": {
+      "heading": "표준화된 증빙 데이터로 <accent>운영 신뢰를 구축</accent>하고,<br></br><accent>사후 검증 및 분쟁대응을 시스템화</accent> 합니다.",
+      "cards": {
+        "reportTime": {
+          "title": "보고 시간 절감",
+          "value": "70",
+          "suffix": "%",
+          "description": "서류 작업 자동화로 현장 본연의 품질 관리에 집중 가능"
+        },
+        "disputeLeadTime": {
+          "title": "분쟁 대응 리드타임 단축",
+          "value": "80",
+          "suffix": "%",
+          "description": "구조화된 증빙 데이터로 신속하고 명확한 책임소재 규명"
+        },
+        "fastOnboarding": {
+          "title": "초고속 현장 온보딩",
+          "value": "1",
+          "suffix": "day",
+          "description": "기존 메신저/사진첩 방식과 유사한 UX로 학습 곡선 최소화"
+        }
+      }
     },
     "product": {
       "features": {
