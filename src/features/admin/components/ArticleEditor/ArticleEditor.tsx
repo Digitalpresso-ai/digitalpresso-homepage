@@ -20,6 +20,16 @@ interface Props {
   article?: ArticleEntity;
 }
 
+function generateId(): string {
+  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+    return crypto.randomUUID();
+  }
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+    const r = (Math.random() * 16) | 0;
+    return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
+  });
+}
+
 function pasteMarkdown(view: EditorView, event: ClipboardEvent): boolean {
   const clipboard = event.clipboardData;
   if (!clipboard) return false;
@@ -46,14 +56,13 @@ export default function ArticleEditor({ article }: Props) {
   const [isUploading, setIsUploading] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const coverFileInputRef = useRef<HTMLInputElement | null>(null);
   const editorRef = useRef<Editor | null>(null);
   const [pendingImages, setPendingImages] = useState<Record<string, File>>({});
-  const [coverSelection, setCoverSelection] = useState<
-    { type: 'url'; value: string } | { type: 'temp'; value: string } | null
-  >(article?.cover_img_url ? { type: 'url', value: article.cover_img_url } : null);
-  const [imagesInEditor, setImagesInEditor] = useState<
-    { src: string; alt: string; tempId: string | null }[]
-  >([]);
+  // 대표 이미지: 기존 저장된 URL 또는 새로 선택한 파일
+  const [coverImageUrl, setCoverImageUrl] = useState<string | null>(article?.cover_img_url ?? null);
+  const [pendingCoverFile, setPendingCoverFile] = useState<File | null>(null);
+  const [pendingCoverPreview, setPendingCoverPreview] = useState<string | null>(null);
 
   const [title, setTitle] = useState(article?.title ?? '');
   const [titleEn, setTitleEn] = useState(article?.title_en ?? '');
@@ -79,7 +88,7 @@ export default function ArticleEditor({ article }: Props) {
     if (!activeEditor) return;
     setUploadError(null);
 
-    const tempId = crypto.randomUUID();
+    const tempId = generateId();
     const tempUrl = URL.createObjectURL(file);
     setPendingImages((prev) => ({ ...prev, [tempId]: file }));
 
@@ -162,27 +171,24 @@ export default function ArticleEditor({ article }: Props) {
     },
   });
 
-  useEffect(() => {
-    if (!editor) return;
+  // 대표 이미지 파일 선택 핸들러
+  const handleCoverFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    if (pendingCoverPreview) URL.revokeObjectURL(pendingCoverPreview);
+    const preview = URL.createObjectURL(file);
+    setPendingCoverFile(file);
+    setPendingCoverPreview(preview);
+    setCoverImageUrl(null);
+    event.target.value = '';
+  };
 
-    const updateImages = () => {
-      const html = editor.getHTML();
-      const doc = new DOMParser().parseFromString(html, 'text/html');
-      const imgs = Array.from(doc.querySelectorAll('img')).map((img) => ({
-        src: img.getAttribute('src') ?? '',
-        alt: img.getAttribute('alt') ?? '',
-        tempId: img.getAttribute('data-temp-id'),
-      }));
-      setImagesInEditor(imgs.filter((img) => img.src));
-    };
-
-    updateImages();
-    editor.on('update', updateImages);
-
-    return () => {
-      editor.off('update', updateImages);
-    };
-  }, [editor]);
+  const handleCoverClear = () => {
+    if (pendingCoverPreview) URL.revokeObjectURL(pendingCoverPreview);
+    setPendingCoverFile(null);
+    setPendingCoverPreview(null);
+    setCoverImageUrl(null);
+  };
 
   const handleFileInputChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -261,10 +267,29 @@ export default function ArticleEditor({ article }: Props) {
         }
 
         let nextContent = content;
-        let resolvedCoverUrl =
-          coverSelection?.type === 'url' ? coverSelection.value
-          : coverSelection?.type === 'temp' ? null
-          : null;
+        let resolvedCoverUrl: string | null = coverImageUrl;
+
+        // 새로 선택한 대표 이미지 파일을 Supabase에 업로드
+        if (pendingCoverFile) {
+          const objectKey = generateId();
+          const ext = pendingCoverFile.name.split('.').pop() || 'png';
+          const filePath = `articles/${articleId}/cover_${objectKey}.${ext}`;
+
+          const { error: coverUploadError } = await supabase
+            .storage
+            .from('article-images')
+            .upload(filePath, pendingCoverFile, { upsert: false, contentType: pendingCoverFile.type });
+
+          if (coverUploadError) throw coverUploadError;
+
+          const { data: coverPublicData } = supabase
+            .storage
+            .from('article-images')
+            .getPublicUrl(filePath);
+
+          resolvedCoverUrl = coverPublicData?.publicUrl ?? null;
+        }
+
         const tempImages = Object.keys(pendingImages);
 
         if (tempImages.length > 0) {
@@ -278,7 +303,7 @@ export default function ArticleEditor({ article }: Props) {
             const file = pendingImages[tempId];
             if (!file) throw new Error('업로드할 이미지 파일을 찾을 수 없습니다.');
 
-            const objectKey = crypto.randomUUID();
+            const objectKey = generateId();
             const ext = file.name.split('.').pop() || 'png';
             const filePath = `articles/${articleId}/${objectKey}.${ext}`;
 
@@ -323,10 +348,6 @@ export default function ArticleEditor({ article }: Props) {
 
             img.setAttribute('src', imageUrl);
             img.removeAttribute('data-temp-id');
-
-            if (coverSelection?.type === 'temp' && coverSelection.value === tempId) {
-              resolvedCoverUrl = imageUrl;
-            }
           }
 
           nextContent = doc.body.innerHTML;
@@ -355,11 +376,10 @@ export default function ArticleEditor({ article }: Props) {
         }
 
         setPendingImages({});
-        if (resolvedCoverUrl) {
-          setCoverSelection({ type: 'url', value: resolvedCoverUrl });
-        } else {
-          setCoverSelection(null);
-        }
+        if (pendingCoverPreview) URL.revokeObjectURL(pendingCoverPreview);
+        setPendingCoverFile(null);
+        setPendingCoverPreview(null);
+        setCoverImageUrl(resolvedCoverUrl);
         setSaveSuccess(true);
         setTimeout(() => setSaveSuccess(false), 3000);
 
@@ -488,51 +508,47 @@ export default function ArticleEditor({ article }: Props) {
       <div className={styles.coverSection}>
         <div className={styles.coverHeader}>
           <span className={styles.coverTitle}>대표 이미지</span>
-          <button
-            type="button"
-            className={styles.coverClearBtn}
-            onClick={() => setCoverSelection(null)}
-          >
-            없음
-          </button>
-        </div>
-        {imagesInEditor.length === 0 ? (
-          <p className={styles.coverHint}>본문에 이미지가 있어야 선택할 수 있습니다.</p>
-        ) : (
-          <div className={styles.coverGrid}>
-            {imagesInEditor.map((img, index) => {
-              const isSelected = coverSelection
-                ? coverSelection.type === 'temp'
-                  ? coverSelection.value === img.tempId
-                  : coverSelection.value === img.src
-                : false;
-              return (
-                <button
-                  key={`${img.src}-${index}`}
-                  type="button"
-                  className={`${styles.coverItem} ${isSelected ? styles.coverItemActive : ''}`}
-                  onClick={() => {
-                    if (img.tempId) {
-                      setCoverSelection({ type: 'temp', value: img.tempId });
-                    } else {
-                      setCoverSelection({ type: 'url', value: img.src });
-                    }
-                  }}
-                >
-                  <Image
-                    src={img.src}
-                    alt={img.alt || 'cover'}
-                    width={160}
-                    height={100}
-                    sizes="160px"
-                    style={{ width: '100%', height: '100px', objectFit: 'cover', display: 'block' }}
-                    unoptimized
-                  />
-                </button>
-              );
-            })}
+          <div className={styles.coverActions}>
+            <button
+              type="button"
+              className={styles.coverUploadBtn}
+              onClick={() => coverFileInputRef.current?.click()}
+            >
+              이미지 선택
+            </button>
+            {(coverImageUrl || pendingCoverPreview) && (
+              <button
+                type="button"
+                className={styles.coverClearBtn}
+                onClick={handleCoverClear}
+              >
+                제거
+              </button>
+            )}
           </div>
+        </div>
+        {(pendingCoverPreview || coverImageUrl) ? (
+          <div className={styles.coverPreview}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={pendingCoverPreview ?? coverImageUrl ?? ''}
+              alt="대표 이미지 미리보기"
+              className={styles.coverPreviewImg}
+            />
+            {pendingCoverPreview && (
+              <span className={styles.coverPendingBadge}>저장 시 업로드됩니다</span>
+            )}
+          </div>
+        ) : (
+          <p className={styles.coverHint}>대표 이미지를 선택해주세요.</p>
         )}
+        <input
+          ref={coverFileInputRef}
+          type="file"
+          accept="image/*"
+          style={{ display: 'none' }}
+          onChange={handleCoverFileChange}
+        />
       </div>
 
       {activeLocale === 'ko' && (

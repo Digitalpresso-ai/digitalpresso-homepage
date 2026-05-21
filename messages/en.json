@@ -6,7 +6,12 @@
         "product": "Product",
         "aboutUs": "About Us",
         "references": "References",
-        "news": "News"
+        "news": "News",
+        "productSub": {
+          "renameDP": "RenameDP",
+          "sigongtalk": "Sigongtalk",
+          "renameDX": "RenameDX"
+        }
       },
       "cta": "Contact Us",
       "language": {
