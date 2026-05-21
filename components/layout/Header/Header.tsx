@@ -1,7 +1,7 @@
 // components/layout/Header/Header.tsx
 'use client';
 
-import { useEffect, useId, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
 import { Link, usePathname, useRouter } from '@/i18n/navigation';
@@ -15,7 +15,7 @@ export default function Header() {
   const locale = useLocale() as Locale;
   const router = useRouter();
   const pathname = usePathname();
-  const dropdownId = useId();
+  const dropdownId = 'header-language-dropdown';
   const languageRef = useRef<HTMLDivElement>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
