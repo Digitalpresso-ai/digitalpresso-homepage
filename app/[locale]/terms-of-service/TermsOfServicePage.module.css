@@ -20,7 +20,7 @@
 }
 
 .title {
-  font-family: var(--font-noto-sans-kr), 'Noto Sans KR', 'Noto Sans', sans-serif;
+  font-family: var(--font-pretendard), 'Pretendard', 'Noto Sans', sans-serif;
   font-size: 28px;
   font-weight: 600;
   line-height: 48px;
@@ -36,7 +36,7 @@
 }
 
 .body p {
-  font-family: var(--font-noto-sans-kr), 'Noto Sans KR', 'Noto Sans', sans-serif;
+  font-family: var(--font-pretendard), 'Pretendard', 'Noto Sans', sans-serif;
   font-size: 20px;
   font-weight: 400;
   line-height: 1.45;
