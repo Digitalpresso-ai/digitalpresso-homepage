@@ -183,33 +183,6 @@
       "headingLine2": "바로 문의하세요",
       "cta": "지금 문의하기",
       "imageAlt": "RENAME DP 앱 화면 목업"
-    },
-    "pricing": {
-      "heading": "공사비 단 <accent>0.5% 수준</accent>으로 현장 리스크 제로",
-      "subheading": "5억원 이상 관급공사 기준, 현장 관리에 필요한 모든 비용을 합리적으로 해결하세요.",
-      "setup": {
-        "label": "초기 도입",
-        "title": "Setup Fee",
-        "price": "₩ 500,000",
-        "unit": "/ 1회 (현장당)",
-        "features": [
-          "현장 데이터 환경 세팅 및 도면/내역서 구조화",
-          "기존 공사 데이터 마이그레이션 지원",
-          "현장 소장 및 관리자 온보딩 교육"
-        ]
-      },
-      "monthly": {
-        "label": "월 구독료",
-        "title": "Monthly Fee",
-        "price": "₩ 2,100,000",
-        "unit": "/ 월 (현장당)",
-        "features": [
-          "참여 인원 (원청/협력사) 무제한 계정 생성",
-          "VLM/음성 AI 기반 자동 기록 및 증빙 리포트 무제한",
-          "실시간 공정 관리 대시보드 및 발주자 뷰 제공",
-          "전담 매니저 배정 및 24/7 기술 지원"
-        ]
-      }
     }
   },
   "productsPage": {
@@ -393,7 +366,7 @@
     "title": "문의하기",
     "subtitle": "궁금하신 점이나 요청 사항을 남겨주시면 빠르게 답변드리겠습니다.",
     "email": "digitalpresso@digitalpresso.ai",
-    "address": "서울특별시 광진구 광나루로 478, 광진경제허브센터 도약관 402호",
+    "address": "경기도 성남시 수정구 대왕판교로 815",
     "logoAlt": "Digital Presso 로고",
     "buildingImageAlt": "Digital Presso 사옥 건물",
     "form": {

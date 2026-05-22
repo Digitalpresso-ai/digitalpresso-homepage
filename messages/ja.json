@@ -182,33 +182,6 @@
       "headingLine2": "今すぐお問い合わせください",
       "cta": "今すぐ問い合わせる",
       "imageAlt": "RENAME DPアプリのモックアップ"
-    },
-    "pricing": {
-      "heading": "工事費わずか<accent>0.5%水準</accent>で現場リスクをゼロに",
-      "subheading": "5億ウォン以上の官公庁工事を基準に、現場管理に必要なすべての費用を合理的に解決します。",
-      "setup": {
-        "label": "初期導入",
-        "title": "Setup Fee",
-        "price": "₩ 500,000",
-        "unit": "/ 1回 (現場ごと)",
-        "features": [
-          "現場データ環境のセットアップと図面・内訳書の構造化",
-          "既存工事データのマイグレーション支援",
-          "現場所長および管理者のオンボーディング教育"
-        ]
-      },
-      "monthly": {
-        "label": "月額サブスクリプション",
-        "title": "Monthly Fee",
-        "price": "₩ 2,100,000",
-        "unit": "/ 月 (現場ごと)",
-        "features": [
-          "参加人員 (元請・協力会社) 無制限アカウント作成",
-          "VLM・音声AIによる自動記録と証憑レポート無制限",
-          "リアルタイム工程管理ダッシュボードと発注者ビューの提供",
-          "専任マネージャー配置および24/7技術サポート"
-        ]
-      }
     }
   },
   "productsPage": {
@@ -392,7 +365,7 @@
     "title": "お問い合わせ",
     "subtitle": "ご質問やご要望がございましたら、お気軽にお問い合わせください。",
     "email": "digitalpresso@digitalpresso.ai",
-    "address": "ソウル特別市光津区光なる路478、光津経済ハブセンター 跳躍館 402号",
+    "address": "京畿道城南市寿井区大王板橋路815",
     "logoAlt": "Digital Presso ロゴ",
     "buildingImageAlt": "Digital Presso オフィスビル",
     "form": {

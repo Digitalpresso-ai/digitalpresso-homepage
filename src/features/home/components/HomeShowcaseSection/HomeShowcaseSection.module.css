@@ -1,9 +1,10 @@
-/* src/features/home/components/HomeDashboardSection/HomeDashboardSection.module.css */
+/* src/features/home/components/HomeShowcaseSection/HomeShowcaseSection.module.css */
 
 .section {
-  background: #ebf2ff;
+  background: #ffffff;
 }
 
+/* Desktop ≥1280px — variant: large (기본) */
 .container {
   display: flex;
   flex-direction: row;
@@ -14,21 +15,53 @@
   align-items: center;
 }
 
-/* 텍스트가 LEFT, 이미지가 RIGHT */
+.container.compact {
+  gap: 64px;
+  padding: 48px 64px;
+}
+
+.container.reverse {
+  flex-direction: row-reverse;
+}
+
+/* Image column */
+.imageColumn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.image {
+  object-fit: contain;
+}
+
+.image.cover {
+  object-fit: cover;
+}
+
+/* Text column */
 .textColumn {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   align-self: stretch;
+  min-width: 0;
 }
 
 .textBlock {
-  width: 522px;
   display: flex;
   flex-direction: column;
   gap: 16px;
   align-items: flex-start;
+  max-width: 100%;
 }
 
 .headerContainer {
@@ -68,21 +101,8 @@
   margin: 0;
 }
 
-.imageColumn {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.imageWrapper {
-  position: relative;
-  aspect-ratio: 564 / 407;
-  width: 100%;
-}
-
-.image {
-  object-fit: contain;
+.body.bodyMd {
+  font-size: 16px;
 }
 
 /* Tablet: 800px ~ 1279px */
@@ -91,14 +111,8 @@
     padding: 80px 48px;
   }
 
-  .textColumn {
-    width: 342px;
-    flex-shrink: 0;
-    flex: unset;
-  }
-
-  .textBlock {
-    width: 100%;
+  .container.compact {
+    padding: 32px 48px;
   }
 
   .subtitle {
@@ -120,10 +134,17 @@
 
 /* Mobile: ≤799px */
 @media (max-width: 799px) {
-  .container {
+  .container,
+  .container.compact,
+  .container.reverse {
     flex-direction: column;
     gap: 32px;
     padding: 48px 20px;
+  }
+
+  .imageColumn {
+    width: 100%;
+    order: 2;
   }
 
   .textColumn {
@@ -152,9 +173,14 @@
   .body {
     font-size: 16px;
   }
+}
 
-  .imageColumn {
-    width: 100%;
-    order: 2;
-  }
+/* Japanese layout fixes */
+:global(.locale-ja) .subtitle,
+:global(.locale-ja) .title,
+:global(.locale-ja) .body {
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: anywhere;
+  letter-spacing: 0;
 }

@@ -73,7 +73,7 @@
 .title {
   font-size: 40px;
   font-weight: 600;
-  color: #ff6900;
+  color: var(--color-accent);
   line-height: 32px;
   font-family: var(--font-pretendard), sans-serif;
   word-break: keep-all;
