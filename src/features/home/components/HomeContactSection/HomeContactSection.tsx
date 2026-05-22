@@ -13,11 +13,12 @@ export async function HomeContactSection() {
     <section className={styles.section}>
       <div className={styles.imageWrapper}>
         <Image
-          src="/images/section14-contact.png"
+          src="/images/section-contact.png"
           alt={t('imageAlt')}
           width={2197}
           height={1702}
           className={styles.mockupImage}
+          priority
         />
       </div>
 

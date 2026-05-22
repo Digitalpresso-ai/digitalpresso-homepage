@@ -13,7 +13,7 @@
   padding: 48px 64px;
 }
 
-/* 텍스트가 LEFT, 이미지가 RIGHT */
+/* 이미지가 LEFT, 텍스트가 RIGHT */
 .textColumn {
   flex: 1;
   display: flex;

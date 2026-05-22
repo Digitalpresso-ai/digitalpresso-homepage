@@ -1,6 +1,4 @@
-// src/features/home/components/HomeHero/HomeHero.tsx
-
-import Image from 'next/image';
+import Image, { getImageProps } from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import styles from './HomeHero.module.css';
@@ -8,40 +6,56 @@ import styles from './HomeHero.module.css';
 export async function HomeHero() {
   const t = await getTranslations('home.hero');
 
+  const common = { alt: '', quality: 90, sizes: '100vw' } as const;
+  const { props: { srcSet: desktopSrcSet, ...desktopRest } } = getImageProps({
+    ...common,
+    src: '/images/bg_main_hero.png',
+    width: 2560,
+    height: 1048,
+    priority: true,
+  });
+  const { props: { srcSet: tabletSrcSet } } = getImageProps({
+    ...common,
+    src: '/images/bg_main_hero_tablet.png',
+    width: 1600,
+    height: 1048,
+  });
+  const { props: { srcSet: mobileSrcSet } } = getImageProps({
+    ...common,
+    src: '/images/bg_main_hero_mobile.png',
+    width: 640,
+    height: 1278,
+  });
+
   return (
     <section className={styles.section}>
+      <picture className={styles.bgPicture}>
+        <source media="(max-width: 799px)" srcSet={mobileSrcSet} />
+        <source media="(max-width: 1279px)" srcSet={tabletSrcSet} />
+        {/* eslint-disable-next-line jsx-a11y/alt-text */}
+        <img {...desktopRest} srcSet={desktopSrcSet} className={styles.bg} />
+      </picture>
+      <div className={styles.overlay} aria-hidden />
       <div className={styles.inner}>
         <div className={styles.content}>
           <div className={styles.textGroup}>
-            <h1 className={styles.heading}>{t('heading')}</h1>
-            <div className={styles.logoWrapper}>
-              <Image
-                src="/images/renamedp_logo_eng.svg"
-                alt={t('logoAlt')}
-                width={370}
-                height={86}
-                sizes="(max-width: 800px) 272px, (max-width: 1279px) 280px, 370px"
-              />
+            <div className={styles.headerContainer}>
+              <h1 className={styles.heading}>{t('heading')}</h1>
+              <div className={styles.logoWrapper}>
+                <Image
+                  src="/images/logos/dp_logo_eng_white.svg"
+                  alt={t('logoAlt')}
+                  width={370}
+                  height={64}
+                  priority
+                />
+              </div>
             </div>
+            <p className={styles.body}>{t('body')}</p>
           </div>
-          <p className={styles.body}>{t('body')}</p>
           <Link href="/contact" className={styles.ctaButton}>
             {t('ctaButton')}
           </Link>
-        </div>
-
-        <div className={styles.imageColumn}>
-          <div className={styles.imageWrapper}>
-            <Image
-              src="/images/hero-worker.png"
-              alt={t('imageAlt')}
-              width={576}
-              height={486}
-              sizes="(max-width: 799px) 100vw, (max-width: 1279px) 336px, 576px"
-              className={styles.heroImage}
-              priority
-            />
-          </div>
         </div>
       </div>
     </section>

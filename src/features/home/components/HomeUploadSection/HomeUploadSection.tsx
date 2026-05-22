@@ -10,23 +10,23 @@ export async function HomeUploadSection() {
   return (
     <section className={styles.section}>
       <div className={styles.container}>
+        <div className={styles.imageColumn}>
+          <div className={styles.imageWrapper}>
+            <Image
+              src="/images/section-upload.png"
+              alt={t('imageAlt')}
+              fill
+              className={styles.image}
+              loading="lazy"
+            />
+          </div>
+        </div>
         <div className={styles.textColumn}>
           <div className={styles.textBlock}>
             <p className={styles.subtitle}>{t('subtitle')}</p>
             <h2 className={styles.title}>{t('title')}</h2>
             <p className={styles.body}>{t('body1')}</p>
             <p className={styles.body}>{t('body2')}</p>
-          </div>
-        </div>
-        <div className={styles.imageColumn}>
-          <div className={styles.imageWrapper}>
-            <Image
-              src="/images/section6-upload.png"
-              alt={t('imageAlt')}
-              fill
-              className={styles.image}
-              loading="lazy"
-            />
           </div>
         </div>
       </div>

@@ -6,7 +6,7 @@ import styles from './HomeProductSection.module.css';
 
 const FEATURE_IMAGES = [
   {
-    src: '/images/section4-checklist.png',
+    src: '/images/section-checklist.png',
     aspectWidth: 480,
     aspectHeight: 634,
   },

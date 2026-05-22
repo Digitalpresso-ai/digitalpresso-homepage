@@ -1,0 +1,179 @@
+.section {
+  position: relative;
+  background: #c6d6eb;
+  overflow: hidden;
+}
+
+.background {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+.backgroundImage {
+  object-fit: cover;
+  object-position: center 30%;
+  mix-blend-mode: soft-light;
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  padding: 80px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.heading {
+  width: 100%;
+  margin: 0;
+  font-family: var(--font-noto-sans-kr), sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 48px;
+  color: var(--color-heading);
+  text-align: left;
+  word-break: keep-all;
+}
+
+.accent {
+  color: #193cb8;
+}
+
+.cardList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  align-items: stretch;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1.301px solid #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  min-width: 0;
+}
+
+.cardTop {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.cardHeading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.cardTitle {
+  margin: 0;
+  font-family: var(--font-pretendard), var(--font-noto-sans-kr), sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  color: #193cb8;
+  word-break: keep-all;
+}
+
+.cardMetric {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.metricValue {
+  font-family: var(--font-pretendard), var(--font-noto-sans-kr), sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 40px;
+  color: #193cb8;
+  white-space: nowrap;
+}
+
+.metricSuffixLarge {
+  font-family: var(--font-pretendard), var(--font-noto-sans-kr), sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 40px;
+  color: #193cb8;
+  white-space: nowrap;
+}
+
+.metricSuffixSmall {
+  font-family: var(--font-pretendard), var(--font-noto-sans-kr), sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+  color: #4a5565;
+  white-space: nowrap;
+}
+
+.metricArrow {
+  color: #193cb8;
+  align-self: center;
+}
+
+.cardDescription {
+  margin: 0;
+  font-family: var(--font-pretendard), var(--font-noto-sans-kr), sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #1e2939;
+  word-break: keep-all;
+}
+
+/* ── Tablet (800px ~ 1279px) ──
+   3-column grid retained; within each card the metric stacks below the title. */
+
+@media (min-width: 800px) and (max-width: 1279px) {
+  .inner {
+    padding: 48px 64px;
+  }
+
+  .cardTop {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cardHeading {
+    width: 100%;
+  }
+}
+
+/* ── Mobile (≤799px) ──
+   Single column, cards stack vertically. */
+
+@media (max-width: 799px) {
+  .inner {
+    padding: 48px 20px;
+  }
+
+  .cardList {
+    grid-template-columns: 1fr;
+  }
+
+  .cardTop {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cardHeading {
+    width: 100%;
+  }
+}
