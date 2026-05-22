@@ -557,18 +557,23 @@
       "bodyLine1": "Projects that solve customer challenges and create value,",
       "bodyLine2": "and the stories of companies that joined us on that journey."
     },
-    "service": {
-      "eyebrow": "Rename DP Service Logic",
-      "heading": "Easy site photo management with instant capture, input, and save",
-      "body": "Automatically recognizes structure numbers and stores metadata such as location, time, and worker information at the moment of capture, turning photos directly into structured data.",
-      "imageAlt": "Rename DP service logic workflow"
+    "railway": {
+      "heading": "Overseas Rail Construction Validation",
+      "bodyLine1": "Led by the Korea Agency for Infrastructure Technology Advancement (KAIA), we are running on-site validation with Deutsche Bahn, operator of one of the world's most advanced rail infrastructures.",
+      "bodyLine2": "We continue to demonstrate both public-sector collaboration capability and global technology validation while meeting the most demanding international standards.",
+      "imageAlt": "Overseas rail construction validation site"
     },
-    "kepco": {
-      "eyebrow": "KEPCO Case",
-      "eyebrowSub": "w/ Rename DP",
-      "heading": "ERP optimized for inventory efficiency and financial flow visibility",
-      "body": "Provides a dashboard that tracks material inbound/outbound and inventory status in real time to clearly visualize material and financial flows.",
-      "imageAlt": "KEPCO case ERP dashboard screen"
+    "utilityPole": {
+      "heading": "Utility Pole Construction Validation",
+      "bodyLine1": "We validated a core data solution for efficient asset management at the power infrastructure construction sites of KEPCO, Korea's leading public power utility.",
+      "bodyLine2": "By precisely extracting unique \"numbering data\" during utility pole installation and systematically recording and digitizing distribution facility data, we dramatically improved the accuracy of real-time infrastructure monitoring and asset management.",
+      "imageAlt": "KEPCO utility pole construction validation site"
+    },
+    "aiAx": {
+      "heading": "AI·AX Validation Partnership",
+      "bodyLine1": "Through a strategic AI partnership agreement with Gwangju Metropolitan City, we are leading advanced AX validation projects in Korea.",
+      "bodyLine2": "Going beyond simple collaboration, we have secured a foundation of in-kind support and investment, driving digital transformation across the public sector.",
+      "imageAlt": "Gwangju AI partnership AX validation"
     },
     "electrical": {
       "logoAlt": "Rename DP",

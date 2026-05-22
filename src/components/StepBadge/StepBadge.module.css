@@ -53,7 +53,7 @@
 }
 
 .text {
-  font-family: var(--font-pretendard), var(--font-noto-sans-kr), sans-serif;
+  font-family: var(--font-pretendard), var(--font-pretendard), sans-serif;
   font-size: var(--badge-content-size);
   font-weight: 600;
   color: inherit;
@@ -62,7 +62,7 @@
 }
 
 .label {
-  font-family: var(--font-pretendard), var(--font-noto-sans-kr), sans-serif;
+  font-family: var(--font-pretendard), var(--font-pretendard), sans-serif;
   font-size: 16px;
   color: #1e2939;
   text-align: center;

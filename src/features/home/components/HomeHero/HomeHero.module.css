@@ -99,7 +99,7 @@
 
 /* ─── Body ───────────────────────────────────────────────── */
 .body {
-  font-family: var(--font-pretendard), var(--font-noto-sans-kr), sans-serif;
+  font-family: var(--font-pretendard), var(--font-pretendard), sans-serif;
   font-size: 24px;
   font-weight: 500;
   color: #fff;
@@ -166,7 +166,7 @@
   }
 
   .heading {
-    font-family: var(--font-pretendard), var(--font-noto-sans-kr), sans-serif;
+    font-family: var(--font-pretendard), var(--font-pretendard), sans-serif;
     font-size: 24px;
     font-weight: 600;
     line-height: 32px;

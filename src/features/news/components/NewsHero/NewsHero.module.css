@@ -40,7 +40,7 @@
 
 /* ─── Label ─────────────────────────────────────────────── */
 .label {
-  font-family: var(--font-noto-sans-kr), sans-serif;
+  font-family: var(--font-pretendard), sans-serif;
   font-size: 28px;
   font-weight: 600;
   line-height: 48px;
@@ -51,7 +51,7 @@
 
 /* ─── Heading ───────────────────────────────────────────── */
 .heading {
-  font-family: var(--font-noto-sans-kr), sans-serif;
+  font-family: var(--font-pretendard), sans-serif;
   font-size: 40px;
   font-weight: 600;
   color: #ffffff;
@@ -62,7 +62,7 @@
 
 /* ─── Subtitle ──────────────────────────────────────────── */
 .subtitle {
-  font-family: var(--font-noto-sans-kr), sans-serif;
+  font-family: var(--font-pretendard), sans-serif;
   font-size: 14px;
   font-weight: 400;
   color: rgba(255, 255, 255, 0.85);
