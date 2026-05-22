@@ -117,13 +117,13 @@ body {
   overflow-x: clip;
   color: var(--foreground);
   background: var(--background);
-  font-family: var(--font-noto-sans-kr), Arial, Helvetica, sans-serif;
+  font-family: var(--font-pretendard), Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 .locale-ja {
-  font-family: var(--font-noto-sans-jp), var(--font-noto-sans-kr), Arial, Helvetica, sans-serif;
+  font-family: var(--font-noto-sans-jp), var(--font-pretendard), Arial, Helvetica, sans-serif;
 }
 
 /* Japanese locale typography guardrails:

@@ -19,8 +19,8 @@ const SIZE_CONFIG = {
     inner: 36,
     border: 1.125,
     padding: 3,
-    arcRadius: 22,
-    arcStroke: 1.5,
+    arcRadius: 23.5,
+    arcStroke: 1.125,
     contentFontSize: 16,
   },
   large: {

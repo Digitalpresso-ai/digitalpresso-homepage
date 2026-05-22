@@ -6,7 +6,7 @@
   align-items: center;
   gap: 64px;
   padding: 160px 64px;
-  background: linear-gradient(to bottom, #eff6ff, #bedbff);
+  background: linear-gradient(to bottom, #ffffff, #daebff);
   width: 100%;
 }
 
@@ -42,7 +42,7 @@
 }
 
 .heading {
-  font-family: 'Noto Sans KR', 'Noto Sans', sans-serif;
+  font-family: 'Pretendard', 'Noto Sans', sans-serif;
   font-weight: 600;
   font-size: 40px;
   line-height: 1.4;
@@ -72,7 +72,7 @@
 }
 
 .contactText {
-  font-family: 'Noto Sans KR', 'Noto Sans', sans-serif;
+  font-family: 'Pretendard', 'Noto Sans', sans-serif;
   font-weight: 400;
   font-size: 24px;
   line-height: 1.45;
@@ -90,7 +90,7 @@
   padding: 12px 32px;
   background: #ffffff;
   border-radius: 4px;
-  font-family: 'Noto Sans KR', 'Noto Sans', sans-serif;
+  font-family: 'Pretendard', 'Noto Sans', sans-serif;
   font-weight: 600;
   font-size: 28px;
   line-height: 48px;
