@@ -48,3 +48,7 @@ export async function deleteArticle(id: string) {
 export async function uploadArticleDraft(input: UploadDraftInput) {
   return new UploadDraftUsecase(makeRepo()).execute(input);
 }
+
+export async function getArticleCount(category?: string): Promise<number> {
+  return makeRepo().count(category);
+}

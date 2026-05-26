@@ -1,12 +1,16 @@
-// app/[locale]/news/page.tsx
-
 import type { Metadata } from 'next';
+import {
+  QueryClient,
+  dehydrate,
+  HydrationBoundary,
+} from '@tanstack/react-query';
 import { getTranslations } from 'next-intl/server';
 import { NewsHero } from '@/src/features/news/components/NewsHero/NewsHero';
-import { NewsFilterBar } from '@/src/features/news/components/NewsFilterBar/NewsFilterBar';
-import { NewsArticleGrid } from '@/src/features/news/components/NewsArticleGrid/NewsArticleGrid';
-import { getPublishedArticles } from '@/backend/article/application/server-facade';
-import { mapCmsArticleToNewsArticle } from '@/src/features/news/mappers/article.mapper';
+import { NewsContent } from '@/src/features/news/components/NewsContent/NewsContent';
+import {
+  getPublishedArticles,
+  getArticleCount,
+} from '@/backend/article/application/server-facade';
 import type { NewsCategory } from '@/src/features/news/types/article.types';
 import { buildPageMetadata, isAppLocale, type AppLocale } from '@/lib/seo';
 
@@ -20,6 +24,8 @@ const VALID_CATEGORIES: NewsCategory[] = [
   'construction',
   'technology',
 ];
+
+const PAGE_SIZE = 12;
 
 const NEWS_META: Record<AppLocale, { title: string; description: string }> = {
   ko: {
@@ -56,48 +62,51 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function NewsPage({ params, searchParams }: Props) {
   const { locale } = await params;
   const { category, search } = await searchParams;
-  const t = await getTranslations('newsPage.hero');
+  await getTranslations({ locale, namespace: 'newsPage.hero' });
+
   const activeCategory: NewsCategory = VALID_CATEGORIES.includes(
     category as NewsCategory,
   )
     ? (category as NewsCategory)
     : 'company';
 
-  const entities = await getPublishedArticles();
-  const allArticles = entities.map((e) => mapCmsArticleToNewsArticle(e, locale));
-
-  // Filter by category
-  let filteredArticles = allArticles.filter((a) => a.category === activeCategory);
-
-  // Filter by search query
   const searchQuery = search?.trim() || '';
-  if (searchQuery) {
-    const q = searchQuery.toLowerCase();
-    filteredArticles = filteredArticles.filter(
-      (a) =>
-        a.title.toLowerCase().includes(q) ||
-        a.description.toLowerCase().includes(q),
-    );
-  }
+
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchInfiniteQuery({
+    queryKey: ['articles', 'infinite', { category: activeCategory }],
+    queryFn: () =>
+      getPublishedArticles({
+        category: activeCategory,
+        limit: PAGE_SIZE,
+        offset: 0,
+      }),
+    initialPageParam: 0,
+  });
+
+  const [companyCount, constructionCount, technologyCount] = await Promise.all([
+    getArticleCount('company'),
+    getArticleCount('construction'),
+    getArticleCount('technology'),
+  ]);
 
   const articleCounts = {
-    company: allArticles.filter((a) => a.category === 'company').length,
-    construction: allArticles.filter((a) => a.category === 'construction').length,
-    technology: allArticles.filter((a) => a.category === 'technology').length,
+    company: companyCount,
+    construction: constructionCount,
+    technology: technologyCount,
   };
 
   return (
     <main>
       <NewsHero />
-      <NewsFilterBar
-        activeCategory={activeCategory}
-        articleCounts={articleCounts}
-        searchQuery={searchQuery}
-      />
-      <NewsArticleGrid
-        articles={filteredArticles}
-        viewButtonText={t('viewButton')}
-      />
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <NewsContent
+          initialCategory={activeCategory}
+          articleCounts={articleCounts}
+          searchQuery={searchQuery}
+        />
+      </HydrationBoundary>
     </main>
   );
 }
