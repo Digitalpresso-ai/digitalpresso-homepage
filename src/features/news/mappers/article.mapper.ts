@@ -20,8 +20,8 @@ function getCategoryLabel(category: string, locale: string): string {
   return CATEGORY_LABELS[locale]?.[category] ?? CATEGORY_LABELS["ko"]?.[category] ?? "DP News";
 }
 
-function formatPublishedAt(isoDate: string): string {
-  const d = new Date(isoDate);
+function formatPublishedAt(date: Date | string): string {
+  const d = date instanceof Date ? date : new Date(date);
   const year = d.getFullYear();
   const month = String(d.getMonth() + 1).padStart(2, "0");
   return `${year}.${month}`;

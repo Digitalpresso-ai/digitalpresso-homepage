@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { localizedPath, type AppLocale } from '@/lib/seo';
 import { getSiteUrl } from '@/lib/site-url';
-import { getPublishedArticles } from '@/src/features/news/api/news.api';
+import { getPublishedArticles } from '@/backend/article/application/server-facade';
 
 const BASE_URL = getSiteUrl();
 const LOCALES: AppLocale[] = ['ko', 'en', 'ja'];
@@ -20,7 +20,8 @@ function toAbsoluteUrl(path: string): string {
   return `${BASE_URL}${path}`;
 }
 
-function parseCreatedAt(value: string): Date {
+function parseCreatedAt(value: Date | string): Date {
+  if (value instanceof Date) return value;
   const date = new Date(value);
   return Number.isNaN(date.getTime()) ? new Date() : date;
 }

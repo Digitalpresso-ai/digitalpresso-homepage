@@ -19,7 +19,6 @@ export function NewsArticleCard({ article, viewButtonText }: NewsArticleCardProp
             src={article.thumbnail}
             alt={article.mainImage.alt}
             fill
-            unoptimized
             style={{ objectFit: article.thumbnailFit || "cover" }}
             sizes="(max-width: 799px) 100vw, (max-width: 1279px) 50vw, 33vw"
           />
