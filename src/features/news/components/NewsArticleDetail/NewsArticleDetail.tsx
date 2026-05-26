@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import { getTranslations } from 'next-intl/server';
 import { ArticleNavLink } from '../ArticleNavLink/ArticleNavLink';
+import { ScrollToTopOnMount } from './ScrollToTopOnMount';
 import type { NewsArticle } from '../../types/article.types';
 import styles from './NewsArticleDetail.module.css';
 
@@ -34,6 +35,7 @@ export async function NewsArticleDetail({
 
   return (
     <div className={styles.container}>
+      <ScrollToTopOnMount />
       {/* Header: title + category */}
       <div className={styles.header}>
         <h2 className={styles.title}>
@@ -157,17 +159,17 @@ export async function NewsArticleDetail({
       <div className={styles.navigation}>
         {(nextArticle || prevArticle) && (
           <div className={styles.navLinks}>
-            {prevArticle && (
-              <ArticleNavLink
-                href={`/news/article/${prevArticle.id}`}
-                title={prevArticle.title}
-                direction="next"
-              />
-            )}
             {nextArticle && (
               <ArticleNavLink
                 href={`/news/article/${nextArticle.id}`}
                 title={nextArticle.title}
+                direction="next"
+              />
+            )}
+            {prevArticle && (
+              <ArticleNavLink
+                href={`/news/article/${prevArticle.id}`}
+                title={prevArticle.title}
                 direction="prev"
               />
             )}
