@@ -22,7 +22,7 @@
   text-align: center;
   line-height: 48px;
   margin: 0;
-  font-family: var(--font-noto-sans-kr), sans-serif;
+  font-family: var(--font-pretendard), sans-serif;
 }
 
 .accent {
@@ -71,7 +71,7 @@
   text-align: center;
   line-height: 48px;
   margin: 0;
-  font-family: var(--font-noto-sans-kr), sans-serif;
+  font-family: var(--font-pretendard), sans-serif;
 }
 
 .bodyText {
@@ -82,7 +82,7 @@
   line-height: 1.45;
   letter-spacing: -0.1px;
   margin: 0;
-  font-family: var(--font-noto-sans-kr), sans-serif;
+  font-family: var(--font-pretendard), sans-serif;
 }
 
 /* Tablet (800px ~ 1279px) */

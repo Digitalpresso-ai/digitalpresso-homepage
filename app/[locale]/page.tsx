@@ -1,19 +1,13 @@
 // app/[locale]/page.tsx
 
 import type { Metadata } from "next";
-import { HomeWorkReportsSection } from '@/src/features/home/components/HomeWorkReportsSection/HomeWorkReportsSection';
-import { HomeBlueprintSection } from '@/src/features/home/components/HomeBlueprintSection/HomeBlueprintSection';
-import { HomePricingSection } from '@/src/features/home/components/HomePricingSection/HomePricingSection';
 import { HomeContactSection } from '@/src/features/home/components/HomeContactSection/HomeContactSection';
-import { HomeDocumentsSection } from '@/src/features/home/components/HomeDocumentsSection/HomeDocumentsSection';
-import { HomeDashboardSection } from '@/src/features/home/components/HomeDashboardSection/HomeDashboardSection';
 import { HomeImpactSection } from '@/src/features/home/components/HomeImpactSection/HomeImpactSection';
 import { HomeHero } from '@/src/features/home/components/HomeHero/HomeHero';
 import { HomeMessengerSection } from '@/src/features/home/components/HomeMessengerSection/HomeMessengerSection';
 import { HomeNewsSection } from '@/src/features/home/components/HomeNewsSection/HomeNewsSection';
 import { HomeProductSection } from '@/src/features/home/components/HomeProductSection/HomeProductSection';
-import { HomeUploadSection } from '@/src/features/home/components/HomeUploadSection/HomeUploadSection';
-import { HomeDefectSection } from '@/src/features/home/components/HomeDefectSection/HomeDefectSection';
+import { HomeShowcaseSection } from '@/src/features/home/components/HomeShowcaseSection/HomeShowcaseSection';
 import { buildPageMetadata, isAppLocale, type AppLocale } from '@/lib/seo';
 
 interface HomePageProps {
@@ -61,14 +55,50 @@ export default function HomePage() {
       <HomeNewsSection />
       <HomeImpactSection />
       <HomeProductSection />
-      <HomeUploadSection />
-      <HomeDefectSection />
+      <HomeShowcaseSection
+        namespace="home.upload"
+        imageSrc="/images/section-upload.png"
+        imageAspectRatio="480 / 634"
+        variant="compact"
+      />
+      <HomeShowcaseSection
+        namespace="home.defect"
+        imageSrc="/images/section-defect.png"
+        imageAspectRatio="480 / 634"
+        variant="compact"
+        reverse
+      />
       <HomeMessengerSection />
-      <HomeDashboardSection />
-      <HomeBlueprintSection />
-      <HomeDocumentsSection />
-      <HomeWorkReportsSection />
-      <HomePricingSection />
+      <HomeShowcaseSection
+        namespace="home.dashboard"
+        imageSrc="/images/section-dashboard.png"
+        imageAspectRatio="564 / 407"
+        background="#ebf2ff"
+        reverse
+      />
+      <HomeShowcaseSection
+        namespace="home.blueprint"
+        imageSrc="/images/section-blueprint.png"
+        imageAspectRatio="564 / 318"
+        background="#eef3fb"
+        objectFit="cover"
+      />
+      <HomeShowcaseSection
+        namespace="home.documents"
+        imageSrc="/images/section-documents.png"
+        imageAspectRatio="564 / 382"
+        background="#eef3fb"
+        objectFit="cover"
+        bodySize="md"
+        reverse
+      />
+      <HomeShowcaseSection
+        namespace="home.workReports"
+        imageSrc="/images/section-work-reports.png"
+        imageAspectRatio="564 / 350"
+        background="#eef3fb"
+        objectFit="cover"
+      />
       <HomeContactSection />
     </main>
   );

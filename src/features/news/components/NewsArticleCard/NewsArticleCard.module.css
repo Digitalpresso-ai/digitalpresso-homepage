@@ -62,7 +62,7 @@
   justify-content: center;
   background: #193cb8;
   color: #ffffff;
-  font-family: var(--font-noto-sans-kr), sans-serif;
+  font-family: var(--font-pretendard), sans-serif;
   font-size: 16px;
   font-weight: 700;
   line-height: 24px;
@@ -79,7 +79,7 @@
 }
 
 .title {
-  font-family: var(--font-noto-sans-kr), sans-serif;
+  font-family: var(--font-pretendard), sans-serif;
   font-size: 16px;
   font-weight: 700;
   color: #000;
@@ -93,7 +93,7 @@
 }
 
 .description {
-  font-family: var(--font-noto-sans-kr), sans-serif;
+  font-family: var(--font-pretendard), sans-serif;
   font-size: 16px;
   font-weight: 400;
   color: #000;

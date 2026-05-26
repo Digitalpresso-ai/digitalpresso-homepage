@@ -20,8 +20,8 @@
   color: var(--color-heading);
   line-height: 48px;
   margin: 0;
+  max-width: 818px;
   word-break: keep-all;
-  white-space: nowrap;
 }
 
 /* 각 행: 이미지 2개 나란히, gap-24 */

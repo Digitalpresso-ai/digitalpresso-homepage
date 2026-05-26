@@ -154,10 +154,10 @@ export default function Header() {
       <div className={styles.inner}>
         <Link href="/" className={styles.logoLink} onClick={closeMobileMenu}>
           <Image
-            src="/images/renamedp_logo_eng.svg"
+            src="/images/logos/dp_logo_eng_navy.svg"
             alt={t('logoAlt')}
-            width={174}
-            height={40}
+            width={156}
+            height={55}
             className={styles.logo}
             priority
           />

@@ -25,7 +25,7 @@
   border: none;
   cursor: pointer;
   padding: 4px 0;
-  font-family: var(--font-noto-sans-kr), sans-serif;
+  font-family: var(--font-pretendard), sans-serif;
   font-size: 16px;
   font-weight: 600;
   color: #6a7282;
@@ -45,7 +45,7 @@
   cursor: pointer;
   padding: 4px 12px;
   border-radius: 9999px;
-  font-family: var(--font-noto-sans-kr), sans-serif;
+  font-family: var(--font-pretendard), sans-serif;
   font-size: 18px;
   font-weight: 600;
   color: #1e2939;
@@ -80,7 +80,7 @@
   transform: translateY(-50%);
   background: #ffffff;
   padding: 0 4px;
-  font-family: var(--font-pretendard), var(--font-noto-sans-kr), sans-serif;
+  font-family: var(--font-pretendard), var(--font-pretendard), sans-serif;
   font-size: 14px;
   font-weight: 400;
   color: #1e2939;
@@ -104,7 +104,7 @@
 }
 
 .searchInput {
-  font-family: var(--font-pretendard), var(--font-noto-sans-kr), sans-serif;
+  font-family: var(--font-pretendard), var(--font-pretendard), sans-serif;
   font-size: 16px;
   font-weight: 400;
   color: #1e2939;

@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import GAPageTracker from "@/components/analytics/GAPageTracker";
 import { getSiteUrl } from "@/lib/site-url";
+import QueryProvider from "@/src/providers/QueryProvider";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -73,6 +74,11 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  verification: {
+    other: {
+      "naver-site-verification": "9e7914b79e8352bb6479811768d5c77878fa9c03",
+    },
+  },
 };
 
 export default function RootLayout({
@@ -87,7 +93,7 @@ export default function RootLayout({
       >
         <GoogleAnalytics />
         <GAPageTracker />
-        {children}
+        <QueryProvider>{children}</QueryProvider>
       </body>
     </html>
   );
