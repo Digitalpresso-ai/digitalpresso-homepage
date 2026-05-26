@@ -1,0 +1,167 @@
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* ─── Shimmer base ─────────────────────────────────────── */
+.hero,
+.heroLabel,
+.heroHeading,
+.heroSubtitle,
+.tab,
+.searchBox,
+.cardImage,
+.cardTitle,
+.cardDesc {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite ease-in-out;
+  border-radius: 6px;
+}
+
+/* ─── Hero skeleton ────────────────────────────────────── */
+.hero {
+  padding: 80px 64px;
+  border-radius: 0;
+}
+
+.heroInner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.heroLabel {
+  width: 120px;
+  height: 28px;
+}
+
+.heroHeading {
+  width: 360px;
+  height: 48px;
+}
+
+.heroSubtitle {
+  width: 280px;
+  height: 20px;
+}
+
+/* ─── Filter bar skeleton ──────────────────────────────── */
+.filterBar {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px 64px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tabs {
+  display: flex;
+  gap: 12px;
+}
+
+.tab {
+  width: 80px;
+  height: 36px;
+  border-radius: 18px;
+}
+
+.searchBox {
+  width: 200px;
+  height: 36px;
+}
+
+/* ─── Grid skeleton ────────────────────────────────────── */
+.grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 16px 64px 80px;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 20px;
+  column-gap: 32px;
+}
+
+.card {
+  width: calc((100% - 64px) / 3);
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.cardImage {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.cardContent {
+  padding: 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cardTitle {
+  width: 80%;
+  height: 20px;
+}
+
+.cardDesc {
+  width: 60%;
+  height: 16px;
+}
+
+/* ─── Tablet (800px – 1279px) ───────────────────────────── */
+@media (min-width: 800px) and (max-width: 1279px) {
+  .hero {
+    padding: 64px 40px;
+  }
+
+  .filterBar {
+    padding: 24px 40px 0;
+  }
+
+  .grid {
+    padding: 16px 40px 64px;
+  }
+
+  .card {
+    width: calc((100% - 32px) / 2);
+  }
+}
+
+/* ─── Mobile (≤ 799px) ──────────────────────────────────── */
+@media (max-width: 799px) {
+  .hero {
+    padding: 48px 20px;
+  }
+
+  .filterBar {
+    padding: 24px 20px 0;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .searchBox {
+    width: 100%;
+  }
+
+  .grid {
+    padding: 24px 20px 64px;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .card {
+    width: 100%;
+  }
+}

@@ -1,5 +1,8 @@
 import Link from 'next/link';
-import { getArticles, getArticleStats } from '@/src/features/admin/actions/article.actions';
+import {
+  getPublishedArticles,
+  getArticleStats,
+} from '@/backend/article/application/server-facade';
 import {
   getOverviewMetrics,
   getPageViewsTimeline,
@@ -31,7 +34,7 @@ async function fetchGaData() {
 export default async function DashboardPage() {
   const [articleStats, articles, ga] = await Promise.all([
     getArticleStats(),
-    getArticles(),
+    getPublishedArticles(),
     fetchGaData(),
   ]);
   const recentArticles = articles.slice(0, 5);
