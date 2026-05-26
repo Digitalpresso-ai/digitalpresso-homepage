@@ -7,19 +7,8 @@ export interface ArticleImage {
   height: number;
 }
 
-// CMS(Supabase) 엔티티 — DB 응답 기준
-export interface ArticleEntity {
-  id: string;
-  title: string;
-  title_en: string;
-  title_ja: string;
-  content: string;
-  content_en: string;
-  content_ja: string;
-  category: string;
-  created_at: string;
-  cover_img_url: string | null;
-}
+export type { ArticleEntity } from '@/backend/article/domain/entities/ArticleEntity';
+import type { ArticleEntity } from '@/backend/article/domain/entities/ArticleEntity';
 
 // 회사 소식 정적 데이터 기준
 export interface StaticCompanyArticle {

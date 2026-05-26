@@ -5,7 +5,7 @@ import { getTranslations } from 'next-intl/server';
 import { NewsHero } from '@/src/features/news/components/NewsHero/NewsHero';
 import { NewsFilterBar } from '@/src/features/news/components/NewsFilterBar/NewsFilterBar';
 import { NewsArticleGrid } from '@/src/features/news/components/NewsArticleGrid/NewsArticleGrid';
-import { getPublishedArticles } from '@/src/features/news/api/news.api';
+import { getPublishedArticles } from '@/backend/article/application/server-facade';
 import { mapCmsArticleToNewsArticle } from '@/src/features/news/mappers/article.mapper';
 import type { NewsCategory } from '@/src/features/news/types/article.types';
 import { buildPageMetadata, isAppLocale, type AppLocale } from '@/lib/seo';

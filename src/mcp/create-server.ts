@@ -4,7 +4,7 @@ import { join } from 'path'
 import { z } from 'zod'
 import { getScraps } from '@/src/services/notion.service'
 import { fetchArticleContent } from '@/src/services/crawler.service'
-import { uploadArticleDraft } from '@/src/services/article-upload.service'
+import { uploadArticleDraft } from '@/backend/article/application/server-facade'
 import { generateNewsletterDraft } from '@/src/services/draft-generator.service'
 
 const contentRoot = join(process.cwd(), 'content')

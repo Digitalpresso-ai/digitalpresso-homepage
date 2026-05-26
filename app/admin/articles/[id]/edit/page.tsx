@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
-import { getArticleForEdit, deleteArticle } from '@/src/features/admin/actions/article.actions';
+import { getArticleById } from '@/backend/article/application/server-facade';
 import ArticleEditor from '@/src/features/admin/components/ArticleEditor/ArticleEditor';
+import DeleteArticleButton from '@/src/features/admin/components/DeleteArticleButton/DeleteArticleButton';
 import styles from './page.module.css';
 
 interface Props {
@@ -9,7 +10,7 @@ interface Props {
 
 export default async function EditArticlePage({ params }: Props) {
   const { id } = await params;
-  const article = await getArticleForEdit(id);
+  const article = await getArticleById(id);
 
   if (!article) notFound();
 
@@ -17,24 +18,9 @@ export default async function EditArticlePage({ params }: Props) {
     <div className={styles.page}>
       <div className={styles.pageHeader}>
         <h1 className={styles.title}>아티클 수정</h1>
-        <DeleteButton id={id} />
+        <DeleteArticleButton id={id} className={styles.deleteBtn} />
       </div>
       <ArticleEditor article={article} />
     </div>
-  );
-}
-
-function DeleteButton({ id }: { id: string }) {
-  return (
-    <form
-      action={async () => {
-        'use server';
-        await deleteArticle(id);
-      }}
-    >
-      <button type="submit" className={styles.deleteBtn}>
-        삭제
-      </button>
-    </form>
   );
 }

@@ -6,7 +6,7 @@ import { NewsArticleDetail } from '@/src/features/news/components/NewsArticleDet
 import {
   getArticleById,
   getAdjacentArticles,
-} from '@/src/features/news/api/news.api';
+} from '@/backend/article/application/server-facade';
 import { mapCmsArticleToNewsArticle } from '@/src/features/news/mappers/article.mapper';
 import { buildPageMetadata, isAppLocale, type AppLocale } from '@/lib/seo';
 

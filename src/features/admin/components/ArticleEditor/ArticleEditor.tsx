@@ -8,12 +8,11 @@ import Placeholder from '@tiptap/extension-placeholder';
 import { DOMParser as PMDOMParser } from '@tiptap/pm/model';
 import type { EditorView } from '@tiptap/pm/view';
 import { marked } from 'marked';
-import { useEffect, useRef, useState, useTransition, type ChangeEvent } from 'react';
-import Image from 'next/image';
+import { useRef, useState, useTransition, type ChangeEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient as createBrowserClient } from '@/lib/supabase/client';
-import { createArticleShell, updateArticle } from '@/src/features/admin/actions/article.actions';
-import type { ArticleEntity, ArticleFormData, NewsCategory } from '@/src/features/news/types/article.types';
+import { useCreateArticle, useUpdateArticle } from '@/src/hooks/mutations/useArticleMutations';
+import type { ArticleEntity, NewsCategory } from '@/src/features/news/types/article.types';
 import styles from './ArticleEditor.module.css';
 
 interface Props {
@@ -59,7 +58,6 @@ export default function ArticleEditor({ article }: Props) {
   const coverFileInputRef = useRef<HTMLInputElement | null>(null);
   const editorRef = useRef<Editor | null>(null);
   const [pendingImages, setPendingImages] = useState<Record<string, File>>({});
-  // 대표 이미지: 기존 저장된 URL 또는 새로 선택한 파일
   const [coverImageUrl, setCoverImageUrl] = useState<string | null>(article?.cover_img_url ?? null);
   const [pendingCoverFile, setPendingCoverFile] = useState<File | null>(null);
   const [pendingCoverPreview, setPendingCoverPreview] = useState<string | null>(null);
@@ -73,6 +71,9 @@ export default function ArticleEditor({ article }: Props) {
   const [category, setCategory] = useState<NewsCategory>(
     (article?.category as NewsCategory) ?? 'company'
   );
+
+  const createArticleMutation = useCreateArticle();
+  const updateArticleMutation = useUpdateArticle(article?.id ?? '');
 
   const ImageWithTemp = TiptapImage.extend({
     addAttributes() {
@@ -171,7 +172,6 @@ export default function ArticleEditor({ article }: Props) {
     },
   });
 
-  // 대표 이미지 파일 선택 핸들러
   const handleCoverFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
@@ -257,11 +257,16 @@ export default function ArticleEditor({ article }: Props) {
         let articleId = article?.id;
 
         if (!articleId) {
-          const created = await createArticleShell(title, category);
-          if (created && 'error' in created) {
-            setServerError(created.error);
-            return;
-          }
+          const created = await createArticleMutation.mutateAsync({
+            title,
+            category,
+            title_en: '',
+            title_ja: '',
+            content: '',
+            content_en: '',
+            content_ja: '',
+            cover_img_url: null,
+          });
           articleId = created.id;
           createdArticleId = created.id;
         }
@@ -269,7 +274,6 @@ export default function ArticleEditor({ article }: Props) {
         let nextContent = content;
         let resolvedCoverUrl: string | null = coverImageUrl;
 
-        // 새로 선택한 대표 이미지 파일을 Supabase에 업로드
         if (pendingCoverFile) {
           const objectKey = generateId();
           const ext = pendingCoverFile.name.split('.').pop() || 'png';
@@ -307,12 +311,12 @@ export default function ArticleEditor({ article }: Props) {
             const ext = file.name.split('.').pop() || 'png';
             const filePath = `articles/${articleId}/${objectKey}.${ext}`;
 
-            const { error: uploadError } = await supabase
+            const { error: storageError } = await supabase
               .storage
               .from('article-images')
               .upload(filePath, file, { upsert: false, contentType: file.type });
 
-            if (uploadError) throw uploadError;
+            if (storageError) throw storageError;
 
             const { data: publicData } = supabase
               .storage
@@ -332,9 +336,10 @@ export default function ArticleEditor({ article }: Props) {
               imgEl.src = URL.createObjectURL(file);
             });
 
-            const { error: insertError } = await supabase
-              .from('article_images')
-              .insert({
+            const res = await fetch('/api/article-images', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
                 article_id: articleId,
                 image_url: imageUrl,
                 alt: file.name,
@@ -342,9 +347,13 @@ export default function ArticleEditor({ article }: Props) {
                 height: dimensions.height,
                 caption: null,
                 sort_order: 0,
-              });
+              }),
+            });
 
-            if (insertError) throw insertError;
+            if (!res.ok) {
+              const detail = await res.json().catch(() => null);
+              throw new Error(detail?.error ?? '이미지 메타데이터 저장에 실패했습니다.');
+            }
 
             img.setAttribute('src', imageUrl);
             img.removeAttribute('data-temp-id');
@@ -353,7 +362,7 @@ export default function ArticleEditor({ article }: Props) {
           nextContent = doc.body.innerHTML;
         }
 
-        const formData: ArticleFormData = {
+        await updateArticleMutation.mutateAsync({
           title,
           title_en: titleEn,
           title_ja: titleJa,
@@ -362,14 +371,7 @@ export default function ArticleEditor({ article }: Props) {
           content_ja: editorJa?.getHTML() ?? '',
           cover_img_url: resolvedCoverUrl,
           category,
-        };
-
-        const result = await updateArticle(articleId, formData);
-
-        if (result && 'error' in result) {
-          setServerError(result.error);
-          return;
-        }
+        });
 
         if (editor && nextContent !== content) {
           editor.commands.setContent(nextContent);
@@ -383,18 +385,15 @@ export default function ArticleEditor({ article }: Props) {
         setSaveSuccess(true);
         setTimeout(() => setSaveSuccess(false), 3000);
 
-        if (!isEdit) {
-          router.replace(`/admin/articles/${articleId}/edit`);
+        if (!isEdit && createdArticleId) {
+          router.replace(`/admin/articles/${createdArticleId}/edit`);
         }
       } catch (error) {
         const message = error instanceof Error ? error.message : '저장에 실패했습니다.';
         setUploadError(message);
 
         if (!isEdit && createdArticleId) {
-          await createBrowserClient()
-            .from('articles')
-            .delete()
-            .eq('id', createdArticleId);
+          await fetch(`/api/articles/${createdArticleId}`, { method: 'DELETE' });
         }
       } finally {
         setIsUploading(false);

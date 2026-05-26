@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { getArticles } from '@/src/features/admin/actions/article.actions';
+import { getPublishedArticles } from '@/backend/article/application/server-facade';
 import styles from './page.module.css';
 
 const CATEGORY_FILTERS = [
@@ -21,7 +21,7 @@ interface Props {
 export default async function ArticlesPage({ searchParams }: Props) {
   const { category } = await searchParams;
   const activeFilter = category ?? 'company';
-  const articles = await getArticles(activeFilter);
+  const articles = await getPublishedArticles({ category: activeFilter });
 
   return (
     <div className={styles.page}>
