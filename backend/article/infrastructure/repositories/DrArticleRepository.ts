@@ -1,4 +1,4 @@
-import { and, eq, desc, lt, gt, ilike, count as drizzleCount } from 'drizzle-orm';
+import { and, eq, ne, desc, lt, gt, ilike, count as drizzleCount, sql } from 'drizzle-orm';
 import type { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
 import type * as schema from '@/backend/shared/db/schema';
 import { articles } from '@/backend/shared/db/schema';
@@ -17,7 +17,18 @@ export class DrArticleRepository implements IArticleRepository {
     const where = conditions.length ? and(...conditions) : undefined;
 
     return this.db
-      .select()
+      .select({
+        id: articles.id,
+        title: articles.title,
+        title_en: articles.title_en,
+        title_ja: articles.title_ja,
+        content: sql<string>`left(${articles.content}, 500)`,
+        content_en: sql<string>`left(${articles.content_en}, 500)`,
+        content_ja: sql<string>`left(${articles.content_ja}, 500)`,
+        cover_img_url: articles.cover_img_url,
+        category: articles.category,
+        created_at: articles.created_at,
+      })
       .from(articles)
       .where(where)
       .orderBy(desc(articles.created_at))
@@ -35,7 +46,7 @@ export class DrArticleRepository implements IArticleRepository {
   }
 
   async findAdjacentByCategory(
-    _id: string,
+    id: string,
     category: string,
     createdAt: Date
   ): Promise<{ prev: ArticleEntity | null; next: ArticleEntity | null }> {
@@ -43,13 +54,25 @@ export class DrArticleRepository implements IArticleRepository {
       this.db
         .select()
         .from(articles)
-        .where(and(eq(articles.category, category), lt(articles.created_at, createdAt)))
+        .where(
+          and(
+            eq(articles.category, category),
+            ne(articles.id, id),
+            lt(articles.created_at, createdAt)
+          )
+        )
         .orderBy(desc(articles.created_at))
         .limit(1),
       this.db
         .select()
         .from(articles)
-        .where(and(eq(articles.category, category), gt(articles.created_at, createdAt)))
+        .where(
+          and(
+            eq(articles.category, category),
+            ne(articles.id, id),
+            gt(articles.created_at, createdAt)
+          )
+        )
         .orderBy(articles.created_at)
         .limit(1),
     ]);
@@ -73,6 +96,14 @@ export class DrArticleRepository implements IArticleRepository {
       .from(articles)
       .where(where);
     return Number(rows[0]?.value ?? 0);
+  }
+
+  async countByCategories(): Promise<Record<string, number>> {
+    const rows = await this.db
+      .select({ category: articles.category, value: drizzleCount() })
+      .from(articles)
+      .groupBy(articles.category);
+    return Object.fromEntries(rows.map((r) => [r.category, Number(r.value)]));
   }
 
   async create(data: Omit<ArticleEntity, 'id' | 'created_at'>): Promise<ArticleEntity> {

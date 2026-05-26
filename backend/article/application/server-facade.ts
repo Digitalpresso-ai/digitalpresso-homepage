@@ -52,3 +52,7 @@ export async function uploadArticleDraft(input: UploadDraftInput) {
 export async function getArticleCount(category?: string): Promise<number> {
   return makeRepo().count(category);
 }
+
+export async function getArticleCounts(): Promise<Record<string, number>> {
+  return makeRepo().countByCategories();
+}

@@ -9,7 +9,7 @@ import { NewsHero } from '@/src/features/news/components/NewsHero/NewsHero';
 import { NewsContent } from '@/src/features/news/components/NewsContent/NewsContent';
 import {
   getPublishedArticles,
-  getArticleCount,
+  getArticleCounts,
 } from '@/backend/article/application/server-facade';
 import type { NewsCategory } from '@/src/features/news/types/article.types';
 import { buildPageMetadata, isAppLocale, type AppLocale } from '@/lib/seo';
@@ -74,27 +74,24 @@ export default async function NewsPage({ params, searchParams }: Props) {
 
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchInfiniteQuery({
-    queryKey: ['articles', 'infinite', { category: activeCategory }],
-    queryFn: () =>
-      getPublishedArticles({
-        category: activeCategory,
-        limit: PAGE_SIZE,
-        offset: 0,
-      }),
-    initialPageParam: 0,
-  });
-
-  const [companyCount, constructionCount, technologyCount] = await Promise.all([
-    getArticleCount('company'),
-    getArticleCount('construction'),
-    getArticleCount('technology'),
+  const [, counts] = await Promise.all([
+    queryClient.prefetchInfiniteQuery({
+      queryKey: ['articles', 'infinite', { category: activeCategory }],
+      queryFn: () =>
+        getPublishedArticles({
+          category: activeCategory,
+          limit: PAGE_SIZE,
+          offset: 0,
+        }),
+      initialPageParam: 0,
+    }),
+    getArticleCounts(),
   ]);
 
   const articleCounts = {
-    company: companyCount,
-    construction: constructionCount,
-    technology: technologyCount,
+    company: counts.company ?? 0,
+    construction: counts.construction ?? 0,
+    technology: counts.technology ?? 0,
   };
 
   return (
