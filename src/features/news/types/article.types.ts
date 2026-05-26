@@ -10,23 +10,6 @@ export interface ArticleImage {
 export type { ArticleEntity } from '@/backend/article/domain/entities/ArticleEntity';
 import type { ArticleEntity } from '@/backend/article/domain/entities/ArticleEntity';
 
-// 회사 소식 정적 데이터 기준
-export interface StaticCompanyArticle {
-  id: string;
-  title: string;
-  description: string;
-  category: NewsCategory;
-  categoryLabel: string;
-  publishedAt: string;
-  thumbnail: string;
-  thumbnailFit?: "cover" | "contain";
-  thumbnailBorder?: boolean;
-  mainImage: ArticleImage;
-  bodyImages: ArticleImage[];
-  bodyParagraphs: string[];
-  sourceUrl?: string;
-}
-
 // UI 공통 렌더링 타입
 export interface NewsArticle {
   id: string;
