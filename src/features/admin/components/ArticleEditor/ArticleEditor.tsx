@@ -73,7 +73,7 @@ export default function ArticleEditor({ article }: Props) {
   );
 
   const createArticleMutation = useCreateArticle();
-  const updateArticleMutation = useUpdateArticle(article?.id ?? '');
+  const updateArticleMutation = useUpdateArticle();
 
   const ImageWithTemp = TiptapImage.extend({
     addAttributes() {
@@ -363,14 +363,17 @@ export default function ArticleEditor({ article }: Props) {
         }
 
         await updateArticleMutation.mutateAsync({
-          title,
-          title_en: titleEn,
-          title_ja: titleJa,
-          content: nextContent,
-          content_en: editorEn?.getHTML() ?? '',
-          content_ja: editorJa?.getHTML() ?? '',
-          cover_img_url: resolvedCoverUrl,
-          category,
+          id: articleId,
+          body: {
+            title,
+            title_en: titleEn,
+            title_ja: titleJa,
+            content: nextContent,
+            content_en: editorEn?.getHTML() ?? '',
+            content_ja: editorJa?.getHTML() ?? '',
+            cover_img_url: resolvedCoverUrl,
+            category,
+          },
         });
 
         if (editor && nextContent !== content) {

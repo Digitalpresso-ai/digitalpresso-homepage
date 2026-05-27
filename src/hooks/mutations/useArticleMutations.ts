@@ -11,11 +11,12 @@ export function useCreateArticle() {
   });
 }
 
-export function useUpdateArticle(id: string) {
+export function useUpdateArticle() {
   const client = useQueryClient();
   return useMutation({
-    mutationFn: (body: Record<string, unknown>) => updateArticleApi(id, body),
-    onSuccess: () => {
+    mutationFn: ({ id, body }: { id: string; body: Record<string, unknown> }) =>
+      updateArticleApi(id, body),
+    onSuccess: (_, { id }) => {
       client.invalidateQueries({ queryKey: ['articles'] });
       client.invalidateQueries({ queryKey: ['article', id] });
     },
