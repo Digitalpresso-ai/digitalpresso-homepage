@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { getLocale, getTranslations } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
+import TrackedLink from '@/components/analytics/TrackedLink';
 import styles from "./ManufacturingHero.module.css";
 
 export async function ManufacturingHero() {
@@ -46,7 +46,7 @@ export async function ManufacturingHero() {
 
           <p className={styles.sub}>{t("body")}</p>
 
-          <Link href="/contact" className={styles.cta}>
+          <TrackedLink href="/contact" location="mfg_hero" className={styles.cta}>
             <span>{t("cta")}</span>
             <svg
               width={18}
@@ -60,7 +60,7 @@ export async function ManufacturingHero() {
             >
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
-          </Link>
+          </TrackedLink>
         </div>
       </div>
     </section>

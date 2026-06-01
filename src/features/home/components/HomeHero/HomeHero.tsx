@@ -1,6 +1,6 @@
 import Image, { getImageProps } from 'next/image';
 import { getTranslations } from 'next-intl/server';
-import { Link } from '@/i18n/navigation';
+import TrackedLink from '@/components/analytics/TrackedLink';
 import styles from './HomeHero.module.css';
 
 export async function HomeHero() {
@@ -53,9 +53,9 @@ export async function HomeHero() {
             </div>
             <p className={styles.body}>{t('body')}</p>
           </div>
-          <Link href="/contact" className={styles.ctaButton}>
+          <TrackedLink href="/contact" location="home_hero" className={styles.ctaButton}>
             {t('ctaButton')}
-          </Link>
+          </TrackedLink>
         </div>
       </div>
     </section>

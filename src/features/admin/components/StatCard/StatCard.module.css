@@ -1,0 +1,35 @@
+.card {
+  background: #fff;
+  border-radius: 10px;
+  padding: var(--spacing-5) var(--spacing-6);
+  border-top: 3px solid transparent;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.card_blue  { border-color: var(--color-brand); }
+.card_green { border-color: #38a169; }
+.card_gray  { border-color: #a0aec0; }
+
+.value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-heading);
+  line-height: 1;
+}
+
+.label {
+  font-size: 0.8125rem;
+  color: var(--color-body);
+}
+
+.delta {
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-top: var(--spacing-1);
+}
+
+.up      { color: #38a169; }
+.down    { color: #e53e3e; }
+.neutral { color: #a0aec0; }

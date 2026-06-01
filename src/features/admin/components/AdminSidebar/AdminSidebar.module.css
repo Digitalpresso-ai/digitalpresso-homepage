@@ -14,13 +14,12 @@
   padding: var(--spacing-6) var(--spacing-6) var(--spacing-4);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   gap: var(--spacing-1);
+  text-decoration: none;
 }
 
-.logoText {
-  font-size: 1.125rem;
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: -0.02em;
+.logoImage {
+  width: 150px;
+  height: auto;
 }
 
 .logoSub {
