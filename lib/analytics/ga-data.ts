@@ -330,6 +330,96 @@ export async function getConversions(days = 30): Promise<ConversionData[]> {
   }));
 }
 
+export interface DeviceStat { device: string; sessions: number; users: number; engagementRate: number }
+
+/** 기기별 현황 */
+export async function getDeviceBreakdown(days = 30): Promise<DeviceStat[]> {
+  const client = getClient();
+  const [response] = await client.runReport({
+    property: propertyId(),
+    dateRanges: [{ startDate: `${days}daysAgo`, endDate: 'today' }],
+    dimensions: [{ name: 'deviceCategory' }],
+    metrics: [{ name: 'sessions' }, { name: 'activeUsers' }, { name: 'engagementRate' }],
+    orderBys: [{ metric: { metricName: 'sessions' }, desc: true }],
+  });
+  return (response.rows ?? []).map(row => ({
+    device: row.dimensionValues?.[0].value ?? '',
+    sessions: Number(row.metricValues?.[0].value ?? 0),
+    users: Number(row.metricValues?.[1].value ?? 0),
+    engagementRate: Math.round(Number(row.metricValues?.[2].value ?? 0) * 100),
+  }));
+}
+
+export interface CountryStat { country: string; sessions: number; users: number }
+
+/** 국가별 상위 유입 */
+export async function getCountryBreakdown(days = 30, limit = 10): Promise<CountryStat[]> {
+  const client = getClient();
+  const [response] = await client.runReport({
+    property: propertyId(),
+    dateRanges: [{ startDate: `${days}daysAgo`, endDate: 'today' }],
+    dimensions: [{ name: 'country' }],
+    metrics: [{ name: 'sessions' }, { name: 'activeUsers' }],
+    orderBys: [{ metric: { metricName: 'sessions' }, desc: true }],
+    limit,
+  });
+  return (response.rows ?? []).map(row => ({
+    country: row.dimensionValues?.[0].value ?? '',
+    sessions: Number(row.metricValues?.[0].value ?? 0),
+    users: Number(row.metricValues?.[1].value ?? 0),
+  }));
+}
+
+export interface PageDetailStat {
+  path: string;
+  title: string;
+  pageViews: number;
+  sessions: number;
+  bounceRate: number;
+  engagementRate: number;
+  avgDuration: number;
+}
+
+export type PageSortMetric = 'screenPageViews' | 'bounceRate' | 'engagementRate' | 'userEngagementDuration';
+
+/** 페이지별 상세 지표 (정렬 기준 지정 가능) */
+export async function getPageDetails(
+  days = 30,
+  sortBy: PageSortMetric = 'screenPageViews',
+  limit = 20,
+): Promise<PageDetailStat[]> {
+  const client = getClient();
+  const [response] = await client.runReport({
+    property: propertyId(),
+    dateRanges: [{ startDate: `${days}daysAgo`, endDate: 'today' }],
+    dimensions: [{ name: 'pagePath' }, { name: 'pageTitle' }],
+    metrics: [
+      { name: 'screenPageViews' },
+      { name: 'sessions' },
+      { name: 'activeUsers' },
+      { name: 'bounceRate' },
+      { name: 'engagementRate' },
+      { name: 'userEngagementDuration' },
+    ],
+    orderBys: [{ metric: { metricName: sortBy }, desc: true }],
+    limit,
+  });
+
+  return (response.rows ?? []).map(row => {
+    const activeUsers = Number(row.metricValues?.[2].value ?? 0);
+    const duration    = Number(row.metricValues?.[5].value ?? 0);
+    return {
+      path:           row.dimensionValues?.[0].value ?? '',
+      title:          row.dimensionValues?.[1].value ?? '',
+      pageViews:      Number(row.metricValues?.[0].value ?? 0),
+      sessions:       Number(row.metricValues?.[1].value ?? 0),
+      bounceRate:     Math.round(Number(row.metricValues?.[3].value ?? 0) * 100),
+      engagementRate: Math.round(Number(row.metricValues?.[4].value ?? 0) * 100),
+      avgDuration:    activeUsers > 0 ? Math.round(duration / activeUsers) : 0,
+    };
+  });
+}
+
 /** 아티클 페이지 (/news/*) 조회수 */
 export async function getArticlePageViews() {
   const client = getClient();

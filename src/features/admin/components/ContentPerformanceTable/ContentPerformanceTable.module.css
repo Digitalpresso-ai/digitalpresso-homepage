@@ -49,6 +49,16 @@
   font-weight: 500;
 }
 
+.titleLink {
+  color: var(--color-heading);
+  text-decoration: none;
+}
+
+.titleLink:hover {
+  color: var(--color-brand);
+  text-decoration: underline;
+}
+
 .empty {
   color: var(--color-body);
   font-size: 0.875rem;

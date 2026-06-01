@@ -134,47 +134,56 @@ export default async function DashboardPage({
               label="세션"
               value={overviewData.sessions.toLocaleString()}
               delta={calcDelta(overviewData.sessions, overviewData.prev.sessions)}
+              href={`/admin/analytics?metric=sessions&range=${range}`}
             />
             <StatCard
               label="활성 사용자"
               value={overviewData.users.toLocaleString()}
               delta={calcDelta(overviewData.users, overviewData.prev.users)}
+              href={`/admin/analytics?metric=users&range=${range}`}
             />
             <StatCard
               label="페이지뷰"
               value={overviewData.pageViews.toLocaleString()}
               delta={calcDelta(overviewData.pageViews, overviewData.prev.pageViews)}
+              href={`/admin/analytics?metric=pageViews&range=${range}`}
             />
             <StatCard
               label="이탈률"
               value={`${overviewData.bounceRate}%`}
               delta={calcDelta(overviewData.bounceRate, overviewData.prev.bounceRate)}
               lowerIsBetter
+              href={`/admin/analytics?metric=bounceRate&range=${range}`}
             />
             <StatCard
               label="참여율"
               value={`${overviewData.engagementRate}%`}
               color="green"
+              href={`/admin/analytics?metric=engagementRate&range=${range}`}
             />
             <StatCard
               label="평균 체류"
               value={fmtSeconds(overviewData.avgSessionDuration)}
               color="gray"
+              href={`/admin/analytics?metric=avgDuration&range=${range}`}
             />
             <StatCard
               label="신규 사용자"
               value={overviewData.newUsers.toLocaleString()}
               color="green"
+              href={`/admin/analytics?metric=newUsers&range=${range}`}
             />
             <StatCard
               label="전환"
               value={totalConversions.toLocaleString()}
               color="green"
+              href={`/admin/analytics?metric=conversions&range=${range}`}
             />
             <StatCard
               label="전체 아티클"
               value={String(articleStats.total)}
               color="gray"
+              href="/admin/articles"
             />
           </section>
 

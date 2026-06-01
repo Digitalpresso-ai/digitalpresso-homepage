@@ -70,7 +70,18 @@ export default function ContentPerformanceTable({ items, articles }: Props) {
           <tbody>
             {enriched.map(item => (
               <tr key={item.path}>
-                <td className={styles.titleCell}>{item.title}</td>
+                <td className={styles.titleCell}>
+                  {item.articleId ? (
+                    <a
+                      href={`/news/article/${item.articleId}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.titleLink}
+                    >
+                      {item.title}
+                    </a>
+                  ) : item.title}
+                </td>
                 <td>{item.views.toLocaleString()}</td>
                 <td>{fmtDuration(item.avgDuration)}</td>
                 <td>{item.bounceRate}%</td>

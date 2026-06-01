@@ -8,6 +8,17 @@
   gap: var(--spacing-1);
 }
 
+.cardLink {
+  text-decoration: none;
+  cursor: pointer;
+  transition: box-shadow 0.15s, transform 0.15s;
+}
+
+.cardLink:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+
 .card_blue  { border-color: var(--color-brand); }
 .card_green { border-color: #38a169; }
 .card_gray  { border-color: #a0aec0; }

@@ -72,7 +72,16 @@ export default async function ArticlesPage({ searchParams }: Props) {
             <tbody>
               {articles.map((article) => (
                 <tr key={article.id}>
-                  <td className={styles.titleCell}>{article.title}</td>
+                  <td className={styles.titleCell}>
+                    <a
+                      href={`/news/article/${article.id}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.titleLink}
+                    >
+                      {article.title}
+                    </a>
+                  </td>
                   <td>
                     <span className={styles.category}>
                       {CATEGORY_LABELS[article.category] ?? article.category}
