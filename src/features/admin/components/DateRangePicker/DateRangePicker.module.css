@@ -1,0 +1,109 @@
+.wrapper {
+  position: relative;
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: var(--spacing-1) var(--spacing-3);
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  border-radius: 6px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-body);
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.trigger:hover,
+.triggerOpen {
+  border-color: var(--color-brand);
+  color: var(--color-brand);
+}
+
+.icon { font-size: 0.875rem; }
+
+.popover {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  z-index: 100;
+  overflow: hidden;
+  min-width: 560px;
+}
+
+.presets {
+  display: flex;
+  gap: 6px;
+  padding: var(--spacing-3) var(--spacing-4);
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.preset {
+  padding: 4px 12px;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  border-radius: 20px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-body);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.preset:hover {
+  background: #eef2ff;
+  border-color: var(--color-brand);
+  color: var(--color-brand);
+}
+
+.picker {
+  padding: var(--spacing-2) var(--spacing-4);
+}
+
+/* react-day-picker 오버라이드 */
+.picker :global(.rdp-root) {
+  --rdp-accent-color: var(--color-brand);
+  --rdp-accent-background-color: #eef2ff;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-3) var(--spacing-4);
+  border-top: 1px solid #f1f5f9;
+  gap: var(--spacing-3);
+}
+
+.selectedRange {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-heading);
+}
+
+.applyBtn {
+  padding: var(--spacing-2) var(--spacing-5);
+  background: var(--color-brand);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.applyBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.applyBtn:not(:disabled):hover { opacity: 0.85; }

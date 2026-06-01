@@ -1,8 +1,10 @@
 // src/features/contact/components/ContactInfoCard/ContactInfoCard.tsx
+'use client';
 
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Icon } from '@/src/components/Icon';
+import { trackEvent } from '@/lib/analytics/gtag';
 import styles from './ContactInfoCard.module.css';
 
 export function ContactInfoCard() {
@@ -17,7 +19,13 @@ export function ContactInfoCard() {
         <ul className={styles.infoList}>
           <li className={`${styles.infoItem} ${styles.infoItemCenter}`}>
             <Icon name="mail" size={24} className={styles.infoIcon} />
-            <span className={styles.infoText}>{t('email')}</span>
+            <a
+              href={`mailto:${t('email')}`}
+              className={styles.infoText}
+              onClick={() => trackEvent('contact_click', { method: 'email' })}
+            >
+              {t('email')}
+            </a>
           </li>
           <li className={`${styles.infoItem} ${styles.infoItemStart}`}>
             <Icon name="building" size={24} className={`${styles.infoIcon} `} />

@@ -3,6 +3,7 @@
 import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
+import TrackedLink from '@/components/analytics/TrackedLink';
 import styles from './AboutHero.module.css';
 
 export async function AboutHero() {
@@ -32,9 +33,9 @@ export async function AboutHero() {
         </div>
 
         <div className={styles.buttonGroup}>
-          <Link href="/contact" className={styles.ctaButton}>
+          <TrackedLink href="/contact" location="about_hero" className={styles.ctaButton}>
             {t('cta')}
-          </Link>
+          </TrackedLink>
           <Link href="/products" className={styles.outlineButton}>
             {t('secondaryCta')}
           </Link>
