@@ -1,6 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import DateRangePicker from '@/src/features/admin/components/DateRangePicker/DateRangePicker';
 import styles from './DashboardTabs.module.css';
 
 const TABS = [
@@ -10,18 +11,21 @@ const TABS = [
   { key: 'traffic',  label: '유입' },
 ] as const;
 
-const RANGES = [7, 30, 90] as const;
-
 interface Props {
   activeTab: string;
-  activeRange: number;
+  from: string;
+  to: string;
 }
 
-export default function DashboardTabs({ activeTab, activeRange }: Props) {
+export default function DashboardTabs({ activeTab, from, to }: Props) {
   const router = useRouter();
 
-  function go(tab: string, range: number) {
-    router.push(`/admin/dashboard?tab=${tab}&range=${range}`);
+  function goTab(tab: string) {
+    router.push(`/admin/dashboard?tab=${tab}&from=${from}&to=${to}`);
+  }
+
+  function onDateChange(f: string, t: string) {
+    router.push(`/admin/dashboard?tab=${activeTab}&from=${f}&to=${t}`);
   }
 
   return (
@@ -32,25 +36,14 @@ export default function DashboardTabs({ activeTab, activeRange }: Props) {
             key={t.key}
             type="button"
             className={`${styles.tab} ${activeTab === t.key ? styles.tabActive : ''}`}
-            onClick={() => go(t.key, activeRange)}
+            onClick={() => goTab(t.key)}
           >
             {t.label}
           </button>
         ))}
       </nav>
 
-      <div className={styles.ranges}>
-        {RANGES.map(r => (
-          <button
-            key={r}
-            type="button"
-            className={`${styles.rangeBtn} ${activeRange === r ? styles.rangeBtnActive : ''}`}
-            onClick={() => go(activeTab, r)}
-          >
-            {r}일
-          </button>
-        ))}
-      </div>
+      <DateRangePicker from={from} to={to} onChange={onDateChange} />
     </div>
   );
 }

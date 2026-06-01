@@ -8,7 +8,16 @@ import {
   getConversions,
   type PageSortMetric,
 } from '@/lib/analytics/ga-data';
+import { parseDateRange, formatKo } from '@/lib/analytics/date-utils';
 import AnalyticsTrendChart from '@/src/features/admin/components/AnalyticsTrendChart/AnalyticsTrendChart';
+import {
+  DeviceTable,
+  CountryTable,
+  TopPagesTable,
+  SortedPagesTable,
+  ConversionsTable,
+} from './TableClients';
+import AnalyticsRanges from './AnalyticsRanges';
 import styles from './page.module.css';
 
 export const dynamic = 'force-dynamic';
@@ -41,20 +50,14 @@ async function safeGA<T>(fn: () => Promise<T>): Promise<T | null> {
   try { return await fn(); } catch { return null; }
 }
 
-function fmtSecs(s: number) {
-  const m = Math.floor(s / 60);
-  const r = s % 60;
-  return m > 0 ? `${m}분 ${r}초` : `${r}초`;
-}
-
 export default async function AnalyticsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ metric?: string; range?: string }>;
+  searchParams: Promise<{ metric?: string; from?: string; to?: string }>;
 }) {
-  const { metric: mp = 'sessions', range: rp = '30' } = await searchParams;
+  const { metric: mp = 'sessions', from: fromParam, to: toParam } = await searchParams;
   const metric = Object.keys(METRIC_META).includes(mp) ? mp : 'sessions';
-  const range  = [7, 30, 90].includes(Number(rp)) ? Number(rp) : 30;
+  const { from, to } = parseDateRange(fromParam, toParam);
 
   const meta      = METRIC_META[metric];
   const trendKey  = TREND_KEY[metric];
@@ -63,35 +66,25 @@ export default async function AnalyticsPage({
   const hasSorted = !!sortKey;
 
   const [timeline, devices, countries, topPages, sortedPages, conversions] = await Promise.all([
-    hasTrend                                    ? safeGA(() => getTimeSeries(range))              : Promise.resolve(null),
-    metric === 'sessions' || metric === 'users'  ? safeGA(() => getDeviceBreakdown(range))         : Promise.resolve(null),
-    metric === 'sessions' || metric === 'users'  ? safeGA(() => getCountryBreakdown(range))        : Promise.resolve(null),
-    metric === 'pageViews'                       ? safeGA(() => getTopPages(20, range))            : Promise.resolve(null),
-    hasSorted                                    ? safeGA(() => getPageDetails(range, sortKey, 20)) : Promise.resolve(null),
-    metric === 'conversions'                     ? safeGA(() => getConversions(range))             : Promise.resolve(null),
+    hasTrend                                    ? safeGA(() => getTimeSeries(from, to))                    : Promise.resolve(null),
+    metric === 'sessions' || metric === 'users'  ? safeGA(() => getDeviceBreakdown(from, to))               : Promise.resolve(null),
+    metric === 'sessions' || metric === 'users'  ? safeGA(() => getCountryBreakdown(from, to))              : Promise.resolve(null),
+    metric === 'pageViews'                       ? safeGA(() => getTopPages(20, from, to))                  : Promise.resolve(null),
+    hasSorted                                    ? safeGA(() => getPageDetails(from, to, sortKey, 20))      : Promise.resolve(null),
+    metric === 'conversions'                     ? safeGA(() => getConversions(from, to))                   : Promise.resolve(null),
   ]);
 
   return (
     <div className={styles.page}>
       <header className={styles.header}>
         <nav className={styles.breadcrumb}>
-          <Link href={`/admin/dashboard?tab=overview&range=${range}`} className={styles.backLink}>
+          <Link href={`/admin/dashboard?tab=overview&from=${from}&to=${to}`} className={styles.backLink}>
             ← 대시보드
           </Link>
           <span className={styles.sep}>/</span>
           <span className={styles.current}>{meta.title}</span>
         </nav>
-        <div className={styles.ranges}>
-          {([7, 30, 90] as const).map(r => (
-            <Link
-              key={r}
-              href={`/admin/analytics?metric=${metric}&range=${r}`}
-              className={`${styles.rangeBtn} ${range === r ? styles.rangeBtnActive : ''}`}
-            >
-              {r}일
-            </Link>
-          ))}
-        </div>
+        <AnalyticsRanges metric={metric} from={from} to={to} />
       </header>
 
       <div className={styles.titleBlock}>
@@ -102,7 +95,7 @@ export default async function AnalyticsPage({
       {/* 추이 차트 */}
       {hasTrend && timeline && (
         <div className={styles.card}>
-          <h2 className={styles.cardTitle}>{meta.title} 추이 (최근 {range}일)</h2>
+          <h2 className={styles.cardTitle}>{meta.title} 추이 ({formatKo(from)} ~ {formatKo(to)})</h2>
           <AnalyticsTrendChart data={timeline} metricKey={trendKey!} label={meta.title} />
         </div>
       )}
@@ -112,39 +105,16 @@ export default async function AnalyticsPage({
         <div className={styles.grid2}>
           <div className={styles.card}>
             <h2 className={styles.cardTitle}>기기별 현황</h2>
-            {devices && devices.length > 0 ? (
-              <table className={styles.table}>
-                <thead><tr><th>기기</th><th>세션</th><th>사용자</th><th>참여율</th></tr></thead>
-                <tbody>
-                  {devices.map(d => (
-                    <tr key={d.device}>
-                      <td className={styles.boldCell}>{d.device}</td>
-                      <td>{d.sessions.toLocaleString()}</td>
-                      <td>{d.users.toLocaleString()}</td>
-                      <td>{d.engagementRate}%</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            ) : <p className={styles.empty}>데이터가 없습니다.</p>}
+            {devices && devices.length > 0
+              ? <DeviceTable devices={devices} />
+              : <p className={styles.empty}>데이터가 없습니다.</p>}
           </div>
 
           <div className={styles.card}>
             <h2 className={styles.cardTitle}>국가별 상위 10</h2>
-            {countries && countries.length > 0 ? (
-              <table className={styles.table}>
-                <thead><tr><th>국가</th><th>세션</th><th>사용자</th></tr></thead>
-                <tbody>
-                  {countries.map(c => (
-                    <tr key={c.country}>
-                      <td className={styles.boldCell}>{c.country}</td>
-                      <td>{c.sessions.toLocaleString()}</td>
-                      <td>{c.users.toLocaleString()}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            ) : <p className={styles.empty}>데이터가 없습니다.</p>}
+            {countries && countries.length > 0
+              ? <CountryTable countries={countries} />
+              : <p className={styles.empty}>데이터가 없습니다.</p>}
           </div>
         </div>
       )}
@@ -153,18 +123,7 @@ export default async function AnalyticsPage({
       {metric === 'pageViews' && topPages && (
         <div className={styles.card}>
           <h2 className={styles.cardTitle}>상위 페이지 (20개)</h2>
-          <table className={styles.table}>
-            <thead><tr><th>경로</th><th>페이지뷰</th><th>이탈률</th></tr></thead>
-            <tbody>
-              {topPages.map(p => (
-                <tr key={p.path}>
-                  <td className={styles.pathCell}>{p.path}</td>
-                  <td>{p.views.toLocaleString()}</td>
-                  <td>{p.bounceRate}%</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <TopPagesTable pages={topPages} />
         </div>
       )}
 
@@ -176,30 +135,11 @@ export default async function AnalyticsPage({
             {metric === 'engagementRate' && '참여율이 높은 페이지'}
             {metric === 'avgDuration'    && '체류시간이 긴 페이지'}
           </h2>
-          <table className={styles.table}>
-            <thead>
-              <tr>
-                <th>경로</th>
-                <th>페이지뷰</th>
-                <th>세션</th>
-                {metric === 'bounceRate'     && <th>이탈률</th>}
-                {metric === 'engagementRate' && <th>참여율</th>}
-                {metric === 'avgDuration'    && <th>평균 체류</th>}
-              </tr>
-            </thead>
-            <tbody>
-              {sortedPages.map(p => (
-                <tr key={p.path}>
-                  <td className={styles.pathCell}>{p.path}</td>
-                  <td>{p.pageViews.toLocaleString()}</td>
-                  <td>{p.sessions.toLocaleString()}</td>
-                  {metric === 'bounceRate'     && <td>{p.bounceRate}%</td>}
-                  {metric === 'engagementRate' && <td>{p.engagementRate}%</td>}
-                  {metric === 'avgDuration'    && <td>{fmtSecs(p.avgDuration)}</td>}
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <SortedPagesTable
+            key={metric}
+            pages={sortedPages}
+            metric={metric as 'bounceRate' | 'engagementRate' | 'avgDuration'}
+          />
         </div>
       )}
 
@@ -217,17 +157,7 @@ export default async function AnalyticsPage({
         <div className={styles.card}>
           <h2 className={styles.cardTitle}>전환 이벤트 집계</h2>
           {conversions && conversions.length > 0 ? (
-            <table className={styles.table}>
-              <thead><tr><th>이벤트</th><th>발생 횟수</th></tr></thead>
-              <tbody>
-                {conversions.map(c => (
-                  <tr key={c.eventName}>
-                    <td className={styles.boldCell}>{c.eventName}</td>
-                    <td>{c.count.toLocaleString()}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <ConversionsTable conversions={conversions} />
           ) : (
             <p className={styles.empty}>
               아직 전환 이벤트 데이터가 없습니다.

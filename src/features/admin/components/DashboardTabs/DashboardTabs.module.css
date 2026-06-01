@@ -35,27 +35,3 @@
   box-shadow: 0 1px 3px rgba(0,0,0,0.08);
 }
 
-.ranges {
-  display: flex;
-  gap: 4px;
-}
-
-.rangeBtn {
-  padding: var(--spacing-1) var(--spacing-3);
-  border: 1px solid #e2e8f0;
-  background: #fff;
-  border-radius: 6px;
-  font-size: 0.8125rem;
-  font-weight: 500;
-  color: var(--color-body);
-  cursor: pointer;
-  transition: border-color 0.15s, color 0.15s;
-}
-
-.rangeBtn:hover { border-color: var(--color-brand); color: var(--color-brand); }
-
-.rangeBtnActive {
-  border-color: var(--color-brand);
-  background: var(--color-brand);
-  color: #fff;
-}

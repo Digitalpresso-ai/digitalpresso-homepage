@@ -226,7 +226,18 @@
 
 .dateCell { color: var(--color-body); }
 
+.clickableRow { position: relative; cursor: pointer; }
+.clickableRow:hover td { background: #f8fafc; }
+
+.rowLink {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
 .editLink {
+  position: relative;
+  z-index: 1;
   color: var(--color-accent);
   font-weight: 500;
   font-size: 0.8125rem;

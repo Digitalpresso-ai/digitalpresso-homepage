@@ -3,6 +3,7 @@ import {
   getPublishedArticles,
   getArticleStats,
 } from '@/backend/article/application/server-facade';
+import { parseDateRange, formatKo } from '@/lib/analytics/date-utils';
 import {
   getOverviewMetrics,
   getTimeSeries,
@@ -45,11 +46,11 @@ function fmtSeconds(secs: number) {
 export default async function DashboardPage({
   searchParams,
 }: {
-  searchParams: Promise<{ tab?: string; range?: string }>;
+  searchParams: Promise<{ tab?: string; from?: string; to?: string }>;
 }) {
-  const { tab: tabParam = 'overview', range: rangeParam = '30' } = await searchParams;
+  const { tab: tabParam = 'overview', from: fromParam, to: toParam } = await searchParams;
   const activeTab = ['overview', 'content', 'locale', 'traffic'].includes(tabParam) ? tabParam : 'overview';
-  const range = [7, 30, 90].includes(Number(rangeParam)) ? Number(rangeParam) : 30;
+  const { from, to } = parseDateRange(fromParam, toParam);
 
   let gaError: string | null = null;
 
@@ -73,10 +74,10 @@ export default async function DashboardPage({
 
   if (activeTab === 'overview') {
     const [ov, tl, tp, conv, stats] = await Promise.all([
-      safeGA(() => getOverviewMetrics(range)),
-      safeGA(() => getTimeSeries(range)),
-      safeGA(() => getTopPages(8, range)),
-      safeGA(() => getConversions(range)),
+      safeGA(() => getOverviewMetrics(from, to)),
+      safeGA(() => getTimeSeries(from, to)),
+      safeGA(() => getTopPages(8, from, to)),
+      safeGA(() => getConversions(from, to)),
       getArticleStats().catch(() => ({ total: 0 })),
     ]);
     overviewData = ov;
@@ -87,19 +88,19 @@ export default async function DashboardPage({
     if (!ov) gaError = 'GA 연결 오류';
   } else if (activeTab === 'content') {
     const [ci, arts] = await Promise.all([
-      safeGA(() => getContentPerformance(range)),
+      safeGA(() => getContentPerformance(from, to)),
       getPublishedArticles().catch(() => []),
     ]);
     contentItems = ci ?? [];
     allArticles  = arts;
   } else if (activeTab === 'locale') {
-    const ld = await safeGA(() => getLocaleBreakdown(range));
+    const ld = await safeGA(() => getLocaleBreakdown(from, to));
     localeData = ld ?? [];
     if (!ld) gaError = 'GA 연결 오류';
   } else if (activeTab === 'traffic') {
     const [ch, sr] = await Promise.all([
-      safeGA(() => getTrafficAcquisition(range)),
-      safeGA(() => getTopSources(range)),
+      safeGA(() => getTrafficAcquisition(from, to)),
+      safeGA(() => getTopSources(from, to)),
     ]);
     channels = ch ?? [];
     sources  = sr ?? [];
@@ -112,10 +113,10 @@ export default async function DashboardPage({
     <div className={styles.page}>
       <header className={styles.header}>
         <h1 className={styles.title}>대시보드</h1>
-        <span className={styles.period}>최근 {range}일</span>
+        <span className={styles.period}>{formatKo(from)} ~ {formatKo(to)}</span>
       </header>
 
-      <DashboardTabs activeTab={activeTab} activeRange={range} />
+      <DashboardTabs activeTab={activeTab} from={from} to={to} />
 
       {gaError && (
         <div className={styles.gaError}>
@@ -134,50 +135,50 @@ export default async function DashboardPage({
               label="세션"
               value={overviewData.sessions.toLocaleString()}
               delta={calcDelta(overviewData.sessions, overviewData.prev.sessions)}
-              href={`/admin/analytics?metric=sessions&range=${range}`}
+              href={`/admin/analytics?metric=sessions&from=${from}&to=${to}`}
             />
             <StatCard
               label="활성 사용자"
               value={overviewData.users.toLocaleString()}
               delta={calcDelta(overviewData.users, overviewData.prev.users)}
-              href={`/admin/analytics?metric=users&range=${range}`}
+              href={`/admin/analytics?metric=users&from=${from}&to=${to}`}
             />
             <StatCard
               label="페이지뷰"
               value={overviewData.pageViews.toLocaleString()}
               delta={calcDelta(overviewData.pageViews, overviewData.prev.pageViews)}
-              href={`/admin/analytics?metric=pageViews&range=${range}`}
+              href={`/admin/analytics?metric=pageViews&from=${from}&to=${to}`}
             />
             <StatCard
               label="이탈률"
               value={`${overviewData.bounceRate}%`}
               delta={calcDelta(overviewData.bounceRate, overviewData.prev.bounceRate)}
               lowerIsBetter
-              href={`/admin/analytics?metric=bounceRate&range=${range}`}
+              href={`/admin/analytics?metric=bounceRate&from=${from}&to=${to}`}
             />
             <StatCard
               label="참여율"
               value={`${overviewData.engagementRate}%`}
               color="green"
-              href={`/admin/analytics?metric=engagementRate&range=${range}`}
+              href={`/admin/analytics?metric=engagementRate&from=${from}&to=${to}`}
             />
             <StatCard
               label="평균 체류"
               value={fmtSeconds(overviewData.avgSessionDuration)}
               color="gray"
-              href={`/admin/analytics?metric=avgDuration&range=${range}`}
+              href={`/admin/analytics?metric=avgDuration&from=${from}&to=${to}`}
             />
             <StatCard
               label="신규 사용자"
               value={overviewData.newUsers.toLocaleString()}
               color="green"
-              href={`/admin/analytics?metric=newUsers&range=${range}`}
+              href={`/admin/analytics?metric=newUsers&from=${from}&to=${to}`}
             />
             <StatCard
               label="전환"
               value={totalConversions.toLocaleString()}
               color="green"
-              href={`/admin/analytics?metric=conversions&range=${range}`}
+              href={`/admin/analytics?metric=conversions&from=${from}&to=${to}`}
             />
             <StatCard
               label="전체 아티클"
@@ -243,8 +244,11 @@ async function RecentArticleTable() {
       </thead>
       <tbody>
         {recent.map(article => (
-          <tr key={article.id}>
-            <td className={styles.titleCell}>{article.title}</td>
+          <tr key={article.id} className={styles.clickableRow}>
+            <td className={styles.titleCell}>
+              <Link href={`/news/article/${article.id}`} className={styles.rowLink} aria-label={article.title} target="_blank" rel="noopener noreferrer" />
+              {article.title}
+            </td>
             <td className={styles.dateCell}>
               {new Date(article.created_at).toLocaleDateString('ko-KR')}
             </td>

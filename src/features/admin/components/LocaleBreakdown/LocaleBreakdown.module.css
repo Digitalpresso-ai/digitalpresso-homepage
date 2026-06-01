@@ -33,6 +33,30 @@
   border-bottom: 1px solid #e2e8f0;
 }
 
+.sortableTh {
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.sortableTh:hover { color: var(--color-brand); }
+
+.sortIcon {
+  display: inline-block;
+  margin-left: 3px;
+  font-size: 0.6875rem;
+  opacity: 0.45;
+  font-style: normal;
+}
+
+.sortIconActive {
+  display: inline-block;
+  margin-left: 3px;
+  font-size: 0.6875rem;
+  color: var(--color-brand);
+  font-style: normal;
+}
+
 .table td {
   padding: var(--spacing-3);
   border-bottom: 1px solid #f7fafc;

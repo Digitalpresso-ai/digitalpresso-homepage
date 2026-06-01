@@ -1,5 +1,6 @@
 'use client';
 
+import { useMemo, useState } from 'react';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
 } from 'recharts';
@@ -11,7 +12,48 @@ interface Props {
   sources: TopSource[];
 }
 
+function sortArr<T extends object>(arr: T[], key: keyof T, dir: 'asc' | 'desc'): T[] {
+  return [...arr].sort((a, b) => {
+    const av = a[key];
+    const bv = b[key];
+    if (typeof av === 'number' && typeof bv === 'number') {
+      return dir === 'asc' ? av - bv : bv - av;
+    }
+    return dir === 'asc'
+      ? String(av).localeCompare(String(bv))
+      : String(bv).localeCompare(String(av));
+  });
+}
+
 export default function TrafficAcquisition({ channels, sources }: Props) {
+  const [chKey, setChKey] = useState<keyof TrafficChannel>('sessions');
+  const [chDir, setChDir] = useState<'asc' | 'desc'>('desc');
+  const [srcKey, setSrcKey] = useState<keyof TopSource>('sessions');
+  const [srcDir, setSrcDir] = useState<'asc' | 'desc'>('desc');
+
+  const sortedChannels = useMemo(() => sortArr(channels, chKey, chDir), [channels, chKey, chDir]);
+  const sortedSources  = useMemo(() => sortArr(sources, srcKey, srcDir), [sources, srcKey, srcDir]);
+
+  function toggleCh(key: keyof TrafficChannel) {
+    if (chKey === key) setChDir(d => (d === 'asc' ? 'desc' : 'asc'));
+    else { setChKey(key); setChDir('desc'); }
+  }
+
+  function toggleSrc(key: keyof TopSource) {
+    if (srcKey === key) setSrcDir(d => (d === 'asc' ? 'desc' : 'asc'));
+    else { setSrcKey(key); setSrcDir('desc'); }
+  }
+
+  function chIcon(key: keyof TrafficChannel) {
+    if (chKey !== key) return <em className={styles.sortIcon}>↕</em>;
+    return <em className={styles.sortIconActive}>{chDir === 'asc' ? '↑' : '↓'}</em>;
+  }
+
+  function srcIcon(key: keyof TopSource) {
+    if (srcKey !== key) return <em className={styles.sortIcon}>↕</em>;
+    return <em className={styles.sortIconActive}>{srcDir === 'asc' ? '↑' : '↓'}</em>;
+  }
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.card}>
@@ -40,14 +82,14 @@ export default function TrafficAcquisition({ channels, sources }: Props) {
         <table className={styles.table}>
           <thead>
             <tr>
-              <th>채널</th>
-              <th>세션</th>
-              <th>사용자</th>
-              <th>참여율</th>
+              <th className={styles.sortableTh} onClick={() => toggleCh('channel')}>채널{chIcon('channel')}</th>
+              <th className={styles.sortableTh} onClick={() => toggleCh('sessions')}>세션{chIcon('sessions')}</th>
+              <th className={styles.sortableTh} onClick={() => toggleCh('users')}>사용자{chIcon('users')}</th>
+              <th className={styles.sortableTh} onClick={() => toggleCh('engagementRate')}>참여율{chIcon('engagementRate')}</th>
             </tr>
           </thead>
           <tbody>
-            {channels.map(c => (
+            {sortedChannels.map(c => (
               <tr key={c.channel}>
                 <td className={styles.channelCell}>{c.channel}</td>
                 <td>{c.sessions.toLocaleString()}</td>
@@ -64,14 +106,14 @@ export default function TrafficAcquisition({ channels, sources }: Props) {
         <table className={styles.table}>
           <thead>
             <tr>
-              <th>소스</th>
-              <th>미디엄</th>
-              <th>세션</th>
-              <th>사용자</th>
+              <th className={styles.sortableTh} onClick={() => toggleSrc('source')}>소스{srcIcon('source')}</th>
+              <th className={styles.sortableTh} onClick={() => toggleSrc('medium')}>미디엄{srcIcon('medium')}</th>
+              <th className={styles.sortableTh} onClick={() => toggleSrc('sessions')}>세션{srcIcon('sessions')}</th>
+              <th className={styles.sortableTh} onClick={() => toggleSrc('users')}>사용자{srcIcon('users')}</th>
             </tr>
           </thead>
           <tbody>
-            {sources.map((s, i) => (
+            {sortedSources.map((s, i) => (
               <tr key={i}>
                 <td className={styles.channelCell}>{s.source}</td>
                 <td>{s.medium}</td>

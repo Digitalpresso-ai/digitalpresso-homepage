@@ -1,4 +1,5 @@
 import { BetaAnalyticsDataClient } from '@google-analytics/data';
+import { computePrevRange } from './date-utils';
 
 function parseServiceAccountKey(raw: string): Record<string, unknown> {
   const trimmed = raw.trim();
@@ -31,10 +32,6 @@ function propertyId() {
   return `properties/${id}`;
 }
 
-function prevRange(days: number) {
-  return { startDate: `${days * 2}daysAgo`, endDate: `${days + 1}daysAgo` };
-}
-
 export interface OverviewMetrics {
   sessions: number;
   users: number;
@@ -47,13 +44,14 @@ export interface OverviewMetrics {
 }
 
 /** 요약 지표 (현재 + 이전 기간 비교) */
-export async function getOverviewMetrics(days = 30): Promise<OverviewMetrics> {
+export async function getOverviewMetrics(from: string, to: string): Promise<OverviewMetrics> {
   const client = getClient();
+  const prev = computePrevRange(from, to);
   const [response] = await client.runReport({
     property: propertyId(),
     dateRanges: [
-      { startDate: `${days}daysAgo`, endDate: 'today' },
-      prevRange(days),
+      { startDate: from, endDate: to },
+      { startDate: prev.startDate, endDate: prev.endDate },
     ],
     metrics: [
       { name: 'sessions' },
@@ -96,12 +94,12 @@ export async function getOverviewMetrics(days = 30): Promise<OverviewMetrics> {
 
 export interface TimelinePoint { date: string; views: number; sessions: number; users: number }
 
-/** 최근 n일간 일별 지표 (pageViews / sessions / activeUsers) */
-export async function getTimeSeries(days = 30): Promise<TimelinePoint[]> {
+/** 기간 내 일별 지표 (pageViews / sessions / activeUsers) */
+export async function getTimeSeries(from: string, to: string): Promise<TimelinePoint[]> {
   const client = getClient();
   const [response] = await client.runReport({
     property: propertyId(),
-    dateRanges: [{ startDate: `${days}daysAgo`, endDate: 'today' }],
+    dateRanges: [{ startDate: from, endDate: to }],
     dimensions: [{ name: 'date' }],
     metrics: [
       { name: 'screenPageViews' },
@@ -125,11 +123,11 @@ export const getPageViewsTimeline = getTimeSeries;
 export interface TopPage { path: string; title: string; views: number; bounceRate: number }
 
 /** 상위 페이지 (조회수 기준) */
-export async function getTopPages(limit = 10, days = 30): Promise<TopPage[]> {
+export async function getTopPages(limit: number, from: string, to: string): Promise<TopPage[]> {
   const client = getClient();
   const [response] = await client.runReport({
     property: propertyId(),
-    dateRanges: [{ startDate: `${days}daysAgo`, endDate: 'today' }],
+    dateRanges: [{ startDate: from, endDate: to }],
     dimensions: [{ name: 'pagePath' }, { name: 'pageTitle' }],
     metrics: [{ name: 'screenPageViews' }, { name: 'bounceRate' }],
     orderBys: [{ metric: { metricName: 'screenPageViews' }, desc: true }],
@@ -154,11 +152,11 @@ export interface ContentItem {
 }
 
 /** 아티클 콘텐츠 성과 (/news/article/* 필터) */
-export async function getContentPerformance(days = 30): Promise<ContentItem[]> {
+export async function getContentPerformance(from: string, to: string): Promise<ContentItem[]> {
   const client = getClient();
   const [response] = await client.runReport({
     property: propertyId(),
-    dateRanges: [{ startDate: `${days}daysAgo`, endDate: 'today' }],
+    dateRanges: [{ startDate: from, endDate: to }],
     dimensions: [{ name: 'pagePath' }],
     metrics: [
       { name: 'screenPageViews' },
@@ -173,7 +171,7 @@ export async function getContentPerformance(days = 30): Promise<ContentItem[]> {
       },
     },
     orderBys: [{ metric: { metricName: 'screenPageViews' }, desc: true }],
-    limit: 20,
+    limit: 50,
   });
 
   const uuidRe = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i;
@@ -202,11 +200,11 @@ export interface LocaleStat {
 }
 
 /** 언어별(ko/en/ja) 트래픽 — URL 경로 prefix 기반 */
-export async function getLocaleBreakdown(days = 30): Promise<LocaleStat[]> {
+export async function getLocaleBreakdown(from: string, to: string): Promise<LocaleStat[]> {
   const client = getClient();
   const [response] = await client.runReport({
     property: propertyId(),
-    dateRanges: [{ startDate: `${days}daysAgo`, endDate: 'today' }],
+    dateRanges: [{ startDate: from, endDate: to }],
     dimensions: [{ name: 'pagePath' }],
     metrics: [
       { name: 'sessions' },
@@ -255,11 +253,11 @@ export interface TrafficChannel {
 }
 
 /** 채널별 트래픽 유입 */
-export async function getTrafficAcquisition(days = 30): Promise<TrafficChannel[]> {
+export async function getTrafficAcquisition(from: string, to: string): Promise<TrafficChannel[]> {
   const client = getClient();
   const [response] = await client.runReport({
     property: propertyId(),
-    dateRanges: [{ startDate: `${days}daysAgo`, endDate: 'today' }],
+    dateRanges: [{ startDate: from, endDate: to }],
     dimensions: [{ name: 'sessionDefaultChannelGroup' }],
     metrics: [
       { name: 'sessions' },
@@ -286,11 +284,11 @@ export interface TopSource {
 }
 
 /** 상위 유입 소스/미디엄 */
-export async function getTopSources(days = 30, limit = 10): Promise<TopSource[]> {
+export async function getTopSources(from: string, to: string, limit = 10): Promise<TopSource[]> {
   const client = getClient();
   const [response] = await client.runReport({
     property: propertyId(),
-    dateRanges: [{ startDate: `${days}daysAgo`, endDate: 'today' }],
+    dateRanges: [{ startDate: from, endDate: to }],
     dimensions: [{ name: 'sessionSource' }, { name: 'sessionMedium' }],
     metrics: [{ name: 'sessions' }, { name: 'activeUsers' }],
     orderBys: [{ metric: { metricName: 'sessions' }, desc: true }],
@@ -308,11 +306,11 @@ export async function getTopSources(days = 30, limit = 10): Promise<TopSource[]>
 export interface ConversionData { eventName: string; count: number }
 
 /** 전환 이벤트 집계 (generate_lead / cta_click / contact_click) */
-export async function getConversions(days = 30): Promise<ConversionData[]> {
+export async function getConversions(from: string, to: string): Promise<ConversionData[]> {
   const client = getClient();
   const [response] = await client.runReport({
     property: propertyId(),
-    dateRanges: [{ startDate: `${days}daysAgo`, endDate: 'today' }],
+    dateRanges: [{ startDate: from, endDate: to }],
     dimensions: [{ name: 'eventName' }],
     metrics: [{ name: 'eventCount' }],
     dimensionFilter: {
@@ -333,11 +331,11 @@ export async function getConversions(days = 30): Promise<ConversionData[]> {
 export interface DeviceStat { device: string; sessions: number; users: number; engagementRate: number }
 
 /** 기기별 현황 */
-export async function getDeviceBreakdown(days = 30): Promise<DeviceStat[]> {
+export async function getDeviceBreakdown(from: string, to: string): Promise<DeviceStat[]> {
   const client = getClient();
   const [response] = await client.runReport({
     property: propertyId(),
-    dateRanges: [{ startDate: `${days}daysAgo`, endDate: 'today' }],
+    dateRanges: [{ startDate: from, endDate: to }],
     dimensions: [{ name: 'deviceCategory' }],
     metrics: [{ name: 'sessions' }, { name: 'activeUsers' }, { name: 'engagementRate' }],
     orderBys: [{ metric: { metricName: 'sessions' }, desc: true }],
@@ -353,11 +351,11 @@ export async function getDeviceBreakdown(days = 30): Promise<DeviceStat[]> {
 export interface CountryStat { country: string; sessions: number; users: number }
 
 /** 국가별 상위 유입 */
-export async function getCountryBreakdown(days = 30, limit = 10): Promise<CountryStat[]> {
+export async function getCountryBreakdown(from: string, to: string, limit = 10): Promise<CountryStat[]> {
   const client = getClient();
   const [response] = await client.runReport({
     property: propertyId(),
-    dateRanges: [{ startDate: `${days}daysAgo`, endDate: 'today' }],
+    dateRanges: [{ startDate: from, endDate: to }],
     dimensions: [{ name: 'country' }],
     metrics: [{ name: 'sessions' }, { name: 'activeUsers' }],
     orderBys: [{ metric: { metricName: 'sessions' }, desc: true }],
@@ -384,14 +382,15 @@ export type PageSortMetric = 'screenPageViews' | 'bounceRate' | 'engagementRate'
 
 /** 페이지별 상세 지표 (정렬 기준 지정 가능) */
 export async function getPageDetails(
-  days = 30,
+  from: string,
+  to: string,
   sortBy: PageSortMetric = 'screenPageViews',
   limit = 20,
 ): Promise<PageDetailStat[]> {
   const client = getClient();
   const [response] = await client.runReport({
     property: propertyId(),
-    dateRanges: [{ startDate: `${days}daysAgo`, endDate: 'today' }],
+    dateRanges: [{ startDate: from, endDate: to }],
     dimensions: [{ name: 'pagePath' }, { name: 'pageTitle' }],
     metrics: [
       { name: 'screenPageViews' },
