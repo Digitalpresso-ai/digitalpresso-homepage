@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
+import TrackedLink from '@/components/analytics/TrackedLink';
 import styles from "./ManufacturingContact.module.css";
 
 export async function ManufacturingContact() {
@@ -18,7 +18,7 @@ export async function ManufacturingContact() {
           <p className={styles.sub}>{t("body")}</p>
         </div>
 
-        <Link href="/contact" className={styles.cta}>
+        <TrackedLink href="/contact" location="mfg_contact" className={styles.cta}>
           {t("cta")}
           <svg
             width={22}
@@ -32,7 +32,7 @@ export async function ManufacturingContact() {
           >
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
-        </Link>
+        </TrackedLink>
       </div>
     </section>
   );

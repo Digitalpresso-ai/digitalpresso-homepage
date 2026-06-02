@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { signOut } from '@/src/features/admin/actions/auth.actions';
@@ -15,10 +16,17 @@ export default function AdminSidebar() {
 
   return (
     <aside className={styles.sidebar}>
-      <div className={styles.logo}>
-        <span className={styles.logoText}>Digitalpresso</span>
+      <Link href="/admin/dashboard" className={styles.logo}>
+        <Image
+          src="/images/logos/dp_logo_kor.svg"
+          alt="Digitalpresso"
+          width={150}
+          height={22}
+          className={styles.logoImage}
+          priority
+        />
         <span className={styles.logoSub}>Admin</span>
-      </div>
+      </Link>
 
       <nav className={styles.nav}>
         {NAV_ITEMS.map((item) => (

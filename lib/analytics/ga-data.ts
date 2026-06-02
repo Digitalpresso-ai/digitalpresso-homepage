@@ -1,4 +1,5 @@
 import { BetaAnalyticsDataClient } from '@google-analytics/data';
+import { computePrevRange } from './date-utils';
 
 function parseServiceAccountKey(raw: string): Record<string, unknown> {
   const trimmed = raw.trim();
@@ -21,7 +22,6 @@ function parseServiceAccountKey(raw: string): Record<string, unknown> {
 function getClient() {
   const raw = process.env.GA_SERVICE_ACCOUNT_KEY_JSON;
   if (!raw) throw new Error('GA_SERVICE_ACCOUNT_KEY_JSON is not set');
-
   const credentials = parseServiceAccountKey(raw);
   return new BetaAnalyticsDataClient({ credentials });
 }
@@ -32,41 +32,391 @@ function propertyId() {
   return `properties/${id}`;
 }
 
-/** 최근 n일간 일별 페이지뷰 */
-export async function getPageViewsTimeline(days = 30) {
+export interface OverviewMetrics {
+  sessions: number;
+  users: number;
+  pageViews: number;
+  bounceRate: number;
+  engagementRate: number;
+  avgSessionDuration: number;
+  newUsers: number;
+  prev: { sessions: number; users: number; pageViews: number; bounceRate: number };
+}
+
+/** 요약 지표 (현재 + 이전 기간 비교) */
+export async function getOverviewMetrics(from: string, to: string): Promise<OverviewMetrics> {
+  const client = getClient();
+  const prev = computePrevRange(from, to);
+  const [response] = await client.runReport({
+    property: propertyId(),
+    dateRanges: [
+      { startDate: from, endDate: to },
+      { startDate: prev.startDate, endDate: prev.endDate },
+    ],
+    metrics: [
+      { name: 'sessions' },
+      { name: 'activeUsers' },
+      { name: 'screenPageViews' },
+      { name: 'bounceRate' },
+      { name: 'engagementRate' },
+      { name: 'userEngagementDuration' },
+      { name: 'newUsers' },
+    ],
+  });
+
+  const rows = response.rows ?? [];
+  const cur = rows.find(r => r.dimensionValues?.[0]?.value === 'date_range_0') ?? rows[0];
+  const prv = rows.find(r => r.dimensionValues?.[0]?.value === 'date_range_1') ?? rows[1];
+
+  function n(row: typeof cur, i: number) {
+    return Number(row?.metricValues?.[i]?.value ?? 0);
+  }
+
+  const duration = n(cur, 5);
+  const sessions = n(cur, 0);
+
+  return {
+    sessions,
+    users: n(cur, 1),
+    pageViews: n(cur, 2),
+    bounceRate: Math.round(n(cur, 3) * 100),
+    engagementRate: Math.round(n(cur, 4) * 100),
+    avgSessionDuration: sessions > 0 ? Math.round(duration / sessions) : 0,
+    newUsers: n(cur, 6),
+    prev: {
+      sessions: n(prv, 0),
+      users: n(prv, 1),
+      pageViews: n(prv, 2),
+      bounceRate: Math.round(n(prv, 3) * 100),
+    },
+  };
+}
+
+export interface TimelinePoint { date: string; views: number; sessions: number; users: number }
+
+/** 기간 내 일별 지표 (pageViews / sessions / activeUsers) */
+export async function getTimeSeries(from: string, to: string): Promise<TimelinePoint[]> {
   const client = getClient();
   const [response] = await client.runReport({
     property: propertyId(),
-    dateRanges: [{ startDate: `${days}daysAgo`, endDate: 'today' }],
+    dateRanges: [{ startDate: from, endDate: to }],
     dimensions: [{ name: 'date' }],
-    metrics: [{ name: 'screenPageViews' }],
+    metrics: [
+      { name: 'screenPageViews' },
+      { name: 'sessions' },
+      { name: 'activeUsers' },
+    ],
     orderBys: [{ dimension: { dimensionName: 'date' } }],
   });
 
-  return (response.rows ?? []).map((row) => ({
+  return (response.rows ?? []).map(row => ({
     date: row.dimensionValues?.[0].value ?? '',
     views: Number(row.metricValues?.[0].value ?? 0),
+    sessions: Number(row.metricValues?.[1].value ?? 0),
+    users: Number(row.metricValues?.[2].value ?? 0),
   }));
 }
 
+/** backward compat */
+export const getPageViewsTimeline = getTimeSeries;
+
+export interface TopPage { path: string; title: string; views: number; bounceRate: number }
+
 /** 상위 페이지 (조회수 기준) */
-export async function getTopPages(limit = 10) {
+export async function getTopPages(limit: number, from: string, to: string): Promise<TopPage[]> {
   const client = getClient();
   const [response] = await client.runReport({
     property: propertyId(),
-    dateRanges: [{ startDate: '30daysAgo', endDate: 'today' }],
+    dateRanges: [{ startDate: from, endDate: to }],
     dimensions: [{ name: 'pagePath' }, { name: 'pageTitle' }],
     metrics: [{ name: 'screenPageViews' }, { name: 'bounceRate' }],
     orderBys: [{ metric: { metricName: 'screenPageViews' }, desc: true }],
     limit,
   });
 
-  return (response.rows ?? []).map((row) => ({
+  return (response.rows ?? []).map(row => ({
     path: row.dimensionValues?.[0].value ?? '',
     title: row.dimensionValues?.[1].value ?? '',
     views: Number(row.metricValues?.[0].value ?? 0),
     bounceRate: Math.round(Number(row.metricValues?.[1].value ?? 0) * 100),
   }));
+}
+
+export interface ContentItem {
+  path: string;
+  articleId: string | null;
+  views: number;
+  avgDuration: number;
+  bounceRate: number;
+  activeUsers: number;
+}
+
+/** 아티클 콘텐츠 성과 (/news/article/* 필터) */
+export async function getContentPerformance(from: string, to: string): Promise<ContentItem[]> {
+  const client = getClient();
+  const [response] = await client.runReport({
+    property: propertyId(),
+    dateRanges: [{ startDate: from, endDate: to }],
+    dimensions: [{ name: 'pagePath' }],
+    metrics: [
+      { name: 'screenPageViews' },
+      { name: 'userEngagementDuration' },
+      { name: 'bounceRate' },
+      { name: 'activeUsers' },
+    ],
+    dimensionFilter: {
+      filter: {
+        fieldName: 'pagePath',
+        stringFilter: { matchType: 'CONTAINS', value: '/news/article/' },
+      },
+    },
+    orderBys: [{ metric: { metricName: 'screenPageViews' }, desc: true }],
+    limit: 50,
+  });
+
+  const uuidRe = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i;
+
+  return (response.rows ?? []).map(row => {
+    const path = row.dimensionValues?.[0].value ?? '';
+    const activeUsers = Number(row.metricValues?.[3].value ?? 0);
+    const duration = Number(row.metricValues?.[1].value ?? 0);
+    return {
+      path,
+      articleId: path.match(uuidRe)?.[0] ?? null,
+      views: Number(row.metricValues?.[0].value ?? 0),
+      avgDuration: activeUsers > 0 ? Math.round(duration / activeUsers) : 0,
+      bounceRate: Math.round(Number(row.metricValues?.[2].value ?? 0) * 100),
+      activeUsers,
+    };
+  });
+}
+
+export interface LocaleStat {
+  locale: 'ko' | 'en' | 'ja';
+  sessions: number;
+  users: number;
+  pageViews: number;
+  bounceRate: number;
+}
+
+/** 언어별(ko/en/ja) 트래픽 — URL 경로 prefix 기반 */
+export async function getLocaleBreakdown(from: string, to: string): Promise<LocaleStat[]> {
+  const client = getClient();
+  const [response] = await client.runReport({
+    property: propertyId(),
+    dateRanges: [{ startDate: from, endDate: to }],
+    dimensions: [{ name: 'pagePath' }],
+    metrics: [
+      { name: 'sessions' },
+      { name: 'activeUsers' },
+      { name: 'screenPageViews' },
+      { name: 'bounceRate' },
+    ],
+    limit: 500,
+  });
+
+  const buckets: Record<string, { sessions: number; users: number; pv: number; brSum: number; cnt: number }> = {
+    ko: { sessions: 0, users: 0, pv: 0, brSum: 0, cnt: 0 },
+    en: { sessions: 0, users: 0, pv: 0, brSum: 0, cnt: 0 },
+    ja: { sessions: 0, users: 0, pv: 0, brSum: 0, cnt: 0 },
+  };
+
+  for (const row of response.rows ?? []) {
+    const path = row.dimensionValues?.[0].value ?? '';
+    const locale = path.startsWith('/en/') || path === '/en' ? 'en'
+      : path.startsWith('/ja/') || path === '/ja' ? 'ja'
+      : 'ko';
+    const b = buckets[locale];
+    b.sessions += Number(row.metricValues?.[0].value ?? 0);
+    b.users    += Number(row.metricValues?.[1].value ?? 0);
+    b.pv       += Number(row.metricValues?.[2].value ?? 0);
+    b.brSum    += Number(row.metricValues?.[3].value ?? 0);
+    b.cnt      += 1;
+  }
+
+  return (['ko', 'en', 'ja'] as const).map(locale => ({
+    locale,
+    sessions:  buckets[locale].sessions,
+    users:     buckets[locale].users,
+    pageViews: buckets[locale].pv,
+    bounceRate: buckets[locale].cnt > 0
+      ? Math.round((buckets[locale].brSum / buckets[locale].cnt) * 100)
+      : 0,
+  }));
+}
+
+export interface TrafficChannel {
+  channel: string;
+  sessions: number;
+  users: number;
+  engagementRate: number;
+}
+
+/** 채널별 트래픽 유입 */
+export async function getTrafficAcquisition(from: string, to: string): Promise<TrafficChannel[]> {
+  const client = getClient();
+  const [response] = await client.runReport({
+    property: propertyId(),
+    dateRanges: [{ startDate: from, endDate: to }],
+    dimensions: [{ name: 'sessionDefaultChannelGroup' }],
+    metrics: [
+      { name: 'sessions' },
+      { name: 'activeUsers' },
+      { name: 'engagementRate' },
+    ],
+    orderBys: [{ metric: { metricName: 'sessions' }, desc: true }],
+    limit: 10,
+  });
+
+  return (response.rows ?? []).map(row => ({
+    channel: row.dimensionValues?.[0].value ?? '(none)',
+    sessions: Number(row.metricValues?.[0].value ?? 0),
+    users: Number(row.metricValues?.[1].value ?? 0),
+    engagementRate: Math.round(Number(row.metricValues?.[2].value ?? 0) * 100),
+  }));
+}
+
+export interface TopSource {
+  source: string;
+  medium: string;
+  sessions: number;
+  users: number;
+}
+
+/** 상위 유입 소스/미디엄 */
+export async function getTopSources(from: string, to: string, limit = 10): Promise<TopSource[]> {
+  const client = getClient();
+  const [response] = await client.runReport({
+    property: propertyId(),
+    dateRanges: [{ startDate: from, endDate: to }],
+    dimensions: [{ name: 'sessionSource' }, { name: 'sessionMedium' }],
+    metrics: [{ name: 'sessions' }, { name: 'activeUsers' }],
+    orderBys: [{ metric: { metricName: 'sessions' }, desc: true }],
+    limit,
+  });
+
+  return (response.rows ?? []).map(row => ({
+    source: row.dimensionValues?.[0].value ?? '(direct)',
+    medium: row.dimensionValues?.[1].value ?? '(none)',
+    sessions: Number(row.metricValues?.[0].value ?? 0),
+    users: Number(row.metricValues?.[1].value ?? 0),
+  }));
+}
+
+export interface ConversionData { eventName: string; count: number }
+
+/** 전환 이벤트 집계 (generate_lead / cta_click / contact_click) */
+export async function getConversions(from: string, to: string): Promise<ConversionData[]> {
+  const client = getClient();
+  const [response] = await client.runReport({
+    property: propertyId(),
+    dateRanges: [{ startDate: from, endDate: to }],
+    dimensions: [{ name: 'eventName' }],
+    metrics: [{ name: 'eventCount' }],
+    dimensionFilter: {
+      filter: {
+        fieldName: 'eventName',
+        inListFilter: { values: ['generate_lead', 'cta_click', 'contact_click'] },
+      },
+    },
+    orderBys: [{ metric: { metricName: 'eventCount' }, desc: true }],
+  });
+
+  return (response.rows ?? []).map(row => ({
+    eventName: row.dimensionValues?.[0].value ?? '',
+    count: Number(row.metricValues?.[0].value ?? 0),
+  }));
+}
+
+export interface DeviceStat { device: string; sessions: number; users: number; engagementRate: number }
+
+/** 기기별 현황 */
+export async function getDeviceBreakdown(from: string, to: string): Promise<DeviceStat[]> {
+  const client = getClient();
+  const [response] = await client.runReport({
+    property: propertyId(),
+    dateRanges: [{ startDate: from, endDate: to }],
+    dimensions: [{ name: 'deviceCategory' }],
+    metrics: [{ name: 'sessions' }, { name: 'activeUsers' }, { name: 'engagementRate' }],
+    orderBys: [{ metric: { metricName: 'sessions' }, desc: true }],
+  });
+  return (response.rows ?? []).map(row => ({
+    device: row.dimensionValues?.[0].value ?? '',
+    sessions: Number(row.metricValues?.[0].value ?? 0),
+    users: Number(row.metricValues?.[1].value ?? 0),
+    engagementRate: Math.round(Number(row.metricValues?.[2].value ?? 0) * 100),
+  }));
+}
+
+export interface CountryStat { country: string; sessions: number; users: number }
+
+/** 국가별 상위 유입 */
+export async function getCountryBreakdown(from: string, to: string, limit = 10): Promise<CountryStat[]> {
+  const client = getClient();
+  const [response] = await client.runReport({
+    property: propertyId(),
+    dateRanges: [{ startDate: from, endDate: to }],
+    dimensions: [{ name: 'country' }],
+    metrics: [{ name: 'sessions' }, { name: 'activeUsers' }],
+    orderBys: [{ metric: { metricName: 'sessions' }, desc: true }],
+    limit,
+  });
+  return (response.rows ?? []).map(row => ({
+    country: row.dimensionValues?.[0].value ?? '',
+    sessions: Number(row.metricValues?.[0].value ?? 0),
+    users: Number(row.metricValues?.[1].value ?? 0),
+  }));
+}
+
+export interface PageDetailStat {
+  path: string;
+  title: string;
+  pageViews: number;
+  sessions: number;
+  bounceRate: number;
+  engagementRate: number;
+  avgDuration: number;
+}
+
+export type PageSortMetric = 'screenPageViews' | 'bounceRate' | 'engagementRate' | 'userEngagementDuration';
+
+/** 페이지별 상세 지표 (정렬 기준 지정 가능) */
+export async function getPageDetails(
+  from: string,
+  to: string,
+  sortBy: PageSortMetric = 'screenPageViews',
+  limit = 20,
+): Promise<PageDetailStat[]> {
+  const client = getClient();
+  const [response] = await client.runReport({
+    property: propertyId(),
+    dateRanges: [{ startDate: from, endDate: to }],
+    dimensions: [{ name: 'pagePath' }, { name: 'pageTitle' }],
+    metrics: [
+      { name: 'screenPageViews' },
+      { name: 'sessions' },
+      { name: 'activeUsers' },
+      { name: 'bounceRate' },
+      { name: 'engagementRate' },
+      { name: 'userEngagementDuration' },
+    ],
+    orderBys: [{ metric: { metricName: sortBy }, desc: true }],
+    limit,
+  });
+
+  return (response.rows ?? []).map(row => {
+    const activeUsers = Number(row.metricValues?.[2].value ?? 0);
+    const duration    = Number(row.metricValues?.[5].value ?? 0);
+    return {
+      path:           row.dimensionValues?.[0].value ?? '',
+      title:          row.dimensionValues?.[1].value ?? '',
+      pageViews:      Number(row.metricValues?.[0].value ?? 0),
+      sessions:       Number(row.metricValues?.[1].value ?? 0),
+      bounceRate:     Math.round(Number(row.metricValues?.[3].value ?? 0) * 100),
+      engagementRate: Math.round(Number(row.metricValues?.[4].value ?? 0) * 100),
+      avgDuration:    activeUsers > 0 ? Math.round(duration / activeUsers) : 0,
+    };
+  });
 }
 
 /** 아티클 페이지 (/news/*) 조회수 */
@@ -86,31 +436,8 @@ export async function getArticlePageViews() {
     orderBys: [{ metric: { metricName: 'screenPageViews' }, desc: true }],
   });
 
-  return (response.rows ?? []).map((row) => ({
+  return (response.rows ?? []).map(row => ({
     path: row.dimensionValues?.[0].value ?? '',
     views: Number(row.metricValues?.[0].value ?? 0),
   }));
-}
-
-/** 요약 지표 (총 세션, 사용자, 페이지뷰) */
-export async function getOverviewMetrics() {
-  const client = getClient();
-  const [response] = await client.runReport({
-    property: propertyId(),
-    dateRanges: [{ startDate: '30daysAgo', endDate: 'today' }],
-    metrics: [
-      { name: 'sessions' },
-      { name: 'activeUsers' },
-      { name: 'screenPageViews' },
-      { name: 'bounceRate' },
-    ],
-  });
-
-  const row = response.rows?.[0];
-  return {
-    sessions: Number(row?.metricValues?.[0].value ?? 0),
-    users: Number(row?.metricValues?.[1].value ?? 0),
-    pageViews: Number(row?.metricValues?.[2].value ?? 0),
-    bounceRate: Math.round(Number(row?.metricValues?.[3].value ?? 0) * 100),
-  };
 }
