@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
 import { Link, usePathname, useRouter } from '@/i18n/navigation';
+import { trackEvent } from '@/lib/analytics/gtag';
 import { routing, type Locale } from '@/i18n/routing';
 import styles from './Header.module.css';
 
@@ -225,7 +226,7 @@ export default function Header() {
               </li>
             ))}
           </ul>
-          <Link href={CTA_HREF} className={styles.ctaButton}>
+          <Link href={CTA_HREF} className={styles.ctaButton} onClick={() => trackEvent('cta_click', { location: 'header_desktop' })}>
             {t('cta')}
           </Link>
           <div className={styles.languageDropdown} ref={languageRef}>
@@ -307,7 +308,7 @@ export default function Header() {
 
         {/* 태블릿·모바일: CTA + 햄버거 */}
         <div className={styles.mobileActions}>
-          <Link href={CTA_HREF} className={styles.mobileCtaInline} onClick={closeMobileMenu}>
+          <Link href={CTA_HREF} className={styles.mobileCtaInline} onClick={() => { closeMobileMenu(); trackEvent('cta_click', { location: 'header_mobile' }); }}>
             {t('cta')}
           </Link>
           <button

@@ -2,7 +2,7 @@
 
 import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
-import { Link } from '@/i18n/navigation';
+import TrackedLink from '@/components/analytics/TrackedLink';
 import { Icon } from '@/src/components/Icon';
 import styles from './HomeContactSection.module.css';
 
@@ -33,18 +33,18 @@ export async function HomeContactSection() {
           <div className={styles.contactList}>
             <div className={styles.contactItem}>
               <Icon name="mail" className={styles.icon} color="#1e2939" aria-hidden="true" />
-              <span className={styles.contactText}>digitalpresso@digitalpresso.ai</span>
+              <a href="mailto:digitalpresso@digitalpresso.ai" className={styles.contactText}>digitalpresso@digitalpresso.ai</a>
             </div>
             <div className={styles.contactItem}>
               <Icon name="phone" className={styles.icon} color="#1e2939" aria-hidden="true" />
-              <span className={styles.contactText}>02-455-5796</span>
+              <a href="tel:0244555796" className={styles.contactText}>02-455-5796</a>
             </div>
           </div>
         </div>
 
-        <Link href="/contact" className={styles.ctaButton}>
+        <TrackedLink href="/contact" location="home_contact" className={styles.ctaButton}>
           {t('cta')}
-        </Link>
+        </TrackedLink>
       </div>
     </section>
   );

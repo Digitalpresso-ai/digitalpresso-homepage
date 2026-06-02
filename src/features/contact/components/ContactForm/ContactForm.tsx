@@ -5,6 +5,7 @@
 import { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { trackEvent } from '@/lib/analytics/gtag';
 import { useTranslations } from 'next-intl';
 import {
   contactFormSchema,
@@ -111,6 +112,7 @@ export function ContactForm() {
         throw new Error(`HTTP error: ${response.status}`);
       }
 
+      trackEvent('generate_lead', { form: 'contact' });
       setIsSuccess(true);
     } catch {
       setSubmitError(t('errorMessage'));
