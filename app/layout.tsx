@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Noto_Sans_JP, Noto_Sans_KR } from "next/font/google";
 import localFont from "next/font/local";
-import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
-import GAPageTracker from "@/components/analytics/GAPageTracker";
 import { getSiteUrl } from "@/lib/site-url";
 import QueryProvider from "@/src/providers/QueryProvider";
 import "./globals.css";
@@ -91,8 +89,6 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${notoSansKR.variable} ${notoSansJP.variable} ${pretendard.variable}`}
       >
-        <GoogleAnalytics />
-        <GAPageTracker />
         <QueryProvider>{children}</QueryProvider>
       </body>
     </html>
