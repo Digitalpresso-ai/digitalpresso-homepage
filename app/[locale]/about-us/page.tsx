@@ -12,19 +12,19 @@ interface AboutUsPageProps {
 
 const ABOUT_META: Record<AppLocale, { title: string; description: string }> = {
   ko: {
-    title: "회사 소개 | digitalPresso",
+    title: "회사 소개 | 디지털프레소(digitalPresso)",
     description:
-      "digitalPresso의 비전, 팀, 오피스를 소개합니다. 현장 중심 AI 기술로 산업 데이터 자동화를 실현합니다.",
+      "디지털프레소(digitalPresso)의 비전, 팀, 오피스를 소개합니다. 현장 중심 AI 기술로 산업 데이터 자동화를 실현합니다.",
   },
   en: {
-    title: "About Us | digitalPresso",
+    title: "About Us | digitalPresso (디지털프레소)",
     description:
-      "Learn about digitalPresso's vision, team, and office. We build AI solutions for field-first industrial data automation.",
+      "Learn about digitalPresso (디지털프레소)'s vision, team, and office. We build AI solutions for field-first industrial data automation.",
   },
   ja: {
-    title: "会社紹介 | digitalPresso",
+    title: "会社紹介 | digitalPresso (디지털프레소)",
     description:
-      "digitalPressoのビジョン、チーム、オフィスをご紹介します。現場起点のAI技術で産業データ自動化を実現します。",
+      "digitalPresso（디지털프레소）のビジョン、チーム、オフィスをご紹介します。現場起点のAI技術で産業データ自動化を実現します。",
   },
 };
 
