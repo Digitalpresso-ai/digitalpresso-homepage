@@ -39,11 +39,11 @@ const siteUrl = getSiteUrl();
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "digitalPresso | RENAME DP",
+    default: "디지털프레소(digitalPresso) | RENAME DP",
     template: "%s | digitalPresso",
   },
   description:
-    "건설 현장 기록, 안전·품질 관리, 보고 자동화를 지원하는 AI 기반 현장 운영 솔루션",
+    "디지털프레소(digitalPresso) — 건설 현장 기록, 안전·품질 관리, 보고 자동화를 지원하는 AI 기반 현장 운영 솔루션",
   openGraph: {
     type: "website",
     locale: "ko_KR",
@@ -79,6 +79,20 @@ export const metadata: Metadata = {
   },
 };
 
+// Organization 구조화 데이터(JSON-LD).
+// 구글에 회사 정체성을 명시적으로 알리고, alternateName으로 한글 브랜드명("디지털프레소")을
+// 영문명(digitalPresso)과 연결해 한글 검색에서도 사이트가 노출되도록 돕는다.
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "digitalPresso",
+  alternateName: ["디지털프레소", "디지털 프레소", "RENAME DP"],
+  url: siteUrl,
+  logo: `${siteUrl}/images/header-background.png`,
+  description:
+    "건설 현장 기록, 안전·품질 관리, 보고 자동화를 지원하는 AI 기반 현장 운영 솔루션",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -89,6 +103,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${notoSansKR.variable} ${notoSansJP.variable} ${pretendard.variable}`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationJsonLd),
+          }}
+        />
         <QueryProvider>{children}</QueryProvider>
       </body>
     </html>
