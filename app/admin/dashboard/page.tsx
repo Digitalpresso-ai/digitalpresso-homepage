@@ -24,11 +24,16 @@ import styles from './page.module.css';
 
 export const dynamic = 'force-dynamic';
 
-async function safeGA<T>(fn: () => Promise<T>): Promise<T | null> {
+/**
+ * GA 호출을 감싸 "진짜 실패"와 "데이터 없음"을 구분한다.
+ * - ok: false  → API 호출 자체가 실패 (권한/네트워크/설정 오류) → 빨간 연결 오류
+ * - ok: true   → 호출 성공 (data가 비어 있어도 정상. 새 속성이라 데이터가 0일 뿐)
+ */
+async function safeGA<T>(fn: () => Promise<T>): Promise<{ ok: true; data: T } | { ok: false }> {
   try {
-    return await fn();
+    return { ok: true, data: await fn() };
   } catch {
-    return null;
+    return { ok: false };
   }
 }
 
@@ -53,6 +58,7 @@ export default async function DashboardPage({
   const { from, to } = parseDateRange(fromParam, toParam);
 
   let gaError: string | null = null;
+  let gaEmpty = false;
 
   /* ─── Overview ─── */
   let overviewData: Awaited<ReturnType<typeof getOverviewMetrics>> | null = null;
@@ -80,31 +86,36 @@ export default async function DashboardPage({
       safeGA(() => getConversions(from, to)),
       getArticleStats().catch(() => ({ total: 0 })),
     ]);
-    overviewData = ov;
-    timeline     = tl ?? [];
-    topPages     = tp ?? [];
-    conversions  = conv ?? [];
+    overviewData = ov.ok ? ov.data : null;
+    timeline     = tl.ok ? tl.data : [];
+    topPages     = tp.ok ? tp.data : [];
+    conversions  = conv.ok ? conv.data : [];
     articleStats = stats;
-    if (!ov) gaError = 'GA 연결 오류';
+    if (!ov.ok) gaError = 'GA 연결 오류';
+    else if (overviewData && overviewData.sessions === 0 && overviewData.pageViews === 0) gaEmpty = true;
   } else if (activeTab === 'content') {
     const [ci, arts] = await Promise.all([
       safeGA(() => getContentPerformance(from, to)),
       getPublishedArticles().catch(() => []),
     ]);
-    contentItems = ci ?? [];
+    contentItems = ci.ok ? ci.data : [];
     allArticles  = arts;
+    if (!ci.ok) gaError = 'GA 연결 오류';
+    else if (contentItems.length === 0) gaEmpty = true;
   } else if (activeTab === 'locale') {
     const ld = await safeGA(() => getLocaleBreakdown(from, to));
-    localeData = ld ?? [];
-    if (!ld) gaError = 'GA 연결 오류';
+    localeData = ld.ok ? ld.data : [];
+    if (!ld.ok) gaError = 'GA 연결 오류';
+    else if (localeData.every(l => l.sessions === 0 && l.pageViews === 0)) gaEmpty = true;
   } else if (activeTab === 'traffic') {
     const [ch, sr] = await Promise.all([
       safeGA(() => getTrafficAcquisition(from, to)),
       safeGA(() => getTopSources(from, to)),
     ]);
-    channels = ch ?? [];
-    sources  = sr ?? [];
-    if (!ch) gaError = 'GA 연결 오류';
+    channels = ch.ok ? ch.data : [];
+    sources  = sr.ok ? sr.data : [];
+    if (!ch.ok) gaError = 'GA 연결 오류';
+    else if (channels.length === 0) gaEmpty = true;
   }
 
   const totalConversions = conversions.reduce((s, c) => s + c.count, 0);
@@ -118,14 +129,19 @@ export default async function DashboardPage({
 
       <DashboardTabs activeTab={activeTab} from={from} to={to} />
 
-      {gaError && (
+      {gaError ? (
         <div className={styles.gaError}>
           <strong>GA 연결 오류:</strong> {gaError}
           {!process.env.GA_PROPERTY_ID && (
             <span> — <code>.env.local</code>에 <code>GA_PROPERTY_ID</code>를 추가해주세요.</span>
           )}
         </div>
-      )}
+      ) : gaEmpty ? (
+        <div className={styles.gaEmpty}>
+          이 기간에는 아직 수집된 데이터가 없습니다. 새 GA 속성으로 전환한 직후라 데이터가
+          쌓이기까지 하루 정도 걸릴 수 있어요.
+        </div>
+      ) : null}
 
       {/* ── 개요 탭 ── */}
       {activeTab === 'overview' && overviewData && (
