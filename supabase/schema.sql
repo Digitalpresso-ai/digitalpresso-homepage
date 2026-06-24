@@ -14,6 +14,8 @@ CREATE TABLE IF NOT EXISTS articles (
   -- 'draft' = 임시저장(공개 안 됨), 'published' = 실서버 게시
   status         TEXT        NOT NULL DEFAULT 'draft',
   published_at   TIMESTAMPTZ,
+  -- 고정 시각. null 이면 고정 안 됨. 값이 있으면 목록 최상단 노출, 최신 고정순 정렬.
+  pinned_at      TIMESTAMPTZ,
   created_at     TIMESTAMPTZ DEFAULT NOW()
 );
 
@@ -21,6 +23,7 @@ CREATE TABLE IF NOT EXISTS articles (
 CREATE INDEX IF NOT EXISTS articles_created_at_idx ON articles (created_at DESC);
 CREATE INDEX IF NOT EXISTS articles_category_idx ON articles (category);
 CREATE INDEX IF NOT EXISTS articles_status_idx ON articles (status);
+CREATE INDEX IF NOT EXISTS articles_pinned_at_idx ON articles (pinned_at DESC) WHERE pinned_at IS NOT NULL;
 
 -- RLS (Row Level Security)
 ALTER TABLE articles ENABLE ROW LEVEL SECURITY;

@@ -20,6 +20,9 @@ export const articles = pgTable('articles', {
   // 'draft' = 임시저장(공개 안 됨), 'published' = 실서버 게시
   status: text('status').notNull().default('draft'),
   published_at: timestamp('published_at', { withTimezone: true }),
+  // 고정 시각. null 이면 고정 안 됨. 값이 있으면 목록 최상단에 노출되며,
+  // 여러 고정글은 pinned_at 최신순으로 정렬된다.
+  pinned_at: timestamp('pinned_at', { withTimezone: true }),
   created_at: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
 });
 

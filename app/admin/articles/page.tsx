@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { getAdminArticles } from '@/backend/article/application/server-facade';
 import PublishButton from '@/src/features/admin/components/PublishButton/PublishButton';
+import PinButton from '@/src/features/admin/components/PinButton/PinButton';
 import styles from './page.module.css';
 
 const CATEGORY_LABELS: Record<string, string> = {
@@ -68,9 +69,11 @@ export default async function ArticlesPage({ searchParams }: Props) {
             <tbody>
               {articles.map((article) => {
                 const isPublished = article.status === 'published';
+                const isPinned = !!article.pinned_at;
                 return (
                   <tr key={article.id}>
                     <td className={styles.titleCell}>
+                      {isPinned && <span className={styles.pinMark} title="고정됨">📌</span>}
                       {isPublished ? (
                         <a
                           href={`/news/article/${article.id}`}
@@ -100,6 +103,7 @@ export default async function ArticlesPage({ searchParams }: Props) {
                       {new Date(article.created_at).toLocaleDateString('ko-KR')}
                     </td>
                     <td className={styles.actionsCell}>
+                      <PinButton articleId={article.id} pinnedAt={article.pinned_at} />
                       <PublishButton articleId={article.id} status={article.status} />
                       <Link href={`/admin/articles/${article.id}/edit`} className={styles.editLink}>
                         수정

@@ -57,3 +57,14 @@ export async function publishArticleApi(id: string, unpublish = false): Promise<
   if (!data.success) throw new Error(data.error);
   return data.data;
 }
+
+/** 아티클 고정. unpin=true 면 고정 해제 */
+export async function pinArticleApi(id: string, unpin = false): Promise<ArticleEntity> {
+  const { data } = await api.post<ApiResponse<ArticleEntity>>(
+    `/articles/${id}/pin`,
+    null,
+    { params: unpin ? { unpin: 1 } : undefined }
+  );
+  if (!data.success) throw new Error(data.error);
+  return data.data;
+}

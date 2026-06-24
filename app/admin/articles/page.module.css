@@ -122,6 +122,11 @@
   white-space: nowrap;
 }
 
+.pinMark {
+  margin-right: 6px;
+  font-size: 0.8125rem;
+}
+
 .titleLink {
   color: var(--color-heading);
   text-decoration: none;

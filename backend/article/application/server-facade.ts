@@ -9,6 +9,7 @@ import { UpdateArticleUsecase } from './usecases/UpdateArticleUsecase';
 import { DeleteArticleUsecase } from './usecases/DeleteArticleUsecase';
 import { UploadDraftUsecase } from './usecases/UploadDraftUsecase';
 import { PublishArticleUsecase } from './usecases/PublishArticleUsecase';
+import { PinArticleUsecase } from './usecases/PinArticleUsecase';
 import type { FindAllOptions } from '../domain/repositories/IArticleRepository';
 import type { CreateArticleDto } from './dtos/CreateArticleDto';
 import type { UpdateArticleDto } from './dtos/UpdateArticleDto';
@@ -48,6 +49,16 @@ export async function publishArticle(id: string, now: Date) {
 /** published → draft (사이트에서 내림) */
 export async function unpublishArticle(id: string) {
   return new PublishArticleUsecase(makeRepo()).unpublish(id);
+}
+
+/** 아티클 고정 (목록 최상단 노출) */
+export async function pinArticle(id: string, now: Date) {
+  return new PinArticleUsecase(makeRepo()).pin(id, now);
+}
+
+/** 아티클 고정 해제 */
+export async function unpinArticle(id: string) {
+  return new PinArticleUsecase(makeRepo()).unpin(id);
 }
 
 export async function createArticle(data: CreateArticleDto) {

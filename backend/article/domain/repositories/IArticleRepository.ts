@@ -23,9 +23,11 @@ export interface IArticleRepository {
   countByCategories(status?: ArticleStatus): Promise<Record<string, number>>;
   /** draft → published 또는 published → draft 전환 */
   setStatus(id: string, status: ArticleStatus, publishedAt: Date | null): Promise<ArticleEntity | null>;
+  /** 고정/고정해제. pinnedAt 에 시각을 주면 고정, null 이면 해제 */
+  setPinned(id: string, pinnedAt: Date | null): Promise<ArticleEntity | null>;
   create(
-    data: Omit<ArticleEntity, 'id' | 'created_at' | 'status' | 'published_at'> &
-      Partial<Pick<ArticleEntity, 'status' | 'published_at'>>
+    data: Omit<ArticleEntity, 'id' | 'created_at' | 'status' | 'published_at' | 'pinned_at'> &
+      Partial<Pick<ArticleEntity, 'status' | 'published_at' | 'pinned_at'>>
   ): Promise<ArticleEntity>;
   update(id: string, data: Partial<Omit<ArticleEntity, 'id' | 'created_at'>>): Promise<ArticleEntity | null>;
   delete(id: string): Promise<boolean>;

@@ -32,11 +32,13 @@ export class DrArticleRepository implements IArticleRepository {
         category: articles.category,
         status: articles.status,
         published_at: articles.published_at,
+        pinned_at: articles.pinned_at,
         created_at: articles.created_at,
       })
       .from(articles)
       .where(where)
-      .orderBy(desc(articles.created_at))
+      // 고정글(pinned_at 최신순) 먼저, 그다음 작성일 최신순
+      .orderBy(sql`${articles.pinned_at} DESC NULLS LAST`, desc(articles.created_at))
       .limit(limit ?? 10000)
       .offset(offset ?? 0);
   }
@@ -132,9 +134,18 @@ export class DrArticleRepository implements IArticleRepository {
     return rows[0] ?? null;
   }
 
+  async setPinned(id: string, pinnedAt: Date | null): Promise<ArticleEntity | null> {
+    const rows = await this.db
+      .update(articles)
+      .set({ pinned_at: pinnedAt })
+      .where(eq(articles.id, id))
+      .returning();
+    return rows[0] ?? null;
+  }
+
   async create(
-    data: Omit<ArticleEntity, 'id' | 'created_at' | 'status' | 'published_at'> &
-      Partial<Pick<ArticleEntity, 'status' | 'published_at'>>
+    data: Omit<ArticleEntity, 'id' | 'created_at' | 'status' | 'published_at' | 'pinned_at'> &
+      Partial<Pick<ArticleEntity, 'status' | 'published_at' | 'pinned_at'>>
   ): Promise<ArticleEntity> {
     const rows = await this.db.insert(articles).values(data).returning();
     return rows[0];
