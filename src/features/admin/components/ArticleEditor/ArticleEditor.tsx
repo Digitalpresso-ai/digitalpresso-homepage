@@ -11,7 +11,7 @@ import { marked } from 'marked';
 import { useRef, useState, useTransition, type ChangeEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient as createBrowserClient } from '@/lib/supabase/client';
-import { useCreateArticle, useUpdateArticle } from '@/src/hooks/mutations/useArticleMutations';
+import { useCreateArticle, useUpdateArticle, usePublishArticle } from '@/src/hooks/mutations/useArticleMutations';
 import type { ArticleEntity, NewsCategory } from '@/src/features/news/types/article.types';
 import styles from './ArticleEditor.module.css';
 
@@ -74,6 +74,13 @@ export default function ArticleEditor({ article }: Props) {
 
   const createArticleMutation = useCreateArticle();
   const updateArticleMutation = useUpdateArticle();
+  const publishArticleMutation = usePublishArticle();
+
+  // 현재 아티클의 게시 상태 (저장/게시에 따라 갱신)
+  const [status, setStatus] = useState<string>(article?.status ?? 'draft');
+  const [currentArticleId, setCurrentArticleId] = useState<string | null>(article?.id ?? null);
+  const [publishError, setPublishError] = useState<string | null>(null);
+  const isPublished = status === 'published';
 
   const ImageWithTemp = TiptapImage.extend({
     addAttributes() {
@@ -239,6 +246,33 @@ export default function ArticleEditor({ article }: Props) {
     }
   };
 
+  const handlePublishToggle = () => {
+    const targetId = currentArticleId ?? article?.id;
+    if (!targetId) {
+      setPublishError('먼저 저장한 뒤 게시할 수 있습니다.');
+      return;
+    }
+
+    if (isPublished) {
+      const ok = window.confirm('이 아티클을 사이트에서 내려 임시저장으로 되돌릴까요?');
+      if (!ok) return;
+    }
+
+    setPublishError(null);
+    startTransition(async () => {
+      try {
+        const updated = await publishArticleMutation.mutateAsync({
+          id: targetId,
+          unpublish: isPublished,
+        });
+        setStatus(updated.status);
+      } catch (error) {
+        const message = error instanceof Error ? error.message : '게시 처리에 실패했습니다.';
+        setPublishError(message);
+      }
+    });
+  };
+
   const handleSubmit = () => {
     const content = editor?.getHTML() ?? '';
     if (!title.trim()) { setServerError('제목을 입력해주세요.'); return; }
@@ -269,6 +303,7 @@ export default function ArticleEditor({ article }: Props) {
           });
           articleId = created.id;
           createdArticleId = created.id;
+          setCurrentArticleId(created.id);
         }
 
         let nextContent = content;
@@ -421,7 +456,11 @@ export default function ArticleEditor({ article }: Props) {
         <div className={styles.actions}>
           {serverError && <span className={styles.errorMsg}>{serverError}</span>}
           {translateError && <span className={styles.errorMsg}>{translateError}</span>}
+          {publishError && <span className={styles.errorMsg}>{publishError}</span>}
           {saveSuccess && <span className={styles.successMsg}>저장됨 ✓</span>}
+          <span className={`${styles.statusBadge} ${isPublished ? styles.statusPublished : styles.statusDraft}`}>
+            {isPublished ? '게시됨' : '임시저장'}
+          </span>
           <button
             type="button"
             onClick={() => handleTranslate()}
@@ -437,6 +476,14 @@ export default function ArticleEditor({ article }: Props) {
             className={styles.publishBtn}
           >
             {isPending || isUploading ? '저장 중...' : '저장'}
+          </button>
+          <button
+            type="button"
+            onClick={() => handlePublishToggle()}
+            disabled={isPending || isUploading || isTranslating}
+            className={isPublished ? styles.unpublishBtn : styles.goLiveBtn}
+          >
+            {isPublished ? '게시 내리기' : '게시하기'}
           </button>
         </div>
       </div>

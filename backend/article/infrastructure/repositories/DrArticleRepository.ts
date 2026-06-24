@@ -2,7 +2,7 @@ import { and, eq, ne, desc, lt, gt, ilike, count as drizzleCount, sql } from 'dr
 import type { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
 import type * as schema from '@/backend/shared/db/schema';
 import { articles } from '@/backend/shared/db/schema';
-import type { IArticleRepository, FindAllOptions } from '../../domain/repositories/IArticleRepository';
+import type { IArticleRepository, FindAllOptions, ArticleStatus } from '../../domain/repositories/IArticleRepository';
 import type { ArticleEntity } from '../../domain/entities/ArticleEntity';
 
 type DB = PostgresJsDatabase<typeof schema>;
@@ -11,9 +11,12 @@ export class DrArticleRepository implements IArticleRepository {
   constructor(private readonly db: DB) {}
 
   async findAll(options: FindAllOptions = {}): Promise<ArticleEntity[]> {
-    const { category, limit, offset } = options;
+    const { category, limit, offset, status } = options;
 
-    const conditions = category ? [eq(articles.category, category)] : [];
+    const conditions = [
+      ...(category ? [eq(articles.category, category)] : []),
+      ...(status ? [eq(articles.status, status)] : []),
+    ];
     const where = conditions.length ? and(...conditions) : undefined;
 
     return this.db
@@ -27,6 +30,8 @@ export class DrArticleRepository implements IArticleRepository {
         content_ja: sql<string>`left(${articles.content_ja}, 500)`,
         cover_img_url: articles.cover_img_url,
         category: articles.category,
+        status: articles.status,
+        published_at: articles.published_at,
         created_at: articles.created_at,
       })
       .from(articles)
@@ -57,6 +62,7 @@ export class DrArticleRepository implements IArticleRepository {
         .where(
           and(
             eq(articles.category, category),
+            eq(articles.status, 'published'),
             ne(articles.id, id),
             lt(articles.created_at, createdAt)
           )
@@ -69,6 +75,7 @@ export class DrArticleRepository implements IArticleRepository {
         .where(
           and(
             eq(articles.category, category),
+            eq(articles.status, 'published'),
             ne(articles.id, id),
             gt(articles.created_at, createdAt)
           )
@@ -89,8 +96,12 @@ export class DrArticleRepository implements IArticleRepository {
     return rows[0] ?? null;
   }
 
-  async count(category?: string): Promise<number> {
-    const where = category ? eq(articles.category, category) : undefined;
+  async count(category?: string, status?: ArticleStatus): Promise<number> {
+    const conditions = [
+      ...(category ? [eq(articles.category, category)] : []),
+      ...(status ? [eq(articles.status, status)] : []),
+    ];
+    const where = conditions.length ? and(...conditions) : undefined;
     const rows = await this.db
       .select({ value: drizzleCount() })
       .from(articles)
@@ -98,15 +109,33 @@ export class DrArticleRepository implements IArticleRepository {
     return Number(rows[0]?.value ?? 0);
   }
 
-  async countByCategories(): Promise<Record<string, number>> {
+  async countByCategories(status?: ArticleStatus): Promise<Record<string, number>> {
+    const where = status ? eq(articles.status, status) : undefined;
     const rows = await this.db
       .select({ category: articles.category, value: drizzleCount() })
       .from(articles)
+      .where(where)
       .groupBy(articles.category);
     return Object.fromEntries(rows.map((r) => [r.category, Number(r.value)]));
   }
 
-  async create(data: Omit<ArticleEntity, 'id' | 'created_at'>): Promise<ArticleEntity> {
+  async setStatus(
+    id: string,
+    status: ArticleStatus,
+    publishedAt: Date | null
+  ): Promise<ArticleEntity | null> {
+    const rows = await this.db
+      .update(articles)
+      .set({ status, published_at: publishedAt })
+      .where(eq(articles.id, id))
+      .returning();
+    return rows[0] ?? null;
+  }
+
+  async create(
+    data: Omit<ArticleEntity, 'id' | 'created_at' | 'status' | 'published_at'> &
+      Partial<Pick<ArticleEntity, 'status' | 'published_at'>>
+  ): Promise<ArticleEntity> {
     const rows = await this.db.insert(articles).values(data).returning();
     return rows[0];
   }

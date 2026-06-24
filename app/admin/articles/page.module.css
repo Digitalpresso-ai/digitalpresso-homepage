@@ -173,6 +173,9 @@
 
 .actionsCell {
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
 
 .editLink {

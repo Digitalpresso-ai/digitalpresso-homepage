@@ -17,6 +17,9 @@ export const articles = pgTable('articles', {
   content_ja: text('content_ja').notNull().default(''),
   cover_img_url: text('cover_img_url'),
   category: text('category').notNull().default('company'),
+  // 'draft' = 임시저장(공개 안 됨), 'published' = 실서버 게시
+  status: text('status').notNull().default('draft'),
+  published_at: timestamp('published_at', { withTimezone: true }),
   created_at: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
 });
 

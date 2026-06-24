@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { createArticleApi, updateArticleApi, deleteArticleApi } from '@/src/lib/api/articles.api';
+import { createArticleApi, updateArticleApi, deleteArticleApi, publishArticleApi } from '@/src/lib/api/articles.api';
 
 export function useCreateArticle() {
   const client = useQueryClient();
@@ -29,6 +29,18 @@ export function useDeleteArticle() {
     mutationFn: (id: string) => deleteArticleApi(id),
     onSuccess: () => {
       client.invalidateQueries({ queryKey: ['articles'] });
+    },
+  });
+}
+
+export function usePublishArticle() {
+  const client = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, unpublish }: { id: string; unpublish?: boolean }) =>
+      publishArticleApi(id, unpublish),
+    onSuccess: (_, { id }) => {
+      client.invalidateQueries({ queryKey: ['articles'] });
+      client.invalidateQueries({ queryKey: ['article', id] });
     },
   });
 }

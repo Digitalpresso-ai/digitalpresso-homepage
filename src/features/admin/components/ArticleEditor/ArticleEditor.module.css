@@ -48,13 +48,54 @@
 
 .draftBtn,
 .publishBtn,
-.translateBtn {
+.translateBtn,
+.goLiveBtn,
+.unpublishBtn {
   padding: var(--spacing-2) var(--spacing-5);
   border-radius: 6px;
   font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;
   transition: background 0.15s;
+}
+
+.goLiveBtn {
+  border: none;
+  background: #2f855a;
+  color: #fff;
+}
+.goLiveBtn:hover:not(:disabled) {
+  background: #276749;
+}
+
+.unpublishBtn {
+  border: 1px solid #cbd5e0;
+  background: #fff;
+  color: #718096;
+}
+.unpublishBtn:hover:not(:disabled) {
+  background: #f7fafc;
+}
+
+.goLiveBtn:disabled,
+.unpublishBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.statusBadge {
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.statusPublished {
+  background: #f0fff4;
+  color: #276749;
+}
+.statusDraft {
+  background: #f7fafc;
+  color: #718096;
 }
 
 .draftBtn {

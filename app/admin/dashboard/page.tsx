@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import {
-  getPublishedArticles,
+  getAdminArticles,
   getArticleStats,
 } from '@/backend/article/application/server-facade';
 import { parseDateRange, formatKo } from '@/lib/analytics/date-utils';
@@ -69,7 +69,7 @@ export default async function DashboardPage({
 
   /* ─── Content ─── */
   let contentItems: Awaited<ReturnType<typeof getContentPerformance>> = [];
-  let allArticles: Awaited<ReturnType<typeof getPublishedArticles>> = [];
+  let allArticles: Awaited<ReturnType<typeof getAdminArticles>> = [];
 
   /* ─── Locale ─── */
   let localeData: Awaited<ReturnType<typeof getLocaleBreakdown>> = [];
@@ -96,7 +96,7 @@ export default async function DashboardPage({
   } else if (activeTab === 'content') {
     const [ci, arts] = await Promise.all([
       safeGA(() => getContentPerformance(from, to)),
-      getPublishedArticles().catch(() => []),
+      getAdminArticles().catch(() => []),
     ]);
     contentItems = ci.ok ? ci.data : [];
     allArticles  = arts;
@@ -237,7 +237,7 @@ export default async function DashboardPage({
 }
 
 async function RecentArticleTable() {
-  const articles = await getPublishedArticles().catch(() => []);
+  const articles = await getAdminArticles().catch(() => []);
   const recent = articles.slice(0, 5);
 
   if (recent.length === 0) {
