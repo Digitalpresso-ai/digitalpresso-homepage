@@ -8,6 +8,20 @@
       "when": 1779773964544,
       "tag": "0000_stormy_enchantress",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1782268187850,
+      "tag": "0001_add_article_status",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1782271441732,
+      "tag": "0002_add_article_pinned_at",
+      "breakpoints": true
     }
   ]
 }

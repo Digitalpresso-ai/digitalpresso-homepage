@@ -1,12 +1,8 @@
 import Link from 'next/link';
-import { getPublishedArticles } from '@/backend/article/application/server-facade';
+import { getAdminArticles } from '@/backend/article/application/server-facade';
+import PublishButton from '@/src/features/admin/components/PublishButton/PublishButton';
+import PinButton from '@/src/features/admin/components/PinButton/PinButton';
 import styles from './page.module.css';
-
-const CATEGORY_FILTERS = [
-  { key: 'company', label: '회사소식' },
-  { key: 'construction', label: '건설소식' },
-  { key: 'technology', label: '기술소식' },
-] as const;
 
 const CATEGORY_LABELS: Record<string, string> = {
   company: '회사소식',
@@ -21,7 +17,7 @@ interface Props {
 export default async function ArticlesPage({ searchParams }: Props) {
   const { category } = await searchParams;
   const activeFilter = category ?? 'company';
-  const articles = await getPublishedArticles({ category: activeFilter });
+  const articles = await getAdminArticles({ category: activeFilter });
 
   return (
     <div className={styles.page}>
@@ -64,39 +60,58 @@ export default async function ArticlesPage({ searchParams }: Props) {
             <thead>
               <tr>
                 <th>제목</th>
+                <th>상태</th>
                 <th>카테고리</th>
                 <th>작성일</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
-              {articles.map((article) => (
-                <tr key={article.id}>
-                  <td className={styles.titleCell}>
-                    <a
-                      href={`/news/article/${article.id}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={styles.titleLink}
-                    >
-                      {article.title}
-                    </a>
-                  </td>
-                  <td>
-                    <span className={styles.category}>
-                      {CATEGORY_LABELS[article.category] ?? article.category}
-                    </span>
-                  </td>
-                  <td className={styles.dateCell}>
-                    {new Date(article.created_at).toLocaleDateString('ko-KR')}
-                  </td>
-                  <td className={styles.actionsCell}>
-                    <Link href={`/admin/articles/${article.id}/edit`} className={styles.editLink}>
-                      수정
-                    </Link>
-                  </td>
-                </tr>
-              ))}
+              {articles.map((article) => {
+                const isPublished = article.status === 'published';
+                const isPinned = !!article.pinned_at;
+                return (
+                  <tr key={article.id}>
+                    <td className={styles.titleCell}>
+                      {isPinned && <span className={styles.pinMark} title="고정됨">📌</span>}
+                      {isPublished ? (
+                        <a
+                          href={`/news/article/${article.id}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={styles.titleLink}
+                        >
+                          {article.title}
+                        </a>
+                      ) : (
+                        <Link href={`/admin/articles/${article.id}/edit`} className={styles.titleLink}>
+                          {article.title || '(제목 없음)'}
+                        </Link>
+                      )}
+                    </td>
+                    <td>
+                      <span className={`${styles.status} ${isPublished ? styles.published : styles.draft}`}>
+                        {isPublished ? '게시됨' : '임시저장'}
+                      </span>
+                    </td>
+                    <td>
+                      <span className={styles.category}>
+                        {CATEGORY_LABELS[article.category] ?? article.category}
+                      </span>
+                    </td>
+                    <td className={styles.dateCell}>
+                      {new Date(article.created_at).toLocaleDateString('ko-KR')}
+                    </td>
+                    <td className={styles.actionsCell}>
+                      <PinButton articleId={article.id} pinnedAt={article.pinned_at} />
+                      <PublishButton articleId={article.id} status={article.status} />
+                      <Link href={`/admin/articles/${article.id}/edit`} className={styles.editLink}>
+                        수정
+                      </Link>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
