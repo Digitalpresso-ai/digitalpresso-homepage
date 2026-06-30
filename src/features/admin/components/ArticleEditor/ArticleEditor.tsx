@@ -247,67 +247,76 @@ export default function ArticleEditor({ article }: Props) {
   };
 
   const handlePublishToggle = () => {
-    const targetId = currentArticleId ?? article?.id;
-    if (!targetId) {
-      setPublishError('먼저 저장한 뒤 게시할 수 있습니다.');
+    // 게시 내리기(unpublish)는 저장 없이 바로 처리
+    if (isPublished) {
+      const targetId = currentArticleId ?? article?.id;
+      if (!targetId) { setPublishError('대상 아티클이 없습니다.'); return; }
+      const ok = window.confirm('이 아티클을 사이트에서 내려 임시저장으로 되돌릴까요?');
+      if (!ok) return;
+      setPublishError(null);
+      startTransition(async () => {
+        try {
+          const updated = await publishArticleMutation.mutateAsync({ id: targetId, unpublish: true });
+          setStatus(updated.status);
+        } catch (error) {
+          setPublishError(error instanceof Error ? error.message : '게시 처리에 실패했습니다.');
+        }
+      });
       return;
     }
 
-    if (isPublished) {
-      const ok = window.confirm('이 아티클을 사이트에서 내려 임시저장으로 되돌릴까요?');
-      if (!ok) return;
-    }
-
-    setPublishError(null);
-    startTransition(async () => {
-      try {
-        const updated = await publishArticleMutation.mutateAsync({
-          id: targetId,
-          unpublish: isPublished,
-        });
-        setStatus(updated.status);
-      } catch (error) {
-        const message = error instanceof Error ? error.message : '게시 처리에 실패했습니다.';
-        setPublishError(message);
-      }
-    });
-  };
-
-  const handleSubmit = () => {
+    // 게시: 먼저 현재 편집 내용(대표 이미지 포함)을 저장한 뒤 게시한다.
+    // 이렇게 해야 새로 고른 이미지가 DB 의 cover_img_url 에 반영돼 게시 검증을 통과한다.
     const content = editor?.getHTML() ?? '';
     if (!title.trim()) { setServerError('제목을 입력해주세요.'); return; }
     if (!content || content === '<p></p>') { setServerError('본문을 작성해주세요.'); return; }
 
     setServerError(null);
-    setSaveSuccess(false);
-
+    setPublishError(null);
     startTransition(async () => {
-      let createdArticleId: string | null = null;
       try {
-        setIsUploading(true);
-        setUploadError(null);
+        const saved = await saveArticle();
+        const updated = await publishArticleMutation.mutateAsync({ id: saved.articleId, unpublish: false });
+        setStatus(updated.status);
+      } catch (error) {
+        setPublishError(error instanceof Error ? error.message : '게시 처리에 실패했습니다.');
+      }
+    });
+  };
 
-        const supabase = createBrowserClient();
-        let articleId = article?.id;
+  /**
+   * 현재 편집 내용을 저장한다(생성/이미지 업로드/업데이트 일괄).
+   * 저장된 articleId 와 cover URL 을 반환한다. 저장과 게시 양쪽에서 재사용.
+   */
+  const saveArticle = async (): Promise<{ articleId: string; coverUrl: string | null }> => {
+    const content = editor?.getHTML() ?? '';
+    setSaveSuccess(false);
+    let createdArticleId: string | null = null;
+    try {
+      setIsUploading(true);
+      setUploadError(null);
 
-        if (!articleId) {
-          const created = await createArticleMutation.mutateAsync({
-            title,
-            category,
-            title_en: '',
-            title_ja: '',
-            content: '',
-            content_en: '',
-            content_ja: '',
-            cover_img_url: null,
-          });
-          articleId = created.id;
-          createdArticleId = created.id;
-          setCurrentArticleId(created.id);
-        }
+      const supabase = createBrowserClient();
+      let articleId = currentArticleId ?? article?.id;
 
-        let nextContent = content;
-        let resolvedCoverUrl: string | null = coverImageUrl;
+      if (!articleId) {
+        const created = await createArticleMutation.mutateAsync({
+          title,
+          category,
+          title_en: '',
+          title_ja: '',
+          content: '',
+          content_en: '',
+          content_ja: '',
+          cover_img_url: null,
+        });
+        articleId = created.id;
+        createdArticleId = created.id;
+        setCurrentArticleId(created.id);
+      }
+
+      let nextContent = content;
+      let resolvedCoverUrl: string | null = coverImageUrl;
 
         if (pendingCoverFile) {
           const objectKey = generateId();
@@ -411,30 +420,48 @@ export default function ArticleEditor({ article }: Props) {
           },
         });
 
-        if (editor && nextContent !== content) {
-          editor.commands.setContent(nextContent);
-        }
+      if (editor && nextContent !== content) {
+        editor.commands.setContent(nextContent);
+      }
 
-        setPendingImages({});
-        if (pendingCoverPreview) URL.revokeObjectURL(pendingCoverPreview);
-        setPendingCoverFile(null);
-        setPendingCoverPreview(null);
-        setCoverImageUrl(resolvedCoverUrl);
-        setSaveSuccess(true);
-        setTimeout(() => setSaveSuccess(false), 3000);
+      setPendingImages({});
+      if (pendingCoverPreview) URL.revokeObjectURL(pendingCoverPreview);
+      setPendingCoverFile(null);
+      setPendingCoverPreview(null);
+      setCoverImageUrl(resolvedCoverUrl);
+      setSaveSuccess(true);
+      setTimeout(() => setSaveSuccess(false), 3000);
 
-        if (!isEdit && createdArticleId) {
-          router.replace(`/admin/articles/${createdArticleId}/edit`);
-        }
-      } catch (error) {
-        const message = error instanceof Error ? error.message : '저장에 실패했습니다.';
-        setUploadError(message);
+      if (!isEdit && createdArticleId) {
+        router.replace(`/admin/articles/${createdArticleId}/edit`);
+      }
 
-        if (!isEdit && createdArticleId) {
-          await fetch(`/api/articles/${createdArticleId}`, { method: 'DELETE' });
-        }
-      } finally {
-        setIsUploading(false);
+      return { articleId, coverUrl: resolvedCoverUrl };
+    } catch (error) {
+      const message = error instanceof Error ? error.message : '저장에 실패했습니다.';
+      setUploadError(message);
+
+      if (!isEdit && createdArticleId) {
+        await fetch(`/api/articles/${createdArticleId}`, { method: 'DELETE' });
+        setCurrentArticleId(null);
+      }
+      throw error instanceof Error ? error : new Error(message);
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  const handleSubmit = () => {
+    const content = editor?.getHTML() ?? '';
+    if (!title.trim()) { setServerError('제목을 입력해주세요.'); return; }
+    if (!content || content === '<p></p>') { setServerError('본문을 작성해주세요.'); return; }
+
+    setServerError(null);
+    startTransition(async () => {
+      try {
+        await saveArticle();
+      } catch {
+        // 에러는 saveArticle 내부에서 uploadError 로 표시됨
       }
     });
   };
