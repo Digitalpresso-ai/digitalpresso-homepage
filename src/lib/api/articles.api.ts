@@ -4,6 +4,17 @@ import type { ApiResponse } from '@/backend/shared/types/ApiResponse';
 
 const api = axios.create({ baseURL: '/api' });
 
+// 서버가 4xx/5xx 를 주면 axios 가 "Request failed with status code 400" 같은
+// 기본 메시지로 throw 한다. 응답 body 의 한국어 error 메시지를 대신 노출한다.
+api.interceptors.response.use(
+  (res) => res,
+  (error) => {
+    const serverMsg = error?.response?.data?.error;
+    if (serverMsg) return Promise.reject(new Error(serverMsg));
+    return Promise.reject(error);
+  }
+);
+
 export interface GetArticlesParams {
   category?: string;
   limit?: number;
