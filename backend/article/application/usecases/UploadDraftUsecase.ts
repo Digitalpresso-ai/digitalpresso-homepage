@@ -58,6 +58,8 @@ export class UploadDraftUsecase {
     const contentEn = input.contentEn ? toHtml(input.contentEn, fmt) : '';
     const contentJa = input.contentJa ? toHtml(input.contentJa, fmt) : '';
 
+    // MCP/스킬로 올라온 글은 항상 임시저장(draft)으로 들어간다.
+    // 대표 이미지를 넣고 admin 에서 [게시] 를 눌러야 실서버에 공개된다.
     const article = await this.repo.create({
       title,
       title_en: (input.titleEn ?? '').trim(),
@@ -67,6 +69,8 @@ export class UploadDraftUsecase {
       content_ja: contentJa,
       cover_img_url: input.coverImgUrl?.trim() || null,
       category,
+      status: 'draft',
+      published_at: null,
     });
 
     return { success: true, id: article.id, deduplicated: false };

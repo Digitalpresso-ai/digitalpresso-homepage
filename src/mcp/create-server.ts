@@ -240,7 +240,7 @@ ${action}
     'upload_draft',
     {
       title: '아티클 초안 업로드',
-      description: '작성한 초안을 CMS(articles 테이블)에 저장합니다. sourceUrl이 같으면 중복 생성하지 않습니다.',
+      description: '작성한 초안을 CMS(articles 테이블)에 임시저장(draft)합니다. 저장만 될 뿐 실서버에는 바로 공개되지 않으며, admin 에서 대표 이미지를 넣고 [게시]를 눌러야 공개됩니다. sourceUrl이 같으면 중복 생성하지 않습니다.',
       inputSchema: {
         title: z.string().min(1).describe('초안 제목'),
         content: z.string().min(1).describe('초안 본문'),
@@ -274,8 +274,8 @@ ${action}
       }
 
       const message = result.deduplicated
-        ? `이미 같은 sourceUrl로 저장된 초안이 있어 기존 항목을 반환합니다. id=${result.id}`
-        : `초안을 저장했습니다. id=${result.id}`
+        ? `이미 같은 sourceUrl로 임시저장된 초안이 있어 기존 항목을 반환합니다. id=${result.id}`
+        : `초안을 임시저장(draft)했습니다. id=${result.id}\n아직 실서버에 공개되지 않았습니다. admin 아티클 관리에서 대표 이미지를 넣고 [게시] 버튼을 눌러야 공개됩니다.`
 
       return {
         content: [{

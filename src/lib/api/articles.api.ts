@@ -46,3 +46,25 @@ export async function deleteArticleApi(id: string): Promise<void> {
   const { data } = await api.delete<ApiResponse<{ id: string }>>(`/articles/${id}`);
   if (!data.success) throw new Error(data.error);
 }
+
+/** draft → published 게시. unpublish=true 면 published → draft 로 내림 */
+export async function publishArticleApi(id: string, unpublish = false): Promise<ArticleEntity> {
+  const { data } = await api.post<ApiResponse<ArticleEntity>>(
+    `/articles/${id}/publish`,
+    null,
+    { params: unpublish ? { unpublish: 1 } : undefined }
+  );
+  if (!data.success) throw new Error(data.error);
+  return data.data;
+}
+
+/** 아티클 고정. unpin=true 면 고정 해제 */
+export async function pinArticleApi(id: string, unpin = false): Promise<ArticleEntity> {
+  const { data } = await api.post<ApiResponse<ArticleEntity>>(
+    `/articles/${id}/pin`,
+    null,
+    { params: unpin ? { unpin: 1 } : undefined }
+  );
+  if (!data.success) throw new Error(data.error);
+  return data.data;
+}
