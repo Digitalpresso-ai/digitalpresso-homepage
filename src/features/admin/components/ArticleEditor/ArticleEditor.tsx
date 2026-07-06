@@ -19,6 +19,17 @@ interface Props {
   article?: ArticleEntity;
 }
 
+/** Date/ISO 문자열을 <input type="date"> 용 'YYYY-MM-DD' 로 변환 */
+function toDateInputValue(value: string | Date | null | undefined): string {
+  if (!value) return '';
+  const d = value instanceof Date ? value : new Date(value);
+  if (Number.isNaN(d.getTime())) return '';
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
 function generateId(): string {
   if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
     return crypto.randomUUID();
@@ -70,6 +81,10 @@ export default function ArticleEditor({ article }: Props) {
   const [translateError, setTranslateError] = useState<string | null>(null);
   const [category, setCategory] = useState<NewsCategory>(
     (article?.category as NewsCategory) ?? 'company'
+  );
+  // 게시일. 정렬·표시 기준인 created_at 을 조정한다. (새 글은 저장 시 오늘 날짜 자동)
+  const [publishedDate, setPublishedDate] = useState<string>(
+    toDateInputValue(article?.created_at),
   );
 
   const createArticleMutation = useCreateArticle();
@@ -417,6 +432,8 @@ export default function ArticleEditor({ article }: Props) {
             content_ja: editorJa?.getHTML() ?? '',
             cover_img_url: resolvedCoverUrl,
             category,
+            // 값이 있을 때만 전송. 비우면 기존 게시일 유지(새 글은 생성 시 오늘 자동).
+            ...(publishedDate ? { published_date: publishedDate } : {}),
           },
         });
 
@@ -479,6 +496,15 @@ export default function ArticleEditor({ article }: Props) {
             <option value="construction">건설소식</option>
             <option value="technology">기술소식</option>
           </select>
+          <label className={styles.dateField}>
+            <span className={styles.dateLabel}>게시일</span>
+            <input
+              type="date"
+              value={publishedDate}
+              onChange={(e) => setPublishedDate(e.target.value)}
+              className={styles.dateInput}
+            />
+          </label>
         </div>
         <div className={styles.actions}>
           {serverError && <span className={styles.errorMsg}>{serverError}</span>}

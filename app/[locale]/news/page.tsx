@@ -11,7 +11,7 @@ import {
   getPublishedArticles,
   getArticleCounts,
 } from '@/backend/article/application/server-facade';
-import type { NewsCategory } from '@/src/features/news/types/article.types';
+import type { NewsCategory, NewsTab } from '@/src/features/news/types/article.types';
 import { buildPageMetadata, isAppLocale, type AppLocale } from '@/lib/seo';
 
 interface Props {
@@ -64,11 +64,13 @@ export default async function NewsPage({ params, searchParams }: Props) {
   const { category, search } = await searchParams;
   await getTranslations({ locale, namespace: 'newsPage.hero' });
 
-  const activeCategory: NewsCategory = VALID_CATEGORIES.includes(
-    category as NewsCategory,
-  )
+  // category 파라미터가 없거나 유효하지 않으면 '전체'(all)가 기본 탭이다.
+  const activeTab: NewsTab = VALID_CATEGORIES.includes(category as NewsCategory)
     ? (category as NewsCategory)
-    : 'company';
+    : 'all';
+
+  // 'all' 은 카테고리 필터 없이 전체 조회(undefined).
+  const fetchCategory = activeTab === 'all' ? undefined : activeTab;
 
   const searchQuery = search?.trim() || '';
 
@@ -76,10 +78,10 @@ export default async function NewsPage({ params, searchParams }: Props) {
 
   const [, counts] = await Promise.all([
     queryClient.prefetchInfiniteQuery({
-      queryKey: ['articles', 'infinite', { category: activeCategory }],
+      queryKey: ['articles', 'infinite', { category: fetchCategory }],
       queryFn: () =>
         getPublishedArticles({
-          category: activeCategory,
+          category: fetchCategory,
           limit: PAGE_SIZE,
           offset: 0,
         }),
@@ -88,10 +90,14 @@ export default async function NewsPage({ params, searchParams }: Props) {
     getArticleCounts(),
   ]);
 
+  const company = counts.company ?? 0;
+  const construction = counts.construction ?? 0;
+  const technology = counts.technology ?? 0;
   const articleCounts = {
-    company: counts.company ?? 0,
-    construction: counts.construction ?? 0,
-    technology: counts.technology ?? 0,
+    all: company + construction + technology,
+    company,
+    construction,
+    technology,
   };
 
   return (
@@ -99,7 +105,7 @@ export default async function NewsPage({ params, searchParams }: Props) {
       <NewsHero />
       <HydrationBoundary state={dehydrate(queryClient)}>
         <NewsContent
-          initialCategory={activeCategory}
+          initialCategory={activeTab}
           articleCounts={articleCounts}
           searchQuery={searchQuery}
         />

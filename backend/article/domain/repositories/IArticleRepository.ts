@@ -29,6 +29,6 @@ export interface IArticleRepository {
     data: Omit<ArticleEntity, 'id' | 'created_at' | 'status' | 'published_at' | 'pinned_at'> &
       Partial<Pick<ArticleEntity, 'status' | 'published_at' | 'pinned_at'>>
   ): Promise<ArticleEntity>;
-  update(id: string, data: Partial<Omit<ArticleEntity, 'id' | 'created_at'>>): Promise<ArticleEntity | null>;
+  update(id: string, data: Partial<Omit<ArticleEntity, 'id'>>): Promise<ArticleEntity | null>;
   delete(id: string): Promise<boolean>;
 }
