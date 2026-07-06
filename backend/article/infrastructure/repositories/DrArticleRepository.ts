@@ -153,7 +153,7 @@ export class DrArticleRepository implements IArticleRepository {
 
   async update(
     id: string,
-    data: Partial<Omit<ArticleEntity, 'id' | 'created_at'>>
+    data: Partial<Omit<ArticleEntity, 'id'>>
   ): Promise<ArticleEntity | null> {
     const rows = await this.db
       .update(articles)

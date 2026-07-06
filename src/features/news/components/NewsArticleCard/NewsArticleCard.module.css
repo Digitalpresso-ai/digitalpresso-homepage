@@ -76,9 +76,53 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  padding: 0 12px;
+}
+
+/* 태그 + 제목: 태그가 제목 첫 줄 앞에 인라인으로 붙고, 전체가 3줄로 잘린다 */
+.titleRow {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  /* 어절(공백) 단위로 줄바꿈 — 한국어 단어 중간이 끊기지 않게 */
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+.tag {
+  display: inline;
+  padding: 2px 8px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  font-family: var(--font-pretendard), sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  white-space: nowrap;
+  margin-right: 8px;
+}
+
+.tag_company {
+  background: #dbeafe;
+  border-color: #193cb8;
+  color: #193cb8;
+}
+
+.tag_construction {
+  background: #fef9c2;
+  border-color: #894b00;
+  color: #894b00;
+}
+
+.tag_technology {
+  background: #dcfce7;
+  border-color: #016630;
+  color: #016630;
 }
 
 .title {
+  display: inline;
   font-family: var(--font-pretendard), sans-serif;
   font-size: 16px;
   font-weight: 700;
@@ -86,23 +130,31 @@
   line-height: 24px;
   margin: 0;
   transition: color 0.15s ease;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 .description {
   font-family: var(--font-pretendard), sans-serif;
   font-size: 16px;
   font-weight: 400;
-  color: #000;
+  color: #1e2939;
   line-height: 24px;
   margin: 0;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  /* 어절(공백) 단위로 줄바꿈 — 한국어 단어 중간이 끊기지 않게 */
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+.date {
+  font-family: var(--font-pretendard), sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #6a7282;
+  line-height: 24px;
+  margin: 0;
 }
 
 /* ─── Tablet (800px – 1279px) ───────────────────────────── */

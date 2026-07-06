@@ -1,5 +1,8 @@
 export type NewsCategory = "company" | "construction" | "technology";
 
+/** 탭 필터 값. 'all' 은 전체(카테고리 필터 없음)를 의미한다. */
+export type NewsTab = NewsCategory | "all";
+
 export interface ArticleImage {
   src: string;
   alt: string;
