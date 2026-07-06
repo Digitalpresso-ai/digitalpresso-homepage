@@ -29,6 +29,28 @@
   cursor: pointer;
 }
 
+.dateField {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.dateLabel {
+  font-size: 0.8rem;
+  color: var(--color-heading);
+  white-space: nowrap;
+}
+
+.dateInput {
+  padding: var(--spacing-2) var(--spacing-3);
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  background: #fff;
+  color: var(--color-heading);
+  cursor: pointer;
+}
+
 .actions {
   display: flex;
   align-items: center;
