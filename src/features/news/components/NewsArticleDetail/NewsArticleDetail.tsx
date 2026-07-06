@@ -9,12 +9,14 @@ import type { NewsArticle } from '../../types/article.types';
 import styles from './NewsArticleDetail.module.css';
 
 function sanitizeHtmlImages(html: string): string {
+  // 인라인 style/width/height 를 제거해 크기 제어를 CSS(.htmlContent img)에 위임한다.
+  // 인라인 스타일을 남기면 반응형 미디어쿼리가 먹지 않으므로, 폭은 CSS에서만 다룬다.
   return html.replace(/<img([^>]*)>/gi, (_match, attrs: string) => {
     const cleaned = attrs
       .replace(/\s*style="[^"]*"/gi, '')
       .replace(/\s*width="[^"]*"/gi, '')
       .replace(/\s*height="[^"]*"/gi, '');
-    return `<img${cleaned} style="max-width:70%;height:auto;display:block;margin:0 0 24px">`;
+    return `<img${cleaned}>`;
   });
 }
 

@@ -6,6 +6,7 @@ import {
   unpublishArticle,
   getArticleById,
 } from '@/backend/article/application/server-facade';
+import { hasUnresolvedImages } from '@/backend/article/application/sanitizeArticleImages';
 import type { ApiResponse } from '@/backend/shared/types/ApiResponse';
 
 interface Params {
@@ -42,6 +43,18 @@ export async function POST(req: NextRequest, { params }: Params) {
       }
       if (!existing.cover_img_url?.trim()) {
         return NextResponse.json<ApiResponse<never>>({ success: false, error: '대표 이미지가 없어 게시할 수 없습니다.' }, { status: 400 });
+      }
+      // 본문에 접속 불가능한(깨질) 이미지가 남아있으면 게시 차단.
+      // MCP로 올라온 상대경로 이미지가 실서버에 그대로 노출되는 것을 원천 차단한다.
+      if (
+        hasUnresolvedImages(existing.content ?? '') ||
+        hasUnresolvedImages(existing.content_en ?? '') ||
+        hasUnresolvedImages(existing.content_ja ?? '')
+      ) {
+        return NextResponse.json<ApiResponse<never>>(
+          { success: false, error: '본문에 업로드되지 않은 이미지가 있어 게시할 수 없습니다. 에디터에서 해당 이미지를 직접 업로드해주세요.' },
+          { status: 400 },
+        );
       }
     }
 
