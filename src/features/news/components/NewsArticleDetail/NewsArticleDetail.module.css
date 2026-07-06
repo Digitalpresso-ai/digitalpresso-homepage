@@ -224,10 +224,11 @@
   margin-bottom: 0;
 }
 
+/* PC/태블릿: 문단 폭의 70% */
 .htmlContent img {
-  max-width: 70% !important;
-  width: auto !important;
-  height: auto !important;
+  max-width: 70%;
+  width: auto;
+  height: auto;
   display: block;
   margin: 0 0 24px;
 }
@@ -323,5 +324,11 @@
 
   .htmlContent p {
     margin-bottom: 16px;
+  }
+
+  /* 모바일: 본문 이미지를 문단 폭에 꽉 차게 */
+  .htmlContent img {
+    max-width: 100%;
+    width: 100%;
   }
 }
