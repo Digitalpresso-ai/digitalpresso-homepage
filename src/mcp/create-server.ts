@@ -273,9 +273,14 @@ ${action}
         }
       }
 
+      const imageWarning =
+        result.removedImages.length > 0
+          ? `\n\n⚠️ 접속 불가능한 이미지 ${result.removedImages.length}개(${result.removedImages.join(', ')})를 본문에서 제거하고 자리 표시만 남겼습니다. MCP로는 이미지 파일이 전송되지 않으므로, admin 에디터에서 해당 위치에 실제 이미지를 직접 업로드해야 합니다.`
+          : ''
+
       const message = result.deduplicated
         ? `이미 같은 sourceUrl로 임시저장된 초안이 있어 기존 항목을 반환합니다. id=${result.id}`
-        : `초안을 임시저장(draft)했습니다. id=${result.id}\n아직 실서버에 공개되지 않았습니다. admin 아티클 관리에서 대표 이미지를 넣고 [게시] 버튼을 눌러야 공개됩니다.`
+        : `초안을 임시저장(draft)했습니다. id=${result.id}\n아직 실서버에 공개되지 않았습니다. admin 아티클 관리에서 대표 이미지를 넣고 [게시] 버튼을 눌러야 공개됩니다.${imageWarning}`
 
       return {
         content: [{
@@ -354,12 +359,17 @@ ${action}
         }
       }
 
+      const autoImageWarning =
+        result.removedImages.length > 0
+          ? `\n⚠️ 접속 불가능한 이미지 ${result.removedImages.length}개를 제거했습니다. admin 에디터에서 직접 업로드하세요.`
+          : ''
+
       return {
         content: [{
           type: 'text' as const,
           text: result.deduplicated
             ? `기존 초안을 재사용했습니다. id=${result.id}`
-            : `초안 자동 업로드 완료. id=${result.id}`,
+            : `초안 자동 업로드 완료. id=${result.id}${autoImageWarning}`,
         }],
       }
     }
