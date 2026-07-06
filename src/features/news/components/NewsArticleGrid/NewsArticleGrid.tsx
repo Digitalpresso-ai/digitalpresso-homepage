@@ -2,12 +2,15 @@
 
 import { NewsArticleCard } from '../NewsArticleCard/NewsArticleCard';
 import { useIntersectionObserver } from '@/src/hooks/useIntersectionObserver';
-import type { NewsArticle } from '../../types/article.types';
+import type { NewsArticle, NewsCategory } from '../../types/article.types';
 import styles from './NewsArticleGrid.module.css';
 
 interface NewsArticleGridProps {
   articles: NewsArticle[];
   viewButtonText: string;
+  tagLabels: Record<NewsCategory, string>;
+  /** 카드에 카테고리 태그를 노출할지 여부 ('전체' 탭에서만 true) */
+  showTag: boolean;
   hasNextPage: boolean;
   isFetchingNextPage: boolean;
   fetchNextPage: () => void;
@@ -16,6 +19,8 @@ interface NewsArticleGridProps {
 export function NewsArticleGrid({
   articles,
   viewButtonText,
+  tagLabels,
+  showTag,
   hasNextPage,
   isFetchingNextPage,
   fetchNextPage,
@@ -36,6 +41,8 @@ export function NewsArticleGrid({
             key={article.id}
             article={article}
             viewButtonText={viewButtonText}
+            tagLabels={tagLabels}
+            showTag={showTag}
           />
         ))}
       </div>

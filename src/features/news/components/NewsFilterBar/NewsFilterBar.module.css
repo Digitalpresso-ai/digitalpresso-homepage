@@ -65,6 +65,99 @@
   line-height: 28px;
 }
 
+/* ─── Mobile dropdown (기본 숨김, 모바일에서만 노출) ────────── */
+.dropdown {
+  display: none;
+  position: relative;
+  width: 100%;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dropdownLabel {
+  font-family: var(--font-pretendard), sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #1e2939;
+  line-height: 20px;
+}
+
+.dropdownToggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px;
+  background: #ffffff;
+  border: 1px solid #99a1af;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: var(--font-pretendard), sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #1e2939;
+  line-height: 24px;
+}
+
+.chevron {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  /* 드롭박스와 리스트 사이 여백: spacing/4 (16px) */
+  margin-top: var(--spacing-4);
+  list-style: none;
+  padding: 8px;
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  /* 리스트 항목 간 여백 유지 */
+  gap: 4px;
+  background: #ffffff;
+  border: 1px solid #99a1af;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  z-index: 10;
+}
+
+.dropdownItem {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 12px;
+  background: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: var(--font-pretendard), sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #1e2939;
+  line-height: 24px;
+}
+
+.dropdownItem:hover {
+  background: #f3f4f6;
+}
+
+/* 선택된 항목: 회색으로 비활성 표시 */
+.dropdownItem:disabled {
+  color: #99a1af;
+  background: #f3f4f6;
+  cursor: default;
+}
+
 /* ─── Search ────────────────────────────────────────────── */
 .searchGroup {
   position: relative;
@@ -134,13 +227,18 @@
   }
 }
 
-/* ─── Mobile (≤ 799px) ──────────────────────────────────── */
+/* ─── Mobile (≤ 799px) : 탭 대신 드롭다운 ────────────────── */
 @media (max-width: 799px) {
   .wrapper {
     padding: 32px 20px 0;
   }
 
+  /* 모바일에서는 탭을 숨기고 드롭다운을 노출 */
   .tabList {
-    gap: 16px;
+    display: none;
+  }
+
+  .dropdown {
+    display: flex;
   }
 }

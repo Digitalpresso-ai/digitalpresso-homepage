@@ -343,10 +343,17 @@
       "subtitleLine1": "Discover the latest news, innovations, and industry insights from our team.",
       "subtitleLine2": "Stay ahead with important updates.",
       "tabs": {
+        "all": "All",
         "company": "Company News",
         "construction": "Construction News",
         "technology": "Technology News"
       },
+      "tags": {
+        "company": "Company",
+        "construction": "Construction",
+        "technology": "Technology"
+      },
+      "dropdownLabel": "Category",
       "searchLabel": "Article name",
       "searchPlaceholder": "Search articles by name.",
       "viewButton": "View",

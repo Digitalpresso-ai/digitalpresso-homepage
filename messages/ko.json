@@ -344,10 +344,17 @@
       "subtitleLine1": "우리 팀이 전하는 최신 뉴스, 혁신 소식 및 업계 인사이트를 만나보세요.",
       "subtitleLine2": "중요한 업데이트를 빠르게 확인하고 앞서 나가세요.",
       "tabs": {
+        "all": "전체",
         "company": "회사 소식",
         "construction": "건설 소식",
         "technology": "기술 소식"
       },
+      "tags": {
+        "company": "회사",
+        "construction": "건설",
+        "technology": "기술"
+      },
+      "dropdownLabel": "구분",
       "searchLabel": "소식 이름",
       "searchPlaceholder": "소식 이름을 검색해 주세요.",
       "viewButton": "확인하기",

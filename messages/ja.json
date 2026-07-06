@@ -343,10 +343,17 @@
       "subtitleLine1": "チームからの最新ニュース、イノベーション、業界インサイトをお届けします。",
       "subtitleLine2": "重要なアップデートをいち早くチェックしましょう。",
       "tabs": {
+        "all": "すべて",
         "company": "企業ニュース",
         "construction": "建設ニュース",
         "technology": "技術ニュース"
       },
+      "tags": {
+        "company": "企業",
+        "construction": "建設",
+        "technology": "技術"
+      },
+      "dropdownLabel": "区分",
       "searchLabel": "記事名",
       "searchPlaceholder": "記事名で検索してください。",
       "viewButton": "確認する",
