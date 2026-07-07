@@ -91,16 +91,22 @@
 }
 
 .tag {
-  display: inline;
-  padding: 2px 8px;
+  display: inline-block;
+  /* 제목 텍스트 라인 중앙에 맞춰 태그 상·하단이 잘리지 않게 한다 */
+  vertical-align: middle;
+  /* 태그 자체 높이를 제목 line-height(24px) 안에 들어오도록 억제 */
+  line-height: 18px;
+  padding: 1px 8px;
   border-radius: 6px;
   border: 1px solid transparent;
   font-family: var(--font-pretendard), sans-serif;
   font-size: 14px;
   font-weight: 400;
-  line-height: 20px;
   white-space: nowrap;
   margin-right: 8px;
+  /* clamp 라인 박스에서 살짝 위로 올려 baseline 흔들림 보정 */
+  position: relative;
+  top: -1px;
 }
 
 .tag_company {
