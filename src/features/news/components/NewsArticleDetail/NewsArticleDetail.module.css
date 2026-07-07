@@ -286,6 +286,12 @@
   .htmlContent {
     font-size: 18px;
   }
+
+  /* 리스트도 본문과 동일한 크기로 축소 (기본 20px → 18px) */
+  .htmlContent ul,
+  .htmlContent ol {
+    font-size: 18px;
+  }
 }
 
 /* --- Mobile (≤ 799px) --- */
@@ -324,6 +330,20 @@
 
   .htmlContent p {
     margin-bottom: 16px;
+  }
+
+  /* 리스트도 본문과 동일한 크기로 축소 (기본 20px → 16px) */
+  .htmlContent ul,
+  .htmlContent ol {
+    font-size: 16px;
+  }
+
+  /* 소제목(h1~h3)도 모바일 크기로 축소 */
+  .htmlContent h1,
+  .htmlContent h2,
+  .htmlContent h3 {
+    font-size: 20px;
+    line-height: 32px;
   }
 
   /* 모바일: 본문 이미지를 문단 폭에 꽉 차게 */
