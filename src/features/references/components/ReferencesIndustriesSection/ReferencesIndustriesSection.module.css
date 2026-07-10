@@ -24,7 +24,7 @@
   word-break: keep-all;
 }
 
-/* 각 행: 이미지 2개 나란히, gap-24 */
+/* 이미지 4개 한 줄 가로 배열, gap-24 */
 .row {
   display: flex;
   gap: 24px;
@@ -34,7 +34,7 @@
 .item {
   flex: 1;
   min-width: 0;
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
 }
 
@@ -60,7 +60,7 @@
   }
 
   .row {
-    gap: 16px;
+    gap: 8px;
   }
 }
 
