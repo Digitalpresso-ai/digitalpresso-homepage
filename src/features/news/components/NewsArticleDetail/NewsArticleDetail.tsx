@@ -48,7 +48,10 @@ export async function NewsArticleDetail({
             </span>
           ))}
         </h2>
-        <p className={styles.categoryLabel}>{article.categoryLabel}</p>
+        <div className={styles.meta}>
+          <span className={styles.categoryLabel}>{article.categoryLabel}</span>
+          <span className={styles.publishedAt}>{article.publishedAt}</span>
+        </div>
       </div>
 
       {/* Body content */}
