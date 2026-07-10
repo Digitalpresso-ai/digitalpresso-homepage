@@ -2,7 +2,7 @@
 
 import type { Metadata } from "next";
 import { ReferencesHero } from '@/src/features/references/components/ReferencesHero/ReferencesHero';
-import { ReferencesShowcaseSection } from '@/src/features/references/components/ReferencesShowcaseSection/ReferencesShowcaseSection';
+import { ReferencesProvenSection } from '@/src/features/references/components/ReferencesProvenSection/ReferencesProvenSection';
 import { ReferencesElectricalSection } from '@/src/features/references/components/ReferencesElectricalSection/ReferencesElectricalSection';
 import { ReferencesIndustriesSection } from '@/src/features/references/components/ReferencesIndustriesSection/ReferencesIndustriesSection';
 import { buildPageMetadata, isAppLocale, type AppLocale } from '@/lib/seo';
@@ -49,19 +49,7 @@ export default function ReferencesPage() {
   return (
     <main>
       <ReferencesHero />
-      <ReferencesShowcaseSection
-        namespace="referencesPage.railway"
-        imageSrc="/images/references-railway.png"
-      />
-      <ReferencesShowcaseSection
-        namespace="referencesPage.utilityPole"
-        imageSrc="/images/references-utility-pole.png"
-        reverse
-      />
-      <ReferencesShowcaseSection
-        namespace="referencesPage.aiAx"
-        imageSrc="/images/references-ai-ax.png"
-      />
+      <ReferencesProvenSection />
       <ReferencesElectricalSection />
       <ReferencesIndustriesSection />
     </main>

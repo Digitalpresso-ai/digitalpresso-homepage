@@ -29,13 +29,23 @@
   margin: 0;
 }
 
-.categoryLabel {
+.meta {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+}
+
+.categoryLabel,
+.publishedAt {
   font-family: var(--font-pretendard), sans-serif;
   font-size: 16px;
   font-weight: 400;
-  color: #1e2939;
+  color: #929292;
   line-height: 24px;
   margin: 0;
+  white-space: nowrap;
 }
 
 /* --- Body --- */
@@ -305,7 +315,8 @@
     line-height: 32px;
   }
 
-  .categoryLabel {
+  .categoryLabel,
+  .publishedAt {
     font-size: 14px;
   }
 

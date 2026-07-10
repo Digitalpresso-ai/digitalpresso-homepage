@@ -537,23 +537,22 @@
       "bodyLine1": "Projects that solve customer challenges and create value,",
       "bodyLine2": "and the stories of companies that joined us on that journey."
     },
-    "railway": {
-      "heading": "Overseas Rail Construction Validation",
-      "bodyLine1": "Led by the Korea Agency for Infrastructure Technology Advancement (KAIA), we are running on-site validation with Deutsche Bahn, operator of one of the world's most advanced rail infrastructures.",
-      "bodyLine2": "We continue to demonstrate both public-sector collaboration capability and global technology validation while meeting the most demanding international standards.",
-      "imageAlt": "Overseas rail construction validation site"
-    },
-    "utilityPole": {
-      "heading": "Utility Pole Construction Validation",
-      "bodyLine1": "We validated a core data solution for efficient asset management at the power infrastructure construction sites of KEPCO, Korea's leading public power utility.",
-      "bodyLine2": "By precisely extracting unique \"numbering data\" during utility pole installation and systematically recording and digitizing distribution facility data, we dramatically improved the accuracy of real-time infrastructure monitoring and asset management.",
-      "imageAlt": "KEPCO utility pole construction validation site"
-    },
-    "aiAx": {
-      "heading": "AI·AX Validation Partnership",
-      "bodyLine1": "Through a strategic AI partnership agreement with Gwangju Metropolitan City, we are leading advanced AX validation projects in Korea.",
-      "bodyLine2": "Going beyond simple collaboration, we have secured a foundation of in-kind support and investment, driving digital transformation across the public sector.",
-      "imageAlt": "Gwangju AI partnership AX validation"
+    "proven": {
+      "heading": "<accent>Proven in the field</accent>, <accent>validated by partners</accent>.",
+      "cards": {
+        "construction": {
+          "title": "Guaranteed Validation Site<br></br>for Sub-5B KRW Projects",
+          "imageAlt": "Guaranteed validation site for construction projects under 5 billion KRW"
+        },
+        "kaia": {
+          "title": "Korea Agency for Infrastructure Technology Advancement<br></br>Global accelerating program participant<br></br>Secured European network channels",
+          "imageAlt": "Participation in the KAIA global accelerating program"
+        },
+        "gwangju": {
+          "title": "Gwangju Metropolitan City<br></br>AI·AX Validation Partnership",
+          "imageAlt": "Gwangju Metropolitan City AI·AX validation partnership signing ceremony"
+        }
+      }
     },
     "electrical": {
       "logoAlt": "Rename DP",
@@ -590,11 +589,9 @@
     },
     "industries": {
       "heading": "Applicable across diverse industries such as manufacturing, logistics, construction materials, and defect detection, improving operational efficiency and quality management at the same time.",
-      "row1Alts": [
+      "alts": [
         "Background showing a manufacturing site",
-        "Background showing a construction materials site"
-      ],
-      "row2Alts": [
+        "Background showing a construction materials site",
         "Background showing a logistics site",
         "Background showing a semiconductor site"
       ]
