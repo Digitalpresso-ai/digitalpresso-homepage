@@ -331,6 +331,8 @@ export default function ArticleEditor({ article }: Props) {
       }
 
       let nextContent = content;
+      let nextContentEn = editorEn?.getHTML() ?? '';
+      let nextContentJa = editorJa?.getHTML() ?? '';
       let resolvedCoverUrl: string | null = coverImageUrl;
 
         if (pendingCoverFile) {
@@ -353,73 +355,91 @@ export default function ArticleEditor({ article }: Props) {
           resolvedCoverUrl = coverPublicData?.publicUrl ?? null;
         }
 
-        const tempImages = Object.keys(pendingImages);
+      const parser = new DOMParser();
+      const docs = [
+        { key: 'ko' as const, doc: parser.parseFromString(content, 'text/html') },
+        { key: 'en' as const, doc: parser.parseFromString(nextContentEn, 'text/html') },
+        { key: 'ja' as const, doc: parser.parseFromString(nextContentJa, 'text/html') },
+      ];
+      const tempIds = Array.from(
+        new Set(
+          docs.flatMap(({ doc }) =>
+            Array.from(doc.querySelectorAll('img[data-temp-id]'))
+              .map((img) => img.getAttribute('data-temp-id'))
+              .filter((tempId): tempId is string => Boolean(tempId))
+          )
+        )
+      );
+      const uploadedImageUrls = new Map<string, string>();
 
-        if (tempImages.length > 0) {
-          const parser = new DOMParser();
-          const doc = parser.parseFromString(content, 'text/html');
-          const imgNodes = Array.from(doc.querySelectorAll('img[data-temp-id]'));
+      for (const tempId of tempIds) {
+        const file = pendingImages[tempId];
+        if (!file) throw new Error('업로드할 이미지 파일을 찾을 수 없습니다.');
 
-          for (const img of imgNodes) {
-            const tempId = img.getAttribute('data-temp-id');
-            if (!tempId) continue;
-            const file = pendingImages[tempId];
-            if (!file) throw new Error('업로드할 이미지 파일을 찾을 수 없습니다.');
+        const objectKey = generateId();
+        const ext = file.name.split('.').pop() || 'png';
+        const filePath = `articles/${articleId}/${objectKey}.${ext}`;
 
-            const objectKey = generateId();
-            const ext = file.name.split('.').pop() || 'png';
-            const filePath = `articles/${articleId}/${objectKey}.${ext}`;
+        const { error: storageError } = await supabase
+          .storage
+          .from('article-images')
+          .upload(filePath, file, { upsert: false, contentType: file.type });
 
-            const { error: storageError } = await supabase
-              .storage
-              .from('article-images')
-              .upload(filePath, file, { upsert: false, contentType: file.type });
+        if (storageError) throw storageError;
 
-            if (storageError) throw storageError;
+        const { data: publicData } = supabase
+          .storage
+          .from('article-images')
+          .getPublicUrl(filePath);
 
-            const { data: publicData } = supabase
-              .storage
-              .from('article-images')
-              .getPublicUrl(filePath);
+        const imageUrl = publicData?.publicUrl;
+        if (!imageUrl) throw new Error('이미지 URL을 가져오지 못했습니다.');
 
-            const imageUrl = publicData?.publicUrl;
-            if (!imageUrl) throw new Error('이미지 URL을 가져오지 못했습니다.');
+        const dimensions = await new Promise<{ width: number; height: number }>((resolve, reject) => {
+          const imgEl = new window.Image();
+          imgEl.onload = () => {
+            URL.revokeObjectURL(imgEl.src);
+            resolve({ width: imgEl.width, height: imgEl.height });
+          };
+          imgEl.onerror = () => reject(new Error('이미지 정보를 읽지 못했습니다.'));
+          imgEl.src = URL.createObjectURL(file);
+        });
 
-            const dimensions = await new Promise<{ width: number; height: number }>((resolve, reject) => {
-              const imgEl = new window.Image();
-              imgEl.onload = () => {
-                URL.revokeObjectURL(imgEl.src);
-                resolve({ width: imgEl.width, height: imgEl.height });
-              };
-              imgEl.onerror = () => reject(new Error('이미지 정보를 읽지 못했습니다.'));
-              imgEl.src = URL.createObjectURL(file);
-            });
+        const res = await fetch('/api/article-images', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            article_id: articleId,
+            image_url: imageUrl,
+            alt: file.name,
+            width: dimensions.width,
+            height: dimensions.height,
+            caption: null,
+            sort_order: 0,
+          }),
+        });
 
-            const res = await fetch('/api/article-images', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                article_id: articleId,
-                image_url: imageUrl,
-                alt: file.name,
-                width: dimensions.width,
-                height: dimensions.height,
-                caption: null,
-                sort_order: 0,
-              }),
-            });
-
-            if (!res.ok) {
-              const detail = await res.json().catch(() => null);
-              throw new Error(detail?.error ?? '이미지 메타데이터 저장에 실패했습니다.');
-            }
-
-            img.setAttribute('src', imageUrl);
-            img.removeAttribute('data-temp-id');
-          }
-
-          nextContent = doc.body.innerHTML;
+        if (!res.ok) {
+          const detail = await res.json().catch(() => null);
+          throw new Error(detail?.error ?? '이미지 메타데이터 저장에 실패했습니다.');
         }
+
+        uploadedImageUrls.set(tempId, imageUrl);
+      }
+
+      for (const { doc } of docs) {
+        for (const img of Array.from(doc.querySelectorAll('img[data-temp-id]'))) {
+          const tempId = img.getAttribute('data-temp-id');
+          const imageUrl = tempId ? uploadedImageUrls.get(tempId) : null;
+          if (!imageUrl) continue;
+          img.setAttribute('src', imageUrl);
+          img.removeAttribute('data-temp-id');
+        }
+      }
+
+      nextContent = docs[0].doc.body.innerHTML;
+      nextContentEn = docs[1].doc.body.innerHTML;
+      nextContentJa = docs[2].doc.body.innerHTML;
 
         await updateArticleMutation.mutateAsync({
           id: articleId,
@@ -428,8 +448,8 @@ export default function ArticleEditor({ article }: Props) {
             title_en: titleEn,
             title_ja: titleJa,
             content: nextContent,
-            content_en: editorEn?.getHTML() ?? '',
-            content_ja: editorJa?.getHTML() ?? '',
+            content_en: nextContentEn,
+            content_ja: nextContentJa,
             cover_img_url: resolvedCoverUrl,
             category,
             // 값이 있을 때만 전송. 비우면 기존 게시일 유지(새 글은 생성 시 오늘 자동).
@@ -439,6 +459,12 @@ export default function ArticleEditor({ article }: Props) {
 
       if (editor && nextContent !== content) {
         editor.commands.setContent(nextContent);
+      }
+      if (editorEn && nextContentEn !== (editorEn.getHTML() ?? '')) {
+        editorEn.commands.setContent(nextContentEn);
+      }
+      if (editorJa && nextContentJa !== (editorJa.getHTML() ?? '')) {
+        editorJa.commands.setContent(nextContentJa);
       }
 
       setPendingImages({});
