@@ -68,6 +68,7 @@ export default function ArticleEditor({ article }: Props) {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const coverFileInputRef = useRef<HTMLInputElement | null>(null);
   const editorRef = useRef<Editor | null>(null);
+  const uploadTargetEditorRef = useRef<Editor | null>(null);
   const [pendingImages, setPendingImages] = useState<Record<string, File>>({});
   const [coverImageUrl, setCoverImageUrl] = useState<string | null>(article?.cover_img_url ?? null);
   const [pendingCoverFile, setPendingCoverFile] = useState<File | null>(null);
@@ -106,8 +107,8 @@ export default function ArticleEditor({ article }: Props) {
     },
   });
 
-  const handleImageUpload = async (file: File) => {
-    const activeEditor = editorRef.current;
+  const handleImageUpload = async (file: File, targetEditor?: Editor | null) => {
+    const activeEditor = targetEditor ?? editorRef.current;
     if (!activeEditor) return;
     setUploadError(null);
 
@@ -121,6 +122,12 @@ export default function ArticleEditor({ article }: Props) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .setImage({ src: tempUrl, alt: file.name, 'data-temp-id': tempId } as any)
       .run();
+  };
+
+  const openImagePicker = (targetEditor: Editor | null) => {
+    if (!targetEditor) return;
+    uploadTargetEditorRef.current = targetEditor;
+    fileInputRef.current?.click();
   };
 
   const sharedExtensions = [
@@ -151,7 +158,7 @@ export default function ArticleEditor({ article }: Props) {
           const file = imageItem.getAsFile();
           if (file) {
             event.preventDefault();
-            void handleImageUpload(file);
+            void handleImageUpload(file, editor);
             return true;
           }
         }
@@ -162,7 +169,7 @@ export default function ArticleEditor({ article }: Props) {
         const imageFile = files.find((file) => file.type.startsWith('image/'));
         if (!imageFile) return false;
         event.preventDefault();
-        void handleImageUpload(imageFile);
+        void handleImageUpload(imageFile, editor);
         return true;
       },
     },
@@ -177,7 +184,27 @@ export default function ArticleEditor({ article }: Props) {
     content: article?.content_en ?? '',
     editorProps: {
       attributes: { class: styles.editorContent },
-      handlePaste: (view, event) => pasteMarkdown(view, event),
+      handlePaste: (view, event) => {
+        const items = Array.from(event.clipboardData?.items ?? []);
+        const imageItem = items.find((item) => item.type.startsWith('image/'));
+        if (imageItem) {
+          const file = imageItem.getAsFile();
+          if (file) {
+            event.preventDefault();
+            void handleImageUpload(file, editorEn);
+            return true;
+          }
+        }
+        return pasteMarkdown(view, event);
+      },
+      handleDrop: (_view, event) => {
+        const files = Array.from(event.dataTransfer?.files ?? []);
+        const imageFile = files.find((file) => file.type.startsWith('image/'));
+        if (!imageFile) return false;
+        event.preventDefault();
+        void handleImageUpload(imageFile, editorEn);
+        return true;
+      },
     },
   });
 
@@ -190,7 +217,27 @@ export default function ArticleEditor({ article }: Props) {
     content: article?.content_ja ?? '',
     editorProps: {
       attributes: { class: styles.editorContent },
-      handlePaste: (view, event) => pasteMarkdown(view, event),
+      handlePaste: (view, event) => {
+        const items = Array.from(event.clipboardData?.items ?? []);
+        const imageItem = items.find((item) => item.type.startsWith('image/'));
+        if (imageItem) {
+          const file = imageItem.getAsFile();
+          if (file) {
+            event.preventDefault();
+            void handleImageUpload(file, editorJa);
+            return true;
+          }
+        }
+        return pasteMarkdown(view, event);
+      },
+      handleDrop: (_view, event) => {
+        const files = Array.from(event.dataTransfer?.files ?? []);
+        const imageFile = files.find((file) => file.type.startsWith('image/'));
+        if (!imageFile) return false;
+        event.preventDefault();
+        void handleImageUpload(imageFile, editorJa);
+        return true;
+      },
     },
   });
 
@@ -215,7 +262,8 @@ export default function ArticleEditor({ article }: Props) {
   const handleFileInputChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
-    await handleImageUpload(file);
+    await handleImageUpload(file, uploadTargetEditorRef.current ?? editorRef.current);
+    uploadTargetEditorRef.current = null;
     event.target.value = '';
   };
 
@@ -683,7 +731,7 @@ export default function ArticleEditor({ article }: Props) {
         <div className={styles.editorWrapper}>
           <Toolbar
             editor={editor}
-            onUploadClick={() => fileInputRef.current?.click()}
+            onUploadClick={() => openImagePicker(editor)}
             isUploading={isUploading}
             uploadError={uploadError}
           />
@@ -693,14 +741,24 @@ export default function ArticleEditor({ article }: Props) {
 
       {activeLocale === 'en' && (
         <div className={styles.editorWrapper}>
-          <Toolbar editor={editorEn} onUploadClick={() => {}} isUploading={false} uploadError={null} />
+          <Toolbar
+            editor={editorEn}
+            onUploadClick={() => openImagePicker(editorEn)}
+            isUploading={isUploading}
+            uploadError={uploadError}
+          />
           <EditorContent editor={editorEn} className={styles.editorArea} />
         </div>
       )}
 
       {activeLocale === 'ja' && (
         <div className={styles.editorWrapper}>
-          <Toolbar editor={editorJa} onUploadClick={() => {}} isUploading={false} uploadError={null} />
+          <Toolbar
+            editor={editorJa}
+            onUploadClick={() => openImagePicker(editorJa)}
+            isUploading={isUploading}
+            uploadError={uploadError}
+          />
           <EditorContent editor={editorJa} className={styles.editorArea} />
         </div>
       )}
