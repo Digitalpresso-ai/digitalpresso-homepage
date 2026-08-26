@@ -22,6 +22,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  min-width: 0;
 }
 
 .title {
@@ -47,6 +48,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  min-width: 0;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -56,6 +58,7 @@
   display: flex;
   align-items: flex-start;
   gap: 12px;
+  min-width: 0;
 }
 
 .stepNum {
@@ -279,6 +282,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+  min-width: 0;
 }
 
 .docName {
@@ -573,6 +577,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  min-width: 0;
   margin-top: 10px;
   animation: slideIn 260ms cubic-bezier(0.22, 0.61, 0.36, 1);
 }
@@ -603,6 +608,7 @@
 .field {
   display: block;
   position: relative;
+  min-width: 0;
 }
 
 .fieldLabel {
@@ -663,6 +669,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  min-width: 0;
   padding: 16px;
   border-radius: 10px;
   background: #fff;
@@ -1057,4 +1064,28 @@
 :global(.locale-ja) .rail {
   font-size: 9px;
   letter-spacing: -0.02em;
+}
+
+/* Japanese layout fix: Japanese has almost no natural word breaks, so
+   keep-all (tuned for Korean) can leave a long unbroken sentence with
+   nowhere to wrap, overflowing the viewport on phones. */
+:global(.locale-ja) .title,
+:global(.locale-ja) .desc,
+:global(.locale-ja) .stepDash,
+:global(.locale-ja) .stepDesc,
+:global(.locale-ja) .breadcrumb,
+:global(.locale-ja) .docName,
+:global(.locale-ja) .fieldBox,
+:global(.locale-ja) .askHead strong,
+:global(.locale-ja) .askDesc {
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
+:global(.locale-ja) .startHint {
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: anywhere;
+  max-width: 160px;
+  text-align: center;
 }

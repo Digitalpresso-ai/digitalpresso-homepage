@@ -22,6 +22,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  min-width: 0;
 }
 
 .title {
@@ -46,6 +47,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  min-width: 0;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -55,6 +57,7 @@
   display: flex;
   align-items: flex-start;
   gap: 12px;
+  min-width: 0;
 }
 
 .stepNum {
@@ -521,6 +524,7 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  min-width: 0;
   padding: 9px 12px;
   border: 1px solid #d1d5dc;
   border-radius: 5px;
@@ -1238,4 +1242,48 @@
 :global(.locale-ja) .rail {
   font-size: 9px;
   letter-spacing: -0.02em;
+}
+
+/* A label like "現在工程率対比 目標原価" is too long for this side-by-side
+   dt/dd layout — it either overflows keep-all's one break point or, once
+   wrapped, collides with the value sitting on the same line. Stack label
+   above value instead, so a two-line label just pushes the value down
+   with it rather than overlapping it. */
+:global(.locale-ja) .costItem {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+:global(.locale-ja) .costItem dt {
+  min-width: 0;
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
+:global(.locale-ja) .costItem dd {
+  white-space: normal;
+}
+
+/* Japanese layout fix: Japanese has almost no natural word breaks, so
+   keep-all (tuned for Korean) can leave a long unbroken sentence with
+   nowhere to wrap, overflowing the viewport on phones. */
+:global(.locale-ja) .title,
+:global(.locale-ja) .desc,
+:global(.locale-ja) .stepDash,
+:global(.locale-ja) .stepDesc,
+:global(.locale-ja) .breadcrumb,
+:global(.locale-ja) .detailTitle,
+:global(.locale-ja) .gTradeCell,
+:global(.locale-ja) .gName {
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
+:global(.locale-ja) .startHint {
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: anywhere;
+  max-width: 160px;
+  text-align: center;
 }
