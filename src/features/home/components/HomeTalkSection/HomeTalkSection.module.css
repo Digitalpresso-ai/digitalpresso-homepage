@@ -1706,7 +1706,8 @@
    the canvas edges instead of wrapping. */
 :global(.locale-ja) .toast {
   align-items: flex-start;
-  max-width: min(90%, 320px);
+  width: 90%;
+  max-width: none;
 }
 
 :global(.locale-ja) .toastText {

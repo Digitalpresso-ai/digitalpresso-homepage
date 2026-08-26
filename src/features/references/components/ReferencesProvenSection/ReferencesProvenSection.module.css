@@ -185,3 +185,22 @@
   overflow-wrap: anywhere;
   letter-spacing: 0;
 }
+
+:global(.locale-ja) .cardTitleNowrap {
+  white-space: normal;
+  overflow: visible;
+}
+
+/* English titles run longer than Korean's — the construction/gwangju cards
+   force a single line (cardTitleNowrap) that was sized for the short
+   Korean copy, so English clips instead of wrapping. Shrink the type a
+   touch and let it wrap like every other locale. */
+:global(.locale-en) .cardTitle {
+  font-size: 19px;
+  line-height: 26px;
+}
+
+:global(.locale-en) .cardTitleNowrap {
+  white-space: normal;
+  overflow: visible;
+}

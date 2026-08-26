@@ -1123,6 +1123,15 @@
     transform: translate(-50%, 20px);
   }
 
+  /* The pin icon anchors at its tapered tip (translate(-50%, -100%)), so
+     the pin's body already sits well clear above this coordinate — unlike
+     the round marker, which is centred on it. Pull the card in closer so
+     the gap reads the same as the marker's. */
+  .popover.popLeft,
+  .popover.popRight {
+    transform: translate(-50%, 6px);
+  }
+
   /* On this narrow canvas the popover card is tall enough to bury whichever
      pin it's docked under. Simplest fix: only the best-placed pin — the one
      that already sits clear at the top — shows on phones. .pin ~ .pin (not
@@ -1157,12 +1166,9 @@
   overflow-wrap: anywhere;
 }
 
-/* "位置タグを押してみてください。" runs longer than the Korean original —
-   nowrap on this pin-anchored hint would push it past the canvas edge. */
-/* Wrapping to two lines pushes the bubble further from the pin, since the
-   base transform (and its hintBob animation) were tuned for the one-line
-   Korean/English copy — use a shallower offset so it still sits just
-   above the pin. */
+/* "位置タグを押してみてください。" runs longer than the Korean original, but
+   width: max-content keeps it on one line, so the base transform/animation
+   (tuned for one-line Korean/English copy) still applies unchanged. */
 :global(.locale-ja) .startHint {
   white-space: normal;
   word-break: normal;
@@ -1170,16 +1176,4 @@
   width: max-content;
   max-width: 220px;
   text-align: center;
-  transform: translate(-50%, -160%);
-  animation-name: hintBobJa;
-}
-
-@keyframes hintBobJa {
-  0%,
-  100% {
-    transform: translate(-50%, -160%);
-  }
-  50% {
-    transform: translate(-50%, -180%);
-  }
 }
