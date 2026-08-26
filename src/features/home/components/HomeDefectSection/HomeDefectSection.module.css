@@ -22,6 +22,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  min-width: 0;
 }
 
 .title {
@@ -47,6 +48,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  min-width: 0;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -56,6 +58,7 @@
   display: flex;
   align-items: flex-start;
   gap: 12px;
+  min-width: 0;
 }
 
 .stepNum {
@@ -280,6 +283,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+  min-width: 0;
 }
 
 .docName {
@@ -450,6 +454,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  min-width: 0;
   margin-top: 14px;
   animation: slideIn 240ms cubic-bezier(0.22, 0.61, 0.36, 1);
 }
@@ -464,6 +469,7 @@
   align-items: center;
   gap: 8px;
   width: 100%;
+  min-width: 0;
   padding: 10px;
   border: 1px solid #d1d5dc;
   border-radius: 5px;
@@ -650,6 +656,7 @@
 .field {
   display: block;
   position: relative;
+  min-width: 0;
 }
 
 .fieldLabel {
@@ -874,6 +881,7 @@
   flex-direction: column;
   gap: 10px;
   width: min(360px, 100%);
+  min-width: 0;
   padding: 16px;
   border-radius: 10px;
   background: #fff;
@@ -1090,4 +1098,36 @@
 :global(.locale-ja) .rail {
   font-size: 9px;
   letter-spacing: -0.02em;
+}
+
+/* Japanese layout fix: Japanese has almost no natural word breaks, so
+   keep-all (tuned for Korean) can leave a long unbroken sentence with
+   nowhere to wrap, overflowing the viewport on phones. */
+:global(.locale-ja) .title,
+:global(.locale-ja) .desc,
+:global(.locale-ja) .stepDash,
+:global(.locale-ja) .stepDesc,
+:global(.locale-ja) .breadcrumb,
+:global(.locale-ja) .docName,
+:global(.locale-ja) .fieldBox {
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
+/* "担当者を指定してみてください。" runs long for this absolutely-positioned
+   hint bubble — let it wrap instead of overflowing past the canvas edge. */
+:global(.locale-ja) .assignHint {
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: anywhere;
+  max-width: 200px;
+  text-align: center;
+}
+
+:global(.locale-ja) .startHint {
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: anywhere;
+  max-width: 160px;
+  text-align: center;
 }
