@@ -12,7 +12,7 @@ export async function ManufacturingHero() {
   return (
     <section className={styles.hero}>
       <Image
-        src="/images/manufacturing-hero.png"
+        src="/images/manufacturing-hero.webp"
         alt=""
         fill
         priority

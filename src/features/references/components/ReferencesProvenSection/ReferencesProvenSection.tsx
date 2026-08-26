@@ -7,13 +7,12 @@ import styles from './ReferencesProvenSection.module.css';
 interface CardConfig {
   key: 'construction' | 'kaia' | 'gwangju';
   imageSrc: string;
-  small?: boolean;
 }
 
 const CARDS: readonly CardConfig[] = [
-  { key: 'construction', imageSrc: '/images/customer1.png' },
-  { key: 'kaia', imageSrc: '/images/customer2.png', small: true },
-  { key: 'gwangju', imageSrc: '/images/customer3.png' },
+  { key: 'construction', imageSrc: '/images/customer-50.webp' },
+  { key: 'kaia', imageSrc: '/images/customer-kaia.webp' },
+  { key: 'gwangju', imageSrc: '/images/customer-ai.webp' },
 ];
 
 export async function ReferencesProvenSection() {
@@ -28,28 +27,32 @@ export async function ReferencesProvenSection() {
           })}
         </h2>
 
-        <div className={styles.cardRow}>
+        <ul className={styles.cards}>
           {CARDS.map((card) => (
-            <div key={card.key} className={styles.card}>
-              <Image
-                src={card.imageSrc}
-                alt={t(`cards.${card.key}.imageAlt`)}
-                fill
-                className={styles.cardImage}
-                sizes="(max-width: 799px) calc(100vw - 40px), (max-width: 1279px) calc((100vw - 128px) / 3), 368px"
-              />
-              <h3
-                className={
-                  card.small
-                    ? `${styles.cardTitle} ${styles.cardTitleSmall}`
-                    : styles.cardTitle
-                }
-              >
-                {t.rich(`cards.${card.key}.title`, { br: () => <br /> })}
-              </h3>
-            </div>
+            <li key={card.key} className={styles.card}>
+              <div className={styles.imageBox}>
+                <Image
+                  src={card.imageSrc}
+                  alt={t(`cards.${card.key}.imageAlt`)}
+                  fill
+                  className={styles.image}
+                  sizes="(max-width: 799px) calc(100vw - 40px), (max-width: 1279px) calc((100vw - 128px) / 3), 368px"
+                />
+              </div>
+              <div className={styles.textArea}>
+                <h3
+                  className={
+                    card.key === 'kaia'
+                      ? styles.cardTitle
+                      : `${styles.cardTitle} ${styles.cardTitleNowrap}`
+                  }
+                >
+                  {t.rich(`cards.${card.key}.title`, { br: () => <br /> })}
+                </h3>
+              </div>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );

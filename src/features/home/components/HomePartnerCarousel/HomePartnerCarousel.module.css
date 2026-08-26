@@ -1,0 +1,226 @@
+/* ─── Section ───────────────────────────────────────────── */
+/* Figma keeps a flat 10px top/bottom padding at every width — only the logo
+   slot height (80/60/40px) changes. */
+.section {
+  background: #fff;
+  padding: 10px 0;
+  overflow: hidden;
+}
+
+/* ─── Viewport ──────────────────────────────────────────── */
+/* Two tracks sit side by side and the pair slides left by exactly one
+   track width, so the loop restarts with no visible jump. */
+.viewport {
+  display: flex;
+  width: max-content;
+  animation: scroll 40s linear infinite;
+}
+
+.viewport:hover {
+  animation-play-state: paused;
+}
+
+.clone {
+  display: flex;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ─── Track ─────────────────────────────────────────────── */
+.track {
+  display: flex;
+  align-items: center;
+  gap: 64px;
+  margin: 0;
+  /* Right padding equals the gap so the seam spacing matches the rest. */
+  padding: 0 64px 0 0;
+  list-style: none;
+}
+
+/* Every logo gets an equal-width slot and scales to fit inside it, so wide
+   and tall marks read at the same visual weight instead of by raw pixels. */
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 132px;
+  height: 40px;
+}
+
+/* Two-line marks fill the slot height and read heavier than the wordmarks,
+   so cap them slightly to even out the optical weight. KOSME's mark also
+   hugs the top of its source asset with more slack below — centering it
+   reads as sitting slightly high, so nudge it down a touch too. */
+.item:has(.stacked) .logo {
+  height: 90%;
+  object-position: 50% 60%;
+}
+
+/* KAIA is a two-line lockup with thin strokes and open space between the
+   lines, so filling the exact slot height still reads lighter/smaller than
+   the single-line wordmarks around it — let it overflow the slot a bit,
+   same idea as .boxed below. Its mark is also much closer to square
+   (~1.7:1) than the wide wordmarks around it, so at the shared 132px slot
+   width it renders far narrower than the others and leaves oversized side
+   margins. Narrowing the slot to its exact rendered width (88px) made the
+   mark itself touch the track gap on both sides, reading as too tight next
+   to its neighbors — split the difference with a bit of slack instead. */
+.item:has(.tall) {
+  width: 92px;
+}
+
+.item:has(.tall) .logo {
+  height: 100%;
+}
+
+/* KOVA is the flattest mark (very wide relative to its height) — at the
+   shared slot height its natural width runs well past the default slot, so
+   the width cap was shrinking it below the others. Widen its slot to its
+   natural width-at-slot-height so height is the only constraint that binds. */
+.item:has(.wide) {
+  width: 240px;
+}
+
+/* KOVA reads slightly larger than its neighbors at the full slot size —
+   scale it down a touch. */
+.item:has(.wide) .logo {
+  width: 88%;
+  height: 88%;
+}
+
+/* Betahaus is wide too, but noticeably less flat than KOVA (~4:1 vs ~6:1) —
+   sharing KOVA's 240px slot left visible empty space on either side of the
+   mark. Give it its own, narrower slot matching its actual aspect ratio. */
+.item:has(.betahausLogo) {
+  width: 162px;
+}
+
+/* KICT and Vertical are moderately wide; a smaller widened slot is enough. */
+.item:has(.semiWide) {
+  width: 169px;
+}
+
+/* KICT's source asset has almost no top padding but a bit of bottom
+   padding, so centering it in the slot reads as sitting slightly low —
+   nudge it up a touch. It also reads slightly larger than its neighbors at
+   the full slot size, so scale it down a touch too. */
+.kictLogo {
+  object-position: 50% 40%;
+  width: 92%;
+  height: 92%;
+}
+
+/* Korea Credit Guarantee Fund's mark fills its source asset with almost no
+   padding, so scaling it to the full slot height reads visually taller/
+   heavier than the other wordmarks around it — cap it down a bit. Capping
+   the height (rather than the shared semiWide slot width) leaves it
+   narrower than its neighbors at the same slot width, so narrow the slot
+   itself to match its actual rendered width. */
+.item:has(.fundLogo) {
+  width: 134px;
+}
+
+.item:has(.fundLogo) .logo {
+  height: 70%;
+}
+
+/* Korea Industrial Complex Corporation's mark has generous padding in its
+   source asset, so filling the slot height still reads a touch smaller
+   than the wordmarks around it — let it overflow slightly. */
+.item:has(.corporationLogo) .logo {
+  height: 115%;
+}
+
+/* The NVIDIA lockup carries a drawn border with built-in padding, so it needs
+   to overflow the nominal slot height to match the others optically. That
+   overflow makes it render narrower than its 156px slot, though, leaving
+   oversized side margins — narrow the slot to its actual rendered width. */
+.item:has(.boxed) {
+  width: 125px;
+}
+
+.item:has(.boxed) .logo {
+  height: 115%;
+}
+
+/* width/height: 100% (not auto) so object-fit actually governs the fit —
+   auto sizing left very wide, short marks (KOVA) rendering at their
+   intrinsic size instead of scaling up to fill the slot. */
+.logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ─── Mobile ────────────────────────────────────────────── */
+@media (max-width: 799px) {
+  .section {
+    padding: 16px 0;
+  }
+
+  .track {
+    gap: 28px;
+    padding-right: 28px;
+  }
+
+  .item {
+    width: 96px;
+    height: 32px;
+  }
+
+  /* Scale the widened slots down with the smaller mobile item height, so
+     the flat marks stay uncapped by width here too. */
+  .item:has(.wide) {
+    width: 192px;
+  }
+
+  .item:has(.semiWide) {
+    width: 136px;
+  }
+
+  .item:has(.boxed) {
+    width: 100px;
+  }
+
+  .item:has(.betahausLogo) {
+    width: 129px;
+  }
+
+  .item:has(.fundLogo) {
+    width: 107px;
+  }
+
+  /* KAIA's overflow reads fine at the 40px desktop slot, but at the
+     smaller 32px mobile slot it overshoots and looks oversized next to the
+     other marks — tone it down to a mild boost instead. */
+  .item:has(.tall) .logo {
+    height: 100%;
+  }
+
+  /* Scale KOVA down at the mobile size too, matching desktop. */
+  .item:has(.wide) .logo {
+    width: 88%;
+    height: 88%;
+  }
+
+  /* Narrow KAIA's slot at the mobile size too, with the same bit of slack
+     as desktop so it doesn't crowd its neighbors. */
+  .item:has(.tall) {
+    width: 62px;
+  }
+}
+
+/* Respect users who ask the OS to reduce motion. */
+@media (prefers-reduced-motion: reduce) {
+  .viewport {
+    animation: none;
+  }
+}

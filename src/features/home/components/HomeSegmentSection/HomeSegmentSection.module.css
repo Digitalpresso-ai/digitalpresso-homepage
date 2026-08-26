@@ -1,0 +1,489 @@
+/* ─── Section ───────────────────────────────────────────── */
+.section {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 64px 0;
+  background: radial-gradient(
+    102% 238% at 50% 52%,
+    #ffffff 0%,
+    #f7fbff 38%,
+    #e7f1ff 68%,
+    #c7ddff 100%
+  );
+}
+
+/* The four soft discs the design scatters behind the content. */
+.blobs {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  background: #dceafd;
+  opacity: 0.35;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: var(--dp-container);
+  margin-inline: auto;
+  padding-inline: var(--dp-gutter-lg);
+}
+
+/* ─── Heading ───────────────────────────────────────────── */
+.title {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 40px;
+  color: #1e2939;
+  text-align: center;
+  word-break: keep-all;
+}
+
+.accent {
+  color: #2b7fff;
+  font-weight: 700;
+}
+
+/* ─── Body ──────────────────────────────────────────────── */
+.body {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  justify-content: center;
+}
+
+.colLeft,
+.colRight {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.colLeft {
+  align-items: flex-end;
+}
+
+.colRight {
+  align-items: flex-start;
+}
+
+/* Each row is pushed away from the hub so the column curves around it. */
+.row {
+  display: flex;
+}
+
+.colLeft .row {
+  justify-content: flex-end;
+}
+
+.colRight .row {
+  justify-content: flex-start;
+}
+
+/* The inset steps a card back from the hub, curving the facing edge. */
+.colLeft .card {
+  margin-right: var(--inset, 0);
+}
+
+.colRight .card {
+  margin-left: var(--inset, 0);
+}
+
+/* ─── Cards ─────────────────────────────────────────────── */
+.card {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  width: 258px;
+  padding: 12px 18px 12px 12px;
+  border: 1px solid #d1d5dc;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  /* Matches the lift used by the cards elsewhere on the page. */
+  transition:
+    transform 200ms ease-out,
+    box-shadow 200ms ease-out,
+    border-color 200ms ease-out;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: #93c5fd;
+  box-shadow:
+    0 18px 28px -8px rgba(23, 60, 140, 0.18),
+    0 8px 12px -6px rgba(23, 60, 140, 0.1);
+}
+
+.cardIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  background: #f3f4f6;
+  color: #2b7fff;
+  transition: background 200ms ease-out;
+}
+
+.cardIcon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.card:hover .cardIcon {
+  background: #e6f0ff;
+}
+
+.cardText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 25px;
+  color: #1e2939;
+  white-space: nowrap;
+}
+
+.cardDesc {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 23px;
+  color: #4a5565;
+  white-space: nowrap;
+}
+
+/* ─── Centre hub ────────────────────────────────────────── */
+.hub {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 360px;
+  height: 360px;
+  flex-shrink: 0;
+}
+
+.rings {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.orbit {
+  fill: none;
+  stroke: #d7e3f5;
+  stroke-width: 1;
+}
+
+.node {
+  fill: #3f4d8f;
+}
+
+/* Both arcs share the one gradient so the pair reads as a single sweep. */
+.ringA,
+.ringB {
+  fill: none;
+  stroke: url(#segRing);
+  stroke-width: 5;
+}
+
+.ringB {
+  stroke: url(#segRingB);
+  stroke-width: 4;
+}
+
+.hubText {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 236px;
+  text-align: center;
+}
+
+.hubLogo {
+  width: auto;
+  height: 26px;
+  margin-bottom: 6px;
+}
+
+.hubTitle {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26px;
+  color: #2b7fff;
+  white-space: nowrap;
+}
+
+.hubDesc {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #4a5565;
+  white-space: nowrap;
+}
+
+.hubRule {
+  width: 100%;
+  margin: 6px 0;
+  border: 0;
+  border-top: 1px solid #d1d5dc;
+}
+
+.hubFlow {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #4a5565;
+  white-space: pre-line;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+
+  .card:hover {
+    transform: none;
+  }
+}
+
+/* ─── Below 1280 ────────────────────────────────────────── */
+@media (max-width: 1279px) {
+  .title {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  .card {
+    width: 260px;
+    padding: 14px 16px;
+    gap: 12px;
+  }
+
+  .cardIcon {
+    width: 54px;
+    height: 54px;
+  }
+
+  .cardIcon svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .cardTitle {
+    font-size: 18px;
+  }
+
+  .cardDesc {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .hub {
+    width: 300px;
+    height: 300px;
+  }
+
+  /* Scale the curve's inset down with the smaller card width so the facing
+     edge still steps in toward the hub instead of running flat. */
+  .colLeft .card {
+    margin-right: calc(var(--inset, 0) * 0.87);
+  }
+
+  .colRight .card {
+    margin-left: calc(var(--inset, 0) * 0.87);
+  }
+}
+
+/* ─── Tablet (800px – 1023px): still side-by-side, scaled further ───────
+   Figma keeps the three-column layout all the way down to 800px; it only
+   stacks (hub above, cards in two columns) on phones, below 800. */
+@media (max-width: 1023px) {
+  .body {
+    gap: 12px;
+  }
+
+  .card {
+    width: 190px;
+    padding: 10px 12px;
+    gap: 8px;
+  }
+
+  .cardIcon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .cardIcon svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  .cardTitle {
+    font-size: 15px;
+  }
+
+  .cardDesc {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .hub {
+    width: 220px;
+    height: 220px;
+  }
+
+  .hubText {
+    width: 160px;
+  }
+
+  /* The ring is too small at this size for the title/desc/flow copy to sit
+     comfortably under the logo — keep just the mark, enlarged. */
+  .hubTitle,
+  .hubDesc,
+  .hubRule,
+  .hubFlow {
+    display: none;
+  }
+
+  /* The inner ring is ~153px across at this hub size; the logo's own 4:1
+     aspect ratio means height has to stay well under that or the wordmark's
+     width spills past the ring. */
+  .hubLogo {
+    height: 28px;
+    margin-bottom: 0;
+  }
+
+  /* Pull the whole curve in close around the hub — keep the original insets
+     (they space the rows apart to draw the curve) but subtract a flat
+     offset so even the widest row still sits near the ring, instead of
+     scaling every row outward from the smaller gap. The two columns use
+     different offsets because their insets top out at different values
+     (left: 48, right: 96) — sharing one offset pulled the left column,
+     whose rows never go past 48, in much further than the right. */
+  .colLeft .card {
+    margin-right: calc(var(--inset, 0) - 50px);
+  }
+
+  .colRight .card {
+    margin-left: calc(var(--inset, 0) - 70px);
+  }
+
+  /* 안전·감리 sits on the widest inset (96) and still read a touch too far
+     out from the ring; pull it in a bit more than its siblings. */
+  .colRight li:nth-child(3) .card {
+    margin-left: calc(var(--inset, 0) - 85px);
+  }
+}
+
+/* ─── Phones: hub above, cards in two columns ───────────── */
+@media (max-width: 799px) {
+  .section {
+    padding: 40px 0;
+  }
+
+  .inner {
+    gap: 24px;
+    padding-inline: var(--dp-gutter-sm);
+  }
+
+  .title {
+    font-size: 22px;
+    line-height: 32px;
+  }
+
+  .body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px 16px;
+    justify-items: center;
+  }
+
+  .hub {
+    grid-column: 1 / -1;
+    order: -1;
+    width: 260px;
+    height: 260px;
+  }
+
+  .hubText {
+    width: 180px;
+  }
+
+  .hubTitle {
+    font-size: 15px;
+    line-height: 22px;
+  }
+
+  .hubDesc,
+  .hubFlow {
+    font-size: 12px;
+    line-height: 19px;
+  }
+
+  /* Same as the 800px tier — the ring is too small for the title/desc/flow
+     copy under the logo, so keep just the mark. */
+  .hubTitle,
+  .hubDesc,
+  .hubRule,
+  .hubFlow {
+    display: none;
+  }
+
+  .hubLogo {
+    height: 32px;
+    margin-bottom: 0;
+  }
+
+  .colLeft,
+  .colRight {
+    align-items: stretch;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .colLeft .row,
+  .colRight .row {
+    justify-content: center;
+  }
+
+  .colLeft .card,
+  .colRight .card {
+    margin-inline: 0;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 320px;
+  }
+}

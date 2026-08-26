@@ -94,5 +94,13 @@
 
   .nav {
     flex-direction: row;
+    gap: 24px;
+  }
+
+  /* The fixed 130px column width (sized for the desktop layout) overflows
+     280px of available width alongside the 799px-tier's 64px gap; let each
+     column size to its own content instead, matching Figma's mobile spec. */
+  .navColumn {
+    width: auto;
   }
 }

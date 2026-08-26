@@ -1,0 +1,335 @@
+/* ─── Section ───────────────────────────────────────────── */
+.section {
+  background: #eff6ff;
+  padding: 64px 0;
+}
+
+/* A line break that only takes effect on phones — desktop/tablet widths
+   have room for the text to wrap on its own. */
+.mobileBreak {
+  display: none;
+}
+
+@media (max-width: 799px) {
+  .mobileBreak {
+    display: inline;
+  }
+}
+
+.inner {
+  max-width: var(--dp-container);
+  margin-inline: auto;
+  padding-inline: var(--dp-gutter-lg);
+}
+
+/* ─── Heading ───────────────────────────────────────────── */
+.heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 40px;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 40px;
+  color: #1e2939;
+  text-align: center;
+  word-break: keep-all;
+}
+
+.headingLine {
+  display: block;
+}
+
+.highlight {
+  color: #2b7fff;
+  font-style: normal;
+}
+
+/* ─── Step row ──────────────────────────────────────────── */
+/* Equal columns keep the four cards the same height even when one label wraps. */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: stretch;
+  container-type: inline-size;
+  gap: 8px;
+  margin: 0 0 32px;
+  padding: 0;
+  list-style: none;
+}
+
+.stepItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.stepReveal {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.stepCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 100%;
+  padding: 16px;
+  border: 1px solid #d1d5dc;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transition:
+    transform 200ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    box-shadow 200ms ease-out,
+    border-color 200ms ease-out;
+}
+
+.stepCard:hover {
+  transform: translateY(-4px);
+  border-color: #93c5fd;
+  box-shadow:
+    0 18px 28px -8px rgba(23, 60, 140, 0.18),
+    0 8px 12px -6px rgba(23, 60, 140, 0.1);
+}
+
+.iconBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  background: #f3f4f6;
+  color: #2b7fff;
+  transition: background 200ms ease-out;
+}
+
+.stepCard:hover .iconBox {
+  background: #e6f0ff;
+}
+
+.stepText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+
+.stepTitle {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  color: #1e2939;
+  word-break: keep-all;
+}
+
+.stepDesc {
+  /* Scales down slightly on narrower containers so the longest label
+     ("종이 · 엑셀 · 사진 · 메신저 저장") still fits on one line. */
+  font-size: clamp(14px, 1.41cqi, 18px);
+  font-weight: 500;
+  line-height: 28px;
+  color: #4a5565;
+  word-break: keep-all;
+}
+
+.arrow {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: #4a5565;
+}
+
+/* ─── Photo cards ───────────────────────────────────────── */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.cardReveal {
+  display: flex;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid #d1d5dc;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transition:
+    transform 200ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    box-shadow 200ms ease-out,
+    border-color 200ms ease-out;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: #93c5fd;
+  box-shadow:
+    0 22px 34px -10px rgba(23, 60, 140, 0.2),
+    0 10px 14px -8px rgba(23, 60, 140, 0.12);
+}
+
+.cardImage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 516 / 334;
+  overflow: hidden;
+}
+
+.photo {
+  object-fit: cover;
+  transition: transform 400ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.card:hover .photo {
+  transform: scale(1.04);
+}
+
+.cardBody {
+  padding: 16px 24px 24px;
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+  color: #1e2939;
+  word-break: keep-all;
+}
+
+.cardDesc {
+  margin: 4px 0 0;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 28px;
+  color: #4a5565;
+  word-break: keep-all;
+}
+
+.divider {
+  margin: 12px 0 16px;
+  border: 0;
+  border-top: 1px solid #e5e7eb;
+}
+
+.bullets {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bullet {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 28px;
+  color: #4a5565;
+  word-break: keep-all;
+}
+
+.dot {
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+  margin-top: 8px;
+  border-radius: 50%;
+  background: #2b7fff;
+}
+
+/* ─── Below 1280: the row stacks into a single column ───── */
+/* Figma keeps four across at 1280 and switches to one column under it. */
+@media (max-width: 1279px) {
+  /* Figma insets this section by 64px at 800px wide. */
+  .inner {
+    padding-inline: var(--dp-gutter-lg);
+  }
+
+  .steps {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .stepItem {
+    flex-direction: column;
+    /* Stretch so each stacked card fills the column width. */
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .arrow {
+    justify-content: center;
+  }
+
+  /* Arrows point down once the cards stack. */
+  .arrow {
+    transform: rotate(90deg);
+  }
+
+  .cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ─── Mobile ────────────────────────────────────────────── */
+@media (max-width: 799px) {
+  .section {
+    padding: 40px 0;
+  }
+
+  .inner {
+    padding-inline: var(--dp-gutter-sm);
+  }
+
+  .heading {
+    margin-bottom: 24px;
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  .heading {
+    gap: 0;
+  }
+
+  /* Figma shows a shorter, wider crop on phones. */
+  .cardImage {
+    aspect-ratio: 278 / 180;
+  }
+
+  .cardTitle {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .cardDesc,
+  .bullet {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .dot {
+    margin-top: 6px;
+  }
+}

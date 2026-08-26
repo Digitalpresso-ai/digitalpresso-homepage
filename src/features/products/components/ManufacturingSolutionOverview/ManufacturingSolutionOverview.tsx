@@ -10,7 +10,7 @@ export async function ManufacturingSolutionOverview() {
     <section
       className={styles.overview}
       style={{
-        backgroundImage: "url(/images/manufacturing-solution-overview.png)",
+        backgroundImage: "url(/images/manufacturing-solution-overview.webp)",
       }}
     >
       <div className={styles.overlay} aria-hidden />

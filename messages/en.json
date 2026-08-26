@@ -51,10 +51,18 @@
   },
   "home": {
     "hero": {
-      "heading": "A New Standard for Field Records,",
-      "body": "We collect and structure construction quality and safety inspection data to prove jobsite credibility and support on-site decisions.",
-      "ctaButton": "Contact Us",
-      "logoAlt": "RENAME DP logo"
+      "heading": ": AI that connects field records\nall the way to reporting",
+      "body": "It sees, hears, and understands the jobsite to\ncomplete the records and documents you need.",
+      "logoAlt": "RENAME DP logo",
+      "tags": [
+        "Smart Glasses",
+        "On-Device AI",
+        "Safety & Risk AI",
+        "Auto Documentation"
+      ],
+      "badge1Alt": "Certified Venture Company",
+      "badge2Alt": "KICT Korea Institute of Civil Engineering and Building Technology",
+      "badge3Alt": "2026 Korea Residential Environment Award"
     },
     "impact": {
       "heading": "Standardized evidence data builds <accent>operational trust</accent>,<br></br>and systemizes <accent>post-verification and dispute response</accent>.",
@@ -182,6 +190,1337 @@
       "headingLine2": "contact us now",
       "cta": "Contact Us Now",
       "imageAlt": "RENAME DP app mockup"
+    },
+    "partners": {
+      "label": "Partners and affiliations",
+      "names": {
+        "kaia": "KAIA",
+        "kict": "KICT",
+        "nvidia": "NVIDIA Inception Program",
+        "kova": "Korea Venture Business Association",
+        "kosme": "KOSME",
+        "betahaus": "betahaus",
+        "vertical": "vertical",
+        "corporation": "Korea Industrial Complex Corporation",
+        "fund": "Korea Credit Guarantee Fund"
+      }
+    },
+    "problem": {
+      "headingLine1": "The later field records arrive,",
+      "headingHighlight": "situation awareness and safety response",
+      "headingLine2Post": " fall behind with them.",
+      "steps": [
+        [
+          "Issue occurs",
+          "Work or inspection issue arises"
+        ],
+        [
+          "Records scatter",
+          "Paper, Excel, photos, messengers"
+        ],
+        [
+          "Late collation",
+          "Manual cleanup after hours"
+        ],
+        [
+          "Delayed response",
+          "Slow awareness and evidence"
+        ]
+      ],
+      "cards": [
+        {
+          "title": "Scattered data",
+          "desc": "Records spread across tools, so field status is understood too late.",
+          "bullets": [
+            "Checklists, reports, and photos split across paper/Excel/messengers",
+            "No real-time sharing between site and head office",
+            "Evidence re-collected after an incident"
+          ],
+          "imageAlt": "A site manager entering records from stacks of paper documents in an office"
+        },
+        {
+          "title": "Hands-free bottleneck",
+          "desc": "When input is blocked, records are delayed and missed.",
+          "bullets": [
+            "Phone input is impractical in helmets or at height",
+            "Underground and tunnel dead zones limit use",
+            "Fewer reports leads to gaps and higher incident risk"
+          ],
+          "imageAlt": "A worker checking records on a phone at a tunnel construction site"
+        }
+      ]
+    },
+    "platform": {
+      "h1a": "It ",
+      "h1b": "sees, hears, and understands",
+      "h2a": "the site, then ",
+      "h2b": "completes the records",
+      "h2c": " and work for you.",
+      "left": {
+        "title": "Field touchpoints",
+        "desc": "Hands-free capture of field data",
+        "devices": [
+          {
+            "label": "Smart glasses",
+            "alt": "Smart glasses device"
+          },
+          {
+            "label": "Mobile device",
+            "alt": "Mobile device"
+          }
+        ],
+        "items": [
+          "Worker voice and site conversation",
+          "Photos, video, CCTV",
+          "Drawings, BOQ, checklists",
+          "Work location, time, owner",
+          "Existing construction and defect history"
+        ]
+      },
+      "center": {
+        "suffix": "Field AI",
+        "logoAlt": "RENAME DP logo",
+        "flow": "Recognize data → judge site context → run work functions",
+        "cards": [
+          {
+            "title": "On-device AI",
+            "desc": "Interprets voice commands right on the device\nKeeps working where connectivity is unstable"
+          },
+          {
+            "title": "VLM · OCR",
+            "desc": "Reads photos, drawings, and documents in context\nStructures equipment, trade, hazard, and action"
+          },
+          {
+            "title": "AI copilot",
+            "desc": "Analyzes regulations, drawings, and past records\nSuggests content and supports field decisions"
+          }
+        ]
+      },
+      "right": {
+        "title": "Automation and integration",
+        "groups": [
+          {
+            "title": "Document automation",
+            "items": [
+              "Daily work logs written automatically",
+              "Construction and defect-repair records",
+              "Safety inspections and risk assessments",
+              "Preparation and evidence reports",
+              "Supervision logs and approval documents"
+            ]
+          },
+          {
+            "title": "Field operations",
+            "items": [
+              "Schedule, workforce, and safety dashboards",
+              "Hazard and omission alerts",
+              "Drawing-anchored history tracking",
+              "Real-time sharing with partners",
+              "ERP and existing system integration",
+              "Evidence for audits and disputes"
+            ]
+          }
+        ]
+      }
+    },
+    "blueprintDemo": {
+      "title": "Project drawing management",
+      "desc": "Drawing versions and change tracking, plus location-tagged construction\nrecords, defect handling, and messaging in one place.",
+      "steps": [
+        {
+          "name": "Change history",
+          "desc": "Version tracking keeps everyone on the same drawing"
+        },
+        {
+          "name": "Location tags",
+          "desc": "Location-based records and defect-repair requests"
+        },
+        {
+          "name": "Page markers",
+          "desc": "Jump straight to the page for that area"
+        }
+      ],
+      "ui": {
+        "breadcrumb": [
+          "Projects",
+          "Project management",
+          "Drawings"
+        ],
+        "projectName": "DP Apartment Building 101",
+        "status": "Active",
+        "manageBtn": "Manage",
+        "versionBtn": "Versions",
+        "listTitle": "Tags and markers",
+        "tabTag": "Location tags",
+        "tabMarker": "Page markers",
+        "searchPlaceholder": "Search tag names",
+        "fileName": "101_typical-floor_structural-plan.pdf",
+        "infoLabel": "View drawing info",
+        "nav": [
+          "Home",
+          "Projects",
+          "Safety",
+          "Org"
+        ],
+        "projectMenu": "Project management",
+        "logout": "Log out",
+        "pages": [
+          "Basement 1 plan",
+          "Level 1 plan",
+          "Level 3 typical plan"
+        ],
+        "blueprintAlt": "Typical floor structural plan for Building 101",
+        "searchMarkerPlaceholder": "Search marker names",
+        "startHint": "Try clicking a location tag."
+      },
+      "modal": {
+        "title": "Drawing info",
+        "nameLabel": "File name",
+        "timeLabel": "Activated",
+        "reasonLabel": "Reason",
+        "reason": "Reflects the revised wall layout on the level 3 typical floor (structural change approval 2026-118)",
+        "confirm": "OK",
+        "close": "Close",
+        "time": "2026-05-31 11:38"
+      },
+      "tags": [
+        {
+          "name": "Unit 903 bathroom",
+          "page": "Level 3 typical plan"
+        },
+        {
+          "name": "Unit 901 living room",
+          "page": "Level 3 typical plan"
+        },
+        {
+          "name": "Unit 902 kitchen",
+          "page": "Level 3 typical plan"
+        }
+      ],
+      "tagCard": {
+        "addedBy": "Added by",
+        "author": "J. Hong",
+        "record": "Construction record",
+        "repair": "Repair request",
+        "trade": "View trades"
+      },
+      "markerCard": {
+        "move": "Go to ‘{page}’"
+      },
+      "markers": [
+        {
+          "name": "Stair core detail, Block A",
+          "target": "Level 1 plan"
+        },
+        {
+          "name": "Machine room enlarged detail",
+          "target": "Basement 1 plan"
+        }
+      ]
+    },
+    "safetyDemo": {
+      "title": "Safety inspection checklist",
+      "desc": "Inspect hazards and raise transparency with electronic signatures\nand real-time photos.",
+      "steps": [
+        {
+          "name": "Item checks",
+          "desc": "Results structured as pass / fail / not applicable"
+        },
+        {
+          "name": "Field photos",
+          "desc": "Real-time capture for verifiable evidence"
+        },
+        {
+          "name": "Electronic signature",
+          "desc": "Signature history strengthens accountability"
+        }
+      ],
+      "ui": {
+        "breadcrumb": [
+          "Projects",
+          "Project management",
+          "Assigned inspections",
+          "New inspection"
+        ],
+        "sub": "Add a safety inspection assignment.",
+        "name": "Week 1 February daily inspection (L3 frame)",
+        "status": "Assigned",
+        "cancel": "Cancel",
+        "register": "Register inspection",
+        "infoTitle": "Assignment details",
+        "formLabel": "Inspection form",
+        "formValue": "Daily safety checklist (frame work)",
+        "assignLabel": "Assigned",
+        "assignValue": "2026-08-14",
+        "writeTitle": "Inspection entry",
+        "writeDesc": "Review each item and select the matching result.",
+        "photo": "Attach photo",
+        "detailLabel": "Details",
+        "detailPlaceholder": "Enter details.",
+        "actionLabel": "Action taken",
+        "actionPlaceholder": "Enter the action taken.",
+        "hint": "Attach a photo to have the content written for you.",
+        "nav": [
+          "Home",
+          "Projects",
+          "Safety",
+          "Org"
+        ],
+        "projectMenu": "Project management",
+        "logout": "Log out",
+        "startHint": "Try choosing an inspection result."
+      },
+      "options": [
+        "Pass",
+        "Fail",
+        "N/A"
+      ],
+      "groups": [
+        {
+          "title": "Personal protective equipment",
+          "items": [
+            "Helmet, safety boots, and harness worn",
+            "Toolbox meeting completed for new workers"
+          ]
+        },
+        {
+          "title": "Work at height and fall prevention",
+          "items": [
+            "Working platforms and guardrails properly installed",
+            "Openings and edges covered and protected"
+          ]
+        }
+      ],
+      "upload": {
+        "crumb": "Attach photo",
+        "title": "Attach inspection photos",
+        "desc": "Attach evidence photos for the selected item.",
+        "itemLabel": "Inspection item",
+        "dropText": "Drag files here, or choose them directly.",
+        "formats": "(Supported: pdf, jpg)",
+        "pick": "Choose file",
+        "files": [
+          "site-record-photo.jpg",
+          "site-record-photo.jpg"
+        ],
+        "cancel": "Cancel",
+        "confirm": "OK"
+      },
+      "ai": {
+        "askTitle": "Fill in the details and action automatically?",
+        "askDesc": "AI can write the details and action from the photos. Anything you already entered will be replaced.",
+        "manual": "Enter manually",
+        "auto": "Write with AI",
+        "loadingTitle": "Writing content…",
+        "loadingDesc": "AI is filling in the inspection content…\nThis will only take a moment.",
+        "detail": "On the east opening of the level 3 frame, the top guardrail has come loose and the toe board is missing. Parts of the working platform are also poorly fixed.",
+        "action": "Work in the area was suspended; the top guardrail was reinstalled and the toe board reinforced. All platform fixings were inspected and re-secured."
+      },
+      "sign": {
+        "title": "Register this inspection entry.",
+        "desc": "Content cannot be edited after signing. Review the entry, then sign to register it.",
+        "hint": "Tap here to sign.",
+        "resign": "Sign again",
+        "cancel": "Cancel",
+        "confirm": "OK"
+      }
+    },
+    "recordDemo": {
+      "title": "Construction records",
+      "desc": "Location and time metadata prevents undocumented work, and AI photo\nanalysis drafts the record for you.",
+      "steps": [
+        {
+          "name": "On-site capture",
+          "desc": "Location and time recorded with every photo"
+        },
+        {
+          "name": "AI-written content",
+          "desc": "A record draft written from the photos (LLM)"
+        }
+      ],
+      "ui": {
+        "breadcrumb": [
+          "Projects",
+          "Project management",
+          "Drawings",
+          "Records",
+          "New record"
+        ],
+        "sub": "Add a construction record to the project.",
+        "path": [
+          "DP Apartment Building 101",
+          "Level 3, zone B-04",
+          "3F rebar placement"
+        ],
+        "stepNames": [
+          "Record photos",
+          "Record details"
+        ],
+        "photoTitle": "Record photos",
+        "photoDesc": "Choose the work type and upload the record photos.",
+        "stateLabel": "Work status",
+        "statePlaceholder": "Select a work type.",
+        "dropText": "Drag files here, or choose them directly.",
+        "formats": "(Supported: pdf, jpg)",
+        "pick": "Choose file",
+        "files": [
+          "site-record-photo.jpg",
+          "site-record-photo.jpg"
+        ],
+        "cancel": "Cancel",
+        "next": "Next",
+        "prev": "Back",
+        "add": "Add record",
+        "infoTitle": "Record details",
+        "infoDesc": "Enter the details for this record.",
+        "nav": [
+          "Home",
+          "Projects",
+          "Safety",
+          "Org"
+        ],
+        "projectMenu": "Project management",
+        "logout": "Log out",
+        "startHint": "Try choosing a work status."
+      },
+      "states": [
+        "Before work",
+        "In progress",
+        "Completed",
+        "Material delivery",
+        "Equipment on site"
+      ],
+      "fields": {
+        "name": "Record name",
+        "content": "Record content",
+        "note": "Notes",
+        "notePlaceholder": "Enter any notes.",
+        "item": "Material",
+        "equip": "Equipment",
+        "spec": "Spec",
+        "unit": "Unit",
+        "qty": "Quantity"
+      },
+      "loading": {
+        "title": "Writing record details…",
+        "desc": "AI is filling in the record details…\nThis will only take a moment."
+      },
+      "mock": [
+        {
+          "name": "3F B-04 pre-placement condition",
+          "content": "Checked floor cleaning and layout marking before slab rebar placement in zone B-04. Formwork level is sound and debris has been cleared."
+        },
+        {
+          "name": "3F B-04 rebar placement in progress",
+          "content": "Placing upper and lower slab rebar in zone B-04. Main bars HD13 @200 and distribution bars HD10 @250; spacer intervals verified."
+        },
+        {
+          "name": "3F B-04 rebar placement complete",
+          "content": "Slab rebar placement in zone B-04 is complete. 40mm cover confirmed; lap and development lengths inspected against the drawings."
+        },
+        {
+          "name": "3F slab ready-mix delivery",
+          "item": "Ready-mix concrete",
+          "spec": "25-24-150",
+          "unit": "m³",
+          "qty": "120"
+        },
+        {
+          "name": "3F concrete placement equipment",
+          "equip": "Concrete pump truck",
+          "spec": "02W",
+          "unit": "unit",
+          "qty": "1"
+        }
+      ]
+    },
+    "reportDemo": {
+      "title": "Automated daily work reports",
+      "desc": "AI analyses field records and uploaded documents to generate and fill in\ndaily report entries, then routes them through a transparent approval flow.",
+      "steps": [
+        {
+          "name": "AI-generated drafts",
+          "desc": "Automatic analysis and extraction from accumulated field data"
+        },
+        {
+          "name": "Review and approval",
+          "desc": "Connected to your reporting and approval workflow"
+        }
+      ],
+      "ui": {
+        "nav": [
+          "Home",
+          "Projects",
+          "Safety",
+          "Organisation"
+        ],
+        "projectMenu": "Project management",
+        "logout": "Log out",
+        "breadcrumb": [
+          "Projects",
+          "Project management",
+          "Daily reports",
+          "New daily report"
+        ],
+        "sub": "Write and add a daily work report for the project.",
+        "tradeLabel": "Trade",
+        "tradePlaceholder": "Select a trade.",
+        "startHint": "Try selecting a trade.",
+        "nameLabel": "Report name",
+        "namePlaceholder": "Enter the report name.",
+        "nameHint": "Try entering a title.",
+        "reportName": "Daily report 2026-05-31",
+        "cancel": "Cancel",
+        "save": "Save draft",
+        "autoWrite": "AI auto-write",
+        "submit": "Submit report",
+        "signOwner": "Owner",
+        "signCheck": "Checked by",
+        "signOwnerName": "J. Lim",
+        "signCheckName": "G. Hong",
+        "dropText": "Upload a file to generate the daily report automatically.",
+        "formats": "(Supported: xlsx, docx, xls, doc, pdf, hwp, hwpx)",
+        "pick": "Choose file",
+        "addMaterial": "Add material",
+        "addEquip": "Add equipment"
+      },
+      "trades": [
+        "Broadcast and telecom electrical works",
+        "Information and communication works",
+        "Fire safety electrical works",
+        "Renewable and ancillary electrical works"
+      ],
+      "header": {
+        "project": "DP Smart Tower new construction",
+        "date": "2026.05.31",
+        "weather": "Rain, 29°C, 60% chance"
+      },
+      "sections": {
+        "work": "Work summary",
+        "labor": "Labour deployed",
+        "material": "Materials used",
+        "equip": "Equipment deployed",
+        "note": "Remarks"
+      },
+      "fields": {
+        "project": "Project",
+        "date": "Date",
+        "weather": "Weather",
+        "today": "Today's work",
+        "tomorrow": "Tomorrow's work",
+        "prev": "Previous",
+        "cur": "Today",
+        "total": "Cumulative",
+        "item": "Item",
+        "spec": "Spec",
+        "unit": "Unit",
+        "qty": "Quantity",
+        "equipName": "Equipment",
+        "equipWork": "Work performed",
+        "note": "Remarks"
+      },
+      "placeholders": {
+        "today": "Enter today's work.",
+        "tomorrow": "Enter tomorrow's work.",
+        "prev": "Enter previous headcount.",
+        "cur": "Enter today's headcount.",
+        "total": "Enter cumulative headcount.",
+        "item": "Enter the item name.",
+        "spec": "Enter the spec.",
+        "unit": "Enter the unit.",
+        "mPrev": "Enter previous quantity.",
+        "mCur": "Enter today's quantity.",
+        "mTotal": "Enter cumulative quantity.",
+        "equipName": "Enter the equipment name.",
+        "ePrev": "Enter previous count.",
+        "eCur": "Enter today's count.",
+        "eTotal": "Enter cumulative count.",
+        "equipWork": "Enter the work performed.",
+        "note": "Enter any remarks."
+      },
+      "confirm": {
+        "title": "AI daily report auto-write",
+        "desc": "AI will pull the field records for the selected date and trade and write the daily report automatically. Existing values will be overwritten and uploaded documents removed. Do you want to continue?",
+        "cancel": "Cancel",
+        "ok": "Confirm"
+      },
+      "loading": {
+        "title": "AI is writing...",
+        "desc": "AI is writing the daily work report...\nPlease wait a moment."
+      },
+      "mock": [
+        {
+          "today": "Ran RG-11 broadcast coaxial cable on level 8 and terminated the rack patch panels. Signal attenuation measured within spec.",
+          "tomorrow": "Continue coaxial cable runs in the sub-control room and terminate the broadcast panel.",
+          "labor": {
+            "prev": "12",
+            "cur": "14",
+            "total": "186"
+          },
+          "material": {
+            "item": "Coaxial cable RG-11",
+            "spec": "75Ω / 300 m reel",
+            "unit": "reel",
+            "prev": "6",
+            "cur": "4",
+            "total": "22"
+          },
+          "equip": {
+            "name": "Cable tray lift",
+            "spec": "3.5 m",
+            "prev": "1",
+            "cur": "1",
+            "total": "9",
+            "work": "Assisted cable pulling along ceiling trays"
+          },
+          "note": "Rooftop entry works deferred due to rain; indoor cabling only."
+        },
+        {
+          "today": "Completed Cat.6 UTP cabling and unit terminal box terminations on levels 5-7, with firestopping at conduit penetrations.",
+          "tomorrow": "UTP cabling on levels 8-10 and fibre fusion splicing in the MDF room.",
+          "labor": {
+            "prev": "9",
+            "cur": "11",
+            "total": "142"
+          },
+          "material": {
+            "item": "UTP Cat.6 cable",
+            "spec": "4P / 305 m box",
+            "unit": "box",
+            "prev": "8",
+            "cur": "6",
+            "total": "31"
+          },
+          "equip": {
+            "name": "Fibre fusion splicer",
+            "spec": "Core alignment",
+            "prev": "0",
+            "cur": "1",
+            "total": "4",
+            "work": "MDF fibre splice prep and loss measurement"
+          },
+          "note": "Two terminal box positions differed from the drawings and were adjusted after supervisor review."
+        },
+        {
+          "today": "Ran detector wiring and installed call point sets on basement level 1, with loop continuity testing against the panel.",
+          "tomorrow": "Smoke damper control wiring and emergency broadcast speakers on level 1.",
+          "labor": {
+            "prev": "7",
+            "cur": "8",
+            "total": "98"
+          },
+          "material": {
+            "item": "Heat-resistant HFIX cable",
+            "spec": "2.5 sq / 2C",
+            "unit": "reel",
+            "prev": "5",
+            "cur": "3",
+            "total": "18"
+          },
+          "equip": {
+            "name": "Elevated work platform",
+            "spec": "Electric 8 m",
+            "prev": "2",
+            "cur": "2",
+            "total": "16",
+            "work": "Ceiling detector wiring and mounting on B1"
+          },
+          "note": "Loop continuity test completed with the fire safety supervisor present; no defects found."
+        },
+        {
+          "today": "Installed rooftop PV mounting structures and ran string DC cabling. Open-circuit voltage measured per string.",
+          "tomorrow": "Inverter delivery and installation, combiner box wiring, and earth resistance testing.",
+          "labor": {
+            "prev": "6",
+            "cur": "9",
+            "total": "77"
+          },
+          "material": {
+            "item": "PV module",
+            "spec": "Monocrystalline 550 W",
+            "unit": "pcs",
+            "prev": "40",
+            "cur": "36",
+            "total": "212"
+          },
+          "equip": {
+            "name": "Cargo crane",
+            "spec": "5 t",
+            "prev": "1",
+            "cur": "1",
+            "total": "7",
+            "work": "Hoisting modules and mounting frames to the roof"
+          },
+          "note": "Hoisting paused for one hour in the afternoon due to sudden gusts, then resumed."
+        }
+      ]
+    },
+    "scheduleDemo": {
+      "title": "Schedule and cash-flow board",
+      "desc": "Visualise cash flow from your document data and manage the whole site\nat a glance with a trade / process / task schedule.",
+      "steps": [
+        {
+          "name": "Hierarchical scheduling",
+          "desc": "A schedule structured by trade, process and task"
+        },
+        {
+          "name": "Cash flow at a glance",
+          "desc": "Financial status as intuitive indicators"
+        },
+        {
+          "name": "One unified view",
+          "desc": "From notices through to outstanding work"
+        }
+      ],
+      "ui": {
+        "nav": [
+          "Home",
+          "Projects",
+          "Safety",
+          "Organisation"
+        ],
+        "menu": [
+          "Dashboard",
+          "Notifications",
+          "SigongTalk",
+          "To do",
+          "Attendance"
+        ],
+        "logout": "Log out",
+        "title": "Dashboard",
+        "sub": "Manage your organisation and project status at a glance.",
+        "projectLabel": "Select project",
+        "projectPlaceholder": "Select a project.",
+        "startHint": "Try selecting a project.",
+        "schedule": "Schedule",
+        "detail": "View details",
+        "back": "Back",
+        "fund": "Cash flow",
+        "empty": "No data to display.\nSelect a project first."
+      },
+      "projects": [
+        "DP Apartment Building 101"
+      ],
+      "attendance": {
+        "title": "Attendance",
+        "link": "Records",
+        "stamp": "2026-08-14 (Mon) 09:14:26",
+        "state": "Not clocked in",
+        "in": "Clock in",
+        "out": "Clock out",
+        "checkIn": "Clock in",
+        "checkOut": "Clock out"
+      },
+      "board": {
+        "title": "Notice board",
+        "link": "View all",
+        "empty": "No posts yet.",
+        "page": "1/1"
+      },
+      "detailView": {
+        "breadcrumb": [
+          "Projects",
+          "Project management",
+          "Schedule"
+        ],
+        "sub": "Review the project schedule.",
+        "status": "Active",
+        "print": "Print to PDF"
+      },
+      "table": {
+        "trade": "Trade",
+        "plan": "Schedule",
+        "start": "Start",
+        "end": "Due",
+        "days": "Days",
+        "months": [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May"
+        ]
+      },
+      "rows": [
+        {
+          "trade": "Reinforced concrete",
+          "name": "B1F setting out",
+          "start": "2026/01/01",
+          "end": "2026/02/10",
+          "days": "41",
+          "task": "B1 setting out"
+        },
+        {
+          "trade": "",
+          "name": "B1F wall formwork",
+          "start": "2026/01/06",
+          "end": "2026/02/12",
+          "days": "38",
+          "task": "Wall formwork"
+        },
+        {
+          "trade": "",
+          "name": "3F rebar placement",
+          "start": "2026/01/22",
+          "end": "2026/02/20",
+          "days": "30",
+          "task": "3F slab rebar"
+        },
+        {
+          "trade": "",
+          "name": "Slab formwork",
+          "start": "2026/01/12",
+          "end": "2026/02/28",
+          "days": "48",
+          "task": "Slab formwork"
+        },
+        {
+          "trade": "",
+          "name": "Concrete pour",
+          "start": "2026/01/18",
+          "end": "2026/01/30",
+          "days": "13",
+          "task": "3F pour"
+        },
+        {
+          "trade": "Temporary works",
+          "name": "Temporary power",
+          "start": "2026/01/01",
+          "end": "2026/02/10",
+          "days": "41",
+          "task": "Power intake"
+        },
+        {
+          "trade": "",
+          "name": "Hoarding and safety",
+          "start": "2026/01/06",
+          "end": "2026/02/12",
+          "days": "38",
+          "task": "Panel install"
+        },
+        {
+          "trade": "Electrical works",
+          "name": "Feeder cabling",
+          "start": "2026/02/04",
+          "end": "2026/03/27",
+          "days": "52",
+          "task": "Feeder pulling"
+        },
+        {
+          "trade": "",
+          "name": "Unit conduit and wiring",
+          "start": "2026/02/18",
+          "end": "2026/04/02",
+          "days": "44",
+          "task": "Unit wiring"
+        },
+        {
+          "trade": "",
+          "name": "Substation delivery",
+          "start": "2026/03/12",
+          "end": "2026/04/16",
+          "days": "36",
+          "task": "Substation install"
+        },
+        {
+          "trade": "",
+          "name": "Earthing and lightning",
+          "start": "2026/03/04",
+          "end": "2026/04/30",
+          "days": "58",
+          "task": "Earthing works"
+        },
+        {
+          "trade": "Telecom works",
+          "name": "Building conduit",
+          "start": "2026/03/30",
+          "end": "2026/05/08",
+          "days": "40",
+          "task": "Conduit runs"
+        },
+        {
+          "trade": "",
+          "name": "MDF and terminal boxes",
+          "start": "2026/04/15",
+          "end": "2026/05/18",
+          "days": "34",
+          "task": "Terminal boxes"
+        },
+        {
+          "trade": "",
+          "name": "Fibre splicing",
+          "start": "2026/04/29",
+          "end": "2026/05/28",
+          "days": "30",
+          "task": "Fibre splicing"
+        }
+      ],
+      "charts": {
+        "billed": {
+          "title": "Billed to date and remaining",
+          "total": "Contract value: ₩10.0bn",
+          "billedLabel": "Billed: ₩5.84bn",
+          "restLabel": "Remaining: ₩4.16bn",
+          "billedPct": "58.4%",
+          "restPct": "41.6%"
+        },
+        "progress": {
+          "title": "Project progress",
+          "doneLabel": "Billed progress: 55%",
+          "planLabel": "Schedule progress: 40%"
+        },
+        "trend": {
+          "title": "Cumulative billing by period",
+          "contract": "Contract value: ₩10.0bn",
+          "axis": [
+            "2026.02.04",
+            "2026.03.02",
+            "2026.04.06",
+            "2026.05.01",
+            "2026.05.02"
+          ],
+          "values": [
+            12,
+            17,
+            22,
+            30,
+            36
+          ]
+        },
+        "cost": {
+          "title": "Progress against target cost",
+          "value": "66.36%",
+          "min": "0%",
+          "mid": "100%",
+          "max": "200%",
+          "rows": [
+            [
+              "Forecast construction cost",
+              "₩9.4bn"
+            ],
+            [
+              "Target cost at current progress",
+              "₩8.8bn"
+            ],
+            [
+              "Spent to date",
+              "₩5.84bn"
+            ],
+            [
+              "Current schedule progress",
+              "40%"
+            ]
+          ]
+        }
+      }
+    },
+    "copilot": {
+      "badge": "AI Copilot",
+      "title": "Regulations, drawings and field data in one place —\nsupporting both safety and daily work.",
+      "imageAlt": "Selecting a crack on a site drawing while AI presents similar cases, related regulations and a risk grade",
+      "stages": [
+        {
+          "stage": "Before work",
+          "title": "Safety preparation",
+          "points": [
+            "Drafts TBM and risk assessments",
+            "Surfaces the relevant standards and checks"
+          ]
+        },
+        {
+          "stage": "During work",
+          "title": "On-site decision support",
+          "points": [
+            "Looks up drawing locations and past history",
+            "Suggests likely causes and remedies"
+          ]
+        },
+        {
+          "stage": "After work",
+          "title": "Automated records and reports",
+          "points": [
+            "Drafts daily reports and field records",
+            "Generates reports and supporting documents"
+          ]
+        }
+      ],
+      "sourcesTitle": "The evidence behind every answer",
+      "sources": [
+        {
+          "title": "Official standards",
+          "desc": "Building code · safety standards ·\nstandard specifications"
+        },
+        {
+          "title": "Drawings and contracts",
+          "desc": "Drawings · bills of quantities · schedules"
+        },
+        {
+          "title": "Field records",
+          "desc": "Photos · voice notes ·\ndaily reports · defect history"
+        },
+        {
+          "title": "Past history",
+          "desc": "Construction · inspection ·\nremedial and approval records"
+        }
+      ]
+    },
+    "segments": {
+      "title": "Sites differ, but the problems of",
+      "titleAccent": "recording, inspection, reporting and evidence",
+      "titleTail": " are the same.",
+      "hub": {
+        "title": "Unified field records and documents",
+        "desc": "Photos · voice · drawings · checklists",
+        "flow": "Capture → organise by item →\nlink location and history → automate documents"
+      },
+      "left": [
+        {
+          "title": "Plant",
+          "desc": "Piping and equipment inspection"
+        },
+        {
+          "title": "Facility management",
+          "desc": "Defects · complaints · inspection history"
+        },
+        {
+          "title": "Fire safety and MEP",
+          "desc": "Statutory inspection reports"
+        },
+        {
+          "title": "Telecom",
+          "desc": "Base station and fibre inspection"
+        }
+      ],
+      "right": [
+        {
+          "title": "Building",
+          "desc": "Structure and finishing records"
+        },
+        {
+          "title": "Civil works",
+          "desc": "Road and bridge photo logs"
+        },
+        {
+          "title": "Safety and supervision",
+          "desc": "Checklists · inspection requests"
+        },
+        {
+          "title": "Public facilities",
+          "desc": "Landscape and playground inspection"
+        },
+        {
+          "title": "Energy",
+          "desc": "Solar and power equipment evidence"
+        }
+      ]
+    },
+    "results": {
+      "eyebrow": "Results",
+      "title": "Records are <accent>automated</accent>, reports are <accent>faster</accent>,<br></br>and risks are <accent>managed earlier</accent>",
+      "cards": {
+        "reportTime": {
+          "metric": "80%",
+          "text": "Less time spent writing records and reports"
+        },
+        "duplicateWork": {
+          "metric": "70%",
+          "text": "Less duplicate entry and manual cleanup"
+        },
+        "documentPrep": {
+          "metric": "60%",
+          "text": "Faster document and evidence preparation"
+        },
+        "sameDayDraft": {
+          "metric": "Same day",
+          "text": "Draft reports from field records"
+        }
+      }
+    },
+    "support": {
+      "title": "From <accent>site diagnosis to setup and training</accent>,<br></br>we help teams apply it quickly through <accent>dedicated step-by-step support</accent>.",
+      "steps": {
+        "diagnosis": {
+          "title": "Site diagnosis",
+          "subtitle": "Workflow and data analysis",
+          "desc": "Review current records and reports\nDefine scope and key goals",
+          "tag": "Scope defined"
+        },
+        "poc": {
+          "title": "PoC · scope",
+          "subtitle": "Validation with real data",
+          "desc": "Test automated photo and voice records\nConfirm rollout scope and schedule",
+          "tag": "Validated"
+        },
+        "setup": {
+          "title": "Setup",
+          "subtitle": "Site-specific configuration",
+          "desc": "Configure accounts, roles, and forms\nStructure drawings and existing data",
+          "tag": "One-time setup"
+        },
+        "training": {
+          "title": "Training · launch",
+          "subtitle": "User adoption support",
+          "desc": "Train admins, managers, and partners\nMonitor early operations and respond",
+          "tag": "Operations live"
+        }
+      }
+    },
+    "ctaCards": {
+      "title": "Equip field experience with data.",
+      "subtitle": "Build a smarter jobsite with RENAME DP.",
+      "cards": {
+        "contact": {
+          "title": "Contact us",
+          "desc": "Discuss a rollout plan for your site",
+          "button": "Contact us",
+          "href": "/en/contact"
+        },
+        "brochure": {
+          "title": "Download brochure",
+          "desc": "Get the service introduction",
+          "button": "Download",
+          "href": "/digitalpresso-brochure.pdf",
+          "filename": "digitalPresso-Service-Introduction.pdf"
+        }
+      }
+    },
+    "defectDemo": {
+      "title": "Defect repair requests",
+      "desc": "Location and time metadata makes the target unambiguous, and approval\nhistory is tracked for you.",
+      "steps": [
+        {
+          "name": "Defect location",
+          "desc": "Photo, location, and time pin down the target"
+        },
+        {
+          "name": "Approval process",
+          "desc": "Every approval step recorded automatically"
+        },
+        {
+          "name": "AI-written content",
+          "desc": "A request draft written from the defect photos"
+        }
+      ],
+      "ui": {
+        "breadcrumb": [
+          "Projects",
+          "Project management",
+          "Drawings",
+          "Repair requests",
+          "New request"
+        ],
+        "sub": "Add a defect repair request to the project.",
+        "path": [
+          "DP Apartment Building 101",
+          "Level 3, zone B-04",
+          "3F rebar placement"
+        ],
+        "stepNames": [
+          "Request\nphotos",
+          "Request\ndetails"
+        ],
+        "photoTitle": "Request photos",
+        "photoDesc": "Upload photos of the defect.",
+        "dropText": "Drag files here, or choose them directly.",
+        "formats": "(Supported: pdf, jpg)",
+        "pick": "Choose file",
+        "files": [
+          "defect-photo.jpg",
+          "defect-photo.jpg"
+        ],
+        "cancel": "Cancel",
+        "next": "Next",
+        "prev": "Back",
+        "add": "Add request",
+        "infoTitle": "Request details",
+        "infoDesc": "Enter the details for this request.",
+        "startHint": "Try clicking Choose file.",
+        "assignHint": "Try assigning an owner.",
+        "nav": [
+          "Home",
+          "Projects",
+          "Safety",
+          "Org"
+        ],
+        "projectMenu": "Project management",
+        "logout": "Log out"
+      },
+      "fields": {
+        "assign": "Assignee",
+        "assignPlaceholder": "Search for a person.",
+        "name": "Request name",
+        "type": "Defect type",
+        "content": "Request content",
+        "note": "Notes",
+        "notePlaceholder": "Enter any notes."
+      },
+      "people": [
+        {
+          "name": "J. Hong",
+          "email": "gdhong@rename.dp"
+        },
+        {
+          "name": "H. Kim",
+          "email": "hjkim@rename.dp"
+        }
+      ],
+      "loading": {
+        "title": "Writing request details…",
+        "desc": "AI is filling in the request details…\nThis will only take a moment."
+      },
+      "mock": {
+        "name": "3F B-04 slab soffit crack repair",
+        "type": "Structural · cracking",
+        "content": "A drying-shrinkage crack roughly 0.3mm wide and 1.2m long was found on the slab soffit in zone B-04. There is no sign of leakage, but a crack gauge should be installed to check for progression, followed by epoxy injection."
+      }
+    },
+    "talkDemo": {
+      "title": "Field messenger",
+      "titleBadge": "Talk",
+      "desc": "Talk in a channel dedicated to the project, share locations on the\ndrawing, and circulate TBM notes for accurate collaboration.",
+      "steps": [
+        {
+          "name": "Channel collaboration",
+          "desc": "A dedicated channel per project"
+        },
+        {
+          "name": "AI-written TBM notes",
+          "desc": "Drafted from the day's work and weather"
+        },
+        {
+          "name": "Drawing location messages",
+          "desc": "Messages carry a location tag"
+        }
+      ],
+      "ui": {
+        "nav": [
+          "Home",
+          "Projects",
+          "Safety",
+          "Org"
+        ],
+        "logout": "Log out",
+        "menu": [
+          "Dashboard",
+          "Notifications",
+          "Field Talk",
+          "To do",
+          "Attendance"
+        ],
+        "crumbChat": [
+          "Chat rooms",
+          "Chat room"
+        ],
+        "crumbPlan": [
+          "Chat rooms",
+          "Chat room",
+          "Drawing"
+        ],
+        "subChat": "Talk with the people on this project.",
+        "subPlan": "Browse location messages on the drawing.",
+        "project": "DP Apartment Building 101",
+        "status": "Active",
+        "search": "Search",
+        "menuBtn": "Menu",
+        "inputPlaceholder": "Type a message.",
+        "startHint": "Try clicking the + button.",
+        "attachLocation": "Location message",
+        "attachTbm": "TBM note",
+        "tbmTitle": "2026 DP Apartment 101 TBM",
+        "tbmDate": "2026. 08. 14",
+        "msgListTitle": "Location messages",
+        "msgSearch": "Search",
+        "msgSearchPlaceholder": "Search messages.",
+        "addLocationMsg": "Add location message",
+        "pageLabel": "Page 1",
+        "toast": "Tap the spot on the drawing to place the location message.",
+        "toastCancel": "Cancel",
+        "backToChat": "Back to chat room",
+        "viewOnPlan": "View on drawing",
+        "locationMsgTitle": "Location message",
+        "pages": [
+          "Page 1",
+          "Page 2",
+          "Page 3"
+        ]
+      },
+      "modal": {
+        "title": "New location message",
+        "label": "Message",
+        "placeholder": "Type a message.",
+        "hint": "Click here to type a message.",
+        "cancel": "Cancel",
+        "confirm": "OK"
+      },
+      "chat": {
+        "author": "J. Hong",
+        "time": "12:00 PM",
+        "intro": "Showers are forecast this afternoon — let us wrap up the work at height early.",
+        "locationMsg": "Please check the crack on the slab soffit in zone B-04, level 3."
+      },
+      "tbm": {
+        "crumb": [
+          "Chat rooms",
+          "Chat room",
+          "Menu",
+          "TBM notes",
+          "TBM detail"
+        ],
+        "sub": "Review the details of this TBM note.",
+        "name": "2026 DP Apartment 101 TBM",
+        "signBtn": "Sign to confirm",
+        "overview": "TBM overview",
+        "projectLabel": "Project",
+        "dateLabel": "Date",
+        "authorLabel": "Author",
+        "date": "2026. 05. 20",
+        "author": "J. Hong",
+        "worksTitle": "Work planned today",
+        "workTag": "Work",
+        "works": [
+          "Level 3 slab rebar",
+          "External scaffold erection"
+        ],
+        "weatherTitle": "Weather",
+        "tempLabel": "Temperature",
+        "rainLabel": "Chance of rain",
+        "windLabel": "Wind",
+        "skyLabel": "Conditions",
+        "temp": "28°C",
+        "rain": "70%",
+        "wind": "6 m/s",
+        "sky": "Afternoon showers",
+        "safetyTitle": "Safety notes",
+        "safetyLabel": "Safety notes",
+        "safety": [
+          "Afternoon showers — 70% chance of rain. Announce the suspension threshold for external work at height after 2pm.",
+          "Wind limits at height — 6 m/s. Double-hook harnesses on scaffold; secure lightweight materials.",
+          "Waterproofing in rain — stop sheet work immediately, protect the cure, and report to the site manager.",
+          "Heat — 28°C. Ensure hydration and shaded rest areas for outdoor crews.",
+          "Confirm helmet, safety boots, and harness before entering the work area."
+        ],
+        "signTitle": "Confirmation signatures",
+        "noSign": "No signature yet.",
+        "signedAt": "2026. 05. 20 16:30",
+        "members": [
+          "J. Hong",
+          "H. Kim",
+          "A. Lee",
+          "Q. Park",
+          "G. Choi"
+        ],
+        "backToChat": "Back to chat room"
+      },
+      "sign": {
+        "title": "Confirm and sign this TBM note.",
+        "desc": "You cannot edit your confirmation after signing. Review the note, then sign to register it.",
+        "hint": "Tap here to sign.",
+        "resign": "Sign again",
+        "cancel": "Cancel",
+        "confirm": "OK"
+      },
+      "titleLead": "Field messenger",
+      "titleMark": "Sigong Talk"
     }
   },
   "productsPage": {
@@ -437,6 +1776,65 @@
     }
   },
   "aboutPage": {
+    "stats": {
+      "title": "Technical & Market Validation",
+      "cards": [
+        {
+          "value": "4.9M",
+          "suffix": "+",
+          "title": "Field AI Data Assets",
+          "desc": "Drawings, checklists, and other\nunstructured field documents"
+        },
+        {
+          "value": "300K",
+          "suffix": "+",
+          "title": "Document Recognition Data",
+          "desc": "Field document recognition\nand analysis data"
+        },
+        {
+          "value": "95%",
+          "suffix": "+",
+          "title": "Data Extraction Accuracy",
+          "desc": "Verified structuring performance on\nfield documents and drawings"
+        },
+        {
+          "value": "7",
+          "suffix": "",
+          "title": "IP Secured",
+          "desc": "3 patents filed/registered,\n4 trademarks"
+        }
+      ]
+    },
+    "validation": {
+      "title": "Key External Validation",
+      "cards": [
+        {
+          "title": "Korea Housing Environment Award",
+          "desc": "Recognized by KFCC and JoongAng Ilbo for AI innovation on construction sites",
+          "date": "2026.07"
+        },
+        {
+          "title": "Selected for NVIDIA Inception",
+          "desc": "Selected for a global AI program",
+          "date": "2026.07"
+        },
+        {
+          "title": "Selected for Startup Growth Technology R&D Program",
+          "desc": "Selected for the 2026 Didimdol\n3rd-round implementation plan",
+          "date": "2026.07"
+        },
+        {
+          "title": "KICT Family Company Certification",
+          "desc": "Korea Institute of Civil Engineering and Building Technology\nPartnership and commercialization base secured",
+          "date": "2026.01"
+        },
+        {
+          "title": "Certified Venture Company",
+          "desc": "Ministry of SMEs and Startups, innovation-growth type\nCertified venture company",
+          "date": "2026.01"
+        }
+      ]
+    },
     "hero": {
       "headingLine1": "Dynamic Integration,",
       "headingLine2": "Pragmatic Innovation",
@@ -449,7 +1847,7 @@
       "title": "Our Team",
       "divisions": [
         {
-          "name": "CEO Division",
+          "name": "Business Strategy Division",
           "departments": [
             {
               "title": "Management",
@@ -481,21 +1879,10 @@
           ]
         },
         {
-          "name": "CAIO Division",
+          "name": "AI Service Development Division",
           "departments": [
             {
-              "title": "Dev",
-              "mobileOrder": 3,
-              "items": [
-                "Develop software and systems",
-                "Write code, test, and debug",
-                "Analyze technical requirements and provide solutions",
-                "Improve systems for optimized performance"
-              ]
-            },
-            {
               "title": "R&D",
-              "mobileOrder": 1,
               "items": [
                 "Research and adopt new technologies",
                 "Experiment and develop for product/service innovation",
@@ -504,8 +1891,16 @@
               ]
             },
             {
+              "title": "Dev",
+              "items": [
+                "Develop software and systems",
+                "Write code, test, and debug",
+                "Analyze technical requirements and provide solutions",
+                "Improve systems for optimized performance"
+              ]
+            },
+            {
               "title": "BX·UX·UI Design",
-              "mobileOrder": 2,
               "items": [
                 "Design and maintain consistent brand experiences",
                 "Manage interface design guidelines",
@@ -520,8 +1915,8 @@
     "office": {
       "title": "Our office",
       "body1": "Even in the early stage, we work with confidence that every small step moves us forward.",
-      "body2": "Within freedom and responsibility, we lead our work proactively and provide a flexible environment where creativity and collaboration can thrive.",
-      "body3": "As we build innovation together, we take pride in contributing every day to the company's growth and progress.",
+      "body2": "Within freedom and responsibility, we lead our work proactively,\nproviding a flexible environment where creativity and collaboration thrive.",
+      "body3": "As we build innovation together, we take pride in contributing every day\nto the company's growth and progress.",
       "captions": [
         "Office",
         "Lounge",
@@ -541,15 +1936,15 @@
       "heading": "<accent>Proven in the field</accent>, <accent>validated by partners</accent>.",
       "cards": {
         "construction": {
-          "title": "Guaranteed Validation Site<br></br>for Sub-5B KRW Projects",
+          "title": "Guaranteed Validation Site for Sub-5B KRW Projects",
           "imageAlt": "Guaranteed validation site for construction projects under 5 billion KRW"
         },
         "kaia": {
-          "title": "Korea Agency for Infrastructure Technology Advancement<br></br>Global accelerating program participant<br></br>Secured European network channels",
+          "title": "Korea Agency for Infrastructure Technology Advancement<br></br>Global accelerating program participant",
           "imageAlt": "Participation in the KAIA global accelerating program"
         },
         "gwangju": {
-          "title": "Gwangju Metropolitan City<br></br>AI·AX Validation Partnership",
+          "title": "Gwangju Metropolitan City AI·AX Validation Partnership",
           "imageAlt": "Gwangju Metropolitan City AI·AX validation partnership signing ceremony"
         }
       }

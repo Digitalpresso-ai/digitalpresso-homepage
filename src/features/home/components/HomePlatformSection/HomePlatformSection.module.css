@@ -1,0 +1,521 @@
+/* ─── Section ───────────────────────────────────────────── */
+.section {
+  background: #fff;
+  padding: 64px 0;
+}
+
+/* A line break that only takes effect on phones — desktop/tablet widths
+   have room for the text to wrap on its own. */
+.mobileBreak {
+  display: none;
+}
+
+@media (max-width: 799px) {
+  .mobileBreak {
+    display: inline;
+  }
+}
+
+/* Same inset as every other section, so the card edges line up vertically
+   with the section above. */
+.inner {
+  max-width: var(--dp-container);
+  margin-inline: auto;
+  padding-inline: var(--dp-gutter-lg);
+}
+
+/* ─── Heading ───────────────────────────────────────────── */
+.heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 40px;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 40px;
+  color: #1e2939;
+  text-align: center;
+  word-break: keep-all;
+}
+
+.headingLine {
+  display: block;
+}
+
+.highlight {
+  color: #2b7fff;
+  font-style: normal;
+}
+
+/* ─── Three columns ─────────────────────────────────────── */
+.columns {
+  display: grid;
+  /* Figma: 342 / 548 / 342 inside the 1280 container */
+  grid-template-columns: 342fr 548fr 342fr;
+  align-items: center;
+  gap: 24px;
+}
+
+.columnReveal,
+.centerReveal {
+  display: flex;
+  min-width: 0;
+}
+
+/* ─── Side cards ────────────────────────────────────────── */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  padding: 16px 24px;
+  border: 1px solid #d1d5dc;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.cardHead {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+  color: #1e2939;
+  word-break: keep-all;
+}
+
+.cardDesc {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 28px;
+  color: #4a5565;
+  word-break: keep-all;
+}
+
+.divider {
+  width: 100%;
+  margin: 0;
+  border: 0;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* ─── Device pair ───────────────────────────────────────── */
+.devices {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.device {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.deviceCircle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: #f3f4f6;
+  overflow: hidden;
+}
+
+.glass {
+  width: 77px;
+  height: auto;
+}
+
+.mobile {
+  width: auto;
+  height: 71px;
+}
+
+.deviceLabel {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  color: #4a5565;
+  word-break: keep-all;
+}
+
+/* ─── Grey chips (left column) ──────────────────────────── */
+.chips {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chip {
+  padding: 12px;
+  border-radius: 8px;
+  background: #f3f4f6;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  color: #4a5565;
+  text-align: center;
+  word-break: keep-all;
+}
+
+/* ─── Bullet lists (right column) ───────────────────────── */
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.groupTitle {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  color: #1e2939;
+}
+
+.bullets {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bullet {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 28px;
+  color: #4a5565;
+  word-break: keep-all;
+}
+
+.dot {
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+  margin-top: 8px;
+  border-radius: 50%;
+  background: #2b7fff;
+}
+
+/* ─── Center column ─────────────────────────────────────── */
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.centerHead {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.brandLogo {
+  width: 134px;
+  height: 36px;
+}
+
+.brandSuffix {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 36px;
+  color: #2b7fff;
+}
+
+.flow {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 28px;
+  color: #4a5565;
+  word-break: keep-all;
+}
+
+/* The three cards sit around a ring, as in the design. */
+.orbit {
+  position: relative;
+  width: 100%;
+  margin-top: 24px;
+  padding-bottom: 8px;
+}
+
+/* Figma stacks three concentric strokes: a solid brand-blue ring flanked by a
+   lighter one on each side. Sizes mirror the 343 / 333 / 319 px circles. */
+.ring,
+.ring::before,
+.ring::after {
+  position: absolute;
+  border-radius: 50%;
+  content: '';
+}
+
+.ring {
+  top: 12px;
+  left: 50%;
+  width: 60.8%;
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+  border: 2px solid #2b7fff;
+}
+
+.ring::before {
+  inset: -6px;
+  border: 1px solid #bedbff;
+}
+
+.ring::after {
+  inset: 5px;
+  border: 1px solid #bedbff;
+}
+
+.centerCards {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 90px clamp(24px, 17.5%, 96px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.centerCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 24px;
+  border: 1px solid #d1d5dc;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transition:
+    transform 200ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    box-shadow 200ms ease-out,
+    border-color 200ms ease-out;
+}
+
+.centerCard:hover {
+  transform: translateY(-4px);
+  border-color: #93c5fd;
+  box-shadow:
+    0 18px 28px -8px rgba(23, 60, 140, 0.18),
+    0 8px 12px -6px rgba(23, 60, 140, 0.1);
+}
+
+/* Bottom cards keep their text on the intended two lines. */
+.centerCard1,
+.centerCard2 {
+  padding-inline: 16px;
+}
+
+/* The first card spans the row and reads as a horizontal lockup. */
+.centerCard0 {
+  grid-column: 1 / -1;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-self: center;
+  gap: 16px;
+  padding: 16px 24px 16px 16px;
+  text-align: left;
+}
+
+.iconBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  background: #f3f4f6;
+  color: #2b7fff;
+  transition: background 200ms ease-out;
+}
+
+.centerCard:hover .iconBox {
+  background: #e6f0ff;
+}
+
+.centerText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  text-align: center;
+}
+
+/* Figma centres the heading but left-aligns the description beneath it. */
+.centerCard1 .centerDesc,
+.centerCard2 .centerDesc {
+  align-self: stretch;
+  text-align: left;
+}
+
+.centerCard0 .centerText {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.centerTitle {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  color: #1e2939;
+  white-space: nowrap;
+}
+
+.centerDesc {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 28px;
+  color: #4a5565;
+  white-space: pre-line;
+  word-break: keep-all;
+}
+
+/* ─── Below 1280: stack the three columns ───────────────── */
+@media (max-width: 1279px) {
+  .inner {
+    padding-inline: var(--dp-gutter-lg);
+  }
+
+  .columns {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .orbit {
+    max-width: 548px;
+    margin-inline: auto;
+  }
+}
+
+/* ─── Mobile ────────────────────────────────────────────── */
+@media (max-width: 799px) {
+  .section {
+    padding: 40px 0;
+  }
+
+  .inner {
+    padding-inline: var(--dp-gutter-sm);
+  }
+
+  .heading {
+    gap: 0;
+    margin-bottom: 24px;
+    font-size: 22px;
+    line-height: 32px;
+  }
+
+  .cardTitle {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .cardDesc,
+  .bullet,
+  .centerDesc {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .chip,
+  .deviceLabel,
+  .groupTitle,
+  .centerTitle,
+  .flow {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .brandLogo {
+    width: 107px;
+    height: 29px;
+  }
+
+  .brandSuffix {
+    font-size: 24px;
+    line-height: 30px;
+  }
+
+  .dot {
+    margin-top: 6px;
+  }
+
+  /* Figma drops the ring on phones and lays every card out horizontally,
+     with the icon beside the copy. */
+  .ring {
+    display: none;
+  }
+
+  .centerCards {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .centerCard {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px;
+  }
+
+  /* The first card is centred at desktop width; on phones every card spans
+     the full column so their edges line up. */
+  .centerCard0 {
+    justify-self: stretch;
+  }
+
+  .centerCard .centerText {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .centerCard .centerDesc {
+    align-self: stretch;
+    text-align: left;
+  }
+
+  .orbit {
+    margin-top: 16px;
+    padding-bottom: 0;
+  }
+}
