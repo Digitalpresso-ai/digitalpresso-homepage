@@ -90,9 +90,11 @@ export async function HomeProblemSection() {
                     {BULLET_INDEXES.map((b) => (
                       <li key={b} className={styles.bullet}>
                         <span className={styles.dot} aria-hidden />
-                        {t.rich(`cards.${i}.bullets.${b}`, {
-                          br: () => <br className={styles.mobileBreak} />,
-                        })}
+                        <span className={styles.bulletText}>
+                          {t.rich(`cards.${i}.bullets.${b}`, {
+                            br: () => <br className={styles.mobileBreak} />,
+                          })}
+                        </span>
                       </li>
                     ))}
                   </ul>

@@ -39,6 +39,7 @@
 
 .headingLine {
   display: block;
+  min-width: 0;
 }
 
 .highlight {
@@ -160,12 +161,14 @@
 
 .cardReveal {
   display: flex;
+  min-width: 0;
 }
 
 .card {
   display: flex;
   flex-direction: column;
   width: 100%;
+  min-width: 0;
   overflow: hidden;
   border: 1px solid #d1d5dc;
   border-radius: 16px;
@@ -204,6 +207,7 @@
 }
 
 .cardBody {
+  min-width: 0;
   padding: 16px 24px 24px;
 }
 
@@ -235,6 +239,7 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+  min-width: 0;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -249,6 +254,10 @@
   line-height: 28px;
   color: #4a5565;
   word-break: keep-all;
+}
+
+.bulletText {
+  min-width: 0;
 }
 
 .dot {
@@ -333,4 +342,19 @@
   .dot {
     margin-top: 6px;
   }
+}
+
+/* Japanese layout fix: Japanese has almost no natural word breaks, so
+   keep-all (tuned for Korean) can leave a long unbroken sentence with
+   nowhere to wrap — most visibly the hero heading, which then overflows
+   the viewport on phones instead of wrapping. */
+:global(.locale-ja) .heading,
+:global(.locale-ja) .stepTitle,
+:global(.locale-ja) .stepDesc,
+:global(.locale-ja) .cardTitle,
+:global(.locale-ja) .cardDesc,
+:global(.locale-ja) .bullet {
+  word-break: normal;
+  overflow-wrap: anywhere;
+  min-width: 0;
 }

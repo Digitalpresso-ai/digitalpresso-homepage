@@ -22,6 +22,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  min-width: 0;
 }
 
 /* The 시공톡 wordmark sits inline with the heading. Its glyphs fill about 83%
@@ -59,6 +60,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  min-width: 0;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -68,6 +70,7 @@
   display: flex;
   align-items: flex-start;
   gap: 12px;
+  min-width: 0;
 }
 
 .stepNum {
@@ -316,6 +319,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+  min-width: 0;
 }
 
 .docName {
@@ -612,12 +616,14 @@
   display: flex;
   gap: 8px;
   align-items: flex-start;
+  min-width: 0;
 }
 
 .msgInBody {
   display: flex;
   flex-direction: column;
   gap: 3px;
+  min-width: 0;
 }
 
 .msgAuthor {
@@ -664,6 +670,7 @@
   flex-direction: column;
   align-items: flex-end;
   gap: 5px;
+  min-width: 0;
   animation: slideIn 240ms cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
@@ -835,6 +842,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  min-width: 0;
   padding: 12px;
   border-right: 1px solid #e5e7eb;
 }
@@ -1005,6 +1013,7 @@
   flex-direction: column;
   gap: 7px;
   width: 210px;
+  min-width: 0;
   padding: 10px;
   border-radius: 8px;
   background: #fff;
@@ -1350,6 +1359,7 @@
   flex-direction: column;
   gap: 10px;
   width: min(380px, 100%);
+  min-width: 0;
   padding: 16px;
   border-radius: 10px;
   background: #fff;
@@ -1405,6 +1415,7 @@
 .field {
   display: block;
   position: relative;
+  min-width: 0;
 }
 
 .fieldLabel {
@@ -1685,4 +1696,32 @@
 :global(.locale-ja) .rail {
   font-size: 9px;
   letter-spacing: -0.02em;
+}
+
+/* "図面内の希望する位置をタップして、位置メッセージの場所を指定してください。"
+   is a full sentence — nowrap on this centred toast would push it past
+   the canvas edges instead of wrapping. */
+:global(.locale-ja) .toast {
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: anywhere;
+  max-width: min(90%, 320px);
+  text-align: center;
+}
+
+:global(.locale-ja) .bubbleIn,
+:global(.locale-ja) .bubbleOut,
+:global(.locale-ja) .modalHead strong,
+:global(.locale-ja) .modalDesc,
+:global(.locale-ja) .fieldBox {
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
+:global(.locale-ja) .startHint {
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: anywhere;
+  max-width: 160px;
+  text-align: center;
 }
