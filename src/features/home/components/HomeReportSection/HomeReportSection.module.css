@@ -1017,9 +1017,14 @@
   overflow-wrap: anywhere;
 }
 
-:global(.locale-ja) .gridHead {
-  width: 92px;
-  font-size: 9px;
+/* Only the side-by-side table layout (≥800px) needs the wider label
+   column — the ≤799px stacked layout already gives .gridHead its own
+   full-width row, so widening it there would fight that width: 100%. */
+@media (min-width: 800px) {
+  :global(.locale-ja) .gridHead {
+    width: 92px;
+    font-size: 9px;
+  }
 }
 
 /* The 62px rail column is a tight fit for a label like "プロジェクト" —
@@ -1036,9 +1041,7 @@
 }
 
 :global(.locale-ja) .startHint {
-  white-space: normal;
-  word-break: normal;
-  overflow-wrap: anywhere;
-  max-width: 160px;
-  text-align: center;
+  white-space: nowrap;
+  width: max-content;
+  max-width: none;
 }

@@ -384,7 +384,7 @@ export function TalkDemo() {
 
                       {stage === 'placing' && (
                         <span className={styles.toast}>
-                          {t('ui.toast')}
+                          <span className={styles.toastText}>{t('ui.toast')}</span>
                           <button type="button" className={styles.toastBtn} onClick={() => go('chat')}>
                             {t('ui.toastCancel')}
                           </button>

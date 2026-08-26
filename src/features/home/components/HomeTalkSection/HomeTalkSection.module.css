@@ -326,6 +326,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  min-width: 0;
   margin: 0;
   font-size: 15px;
   font-weight: 700;
@@ -334,6 +335,7 @@
 }
 
 .chip {
+  flex-shrink: 0;
   padding: 1px 7px;
   border-radius: 999px;
   background: #dbeafe;
@@ -341,6 +343,7 @@
   font-size: 10px;
   font-style: normal;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .actions {
@@ -1702,11 +1705,21 @@
    is a full sentence — nowrap on this centred toast would push it past
    the canvas edges instead of wrapping. */
 :global(.locale-ja) .toast {
+  align-items: flex-start;
+  max-width: min(90%, 320px);
+}
+
+:global(.locale-ja) .toastText {
   white-space: normal;
   word-break: normal;
   overflow-wrap: anywhere;
-  max-width: min(90%, 320px);
-  text-align: center;
+  min-width: 0;
+  text-align: left;
+}
+
+:global(.locale-ja) .toastBtn {
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 :global(.locale-ja) .bubbleIn,
@@ -1722,6 +1735,7 @@
   white-space: normal;
   word-break: normal;
   overflow-wrap: anywhere;
-  max-width: 160px;
+  width: max-content;
+  max-width: 220px;
   text-align: center;
 }
