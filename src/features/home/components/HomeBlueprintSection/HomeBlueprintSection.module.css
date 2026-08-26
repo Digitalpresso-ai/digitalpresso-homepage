@@ -296,6 +296,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  min-width: 0;
   margin: 0;
   font-size: 15px;
   font-weight: 700;
@@ -304,6 +305,7 @@
 }
 
 .chip {
+  flex-shrink: 0;
   padding: 1px 7px;
   border-radius: 999px;
   background: #dbeafe;
@@ -311,6 +313,7 @@
   font-size: 10px;
   font-style: normal;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .ghostBtn {
@@ -1103,7 +1106,7 @@
   }
 
   .popover {
-    width: 152px;
+    width: 208px;
   }
 
   /* On phones the card docks directly under the pin/marker instead of the
@@ -1117,7 +1120,7 @@
   .popRight,
   .popMarkerLeft,
   .popMarkerRight {
-    transform: translate(-50%, 12px);
+    transform: translate(-50%, 20px);
   }
 
   /* On this narrow canvas the popover card is tall enough to bury whichever
@@ -1156,10 +1159,27 @@
 
 /* "位置タグを押してみてください。" runs longer than the Korean original —
    nowrap on this pin-anchored hint would push it past the canvas edge. */
+/* Wrapping to two lines pushes the bubble further from the pin, since the
+   base transform (and its hintBob animation) were tuned for the one-line
+   Korean/English copy — use a shallower offset so it still sits just
+   above the pin. */
 :global(.locale-ja) .startHint {
   white-space: normal;
   word-break: normal;
   overflow-wrap: anywhere;
-  max-width: 160px;
+  width: max-content;
+  max-width: 220px;
   text-align: center;
+  transform: translate(-50%, -160%);
+  animation-name: hintBobJa;
+}
+
+@keyframes hintBobJa {
+  0%,
+  100% {
+    transform: translate(-50%, -160%);
+  }
+  50% {
+    transform: translate(-50%, -180%);
+  }
 }

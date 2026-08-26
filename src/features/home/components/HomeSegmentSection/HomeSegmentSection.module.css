@@ -480,7 +480,8 @@
   }
 
   .colLeft .card,
-  .colRight .card {
+  .colRight .card,
+  .colRight li:nth-child(3) .card {
     margin-inline: 0;
   }
 
