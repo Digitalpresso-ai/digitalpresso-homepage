@@ -1278,9 +1278,31 @@
         "brochure": {
           "title": "資料ダウンロード",
           "desc": "サービス紹介資料を受け取る",
-          "button": "ダウンロード",
-          "href": "/digitalpresso-brochure.pdf",
-          "filename": "digitalPresso_サービス紹介書.pdf"
+          "button": "ダウンロード"
+        }
+      },
+      "brochureModal": {
+        "title": "サービス紹介資料のリクエスト",
+        "desc": "メールアドレスをご入力いただくと、担当者が確認の上サービス紹介資料をお送りします。",
+        "email": {
+          "label": "メールアドレス",
+          "placeholder": "example@company.com"
+        },
+        "privacy": {
+          "label": "個人情報の収集および利用に同意します",
+          "detail": "収集項目：メールアドレス / 利用目的：サービス紹介資料の送付 / 保有期間：収集日から1年間保管の後、破棄"
+        },
+        "submit": "リクエストする",
+        "submitting": "送信中...",
+        "closeButton": "閉じる",
+        "close": "閉じる",
+        "successMessage": "リクエストを受け付けました。",
+        "successSubMessage": "担当者が確認後、ご入力いただいたメールアドレスにサービス紹介資料をお送りします。",
+        "errorMessage": "エラーが発生しました。しばらくしてから再度お試しください。",
+        "errors": {
+          "emailRequired": "メールアドレスを入力してください。",
+          "emailInvalid": "正しいメールアドレスの形式ではありません。",
+          "privacyRequired": "個人情報の収集および利用に同意してください。"
         }
       }
     },
