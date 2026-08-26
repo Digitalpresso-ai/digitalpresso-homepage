@@ -19,6 +19,7 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
+  min-width: 0;
   max-width: var(--dp-container);
   margin: 0 auto;
   padding: 0 var(--dp-gutter-lg);
@@ -241,15 +242,18 @@
   .stepItem {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 12px;
   }
 
   .card {
+    align-self: stretch;
     min-height: auto;
   }
 
   .arrowWrap {
     position: static;
+    width: auto;
     height: 24px;
     transform: rotate(90deg);
   }
@@ -291,4 +295,22 @@
     font-size: 16px;
     line-height: 24px;
   }
+}
+
+/* Japanese layout fix: Japanese has almost no natural word breaks, so
+   keep-all (tuned for Korean) can leave a long unbroken sentence with
+   nowhere to wrap, overflowing the viewport on phones. */
+:global(.locale-ja) .title,
+:global(.locale-ja) .cardTitle,
+:global(.locale-ja) .cardSubtitle,
+:global(.locale-ja) .cardDesc {
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
+:global(.locale-ja) .pill {
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: anywhere;
+  text-align: center;
 }
