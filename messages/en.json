@@ -1278,9 +1278,31 @@
         "brochure": {
           "title": "Download brochure",
           "desc": "Get the service introduction",
-          "button": "Download",
-          "href": "/digitalpresso-brochure.pdf",
-          "filename": "digitalPresso-Service-Introduction.pdf"
+          "button": "Download"
+        }
+      },
+      "brochureModal": {
+        "title": "Request the service brochure",
+        "desc": "Leave your email and our team will review your request and send you the service brochure.",
+        "email": {
+          "label": "Email",
+          "placeholder": "example@company.com"
+        },
+        "privacy": {
+          "label": "I agree to the collection and use of my personal information",
+          "detail": "Collected item: email address / Purpose: sending the service brochure / Retention: kept for 1 year from the date of collection, then destroyed"
+        },
+        "submit": "Request",
+        "submitting": "Sending...",
+        "closeButton": "Close",
+        "close": "Close",
+        "successMessage": "Your request has been received.",
+        "successSubMessage": "Our team will review it and send the service brochure to your email.",
+        "errorMessage": "Something went wrong. Please try again shortly.",
+        "errors": {
+          "emailRequired": "Please enter your email.",
+          "emailInvalid": "Please enter a valid email address.",
+          "privacyRequired": "Please agree to the collection and use of personal information."
         }
       }
     },
