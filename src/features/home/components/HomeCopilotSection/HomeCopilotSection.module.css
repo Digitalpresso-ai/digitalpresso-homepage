@@ -166,9 +166,9 @@
 
 .cardTitle {
   margin: 0;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 600;
-  line-height: 26px;
+  line-height: 20px;
   color: #1e2939;
   word-break: keep-all;
 }
@@ -186,9 +186,10 @@
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  font-size: 16px;
+  min-width: 0;
+  font-size: 13px;
   font-weight: 500;
-  line-height: 26px;
+  line-height: 20px;
   color: #4a5565;
   word-break: keep-all;
 }
@@ -200,9 +201,13 @@
   /* Sit the dot centred on the first line, not the whole (possibly
      multi-line) label — align-items is flex-start so it doesn't drift down
      to the vertical centre of two-line text. */
-  margin-top: calc((26px - 10px) / 2);
+  margin-top: calc((20px - 10px) / 2);
   border-radius: 50%;
   background: #2b7fff;
+}
+
+.bulletText {
+  min-width: 0;
 }
 
 .arrow {
@@ -271,18 +276,18 @@
 
 .sourceName {
   margin: 0;
-  font-size: 20px;
+  font-size: 14px;
   font-weight: 600;
-  line-height: 28px;
+  line-height: 20px;
   color: #1e2939;
   word-break: keep-all;
 }
 
 .sourceDesc {
   margin: 0;
-  font-size: 18px;
+  font-size: 13px;
   font-weight: 500;
-  line-height: 28px;
+  line-height: 19px;
   color: #4a5565;
   white-space: pre-line;
   word-break: keep-all;
@@ -312,13 +317,13 @@
 
   .bullets li,
   .sourceDesc {
-    font-size: 16px;
-    line-height: 24px;
+    font-size: 13px;
+    line-height: 19px;
   }
 
   .cardTitle,
   .sourceName {
-    font-size: 18px;
+    font-size: 14px;
   }
 }
 
@@ -410,4 +415,24 @@
     padding-top: 16px;
     border-top: 1px solid #e5e7eb;
   }
+
+  /* The desktop copy has manual line breaks tuned for the narrow 4-column
+     grid; at this width the card is nearly full-bleed, so those breaks
+     land mid-sentence. Ignore them here and let the text wrap naturally. */
+  .sourceDesc {
+    white-space: normal;
+  }
+}
+
+/* Japanese layout fix: Japanese has almost no natural word breaks, so
+   keep-all (tuned for Korean) can leave a long unbroken sentence with
+   nowhere to wrap — the line ends up filling only as far as the last
+   break point (e.g. "・"), leaving an odd gap before the next line. */
+:global(.locale-ja) .title,
+:global(.locale-ja) .cardTitle,
+:global(.locale-ja) .sourceName,
+:global(.locale-ja) .sourceDesc,
+:global(.locale-ja) .bullets li {
+  word-break: normal;
+  overflow-wrap: anywhere;
 }

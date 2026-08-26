@@ -113,7 +113,9 @@ export async function HomePlatformSection() {
           <RevealOnScroll order={3} className={styles.columnReveal}>
             <div className={styles.card}>
               <div className={styles.cardHead}>
-                <h3 className={styles.cardTitle}>{t('right.title')}</h3>
+                <h3 className={`${styles.cardTitle} ${styles.cardTitleCompact}`}>
+                  {t('right.title')}
+                </h3>
               </div>
               <hr className={styles.divider} />
 
@@ -125,7 +127,9 @@ export async function HomePlatformSection() {
                     {Array.from({ length: size }, (_, b) => (
                       <li key={b} className={styles.bullet}>
                         <span className={styles.dot} aria-hidden />
-                        {t(`right.groups.${g}.items.${b}`)}
+                        <span className={styles.bulletText}>
+                          {t(`right.groups.${g}.items.${b}`)}
+                        </span>
                       </li>
                     ))}
                   </ul>

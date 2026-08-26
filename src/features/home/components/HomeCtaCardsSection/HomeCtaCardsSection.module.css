@@ -250,3 +250,14 @@
     padding: 40px 12px 28px;
   }
 }
+
+/* Japanese layout fix: Japanese has almost no natural word breaks, so
+   keep-all (tuned for Korean) can leave a long unbroken sentence with
+   nowhere to wrap. */
+:global(.locale-ja) .title,
+:global(.locale-ja) .subtitle,
+:global(.locale-ja) .cardTitle,
+:global(.locale-ja) .cardDesc {
+  word-break: normal;
+  overflow-wrap: anywhere;
+}

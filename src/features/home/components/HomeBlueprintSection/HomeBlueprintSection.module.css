@@ -54,7 +54,7 @@
 
 .step {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
 }
 
@@ -65,26 +65,27 @@
   flex-shrink: 0;
   width: 32px;
   height: 32px;
+  margin-top: 2px;
   border-radius: 8px;
   background: #dbeafe;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: #2b7fff;
 }
 
 .stepBody {
-  display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 8px;
-  font-size: 18px;
-  line-height: 28px;
+  font-size: 16px;
+  line-height: 26px;
 }
 
 .stepName {
   font-weight: 600;
   color: #2b7fff;
-  white-space: nowrap;
+}
+
+.stepName::after,
+.stepDash::after {
+  content: ' ';
 }
 
 .stepDash,
@@ -799,8 +800,10 @@
 }
 
 /* Under ~1024px the canvas is too small for pin-anchored cards to clear every
-   edge, so the card centres over the drawing instead of chasing the pin. */
-@media (max-width: 1023px) {
+   edge, so the card centres over the drawing instead of chasing the pin.
+   Phones (≤799px) get their own placement below instead — the card there
+   docks under the pin rather than to the canvas bottom. */
+@media (min-width: 800px) and (max-width: 1023px) {
   /* Too little room to sit beside a pin here, so the card docks to the bottom
      of the drawing where it covers no marker. */
   .popover,
@@ -1096,14 +1099,36 @@
     width: 152px;
   }
 
+  /* On phones the card docks directly under the pin/marker instead of the
+     tablet tier's bottom-of-canvas placement — closer to what people expect
+     from tapping a map pin. The ≤1023px rule doesn't apply here (it's now
+     scoped to 800–1023px), so top/left still come from the pin's own %
+     coordinates (inline style); only the transform changes, from centring
+     on the pin to sitting just below it. */
+  .popover,
+  .popLeft,
+  .popRight,
+  .popMarkerLeft,
+  .popMarkerRight {
+    transform: translate(-50%, 12px);
+  }
+
   /* On this narrow canvas the popover card is tall enough to bury whichever
-     pin it's centred on. Simplest fix: only the best-placed pin — the one
+     pin it's docked under. Simplest fix: only the best-placed pin — the one
      that already sits clear at the top — shows on phones. .pin ~ .pin (not
      :not(:first-child), which never matches here since .pin isn't .canvas's
      first child at all) targets every pin after the first one. The page-jump
-     marker stays — its popover already docks to the drawing's bottom edge
-     (see the ≤1023px rule above) so it never covers the marker. */
+     marker stays, since its card now docks under it the same way and never
+     covers it. */
   .pin ~ .pin {
     display: none;
   }
+}
+
+/* The 62px rail column is a tight fit for a label like "プロジェクト" —
+   shrink the type a touch instead of wrapping to two lines, so it still
+   reads as one word at a glance. */
+:global(.locale-ja) .rail {
+  font-size: 9px;
+  letter-spacing: -0.02em;
 }
