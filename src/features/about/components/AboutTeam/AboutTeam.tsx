@@ -37,7 +37,7 @@ export async function AboutTeam() {
                       : undefined
                   }
                 >
-                  <h3 className={styles.deptTitle}>{dept.title}</h3>
+                  <h3 className={styles.deptTitleBadge}>{dept.title}</h3>
                   <ul className={styles.deptList}>
                     {dept.items.map((item) => (
                       <li key={item} className={styles.deptItem}>

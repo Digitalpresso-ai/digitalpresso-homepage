@@ -1,0 +1,1232 @@
+/* ─── Section ───────────────────────────────────────────── */
+.section {
+  background: #f8fafc;
+  padding: 64px 0;
+}
+
+.inner {
+  max-width: var(--dp-container);
+  margin-inline: auto;
+  padding-inline: var(--dp-gutter-lg);
+}
+
+/* ─── Heading block ─────────────────────────────────────── */
+.head {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+  margin-bottom: 40px;
+}
+
+.headText {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.title {
+  margin: 0;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 40px;
+  color: #1e2939;
+  word-break: keep-all;
+}
+
+.desc {
+  margin: 0;
+  font-size: 20px;
+  line-height: 28px;
+  color: #4a5565;
+  white-space: pre-line;
+  word-break: keep-all;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.stepNum {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #dbeafe;
+  font-size: 18px;
+  font-weight: 600;
+  color: #2b7fff;
+}
+
+.stepBody {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.stepName {
+  font-weight: 600;
+  color: #2b7fff;
+  white-space: nowrap;
+}
+
+.stepDash,
+.stepDesc {
+  font-weight: 500;
+  color: #4a5565;
+  word-break: keep-all;
+}
+
+/* ─── Product mock shell ────────────────────────────────── */
+/* Sizes to its content at desktop widths (the mock's natural height); a
+   fixed ratio only applies at ≤1023px — see the tablet-tier override
+   below. */
+.app {
+  position: relative;
+  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #d1d5dc;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  font-size: 14px;
+  color: #364153;
+}
+
+/* Pin the mock to the same height as the Blueprint (도면 관리) section's mock
+   at desktop widths, so every product mock reads at a consistent frame
+   height instead of each one sizing to its own content. Only ≥1280px —
+   the ≤1279px tiers already pin .app to a fixed aspect-ratio below. */
+@media (min-width: 1280px) {
+  .app {
+    height: 561px;
+  }
+}
+
+.appBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.appLogo {
+  width: auto;
+  height: 25px;
+}
+
+.appBarIcons {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  color: #6a7282;
+}
+
+.badgeWrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.badge {
+  position: absolute;
+  top: -6px;
+  right: -7px;
+  min-width: 14px;
+  padding: 0 3px;
+  border-radius: 999px;
+  background: #ef4444;
+  color: #fff;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 14px;
+  text-align: center;
+}
+
+.avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+}
+
+.appBody {
+  display: grid;
+  grid-template-columns: 62px 150px minmax(0, 1fr);
+  flex: 1;
+  min-height: 0;
+}
+
+/* ─── Left rail ─── */
+.leftCols {
+  display: flex;
+  flex-direction: column;
+  grid-column: 1 / 3;
+  border-right: 1px solid #e5e7eb;
+}
+
+.leftBody {
+  display: grid;
+  grid-template-columns: 62px minmax(0, 1fr);
+  flex: 1;
+  min-height: 0;
+}
+
+.rail {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 14px 0;
+  border-right: 1px solid #e5e7eb;
+  font-size: 10px;
+  color: #6a7282;
+  text-align: center;
+}
+
+.railItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.railActive {
+  color: #2b7fff;
+  font-weight: 600;
+}
+
+.sideMenu {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 14px 10px;
+  list-style: none;
+}
+
+.sideMenuActive,
+.sideMenuItem {
+  display: block;
+  padding: 7px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+}
+
+.sideMenuActive {
+  background: #1d4ed8;
+  color: #fff;
+  font-weight: 600;
+}
+
+.sideMenuItem {
+  color: #4a5565;
+}
+
+.logoutRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 16px;
+  border-top: 1px solid #e5e7eb;
+  color: #4a5565;
+  font-size: 11px;
+}
+
+/* ─── Main column ─── */
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  min-height: 0;
+  padding: 14px 16px 16px;
+  background: #f4f6f9;
+}
+
+.pageTitle {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: #1d4ed8;
+}
+
+.breadcrumb {
+  margin: 0;
+  font-size: 12px;
+  color: #6a7282;
+}
+
+.breadcrumb i {
+  margin: 0 4px;
+  font-style: normal;
+  color: #cbd5e1;
+}
+
+.breadcrumb strong {
+  color: #1d4ed8;
+  font-size: 15px;
+}
+
+.sub {
+  margin: 0 0 8px;
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+/* ─── Dashboard grid ─── */
+.dashGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+  gap: 12px;
+  flex: 1;
+  min-height: 0;
+}
+
+.dashLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: hidden auto;
+}
+
+.dashRight {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  min-height: 0;
+  padding: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fff;
+}
+
+/* ─── Cards (attendance, board) ─── */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.cardHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1e2939;
+}
+
+.cardLink {
+  color: #1d4ed8;
+  font-size: 10px;
+  text-decoration: underline;
+}
+
+.stampRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.stamp {
+  font-size: 11px;
+  color: #4a5565;
+}
+
+.stateTag {
+  padding: 2px 7px;
+  border: 1px solid #d1d5dc;
+  border-radius: 4px;
+  color: #6a7282;
+  font-size: 9px;
+}
+
+.clockBox {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding: 12px 0;
+  border-radius: 6px;
+  background: #f6f7f9;
+}
+
+.clockCell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.clockLabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: #364153;
+}
+
+.clockValue {
+  color: #9ca3af;
+  font-size: 12px;
+}
+
+.clockBtns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.outlineBtn,
+.mutedBtn {
+  padding: 7px 0;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.outlineBtn {
+  border: 1px solid #2b7fff;
+  color: #1d4ed8;
+}
+
+.mutedBtn {
+  border: 1px solid #e5e7eb;
+  color: #9ca3af;
+}
+
+.boardEmpty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 96px;
+  margin: 0;
+  color: #9ca3af;
+  font-size: 11px;
+}
+
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 0;
+  padding-top: 8px;
+  border-top: 1px solid #f1f3f5;
+  color: #6a7282;
+  font-size: 10px;
+}
+
+.pager span {
+  color: #cbd5e1;
+}
+
+/* ─── Project picker ─── */
+.pickRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.pickTitle {
+  flex-shrink: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1e2939;
+}
+
+.selectWrap {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Points the visitor at the first thing to click. */
+.startHint {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 8px);
+  z-index: 6;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: #1d4ed8;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  animation: hintBob 1.8s ease-in-out infinite;
+}
+
+.startHint::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  right: 18px;
+  border: 5px solid transparent;
+  border-top-color: #1d4ed8;
+}
+
+@keyframes hintBob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.fieldLabel {
+  position: absolute;
+  top: -6px;
+  left: 9px;
+  z-index: 1;
+  padding: 0 4px;
+  background: linear-gradient(to bottom, #fff 6px, #fff 6px);
+  color: #6a7282;
+  font-size: 9px;
+}
+
+.select {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid #d1d5dc;
+  border-radius: 5px;
+  background: #fff;
+  font: inherit;
+  font-size: 11px;
+  color: #364153;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 160ms ease-out,
+    box-shadow 160ms ease-out;
+}
+
+.selectIdle {
+  border-color: #bfdbfe;
+  animation: selectHalo 2s ease-in-out infinite;
+}
+
+@keyframes selectHalo {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(43, 127, 255, 0.26);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(43, 127, 255, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .startHint,
+  .selectIdle {
+    animation: none;
+  }
+
+  .selectIdle {
+    box-shadow: 0 0 0 2px rgba(43, 127, 255, 0.3);
+  }
+}
+
+.placeholder {
+  color: #9ca3af;
+}
+
+.caret {
+  flex-shrink: 0;
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid #6a7282;
+  border-bottom: 1.5px solid #6a7282;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 160ms ease-out;
+}
+
+.caretUp {
+  transform: translateY(2px) rotate(-135deg);
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 4;
+  margin: 0;
+  padding: 4px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
+  list-style: none;
+  animation: slideIn 160ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.dropdownItem {
+  display: block;
+  width: 100%;
+  padding: 9px;
+  border: 0;
+  border-radius: 4px;
+  background: none;
+  font: inherit;
+  font-size: 11px;
+  color: #364153;
+  text-align: left;
+  cursor: pointer;
+}
+
+.dropdownItem:hover {
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+.placeholderBox,
+.placeholderCard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fff;
+  color: #9ca3af;
+  font-size: 11px;
+  line-height: 18px;
+  text-align: center;
+  white-space: pre-line;
+  word-break: keep-all;
+}
+
+.placeholderBox {
+  flex-shrink: 0;
+  height: 168px;
+}
+
+.placeholderCard {
+  min-height: 150px;
+  padding: 12px;
+}
+
+/* ─── Board body (schedule + charts), scrolls as one column ─── */
+.boardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden auto;
+  padding-right: 2px;
+}
+
+.blockHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.blockTitle {
+  margin: 4px 0 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1e2939;
+}
+
+.blockHead .blockTitle {
+  margin: 0;
+}
+
+.linkBtn {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #1d4ed8;
+  font: inherit;
+  font-size: 11px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.linkBtn:disabled {
+  color: #9ca3af;
+  cursor: default;
+}
+
+/* Draws the eye to the one link the demo wants clicked. */
+.pulseText {
+  border-radius: 4px;
+  animation: pulseText 1.8s ease-in-out infinite;
+}
+
+@keyframes pulseText {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(43, 127, 255, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(43, 127, 255, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulseText {
+    animation: none;
+    outline: 2px solid #2b7fff;
+    outline-offset: 2px;
+  }
+}
+
+/* ─── Gantt table ─── */
+.ganttWrap {
+  flex-shrink: 0;
+  height: 168px;
+  overflow: auto;
+  border: 1px solid #d1d5dc;
+  border-radius: 4px;
+  background: #fff;
+}
+
+/* The detail view gives the whole column over to the schedule. */
+.main > .ganttWrap {
+  flex: 1;
+  height: auto;
+  min-height: 0;
+}
+
+.gantt {
+  width: 100%;
+  min-width: 2050px;
+  border-collapse: collapse;
+  font-size: 10px;
+}
+
+.gantt th,
+.gantt td {
+  border: 0;
+  box-shadow:
+    inset -1px 0 0 #d1d5dc,
+    inset 0 -1px 0 #d1d5dc;
+}
+
+.gTrade,
+.gPlan,
+.gMonth,
+.gCell,
+.gDay {
+  padding: 6px 4px;
+  background: #dbe7fb;
+  color: #1e2939;
+  font-weight: 600;
+  text-align: center;
+}
+
+.gTrade {
+  min-width: 170px;
+}
+
+/* The whole table (trade/date columns and day grid alike) scrolls together
+   as one block — nothing is frozen. */
+.gName,
+.gDateDays,
+.gCell:nth-of-type(3) {
+  box-shadow:
+    inset -1px 0 0 #d1d5dc,
+    inset 0 -1px 0 #d1d5dc;
+}
+
+.gTrade,
+.gTradeCell {
+  width: 86px;
+}
+
+.gCell {
+  min-width: 64px;
+}
+
+.gDay {
+  min-width: 22px;
+  padding: 6px 2px;
+  font-weight: 500;
+}
+
+.gTradeCell {
+  padding: 6px 8px;
+  background: #eaf1fc;
+  color: #1e2939;
+  font-weight: 600;
+  text-align: center;
+  vertical-align: middle;
+  word-break: keep-all;
+}
+
+.gName {
+  min-width: 130px;
+  padding: 6px 8px;
+  background: #fff;
+  color: #364153;
+  word-break: keep-all;
+  box-shadow:
+    inset -1px 0 0 #d1d5dc,
+    inset 0 -1px 0 #d1d5dc;
+}
+
+.gCellBody {
+  padding: 6px 4px;
+  background: #eaf1fc;
+  color: #364153;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.gDate {
+  width: 64px;
+}
+
+/* Closes the seam where the frozen block meets the scrolling day grid. */
+.gDateDays,
+.gCell:nth-of-type(3) {
+  box-shadow:
+    inset -1px 0 0 #d1d5dc,
+    inset 0 -1px 0 #d1d5dc;
+}
+
+/* The bar track is a positioning context spanning all the day columns. */
+.gTrack {
+  height: 26px;
+  padding: 0;
+  background: #fff;
+}
+
+.gTrackInner {
+  position: relative;
+  height: 26px;
+}
+
+.gBar {
+  position: absolute;
+  top: 4px;
+  left: var(--bar-left, 0);
+  width: var(--bar-width, 0);
+  height: 18px;
+  background: var(--bar-tone, #1d4ed8);
+  display: flex;
+  align-items: center;
+  padding: 0 5px;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* ─── Detail view chrome ─── */
+.detailHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.backBtn {
+  padding: 5px 11px;
+  border: 1px solid #d1d5dc;
+  border-radius: 6px;
+  background: #fff;
+  color: #4a5565;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.backBtn:hover {
+  background: #f3f4f6;
+}
+
+.detailTitleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.detailTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #1d4ed8;
+  word-break: keep-all;
+}
+
+.chip {
+  padding: 1px 7px;
+  border-radius: 4px;
+  background: #dbeafe;
+  color: #1d4ed8;
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.ghostBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+  padding: 6px 11px;
+  border: 1px solid #2b7fff;
+  border-radius: 6px;
+  background: #fff;
+  color: #1d4ed8;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ─── Chart grid ─── */
+.chartGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.chartCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.chartTitle {
+  align-self: flex-start;
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700;
+  color: #1e2939;
+}
+
+.chartTotal {
+  margin: 0;
+  color: #4a5565;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.donut {
+  width: 140px;
+  height: 140px;
+}
+
+.donutCentre {
+  fill: #1e2939;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* Legend: identity never rests on colour alone. */
+.legend {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  margin: 0;
+  padding: 8px 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  list-style: none;
+  font-size: 10px;
+  color: #4a5565;
+}
+
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.swatchBlue,
+.swatchSky,
+.swatchGrey {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.swatchBlue {
+  background: #1d4ed8;
+}
+
+.swatchSky {
+  background: #38bdf8;
+}
+
+.swatchGrey {
+  background: #d1d5dc;
+}
+
+.trend {
+  width: 100%;
+  max-width: 260px;
+  height: auto;
+  margin-block: auto;
+}
+
+.axisLabel {
+  fill: #9ca3af;
+  font-size: 8px;
+}
+
+.refLabel {
+  fill: #1d4ed8;
+  font-size: 8px;
+  font-weight: 600;
+}
+
+/* ─── Gauge ─── */
+.gaugeWrap {
+  position: relative;
+  width: 100%;
+  max-width: 200px;
+}
+
+.gauge {
+  width: 100%;
+  height: auto;
+}
+
+.gaugeValue {
+  fill: #1e2939;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.gaugeMin,
+.gaugeMid,
+.gaugeMax {
+  position: absolute;
+  color: #6a7282;
+  font-size: 9px;
+}
+
+.gaugeMin {
+  left: 2%;
+  bottom: 6px;
+}
+
+.gaugeMid {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.gaugeMax {
+  right: 2%;
+  bottom: 6px;
+}
+
+.costGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px 10px;
+  width: 100%;
+  margin: 0;
+  padding: 8px 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+}
+
+.costItem {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px;
+  font-size: 9px;
+}
+
+.costItem dt {
+  color: #6a7282;
+  word-break: keep-all;
+}
+
+.costItem dd {
+  margin: 0;
+  color: #1e2939;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ─── Below 1280 ────────────────────────────────────────── */
+@media (max-width: 1279px) {
+  .head {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .title {
+    font-size: 30px;
+  }
+
+  .desc {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .appBody {
+    grid-template-columns: 62px minmax(0, 1fr);
+  }
+
+  .leftCols {
+    grid-column: 1 / 2;
+  }
+
+  .leftBody {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sideMenu {
+    display: none;
+  }
+
+  /* The rail-only column is too narrow for the horizontal padding this label
+     had when it sat under both left columns; tighten it and centre the text
+     so "로그아웃" reads as one line instead of an awkward 3+1 wrap. */
+  .logoutRow {
+    padding: 12px 4px;
+    font-size: 9px;
+    text-align: center;
+  }
+
+  .dashGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dashLeft {
+    display: none;
+  }
+
+  /* Ratio measured from the Blueprint mock's natural (content-driven) size
+     at 800px, where every field in this window fits without clipping — the
+     same ratio is shared across all product-demo mocks so they all stay
+     legible at the same widths. Desktop keeps the natural (auto) height set
+     on .app above. */
+  .app {
+    aspect-ratio: 670 / 494.57;
+  }
+}
+
+/* ─── Mobile ────────────────────────────────────────────── */
+@media (max-width: 799px) {
+  .section {
+    padding: 40px 0;
+  }
+
+  .inner {
+    padding-inline: var(--dp-gutter-sm);
+  }
+
+  .title {
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  .desc {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .stepBody {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .stepDesc {
+    white-space: normal;
+  }
+
+  /* Matches the Blueprint mock's measured mobile size (278x431), so every
+     product-demo mock reads at the same height on phones. */
+  .app {
+    aspect-ratio: 278 / 431;
+  }
+
+  .appBody {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .leftCols,
+  .breadcrumb {
+    display: none;
+  }
+
+  .main {
+    padding: 12px 10px;
+  }
+
+  .pickRow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .pickTitle {
+    display: none;
+  }
+
+  .chartGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .costGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

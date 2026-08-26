@@ -4,7 +4,6 @@ import type { Metadata } from "next";
 import { ReferencesHero } from '@/src/features/references/components/ReferencesHero/ReferencesHero';
 import { ReferencesProvenSection } from '@/src/features/references/components/ReferencesProvenSection/ReferencesProvenSection';
 import { ReferencesElectricalSection } from '@/src/features/references/components/ReferencesElectricalSection/ReferencesElectricalSection';
-import { ReferencesIndustriesSection } from '@/src/features/references/components/ReferencesIndustriesSection/ReferencesIndustriesSection';
 import { buildPageMetadata, isAppLocale, type AppLocale } from '@/lib/seo';
 
 interface ReferencesPageProps {
@@ -51,7 +50,6 @@ export default function ReferencesPage() {
       <ReferencesHero />
       <ReferencesProvenSection />
       <ReferencesElectricalSection />
-      <ReferencesIndustriesSection />
     </main>
   );
 }

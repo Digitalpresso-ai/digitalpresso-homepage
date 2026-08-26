@@ -1,0 +1,1660 @@
+/* ─── Section ───────────────────────────────────────────── */
+.section {
+  background: #f8fafc;
+  padding: 64px 0;
+}
+
+.inner {
+  max-width: var(--dp-container);
+  margin-inline: auto;
+  padding-inline: var(--dp-gutter-lg);
+}
+
+/* ─── Heading block ─────────────────────────────────────── */
+.head {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+  margin-bottom: 40px;
+}
+
+.headText {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* The 시공톡 wordmark sits inline with the heading. Its glyphs fill about 83%
+   of the image, so it needs to run a little taller than the cap height to
+   read at the same weight as the bold text beside it. */
+.titleLogo {
+  width: auto;
+  height: 1.26em;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 0;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 40px;
+  color: #1e2939;
+  word-break: keep-all;
+}
+
+.desc {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 28px;
+  color: #4a5565;
+  white-space: pre-line;
+  word-break: keep-all;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.stepNum {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #dbeafe;
+  font-size: 18px;
+  font-weight: 600;
+  color: #2b7fff;
+}
+
+.stepBody {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.stepName {
+  font-weight: 600;
+  color: #2b7fff;
+  white-space: nowrap;
+}
+
+.stepDash,
+.stepDesc {
+  font-weight: 500;
+  color: #4a5565;
+  word-break: keep-all;
+}
+
+/* ─── Product mock ──────────────────────────────────────── */
+/* Sizes to its content at desktop widths (the mock's natural height); a
+   fixed ratio only applies at ≤1023px — see the tablet-tier override
+   below. */
+.app {
+  position: relative;
+  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #d1d5dc;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  font-size: 14px;
+  color: #364153;
+}
+
+/* Pin the mock to the same height as the Blueprint (도면 관리) section's mock
+   at desktop widths, so every product mock reads at a consistent frame
+   height instead of each one sizing to its own content. Only ≥1280px —
+   the ≤1279px tiers already pin .app to a fixed aspect-ratio below. */
+@media (min-width: 1280px) {
+  .app {
+    height: 561px;
+  }
+}
+
+.appBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.appLogo {
+  width: auto;
+  height: 25px;
+}
+
+
+
+
+.appBarIcons {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  color: #6a7282;
+}
+
+.badgeWrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.badge {
+  position: absolute;
+  top: -6px;
+  right: -7px;
+  min-width: 14px;
+  padding: 0 3px;
+  border-radius: 999px;
+  background: #ef4444;
+  color: #fff;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 14px;
+  text-align: center;
+}
+
+.avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+}
+
+.appBody {
+  display: grid;
+  grid-template-columns: 62px 148px minmax(0, 1fr);
+  flex: 1;
+  min-height: 0;
+}
+
+/* ─── Left rail ─── */
+/* Spans the rail and the menu column so the logout strip runs under both. */
+.leftCols {
+  display: flex;
+  flex-direction: column;
+  grid-column: 1 / 3;
+  border-right: 1px solid #e5e7eb;
+}
+
+.leftBody {
+  display: grid;
+  grid-template-columns: 62px minmax(0, 1fr);
+  flex: 1;
+  min-height: 0;
+}
+
+.rail {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 14px 0;
+  border-right: 1px solid #e5e7eb;
+  font-size: 10px;
+  color: #6a7282;
+  text-align: center;
+}
+
+.railItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.railActive {
+  color: #2b7fff;
+  font-weight: 600;
+}
+
+.sideMenu {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px 10px;
+}
+
+.menuItem {
+  display: block;
+  padding: 7px 10px;
+  border-radius: 6px;
+  color: #4a5565;
+  font-size: 11px;
+}
+
+.menuActive {
+  background: #1d4ed8;
+  color: #fff;
+  font-weight: 600;
+}
+
+.sideMenuActive {
+  display: block;
+  padding: 7px 10px;
+  border-radius: 6px;
+  background: #1d4ed8;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.logoutRow {
+  padding: 12px 16px;
+  border-top: 1px solid #e5e7eb;
+  color: #4a5565;
+  font-size: 11px;
+}
+
+/* ─── Main column ─── */
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  min-height: 0;
+  padding: 14px 16px 16px;
+  background: #f4f6f9;
+}
+
+/* Chat and drawing screens fill the remaining height. */
+.main > .chatPanel,
+.main > .planPanels {
+  flex: 1;
+  min-height: 0;
+}
+
+.breadcrumb {
+  margin: 0;
+  font-size: 12px;
+  color: #6a7282;
+}
+
+.breadcrumb i {
+  margin: 0 4px;
+  font-style: normal;
+  color: #cbd5e1;
+}
+
+.breadcrumb strong {
+  color: #1d4ed8;
+}
+
+.sub {
+  margin: 0 0 6px;
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.docName {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #1d4ed8;
+  word-break: keep-all;
+}
+
+.chip {
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: #dbeafe;
+  color: #1d4ed8;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ─── Buttons ─── */
+.ghostBtn,
+.primaryBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.ghostBtn {
+  border: 1px solid #d1d5dc;
+  background: #fff;
+  color: #4a5565;
+  cursor: pointer;
+}
+
+.primaryBtn {
+  border: 0;
+  background: #1d4ed8;
+  color: #fff;
+  cursor: pointer;
+  transition:
+    background 160ms ease-out,
+    box-shadow 160ms ease-out;
+}
+
+.primaryBtn:hover {
+  background: #1a44bd;
+}
+
+/* Draws the eye to whatever the demo wants clicked next. */
+.pulse {
+  animation: pulse 1.7s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(43, 127, 255, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 7px rgba(43, 127, 255, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse {
+    animation: none;
+    outline: 2px solid #2b7fff;
+    outline-offset: 2px;
+  }
+}
+
+/* ─── Sheet ─── */
+/* Fills the remaining height under the mock's now aspect-ratio-driven
+   appBody, same as .chatPanel/.planPanels; long content (the TBM detail)
+   scrolls inside instead of stretching the mock. */
+.sheet {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1 1 0;
+  overflow: hidden auto;
+  min-height: 0;
+  padding: 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.block {
+  display: flex;
+  gap: 14px;
+}
+
+.blockIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  border: 5px solid #eff6ff;
+  border-radius: 50%;
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.blockBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.blockTitle {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e2939;
+}
+
+.blockDesc {
+  margin: 2px 0 0;
+  font-size: 11px;
+  color: #6a7282;
+}
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 24px;
+  margin: 12px 0 0;
+}
+
+.infoGrid dt {
+  font-size: 10px;
+  color: #9ca3af;
+}
+
+.infoGrid dd {
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: #364153;
+}
+
+.divider {
+  margin: 0;
+  border: 0;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* ─── Buttons ─── */
+.accentBtn {
+  border-color: #1d4ed8;
+  color: #1d4ed8;
+  font-weight: 700;
+}
+
+.doneBtn {
+  border-color: #bbf7d0;
+  background: #f0fdf4;
+  color: #15803d;
+  cursor: default;
+}
+
+.actions {
+  display: inline-flex;
+  gap: 8px;
+}
+
+/* ─── Chat room ─── */
+.chatPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-height: 0;
+  padding: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fff;
+}
+
+/* Pinned to the top of the thread and stays there while messages scroll. */
+.notice {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: auto;
+  padding: 9px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background 150ms ease-out;
+}
+
+.notice:hover {
+  background: #f8fafc;
+}
+
+/* Signals that the notice opens the TBM page, in the same soft blue the rest
+   of the demo uses for "click me". */
+.noticeIdle {
+  border-color: #bfdbfe;
+  animation: noticeHalo 2s ease-in-out infinite;
+}
+
+@keyframes noticeHalo {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(43, 127, 255, 0.26);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(43, 127, 255, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .noticeIdle {
+    animation: none;
+    box-shadow: 0 0 0 2px rgba(43, 127, 255, 0.3);
+  }
+}
+
+
+.noticeIcon {
+  display: inline-flex;
+  color: #4a5565;
+}
+
+.noticeText {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.noticeText strong {
+  font-size: 11px;
+  font-weight: 600;
+  color: #1e2939;
+}
+
+.noticeText span {
+  font-size: 10px;
+  color: #9ca3af;
+}
+
+.noticeCaret {
+  width: 6px;
+  height: 6px;
+  border-top: 1.5px solid #9ca3af;
+  border-right: 1.5px solid #9ca3af;
+  transform: rotate(45deg);
+}
+
+/* The thread keeps a fixed height and scrolls; without this the panel grows
+   every time a message is added. The pinned notice rides along at the top. */
+.thread {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 12px;
+  border-radius: 6px;
+  background: #eff6ff;
+}
+
+.msgIn {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.msgInBody {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.msgAuthor {
+  font-size: 10px;
+  font-weight: 700;
+  color: #1d4ed8;
+}
+
+.msgRowLine {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.bubbleIn,
+.bubbleOut {
+  max-width: 340px;
+  padding: 7px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  line-height: 17px;
+  word-break: keep-all;
+}
+
+.bubbleIn {
+  border: 1px solid #bfdbfe;
+  background: #fff;
+  color: #1e2939;
+}
+
+.bubbleOut {
+  background: #dcfce7;
+  color: #1e2939;
+}
+
+.msgTime {
+  flex-shrink: 0;
+  color: #9ca3af;
+  font-size: 9px;
+}
+
+.msgOut {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+  animation: slideIn 240ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.viewOnPlan {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 10px;
+  border: 1px solid #bfdbfe;
+  border-radius: 6px;
+  background: #fff;
+  color: #1d4ed8;
+  font: inherit;
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 150ms ease-out;
+}
+
+.viewOnPlan:hover {
+  background: #eff6ff;
+}
+
+/* ─── Composer ─── */
+.composer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.plusWrap {
+  position: relative;
+  display: inline-flex;
+}
+
+/* Points at the + button; disappears once the visitor uses it. */
+.startHint {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  z-index: 3;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: #1d4ed8;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  animation: hintBobX 1.8s ease-in-out infinite;
+}
+
+.startHint::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 12px;
+  border: 5px solid transparent;
+  border-top-color: #1d4ed8;
+}
+
+@keyframes hintBobX {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .startHint {
+    animation: none;
+  }
+}
+
+.plusBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 50%;
+  background: #dbeafe;
+  color: #1d4ed8;
+  font: inherit;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 150ms ease-out;
+}
+
+.plusOpen {
+  background: #bfdbfe;
+}
+
+.attachMenu {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 0;
+  z-index: 4;
+  min-width: 168px;
+  margin: 0;
+  padding: 6px;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
+  list-style: none;
+  animation: slideIn 160ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.attachItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 10px;
+  border: 0;
+  border-radius: 5px;
+  background: none;
+  color: #364153;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+
+.attachItem:hover {
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.input {
+  flex: 1;
+  padding: 8px 10px;
+  border: 1px solid #d1d5dc;
+  border-radius: 5px;
+  color: #9ca3af;
+  font-size: 11px;
+}
+
+.sendBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #93c5fd;
+  color: #fff;
+  font-size: 13px;
+}
+
+/* ─── Drawing screen ─── */
+.planPanels {
+  display: grid;
+  grid-template-columns: 210px minmax(0, 1fr);
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.msgList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  border-right: 1px solid #e5e7eb;
+}
+
+.panelTitle {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: #1e2939;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  color: #9ca3af;
+  font-size: 10px;
+}
+
+.msgRow {
+  padding: 8px 4px;
+  border-bottom: 1px solid #f1f5f9;
+  animation: slideIn 200ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.msgWho {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 3px;
+  font-size: 10px;
+  color: #9ca3af;
+}
+
+.msgWho strong {
+  font-size: 11px;
+  font-weight: 700;
+  color: #1e2939;
+}
+
+.msgText {
+  margin: 0;
+  font-size: 10px;
+  color: #4a5565;
+  word-break: keep-all;
+}
+
+.planViewer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  padding: 12px;
+}
+
+.pageTitle {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: #1e2939;
+}
+
+.canvas {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  background: #fff;
+}
+
+/* While placing, the whole sheet is the click target. */
+.canvasArmed {
+  cursor: crosshair;
+}
+
+.planImage {
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/main-blueprint-thumb.webp');
+  background-position: center;
+  background-size: cover;
+  opacity: 0.9;
+}
+
+/* ─── Marker ─── */
+.marker {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 50% 50% 50% 2px;
+  background: #7c3aed;
+  color: #fff;
+  cursor: pointer;
+  transform: translate(-50%, -100%);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  transition:
+    background 200ms ease-out,
+    transform 200ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  animation: dropIn 300ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@keyframes dropIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -160%) scale(0.8);
+  }
+}
+
+.marker:hover {
+  transform: translate(-50%, -100%) scale(1.08);
+}
+
+/* Before it is opened the marker carries a soft blue halo, matching how the
+   other demos invite the next click. The drop-in animation still plays, so the
+   halo rides on box-shadow rather than a second animation. */
+.markerIdle {
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.25),
+    0 0 0 5px rgba(43, 127, 255, 0.28);
+  animation:
+    dropIn 300ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    markerHalo 1.7s ease-in-out 300ms infinite;
+}
+
+@keyframes markerHalo {
+  0%,
+  100% {
+    box-shadow:
+      0 2px 6px rgba(0, 0, 0, 0.25),
+      0 0 0 4px rgba(43, 127, 255, 0.32);
+  }
+  50% {
+    box-shadow:
+      0 2px 6px rgba(0, 0, 0, 0.25),
+      0 0 0 10px rgba(43, 127, 255, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .markerIdle {
+    animation: none;
+    box-shadow:
+      0 2px 6px rgba(0, 0, 0, 0.25),
+      0 0 0 4px rgba(43, 127, 255, 0.4);
+  }
+}
+
+.markerOpen {
+  background: #ef4444;
+  transform: translate(-50%, -100%) scale(1.12);
+}
+
+/* ─── Message card on the drawing ─── */
+.msgCard {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  width: 210px;
+  padding: 10px;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.2);
+  transform: translate(24px, -60%);
+  animation: pop 180ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.msgCardHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.msgCardHead strong {
+  font-size: 11px;
+  font-weight: 700;
+  color: #1e2939;
+}
+
+.msgBubble {
+  margin: 0;
+  padding: 7px 9px;
+  border-radius: 6px;
+  background: #eff6ff;
+  font-size: 11px;
+  line-height: 16px;
+  color: #1e2939;
+  word-break: keep-all;
+}
+
+.linkBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 7px;
+  border: 1px solid #bfdbfe;
+  border-radius: 5px;
+  background: #fff;
+  color: #1d4ed8;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ─── Toast ─── */
+.toast {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 14px;
+  border-radius: 6px;
+  background: rgba(15, 23, 42, 0.88);
+  color: #fff;
+  font-size: 10px;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  animation: slideUp 220ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(8px);
+  }
+}
+
+.toastBtn {
+  border: 0;
+  background: none;
+  color: #93c5fd;
+  font: inherit;
+  font-size: 10px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* ─── Page thumbnails ─── */
+.thumbs {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 78px;
+  margin: 0;
+  padding: 7px 5px;
+  border-radius: 6px;
+  background: rgba(15, 23, 42, 0.82);
+  list-style: none;
+}
+
+.thumb {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.thumbLabel {
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 8px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.thumbImage {
+  height: 38px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  background-color: #fff;
+  background-image: url('/images/main-blueprint-thumb.webp');
+  background-position: 20% 30%;
+  background-size: 190% auto;
+}
+
+.thumbActive .thumbImage {
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 1px #60a5fa;
+}
+
+/* ─── TBM detail ─── */
+.workList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.workRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 11px;
+  color: #364153;
+}
+
+.workTag {
+  padding: 1px 7px;
+  border: 1px solid #fcd34d;
+  border-radius: 3px;
+  background: #fffbeb;
+  color: #b45309;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.fieldNote {
+  margin: 10px 0 4px;
+  font-size: 9px;
+  color: #9ca3af;
+}
+
+.safetyList {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin: 0;
+  padding-left: 14px;
+  font-size: 10px;
+  line-height: 16px;
+  color: #4a5565;
+}
+
+.signList {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.signList li {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.signWho {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #1e2939;
+}
+
+.noSign,
+.signedAt {
+  font-size: 9px;
+  color: #9ca3af;
+}
+
+/* The timestamp sits left, the back-link right, on one line. */
+.signedFoot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+/* Plain text link — no border or fill, just the icon and blue label. */
+.backLink {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #1d4ed8;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.backLink:hover {
+  text-decoration: underline;
+}
+
+.signBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 220px;
+  height: 84px;
+  border-radius: 4px;
+  background: #f3f4f6;
+}
+
+/* ─── Signature ─── */
+.signPad {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 104px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: #f3f4f6;
+  cursor: pointer;
+}
+
+.signHint {
+  color: #9ca3af;
+  font-size: 11px;
+}
+
+.signature {
+  width: 150px;
+  height: 66px;
+  overflow: visible;
+}
+
+.signPath {
+  fill: none;
+  stroke: #1e2939;
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Only the signature pad animates the stroke on; the stored signature in the
+   confirmation list is simply drawn. */
+.signPad .signPath {
+  stroke-dasharray: 260;
+  stroke-dashoffset: 260;
+  animation: write 900ms ease-out forwards;
+}
+
+.signPad .signPath:nth-child(2) {
+  animation-delay: 260ms;
+}
+
+.signPad .signPath:nth-child(3) {
+  animation-delay: 520ms;
+}
+
+@keyframes write {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.resignBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 100%;
+  padding: 6px;
+  border: 1px solid #bfdbfe;
+  border-radius: 5px;
+  background: #fff;
+  color: #1d4ed8;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ─── Modal ─── */
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(15, 23, 42, 0.45);
+  animation: fade 160ms ease-out;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: min(380px, 100%);
+  padding: 16px;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.28);
+  animation: pop 200ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.98);
+  }
+}
+
+.modalHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.modalHead strong {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+  color: #1e2939;
+  word-break: keep-all;
+}
+
+.modalDesc {
+  margin: 0;
+  font-size: 11px;
+  line-height: 17px;
+  color: #6a7282;
+  word-break: keep-all;
+}
+
+.modalFoot {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.iconBtn {
+  display: inline-flex;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #9ca3af;
+  cursor: pointer;
+}
+
+.field {
+  display: block;
+  position: relative;
+}
+
+.fieldLabel {
+  position: absolute;
+  top: -6px;
+  left: 9px;
+  z-index: 1;
+  padding: 0 4px;
+  background: #fff;
+  color: #6a7282;
+  font-size: 9px;
+}
+
+.fieldBox {
+  display: block;
+  width: 100%;
+  min-height: 38px;
+  padding: 10px;
+  border: 1px solid #d1d5dc;
+  border-radius: 5px;
+  background: #fff;
+  font: inherit;
+  font-size: 11px;
+  line-height: 17px;
+  color: #364153;
+  text-align: left;
+  cursor: pointer;
+  word-break: keep-all;
+}
+
+.fieldIdle {
+  border-color: #2b7fff;
+  border-width: 1.5px;
+  background: #f5f9ff;
+}
+
+.fieldIdle .empty {
+  color: #1d4ed8;
+  font-weight: 600;
+}
+
+.empty {
+  color: #9ca3af;
+}
+
+.primaryBtn:disabled {
+  background: #93b4f0;
+  cursor: default;
+}
+
+/* ─── Below 1280 ────────────────────────────────────────── */
+@media (max-width: 1279px) {
+  .head {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .title {
+    font-size: 30px;
+  }
+
+  .desc {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .appBody {
+    grid-template-columns: 62px minmax(0, 1fr);
+  }
+
+  .leftCols {
+    grid-column: 1 / 2;
+  }
+
+  .leftBody {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sideMenu {
+    display: none;
+  }
+
+  /* The rail-only column is too narrow for the horizontal padding this label
+     had when it sat under both left columns; tighten it and centre the text
+     so "로그아웃" reads as one line instead of an awkward 3+1 wrap. */
+  .logoutRow {
+    padding: 12px 4px;
+    font-size: 9px;
+    text-align: center;
+  }
+
+  .planPanels {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .msgList {
+    display: none;
+  }
+
+  /* Ratio measured from the Blueprint mock's natural (content-driven) size
+     at 800px, where every field in this window fits without clipping — the
+     same ratio is shared across all product-demo mocks so they all stay
+     legible at the same widths. Desktop keeps the natural (auto) height set
+     on .app above. */
+  .app {
+    aspect-ratio: 670 / 494.57;
+  }
+}
+
+/* ─── Mobile ────────────────────────────────────────────── */
+@media (max-width: 799px) {
+  .section {
+    padding: 40px 0;
+  }
+
+  .inner {
+    padding-inline: var(--dp-gutter-sm);
+  }
+
+  .title {
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  .desc {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .stepBody {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .stepDesc {
+    white-space: normal;
+  }
+
+  /* Matches the Blueprint mock's measured mobile size (278x431), so every
+     product-demo mock reads at the same height on phones. */
+  .app {
+    aspect-ratio: 278 / 431;
+  }
+
+  .appBody {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
+  }
+
+  .leftCols,
+  .breadcrumb,
+  .sub {
+    display: none;
+  }
+
+  .titleRow .actions {
+    display: none;
+  }
+
+  .sheet {
+    padding: 10px;
+  }
+
+  /* The "페이지 1" filename label above the drawing isn't needed once the
+     drawing is the whole point of this narrow view. */
+  .pageTitle {
+    display: none;
+  }
+
+  /* Same as Blueprint's page-thumbnail rail — it eats too much of an
+     already-narrow canvas on phones. */
+  .thumbs {
+    display: none;
+  }
+
+  /* Sitting the card beside the pin (translateX 24px) pushes it past the
+     narrow canvas edge here. Drop it below the pin instead — still fully
+     on-screen, and centred so it doesn't run off either side. */
+  .msgCard {
+    width: 168px;
+    left: 50% !important;
+    top: auto !important;
+    bottom: 8px;
+    transform: translateX(-50%);
+  }
+
+  .bubbleIn,
+  .bubbleOut {
+    max-width: 210px;
+  }
+
+  .block {
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  /* With .block now top-aligned (so the icon doesn't stretch to the full,
+     multi-line block height), nudge the icon up so its centre lines up
+     with the title text's centre instead of sitting above it. */
+  .blockIcon {
+    width: 34px;
+    height: 34px;
+    margin-top: -8px;
+    border-width: 4px;
+  }
+
+  /* Keep the icon beside the title and its one-line description only;
+     everything after that pulls back out to the left edge and spans the
+     full width instead of staying indented by the icon's width. */
+  .blockBody > :not(.blockTitle):not(.blockDesc) {
+    margin-left: calc(-1 * (34px + 10px));
+    width: calc(100% + 34px + 10px);
+  }
+
+  /* A bit more breathing room above the content below each title, now that
+     it runs the full card width. */
+  .infoGrid {
+    margin-top: 20px;
+  }
+
+  .workList {
+    margin-top: 18px;
+  }
+
+  .fieldNote {
+    margin-top: 20px;
+  }
+
+  .signList {
+    margin-top: 18px;
+  }
+
+  /* The timestamp sits left, the back-link right, on one line. */
+.signedFoot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+/* Plain text link — no border or fill, just the icon and blue label. */
+.backLink {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #1d4ed8;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.backLink:hover {
+  text-decoration: underline;
+}
+
+.signBox {
+    width: 100%;
+  }
+}

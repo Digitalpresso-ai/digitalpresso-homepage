@@ -1,0 +1,217 @@
+/* src/features/about/components/AboutValidation/AboutValidation.module.css */
+
+/* ─── Section ───────────────────────────────────────────── */
+.section {
+  background: #eff6ff;
+  padding: 48px 0 64px;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 64px;
+}
+
+/* ─── Heading ───────────────────────────────────────────── */
+.title {
+  margin: 0;
+  color: #1e2939;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 40px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* ─── Cards ─────────────────────────────────────────────── */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #d1d5dc;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transition:
+    transform 200ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    box-shadow 200ms ease-out,
+    border-color 200ms ease-out;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  border-color: #99a1af;
+}
+
+/* Fifth card spans both columns on the trailing row (5 cards, 2-col grid) */
+.card:nth-child(5) {
+  grid-column: 1 / -1;
+}
+
+/* Desktop: row 1 = 2 cards (1/2 each), row 2 = 3 cards (1/3 each), matching Figma */
+@media (min-width: 1024px) {
+  .cards {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .card:nth-child(1),
+  .card:nth-child(2) {
+    grid-column: span 3;
+  }
+
+  .card:nth-child(3),
+  .card:nth-child(4),
+  .card:nth-child(5) {
+    grid-column: span 2;
+  }
+}
+
+/* ─── Image ─────────────────────────────────────────────── */
+.imageBox {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 516 / 334;
+  background: #f3f4f6;
+}
+
+.image {
+  object-fit: cover;
+}
+
+/* ─── Text Area ─────────────────────────────────────────── */
+.textArea {
+  display: flex;
+  align-items: flex-start;
+  padding: 16px 24px;
+  border-top: 1px solid #d1d5dc;
+}
+
+.textBox {
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cardTitle {
+  margin: 0;
+  flex: 1 0 0;
+  min-width: 0;
+  color: #1e2939;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 26px;
+}
+
+.cardDesc {
+  margin: 0;
+  color: #4a5565;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 25px;
+  white-space: pre-line;
+}
+
+.badge {
+  flex-shrink: 0;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  background: #dbeafe;
+  color: #2b7fff;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+/* ─── Responsive ────────────────────────────────────────── */
+/* Tablet (769px – 1023px): single column, matching Figma */
+@media (min-width: 769px) and (max-width: 1023px) {
+  .inner {
+    padding-inline: 32px;
+  }
+
+  .cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .card:nth-child(5) {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 1024px) {
+  .inner {
+    padding-inline: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .inner {
+    padding-inline: 20px;
+  }
+
+  .title {
+    font-size: 28px;
+    line-height: 34px;
+  }
+
+  .cards {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .card:nth-child(5) {
+    grid-column: auto;
+  }
+
+  .textArea {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .textBox {
+    gap: 12px;
+  }
+
+  /* Mobile (Figma): badge sits above the title, in its own row */
+  .titleRow {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .cardTitle {
+    flex: none;
+    width: 100%;
+  }
+
+  .cardDesc {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}

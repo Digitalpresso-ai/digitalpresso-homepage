@@ -1,0 +1,1109 @@
+/* ─── Section ───────────────────────────────────────────── */
+.section {
+  background: #f8fafc;
+  padding: 64px 0;
+}
+
+.inner {
+  max-width: var(--dp-container);
+  margin-inline: auto;
+  padding-inline: var(--dp-gutter-lg);
+}
+
+/* ─── Heading block ─────────────────────────────────────── */
+.head {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+  margin-bottom: 40px;
+}
+
+.headText {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.title {
+  margin: 0;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 40px;
+  color: #1e2939;
+  word-break: keep-all;
+}
+
+.desc {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 28px;
+  color: #4a5565;
+  white-space: pre-line;
+  word-break: keep-all;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.stepNum {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #dbeafe;
+  font-size: 18px;
+  font-weight: 600;
+  color: #2b7fff;
+}
+
+.stepBody {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.stepName {
+  font-weight: 600;
+  color: #2b7fff;
+  white-space: nowrap;
+}
+
+.stepDash,
+.stepDesc {
+  font-weight: 500;
+  color: #4a5565;
+  word-break: keep-all;
+}
+
+/* ─── Product mock ──────────────────────────────────────── */
+/* Everything below draws a fake app window; only the drawing is an image.
+   TEMP: height left auto (content-driven) while we measure the natural
+   height at 800px so the other product-demo sections can share it as a
+   fixed ratio instead of guessing. */
+.app {
+  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #d1d5dc;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  font-size: 14px;
+  color: #364153;
+}
+
+.window {
+  overflow: hidden;
+  background: #fff;
+}
+
+.appBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.appLogo {
+  width: auto;
+  height: 25px;
+}
+
+
+
+
+.appBarIcons {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  color: #6a7282;
+}
+
+.badgeWrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.badge {
+  position: absolute;
+  top: -6px;
+  right: -7px;
+  min-width: 14px;
+  padding: 0 3px;
+  border-radius: 999px;
+  background: #ef4444;
+  color: #fff;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 14px;
+  text-align: center;
+}
+
+.avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+}
+
+.appBody {
+  display: grid;
+  grid-template-columns: 62px 148px minmax(0, 1fr);
+  flex: 1;
+  min-height: 0;
+}
+
+/* The logout strip runs under both left columns, as in the product. */
+.leftCols {
+  display: flex;
+  flex-direction: column;
+  grid-column: 1 / 3;
+  border-right: 1px solid #e5e7eb;
+}
+
+.leftBody {
+  display: grid;
+  grid-template-columns: 62px minmax(0, 1fr);
+  flex: 1;
+  min-height: 0;
+}
+
+.logoutRow {
+  grid-column: 1 / 3;
+  padding: 12px 16px;
+  border-top: 1px solid #e5e7eb;
+  color: #4a5565;
+  font-size: 11px;
+}
+
+/* ─── Left rail ─── */
+.rail {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 14px 0;
+  /* Divider between the icon rail and the menu column; stops above the logout
+     strip, as in the product. */
+  border-right: 1px solid #e5e7eb;
+  font-size: 10px;
+  color: #6a7282;
+  text-align: center;
+}
+
+.railItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.railActive {
+  color: #2b7fff;
+  font-weight: 600;
+}
+
+
+
+.sideMenu {
+  padding: 14px 10px;
+  border-right: 1px solid #e5e7eb;
+}
+
+.sideMenuActive {
+  display: block;
+  padding: 7px 10px;
+  border-radius: 6px;
+  background: #1d4ed8;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* ─── Main column ─── */
+/* The product tints the whole content area a pale grey, with the panels
+   themselves staying white on top of it. */
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  min-height: 0;
+  padding: 14px 16px 16px;
+  background: #f4f6f9;
+}
+
+.listPanel,
+.viewerPanel {
+  background: #fff;
+}
+
+.viewerPanel {
+  padding: 12px;
+}
+
+.breadcrumb {
+  margin: 0;
+  font-size: 12px;
+  color: #6a7282;
+}
+
+.breadcrumb i {
+  margin: 0 4px;
+  font-style: normal;
+  color: #cbd5e1;
+}
+
+.breadcrumb strong {
+  color: #1d4ed8;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.projectName {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #1d4ed8;
+  word-break: keep-all;
+}
+
+.chip {
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: #dbeafe;
+  color: #1d4ed8;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.ghostBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+  padding: 5px 10px;
+  border: 1px solid #bfdbfe;
+  border-radius: 6px;
+  background: #fff;
+  color: #1d4ed8;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* The list and the viewer read as one white card, not two floating panels. */
+.panels {
+  display: grid;
+  grid-template-columns: 210px minmax(0, 1fr);
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fff;
+}
+
+/* ─── Tag list panel ─── */
+.listPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  border-right: 1px solid #e5e7eb;
+}
+
+.panelTitle {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1e2939;
+}
+
+.radios {
+  display: flex;
+  gap: 12px;
+  font-size: 11px;
+}
+
+.radioOn,
+.radioOff {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.radioOn i,
+.radioOff i {
+  width: 11px;
+  height: 11px;
+  border: 3px solid #2b7fff;
+  border-radius: 50%;
+}
+
+.radioOff {
+  color: #6a7282;
+}
+
+.radioOff i {
+  border: 1.5px solid #cbd5e1;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  color: #9ca3af;
+  font-size: 10px;
+}
+
+.tagList {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tagRow {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+  padding: 9px 4px;
+  border: 0;
+  border-bottom: 1px solid #f1f5f9;
+  background: none;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background 150ms ease-out;
+}
+
+.tagRow strong {
+  font-size: 12px;
+  font-weight: 700;
+  color: #1e2939;
+}
+
+.tagRow span {
+  font-size: 10px;
+  color: #9ca3af;
+}
+
+.tagRow:hover {
+  background: #f8fafc;
+}
+
+.tagRowActive {
+  background: #eff6ff;
+}
+
+/* ─── Viewer panel ─── */
+.viewerPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.viewerHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.fileName {
+  margin: 0;
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e2939;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.viewerActions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.infoBtn {
+  display: inline-flex;
+  padding: 3px;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: #6a7282;
+  cursor: pointer;
+  transition:
+    color 150ms ease-out,
+    background 150ms ease-out;
+}
+
+.infoBtn:hover {
+  background: #eff6ff;
+  color: #2b7fff;
+}
+
+/* ─── Drawing canvas ─── */
+.canvas {
+  position: relative;
+  aspect-ratio: 1400 / 746;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.blueprint {
+  object-fit: cover;
+  object-position: left center;
+}
+
+.sheet {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #fff;
+}
+
+.pager {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 8px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+  color: #4a5565;
+  font-size: 11px;
+}
+
+.pager em {
+  font-style: normal;
+}
+
+.pager b {
+  color: #1e2939;
+}
+
+/* Points the visitor at the first thing to click; disappears once they do. */
+.startHint {
+  position: absolute;
+  z-index: 2;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: #1d4ed8;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  transform: translate(-50%, -260%);
+  animation: hintBob 1.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.startHint::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  border: 5px solid transparent;
+  border-top-color: #1d4ed8;
+  transform: translateX(-50%);
+}
+
+@keyframes hintBob {
+  0%,
+  100% {
+    transform: translate(-50%, -260%);
+  }
+  50% {
+    transform: translate(-50%, -290%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .startHint {
+    animation: none;
+  }
+}
+
+/* The info button and the page-jump marker are both circular, so a ring-shaped
+   halo follows their outline. The location pins keep their speech-bubble hint
+   instead — a ring would not match their teardrop shape. */
+@keyframes targetHalo {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(43, 127, 255, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 7px rgba(43, 127, 255, 0);
+  }
+}
+
+.infoIdle {
+  background: #eff6ff;
+  color: #2b7fff;
+  animation: targetHalo 2s ease-in-out infinite;
+}
+
+.markerIdle {
+  animation: targetHalo 2s ease-in-out 0.6s infinite;
+}
+
+/* The pin is a teardrop, so a box-shadow ring would not fit it. A blurred
+   copy of the pin's silhouette glows behind it instead. */
+.pinIdle::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: currentColor;
+  filter: blur(4px);
+  animation: pinGlow 2s ease-in-out 0.25s infinite;
+  clip-path: path('M15 0a15 15 0 0 0-15 15c0 11 15 27 15 27s15-16 15-27a15 15 0 0 0-15-15Z');
+}
+
+@keyframes pinGlow {
+  0%,
+  100% {
+    opacity: 0.12;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.32;
+    transform: scale(1.07);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .infoIdle,
+  .markerIdle {
+    animation: none;
+    box-shadow: 0 0 0 3px rgba(43, 127, 255, 0.35);
+  }
+
+  .pinIdle::before {
+    animation: none;
+    opacity: 0.25;
+  }
+}
+
+/* ─── Pins and markers ─── */
+.pin {
+  position: absolute;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #2b7fff;
+  cursor: pointer;
+  transform: translate(-50%, -100%);
+  transition:
+    color 200ms ease-out,
+    transform 200ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
+}
+
+.pin:hover {
+  transform: translate(-50%, -100%) scale(1.08);
+}
+
+.pinActive {
+  color: #ef4444;
+  transform: translate(-50%, -100%) scale(1.14);
+}
+
+.marker {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #00b8d4;
+  color: #fff;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  transition:
+    background 200ms ease-out,
+    transform 200ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.marker:hover {
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+.markerActive {
+  background: #ef4444;
+  transform: translate(-50%, -50%) scale(1.14);
+}
+
+/* ─── Popovers ─── */
+/* The card sits beside its pin — never on top of it — and picks the side with
+   room, so the marker stays visible while the card is open. */
+.popover {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 178px;
+  padding: 10px;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  animation: pop 180ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.popRight {
+  transform: translate(30px, -50%);
+}
+
+.popLeft {
+  transform: translate(-100%, -50%) translateX(-30px);
+}
+
+/* The round marker reads tighter than the tapered pin at the same gap, so it
+   gets a little more clearance to match optically. */
+.popMarkerRight {
+  transform: translate(38px, -50%);
+}
+
+.popMarkerLeft {
+  transform: translate(-100%, -50%) translateX(-38px);
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+  }
+}
+
+.popHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.popHead strong {
+  font-size: 12px;
+  font-weight: 700;
+  color: #1e2939;
+}
+
+.popClose {
+  display: inline-flex;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #9ca3af;
+  cursor: pointer;
+}
+
+.popMeta {
+  margin: 0;
+  font-size: 10px;
+  color: #6a7282;
+}
+
+.popMeta em {
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.popBtn,
+.popJump {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 6px;
+  border: 1px solid #bfdbfe;
+  border-radius: 5px;
+  background: #fff;
+  color: #1d4ed8;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* The record action is a real link into the section below, so it gets the
+   same affordance as the page-jump button. */
+.popBtn,
+.popJump {
+  cursor: pointer;
+  transition: background 150ms ease-out;
+}
+
+.popBtn:hover,
+.popJump:hover {
+  background: #eff6ff;
+}
+
+/* Under ~1024px the canvas is too small for pin-anchored cards to clear every
+   edge, so the card centres over the drawing instead of chasing the pin. */
+@media (max-width: 1023px) {
+  /* Too little room to sit beside a pin here, so the card docks to the bottom
+     of the drawing where it covers no marker. */
+  .popover,
+  .popLeft,
+  .popRight,
+  .popMarkerLeft,
+  .popMarkerRight {
+    top: auto !important;
+    bottom: 8px;
+    left: 50% !important;
+    transform: translateX(-50%);
+  }
+}
+
+/* ─── Page thumbnails ─── */
+.thumbs {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 92px;
+  margin: 0;
+  padding: 8px 6px;
+  border-radius: 6px;
+  background: rgba(15, 23, 42, 0.82);
+  list-style: none;
+}
+
+.thumb {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.thumbLabel {
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 9px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* A 7KB downscale of the drawing itself, so each thumb reads as a real sheet.
+   Each page shows a different region to suggest three separate drawings. */
+.thumbImage {
+  height: 44px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  background-color: #fff;
+  background-image: url('/images/main-blueprint-thumb.webp');
+  background-repeat: no-repeat;
+  background-size: 190% auto;
+}
+
+.thumb:nth-child(1) .thumbImage {
+  background-position: 8% 22%;
+}
+
+.thumb:nth-child(2) .thumbImage {
+  background-position: 62% 65%;
+}
+
+.thumb:nth-child(3) .thumbImage {
+  background-position: 34% 40%;
+}
+
+.thumbActive .thumbImage {
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 1px #60a5fa;
+}
+
+/* ─── Modal ─── */
+.modalLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.45);
+  animation: fade 160ms ease-out;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: min(300px, 74%);
+  padding: 16px;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.28);
+  animation: pop 200ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.modalHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modalHead strong {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e2939;
+}
+
+.modalList {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+}
+
+.modalList dt {
+  font-size: 10px;
+  color: #9ca3af;
+}
+
+.modalList dd {
+  margin: 0 0 8px;
+  font-size: 12px;
+  color: #364153;
+  /* keep-all so approval numbers don't split mid-token; the filename still
+     needs a hard break since it has no spaces. */
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.modalFoot {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.primaryBtn {
+  padding: 6px 18px;
+  border: 0;
+  border-radius: 5px;
+  background: #2b7fff;
+  color: #fff;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ─── Below 1280 ────────────────────────────────────────── */
+@media (max-width: 1279px) {
+  .head {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .title {
+    font-size: 30px;
+  }
+
+  .desc {
+    font-size: 18px;
+  }
+
+  .appBody {
+    grid-template-columns: 56px minmax(0, 1fr);
+  }
+
+  /* The secondary menu column is the first thing to go. */
+  .sideMenu {
+    display: none;
+  }
+
+  .panels {
+    grid-template-columns: 180px minmax(0, 1fr);
+  }
+}
+
+/* Under 1024px the two-panel split leaves the viewer too narrow to read, so the
+   tag list steps aside and the drawing takes the full width. The left rail's
+   secondary column goes too, or the main column has nothing left to occupy. */
+@media (max-width: 1023px) {
+  .appBody {
+    grid-template-columns: 62px minmax(0, 1fr);
+  }
+
+  .leftCols {
+    grid-column: 1 / 2;
+  }
+
+  .leftBody {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sideMenu {
+    display: none;
+  }
+
+  .panels {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .listPanel {
+    display: none;
+  }
+
+  /* The rail-only column is too narrow for the horizontal padding this label
+     had when it sat under both left columns; tighten it and centre the text
+     so "로그아웃" reads as one line instead of an awkward 3+1 wrap. */
+  .logoutRow {
+    padding: 12px 4px;
+    font-size: 9px;
+    text-align: center;
+  }
+}
+
+/* ─── Mobile ────────────────────────────────────────────── */
+@media (max-width: 799px) {
+  .section {
+    padding: 40px 0;
+  }
+
+  .inner {
+    padding-inline: var(--dp-gutter-sm);
+  }
+
+  .title {
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  .desc {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .stepBody {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .stepDesc {
+    white-space: normal;
+  }
+
+  .appBody {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
+  }
+
+  /* On phones the demo is the drawing plus its pins — the chrome would only
+     shrink the part visitors actually came to see. */
+  .leftCols {
+    display: none;
+  }
+
+  .titleRow .ghostBtn,
+  .breadcrumb {
+    display: none;
+  }
+
+  .panels {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .listPanel {
+    display: none;
+  }
+
+  /* The wide 1400/746 ratio (sized for the desktop two-panel layout) made
+     the drawing very short at this column width. But .app itself has no
+     fixed height here (it sizes to its content), so flex:1/aspect-ratio:auto
+     had nothing to grow against and the canvas collapsed to 0 height —
+     give it its own taller ratio instead, so it still determines its own
+     size the way the rest of the (height: auto) mock relies on. */
+  .canvas {
+    aspect-ratio: 5 / 6;
+  }
+
+  /* The page-thumbnail rail eats too much of an already-narrow canvas on
+     phones — drop it so the drawing gets the full width. */
+  .thumbs {
+    display: none;
+  }
+
+  .popover {
+    width: 152px;
+  }
+
+  /* On this narrow canvas the popover card is tall enough to bury whichever
+     pin it's centred on. Simplest fix: only the best-placed pin — the one
+     that already sits clear at the top — shows on phones. .pin ~ .pin (not
+     :not(:first-child), which never matches here since .pin isn't .canvas's
+     first child at all) targets every pin after the first one. The page-jump
+     marker stays — its popover already docks to the drawing's bottom edge
+     (see the ≤1023px rule above) so it never covers the marker. */
+  .pin ~ .pin {
+    display: none;
+  }
+}

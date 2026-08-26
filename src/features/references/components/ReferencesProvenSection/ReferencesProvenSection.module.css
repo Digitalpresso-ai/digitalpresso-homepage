@@ -30,63 +30,79 @@
   color: var(--color-accent);
 }
 
-/* ─── Cards row (desktop / tablet) ─────────────────────── */
-.cardRow {
+/* ─── Cards (matches the "주요 외부 검증" card style) ────── */
+.cards {
   display: flex;
   gap: 24px;
   align-items: stretch;
   justify-content: center;
   width: 100%;
-  height: 300px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .card {
-  position: relative;
+  display: flex;
   flex: 1 0 0;
   min-width: 0;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding: 24px 16px;
-  border-radius: 16px;
+  height: 336px;
+  flex-direction: column;
   overflow: hidden;
-  isolation: isolate;
+  border: 1px solid #d1d5dc;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transition:
+    transform 200ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    box-shadow 200ms ease-out,
+    border-color 200ms ease-out;
 }
 
-.cardImage {
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  border-color: #99a1af;
+}
+
+.imageBox {
+  position: relative;
+  width: 100%;
+  flex: 1 1 auto;
+  min-height: 0;
+  background: #f3f4f6;
+}
+
+.image {
   object-fit: cover;
-  z-index: -2;
 }
 
-/* 상단 30% → 하단 60% 어두운 그라데이션 */
-.card::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.3) 37%,
-    rgba(0, 0, 0, 0.6) 61%
-  );
+.textArea {
+  flex: none;
+  padding: 16px 24px;
+  border-top: 1px solid #d1d5dc;
 }
 
 .cardTitle {
-  width: 100%;
-  font-size: 36px;
-  font-weight: 700;
-  line-height: 1.24;
-  color: #ffffff;
-  text-align: center;
-  letter-spacing: 0;
   margin: 0;
+  color: #1e2939;
+  font-size: 23px;
+  font-weight: 600;
+  line-height: 30px;
   word-break: keep-all;
 }
 
-/* 가운데 카드는 텍스트가 길어 작게 */
-.cardTitleSmall {
-  font-size: 24px;
-  line-height: 1.2;
+/* construction/gwangju: single line, matching Figma.
+   Shrinks to fit the card's text-area width instead of wrapping or overflowing. */
+.cardTitleNowrap {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 /* ─── Tablet (800px – 1279px) ──────────────────────────── */
@@ -102,23 +118,28 @@
     letter-spacing: -0.5px;
   }
 
-  .cardRow {
+  .cards {
     gap: 16px;
   }
 
-  .cardTitle {
-    font-size: 28px;
+  .card {
+    height: 260px;
   }
 
-  .cardTitleSmall {
-    font-size: 20px;
+  .cardTitle {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .textArea {
+    padding: 12px 14px;
   }
 }
 
 /* ─── Mobile (≤799px): 세로 쌓임 ──────────────────────── */
 @media (max-width: 799px) {
   .container {
-    padding: 32px 20px 40px;
+    padding: 32px 18px 40px;
     gap: 24px;
   }
 
@@ -128,16 +149,31 @@
     letter-spacing: -0.5px;
   }
 
-  .cardRow {
+  .cards {
     flex-direction: column;
-    height: auto;
     gap: 24px;
   }
 
   .card {
-    width: 100%;
-    height: 260px;
     flex: none;
+    height: auto;
+  }
+
+  .imageBox {
+    aspect-ratio: 516 / 334;
+    flex: none;
+  }
+
+  .cardTitle {
+    font-size: 17px;
+    line-height: 18px;
+  }
+
+  .cardTitleNowrap {
+    width: auto;
+    overflow: visible;
+    white-space: normal;
+    font-size: 17px;
   }
 }
 

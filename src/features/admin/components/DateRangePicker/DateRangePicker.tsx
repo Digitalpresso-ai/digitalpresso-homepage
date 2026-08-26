@@ -39,11 +39,14 @@ export default function DateRangePicker({ from, to, onChange }: Props) {
     from: parseDate(from),
     to:   parseDate(to),
   });
+  const [prevProps, setPrevProps] = useState({ from, to });
   const ref = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  // props(from/to)가 바뀌면 렌더 중에 range를 동기화한다 (effect로 하면 cascading render 유발)
+  if (prevProps.from !== from || prevProps.to !== to) {
+    setPrevProps({ from, to });
     setRange({ from: parseDate(from), to: parseDate(to) });
-  }, [from, to]);
+  }
 
   useEffect(() => {
     function onClickOutside(e: MouseEvent) {
