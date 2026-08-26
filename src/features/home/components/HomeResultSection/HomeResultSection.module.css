@@ -1,0 +1,208 @@
+.section {
+  position: relative;
+  overflow: hidden;
+  height: clamp(344px, 33.7vw, 520px);
+  min-height: 344px;
+  background: #18376f;
+}
+
+/* A line break that only takes effect on phones — desktop/tablet widths
+   have room for the text to wrap on its own. */
+.mobileBreak {
+  display: none;
+}
+
+@media (max-width: 799px) {
+  .mobileBreak {
+    display: inline;
+  }
+}
+
+.section,
+.section * {
+  box-sizing: border-box;
+}
+
+.backgroundImage {
+  object-fit: cover;
+  object-position: center bottom;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.32);
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: center;
+  justify-content: center;
+  width: min(100%, 1280px);
+  min-height: 100%;
+  margin: 0 auto;
+  padding: 64px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  text-align: center;
+}
+
+.badge {
+  margin: 0;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.22);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.title {
+  margin: 0;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+  word-break: keep-all;
+}
+
+.accent {
+  color: #b1fcff;
+}
+
+.cardList {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  height: 132px;
+  padding: 24px 18px;
+  border: 1px solid rgba(209, 213, 220, 0.95);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.metric {
+  display: block;
+  background: linear-gradient(107deg, #b1fcff 0%, #ffffff 97%);
+  background-clip: text;
+  color: transparent;
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 40px;
+  white-space: nowrap;
+}
+
+.cardText {
+  margin: 0;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 14px;
+  text-align: center;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 1280px) {
+  .title {
+    font-size: 28px;
+    line-height: 34px;
+  }
+
+  .metric {
+    font-size: 40px;
+  }
+
+  .cardText {
+    font-size: 12px;
+    line-height: 16px;
+  }
+}
+
+/* Figma switches the four metric cards to a 2x2 grid starting at 800px,
+   not only on phones. */
+@media (max-width: 1023px) {
+  /* The fixed clamp() height was sized for the 4-across row; once the cards
+     wrap to 2x2 here the section needs to grow with them or the bottom row
+     gets clipped. */
+  .section {
+    height: auto;
+  }
+
+  .inner {
+    min-height: 420px;
+    padding: 48px 20px;
+  }
+
+  .cardList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+  }
+
+  .card {
+    height: 120px;
+  }
+}
+
+@media (max-width: 799px) {
+  .title {
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  .badge {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  /* Figma stacks all four cards in a single column on phones, not 2x2. */
+  .cardList {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .card {
+    height: auto;
+    padding: 32px 18px 24px;
+  }
+
+  /* line-height was left at the desktop value (40px) while the font grew to
+     56px, so the glyphs' ascenders/descenders overflowed the line box and
+     got clipped top and bottom. */
+  .metric {
+    font-size: 56px;
+    line-height: 64px;
+  }
+
+  .cardText {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}

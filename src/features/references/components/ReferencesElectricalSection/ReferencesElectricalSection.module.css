@@ -161,6 +161,7 @@
   color: var(--color-heading);
   line-height: 1.6;
   word-break: keep-all;
+  white-space: pre-line;
   margin: 0;
 }
 
@@ -226,14 +227,20 @@
     white-space: normal;
   }
 
-  /* 태블릿: 단일 열 */
+  /* 태블릿: 2열 */
   .cardList {
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     height: auto;
   }
 
   .card {
+    flex: 1 1 calc(50% - 12px);
     height: auto;
+  }
+
+  .cardCustomer {
+    margin-top: 16px;
   }
 }
 
@@ -294,6 +301,10 @@
 
   .card {
     height: auto;
+  }
+
+  .cardCustomer {
+    margin-top: 16px;
   }
 }
 

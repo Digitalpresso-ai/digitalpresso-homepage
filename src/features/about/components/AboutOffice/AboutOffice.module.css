@@ -2,7 +2,7 @@
 
 /* ─── Section ───────────────────────────────────────────── */
 .section {
-  background: #ffffff;
+  background: #eff6ff;
 }
 
 /* ─── Inner container ───────────────────────────────────── */
@@ -32,6 +32,7 @@
 }
 
 .body {
+  max-width: 639px;
   font-size: 16px;
   color: var(--color-heading);
   line-height: 1.6;
@@ -46,9 +47,10 @@
   margin: 0;
 }
 
-/* ─── Desktop/Tablet line break ──────────────────────────── */
-.brDesktop {
-  display: block;
+/* body2/body3: fixed line break point from the translation string,
+   matching Figma exactly at every breakpoint (unlike body1, which wraps naturally) */
+.bodyBreak {
+  white-space: pre-line;
 }
 
 /* ─── Gallery grid ───────────────────────────────────────── */
@@ -58,14 +60,24 @@
   gap: 24px;
 }
 
-/* ─── Gallery item ───────────────────────────────────────── */
+/* ─── Gallery item (card, matches Figma) ─────────────────── */
 .galleryItem {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  overflow: hidden;
+  border: 1px solid #d1d5dc;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
   opacity: 0;
   transform: translateY(32px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease,
+    box-shadow 200ms ease-out,
+    border-color 200ms ease-out;
 }
 
 .galleryItem.revealed {
@@ -84,35 +96,32 @@
   transition-delay: 0.18s;
 }
 
+.galleryItem:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  border-color: #99a1af;
+}
+
 .imageWrapper {
   position: relative;
   width: 100%;
-  aspect-ratio: 3 / 2;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-
-.galleryItem:hover .imageWrapper {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  aspect-ratio: 516 / 334;
+  background: #f3f4f6;
 }
 
 .image {
   object-fit: cover;
-  transition: transform 0.4s ease;
-}
-
-.galleryItem:hover .image {
-  transform: scale(1.04);
 }
 
 .caption {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--color-heading);
-  line-height: 1.5;
+  padding: 16px 24px;
+  border-top: 1px solid #d1d5dc;
+  color: #1e2939;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
 }
 
 /* ─── Tablet (800px – 1279px) ───────────────────────────── */
@@ -131,11 +140,13 @@
   }
 
   .body {
+    max-width: 485px;
     font-size: 15px;
   }
 
   .caption {
-    font-size: 15px;
+    font-size: 20px;
+    line-height: 28px;
   }
 }
 
@@ -151,11 +162,8 @@
   }
 
   .body {
+    max-width: 100%;
     font-size: 14px;
-  }
-
-  .brDesktop {
-    display: none;
   }
 
   .gallery {
@@ -164,6 +172,8 @@
   }
 
   .caption {
-    font-size: 14px;
+    padding: 12px 16px;
+    font-size: 18px;
+    line-height: 26px;
   }
 }

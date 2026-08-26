@@ -1,0 +1,293 @@
+.section {
+  background: #f9fafb;
+  padding: 64px 0;
+}
+
+/* A line break that only takes effect on phones — desktop/tablet widths
+   have room for the text to wrap on its own. */
+.mobileBreak {
+  display: none;
+}
+
+@media (max-width: 799px) {
+  .mobileBreak {
+    display: inline;
+  }
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: var(--dp-container);
+  margin: 0 auto;
+  padding: 0 var(--dp-gutter-lg);
+}
+
+.title {
+  margin: 0;
+  color: #1e2939;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 40px;
+  text-align: center;
+  word-break: keep-all;
+}
+
+.accent {
+  color: #2b7fff;
+}
+
+.flowReveal {
+  width: 100%;
+}
+
+.flow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  align-items: stretch;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.stepItem {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 0;
+  width: 100%;
+  min-height: 154px;
+  padding: 16px 12px;
+  border: 1px solid #d1d5dc;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transition:
+    transform 200ms ease-out,
+    box-shadow 200ms ease-out,
+    border-color 200ms ease-out;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: #93c5fd;
+  box-shadow:
+    0 18px 28px -8px rgba(23, 60, 140, 0.18),
+    0 8px 12px -6px rgba(23, 60, 140, 0.1);
+}
+
+.iconBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: #f3f4f6;
+  color: #2b7fff;
+}
+
+.iconBox svg {
+  width: 28px;
+  height: 28px;
+}
+
+.cardCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.cardTitle {
+  margin: 0;
+  color: #2b7fff;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 36px;
+  word-break: keep-all;
+}
+
+.cardSubtitle {
+  margin: 0;
+  color: #1e2939;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  word-break: keep-all;
+}
+
+.cardDesc {
+  margin: 8px 0 0;
+  color: #4a5565;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 28px;
+  text-align: center;
+  white-space: pre-line;
+  word-break: keep-all;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  background: #dbeafe;
+  color: #2b7fff;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+.pillPrimary {
+  background: #2b7fff;
+  color: #ffffff;
+}
+
+.arrowWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  right: -28px;
+  z-index: 2;
+  width: 32px;
+  transform: translateY(-50%);
+  color: #8ec5ff;
+  pointer-events: none;
+}
+
+.arrowIcon {
+  width: 32px;
+  height: 32px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+
+  .card:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 1279px) {
+  .title {
+    font-size: 30px;
+    line-height: 38px;
+  }
+
+  .flow {
+    gap: 12px;
+  }
+
+  .cardTitle {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  .cardSubtitle {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .cardDesc {
+    font-size: 11px;
+    line-height: 18px;
+  }
+
+  .pill {
+    font-size: 10px;
+    line-height: 16px;
+  }
+
+  .arrowWrap {
+    right: -22px;
+  }
+}
+
+/* Figma stacks the four steps vertically starting at 800px, not only on
+   phones. */
+@media (max-width: 1023px) {
+  .flow {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .stepItem {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .card {
+    min-height: auto;
+  }
+
+  .arrowWrap {
+    position: static;
+    height: 24px;
+    transform: rotate(90deg);
+  }
+}
+
+@media (max-width: 799px) {
+  .section {
+    padding: 48px 0;
+  }
+
+  .inner {
+    padding: 0 20px;
+  }
+
+  .title {
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  /* The 1279px tier shrinks these for the still-horizontal 4-across row;
+     phones stack the cards full-width, so restore the base (1280px) sizes
+     that match Figma's mobile spec. */
+  .cardTitle {
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  .cardSubtitle {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .cardDesc {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .pill {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}

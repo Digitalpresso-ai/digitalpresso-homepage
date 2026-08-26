@@ -60,13 +60,20 @@
   gap: 12px;
 }
 
-.deptTitle {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--color-heading);
-  text-align: center;
+/* ─── Department title badge (pill, matches Figma) ───────── */
+.deptTitleBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   margin: 0;
-  line-height: 1.4;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  background: #dbeafe;
+  color: #2b7fff;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+  white-space: nowrap;
 }
 
 /* ─── Department list ────────────────────────────────────── */
@@ -101,12 +108,17 @@
     font-size: 16px;
   }
 
-  .deptTitle {
+  .deptTitleBadge {
     font-size: 16px;
   }
 
   .deptItem {
     font-size: 15px;
+  }
+
+  .departments {
+    grid-template-columns: 1fr;
+    gap: 32px;
   }
 }
 
@@ -134,9 +146,8 @@
     order: var(--mobile-order, 0);
   }
 
-  .deptTitle {
+  .deptTitleBadge {
     font-size: 16px;
-    text-align: left;
   }
 
   .deptItem {

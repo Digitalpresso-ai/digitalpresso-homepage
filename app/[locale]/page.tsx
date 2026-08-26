@@ -1,13 +1,22 @@
 // app/[locale]/page.tsx
 
 import type { Metadata } from "next";
-import { HomeContactSection } from '@/src/features/home/components/HomeContactSection/HomeContactSection';
-import { HomeImpactSection } from '@/src/features/home/components/HomeImpactSection/HomeImpactSection';
+import { HomeBlueprintSection } from '@/src/features/home/components/HomeBlueprintSection/HomeBlueprintSection';
+import { HomeReportSection } from '@/src/features/home/components/HomeReportSection/HomeReportSection';
+import { HomeScheduleSection } from '@/src/features/home/components/HomeScheduleSection/HomeScheduleSection';
+import { HomeCopilotSection } from '@/src/features/home/components/HomeCopilotSection/HomeCopilotSection';
+import { HomeSegmentSection } from '@/src/features/home/components/HomeSegmentSection/HomeSegmentSection';
+import { HomeResultSection } from '@/src/features/home/components/HomeResultSection/HomeResultSection';
+import { HomeSupportSection } from '@/src/features/home/components/HomeSupportSection/HomeSupportSection';
+import { HomeCtaCardsSection } from '@/src/features/home/components/HomeCtaCardsSection/HomeCtaCardsSection';
+import { HomeSafetySection } from '@/src/features/home/components/HomeSafetySection/HomeSafetySection';
+import { HomeRecordSection } from '@/src/features/home/components/HomeRecordSection/HomeRecordSection';
+import { HomeDefectSection } from '@/src/features/home/components/HomeDefectSection/HomeDefectSection';
+import { HomeTalkSection } from '@/src/features/home/components/HomeTalkSection/HomeTalkSection';
 import { HomeHero } from '@/src/features/home/components/HomeHero/HomeHero';
-import { HomeMessengerSection } from '@/src/features/home/components/HomeMessengerSection/HomeMessengerSection';
-import { HomeNewsSection } from '@/src/features/home/components/HomeNewsSection/HomeNewsSection';
-import { HomeProductSection } from '@/src/features/home/components/HomeProductSection/HomeProductSection';
-import { HomeShowcaseSection } from '@/src/features/home/components/HomeShowcaseSection/HomeShowcaseSection';
+import { HomePartnerCarousel } from '@/src/features/home/components/HomePartnerCarousel/HomePartnerCarousel';
+import { HomePlatformSection } from '@/src/features/home/components/HomePlatformSection/HomePlatformSection';
+import { HomeProblemSection } from '@/src/features/home/components/HomeProblemSection/HomeProblemSection';
 import { buildPageMetadata, isAppLocale, type AppLocale } from '@/lib/seo';
 
 interface HomePageProps {
@@ -52,54 +61,21 @@ export default function HomePage() {
   return (
     <main>
       <HomeHero />
-      <HomeNewsSection />
-      <HomeImpactSection />
-      <HomeProductSection />
-      <HomeShowcaseSection
-        namespace="home.upload"
-        imageSrc="/images/section-upload.png"
-        imageAspectRatio="480 / 634"
-        variant="compact"
-      />
-      <HomeShowcaseSection
-        namespace="home.defect"
-        imageSrc="/images/section-defect.png"
-        imageAspectRatio="480 / 634"
-        variant="compact"
-        reverse
-      />
-      <HomeMessengerSection />
-      <HomeShowcaseSection
-        namespace="home.dashboard"
-        imageSrc="/images/section-dashboard.png"
-        imageAspectRatio="564 / 407"
-        background="#ebf2ff"
-        reverse
-      />
-      <HomeShowcaseSection
-        namespace="home.blueprint"
-        imageSrc="/images/section-blueprint.png"
-        imageAspectRatio="564 / 318"
-        background="#eef3fb"
-        objectFit="cover"
-      />
-      <HomeShowcaseSection
-        namespace="home.documents"
-        imageSrc="/images/section-documents.png"
-        imageAspectRatio="564 / 382"
-        background="#eef3fb"
-        objectFit="cover"
-        bodySize="md"
-        reverse
-      />
-      <HomeShowcaseSection
-        namespace="home.workReports"
-        imageSrc="/images/section-work-reports.png"
-        imageAspectRatio="564 / 350"
-        background="#eef3fb"
-        objectFit="cover"
-      />
-      <HomeContactSection />
+      <HomePartnerCarousel />
+      <HomeProblemSection />
+      <HomePlatformSection />
+      <HomeBlueprintSection />
+      <HomeSafetySection />
+      <HomeRecordSection />
+      <HomeDefectSection />
+      <HomeTalkSection />
+      <HomeReportSection />
+      <HomeScheduleSection />
+      <HomeCopilotSection />
+      <HomeSegmentSection />
+      <HomeResultSection />
+      <HomeSupportSection />
+      <HomeCtaCardsSection />
     </main>
   );
 }

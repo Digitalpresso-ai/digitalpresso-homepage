@@ -22,8 +22,8 @@ export async function AboutOffice() {
           <h2 className={styles.title}>{t('title')}</h2>
           <div className={styles.body}>
             <p>{t('body1')}</p>
-            <p>{t('body2')}</p>
-            <p>{t('body3')}</p>
+            <p className={styles.bodyBreak}>{t('body2')}</p>
+            <p className={styles.bodyBreak}>{t('body3')}</p>
           </div>
         </div>
 

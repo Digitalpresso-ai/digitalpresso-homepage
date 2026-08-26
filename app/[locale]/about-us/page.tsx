@@ -1,6 +1,8 @@
 // app/[locale]/about-us/page.tsx
 
 import type { Metadata } from "next";
+import { AboutStats } from "@/src/features/about/components/AboutStats/AboutStats";
+import { AboutValidation } from "@/src/features/about/components/AboutValidation/AboutValidation";
 import { AboutHero } from "@/src/features/about/components/AboutHero/AboutHero";
 import { AboutTeam } from "@/src/features/about/components/AboutTeam/AboutTeam";
 import { AboutOffice } from "@/src/features/about/components/AboutOffice/AboutOffice";
@@ -48,6 +50,8 @@ export default function AboutUsPage() {
   return (
     <main>
       <AboutHero />
+      <AboutStats />
+      <AboutValidation />
       <AboutTeam />
       <AboutOffice />
     </main>
