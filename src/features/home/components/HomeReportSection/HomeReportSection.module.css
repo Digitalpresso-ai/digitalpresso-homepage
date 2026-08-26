@@ -54,7 +54,7 @@
 
 .step {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
 }
 
@@ -65,26 +65,27 @@
   flex-shrink: 0;
   width: 32px;
   height: 32px;
+  margin-top: 2px;
   border-radius: 8px;
   background: #dbeafe;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: #2b7fff;
 }
 
 .stepBody {
-  display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 8px;
-  font-size: 18px;
-  line-height: 28px;
+  font-size: 16px;
+  line-height: 26px;
 }
 
 .stepName {
   font-weight: 600;
   color: #2b7fff;
-  white-space: nowrap;
+}
+
+.stepName::after,
+.stepDash::after {
+  content: ' ';
 }
 
 .stepDash,
@@ -656,7 +657,7 @@
 }
 
 .qtyHead {
-  width: 46px;
+  width: 74px;
 }
 
 /* Labels that span two rows sit centred against the pair. */
@@ -992,4 +993,34 @@
   .actions .ghostBtn {
     display: none;
   }
+}
+
+/* Japanese layout fix: Japanese has almost no natural word breaks, so
+   keep-all (tuned for Korean) can leave a long unbroken sentence with
+   nowhere to wrap. The 74px .gridHead cells are especially tight against
+   labels like "本日の作業内容" (7 characters), so give them a touch more
+   room too. */
+:global(.locale-ja) .title,
+:global(.locale-ja) .desc,
+:global(.locale-ja) .stepDash,
+:global(.locale-ja) .stepDesc,
+:global(.locale-ja) .sectionTitle,
+:global(.locale-ja) .breadcrumb,
+:global(.locale-ja) .gridHead,
+:global(.locale-ja) .box {
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
+:global(.locale-ja) .gridHead {
+  width: 92px;
+  font-size: 9px;
+}
+
+/* The 62px rail column is a tight fit for a label like "プロジェクト" —
+   shrink the type a touch instead of wrapping to two lines, so it still
+   reads as one word at a glance. */
+:global(.locale-ja) .rail {
+  font-size: 9px;
+  letter-spacing: -0.02em;
 }

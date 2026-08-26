@@ -68,7 +68,9 @@ export async function HomeCopilotSection() {
                             {[0, 1].map((b) => (
                               <li key={b}>
                                 <i className={styles.dot} aria-hidden />
-                                {t(`stages.${i}.points.${b}`)}
+                                <span className={styles.bulletText}>
+                                  {t(`stages.${i}.points.${b}`)}
+                                </span>
                               </li>
                             ))}
                           </ul>
