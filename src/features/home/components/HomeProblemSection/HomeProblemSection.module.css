@@ -61,7 +61,7 @@
 
 .stepItem {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   gap: 8px;
   flex: 1 1 0;
   min-width: 0;
@@ -146,6 +146,7 @@
 .arrow {
   display: flex;
   align-items: center;
+  align-self: center;
   flex-shrink: 0;
   color: #4a5565;
 }

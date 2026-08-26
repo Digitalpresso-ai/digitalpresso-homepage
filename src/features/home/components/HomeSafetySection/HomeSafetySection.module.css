@@ -54,7 +54,7 @@
 
 .step {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
 }
 
@@ -65,26 +65,27 @@
   flex-shrink: 0;
   width: 32px;
   height: 32px;
+  margin-top: 2px;
   border-radius: 8px;
   background: #dbeafe;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: #2b7fff;
 }
 
 .stepBody {
-  display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 8px;
-  font-size: 18px;
-  line-height: 28px;
+  font-size: 16px;
+  line-height: 26px;
 }
 
 .stepName {
   font-weight: 600;
   color: #2b7fff;
-  white-space: nowrap;
+}
+
+.stepName::after,
+.stepDash::after {
+  content: ' ';
 }
 
 .stepDash,
@@ -1048,4 +1049,12 @@
     flex-wrap: wrap;
     gap: 8px;
   }
+}
+
+/* The 62px rail column is a tight fit for a label like "プロジェクト" —
+   shrink the type a touch instead of wrapping to two lines, so it still
+   reads as one word at a glance. */
+:global(.locale-ja) .rail {
+  font-size: 9px;
+  letter-spacing: -0.02em;
 }

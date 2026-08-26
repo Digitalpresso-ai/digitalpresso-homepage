@@ -95,3 +95,22 @@
   .inner { padding: 64px var(--dp-gutter-sm); }
   .cards { grid-template-columns: 1fr; }
 }
+
+/* Japanese layout fix: Japanese has almost no natural word breaks, so
+   keep-all (tuned for Korean) can leave a long unbroken sentence with
+   nowhere to wrap, overflowing these fixed-ratio cards. */
+:global(.locale-ja) .heading,
+:global(.locale-ja) .sub,
+:global(.locale-ja) .cardSubtitle,
+:global(.locale-ja) .cardTitle,
+:global(.locale-ja) .cardDescription {
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
+/* The card's fixed 4/5 ratio clips longer Japanese copy instead of letting
+   it overflow past the card — give it room to grow instead. */
+:global(.locale-ja) .card {
+  aspect-ratio: auto;
+  min-height: 320px;
+}

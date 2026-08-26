@@ -270,11 +270,11 @@
           }
         ],
         "items": [
-          "Worker voice and site conversation",
+          "Worker voice, site conversation",
           "Photos, video, CCTV",
           "Drawings, BOQ, checklists",
           "Work location, time, owner",
-          "Existing construction and defect history"
+          "Construction and defect history"
         ]
       },
       "center": {
@@ -284,15 +284,15 @@
         "cards": [
           {
             "title": "On-device AI",
-            "desc": "Interprets voice commands right on the device\nKeeps working where connectivity is unstable"
+            "desc": "Interprets voice on-device\nWorks offline, unstable connectivity"
           },
           {
             "title": "VLM · OCR",
-            "desc": "Reads photos, drawings, and documents in context\nStructures equipment, trade, hazard, and action"
+            "desc": "Reads photos, drawings, documents\nStructures equipment, trade, hazard, action"
           },
           {
             "title": "AI copilot",
-            "desc": "Analyzes regulations, drawings, and past records\nSuggests content and supports field decisions"
+            "desc": "Analyzes regulations, drawings, records\nSuggests content, supports decisions"
           }
         ]
       },
@@ -302,22 +302,22 @@
           {
             "title": "Document automation",
             "items": [
-              "Daily work logs written automatically",
-              "Construction and defect-repair records",
-              "Safety inspections and risk assessments",
+              "Automated daily work logs",
+              "Construction and defect records",
+              "Safety inspections and risk checks",
               "Preparation and evidence reports",
-              "Supervision logs and approval documents"
+              "Supervision logs and approvals"
             ]
           },
           {
             "title": "Field operations",
             "items": [
-              "Schedule, workforce, and safety dashboards",
+              "Schedule, workforce, safety dashboards",
               "Hazard and omission alerts",
-              "Drawing-anchored history tracking",
+              "Drawing-anchored history",
               "Real-time sharing with partners",
-              "ERP and existing system integration",
-              "Evidence for audits and disputes"
+              "ERP and system integration",
+              "Evidence for audits, disputes"
             ]
           }
         ]
@@ -325,7 +325,7 @@
     },
     "blueprintDemo": {
       "title": "Project drawing management",
-      "desc": "Drawing versions and change tracking, plus location-tagged construction\nrecords, defect handling, and messaging in one place.",
+      "desc": "Drawing versions and change tracking, plus location-tagged construction records, defect handling, and messaging in one place.",
       "steps": [
         {
           "name": "Change history",
@@ -420,7 +420,7 @@
     },
     "safetyDemo": {
       "title": "Safety inspection checklist",
-      "desc": "Inspect hazards and raise transparency with electronic signatures\nand real-time photos.",
+      "desc": "Inspect hazards and raise transparency with electronic signatures and real-time photos.",
       "steps": [
         {
           "name": "Item checks",
@@ -527,7 +527,7 @@
     },
     "recordDemo": {
       "title": "Construction records",
-      "desc": "Location and time metadata prevents undocumented work, and AI photo\nanalysis drafts the record for you.",
+      "desc": "Location and time metadata prevents undocumented work, and AI photo analysis drafts the record for you.",
       "steps": [
         {
           "name": "On-site capture",
@@ -636,7 +636,7 @@
     },
     "reportDemo": {
       "title": "Automated daily work reports",
-      "desc": "AI analyses field records and uploaded documents to generate and fill in\ndaily report entries, then routes them through a transparent approval flow.",
+      "desc": "AI analyses field records and uploaded documents to generate and fill in daily report entries, then routes them through a transparent approval flow.",
       "steps": [
         {
           "name": "AI-generated drafts",
@@ -857,7 +857,7 @@
     },
     "scheduleDemo": {
       "title": "Schedule and cash-flow board",
-      "desc": "Visualise cash flow from your document data and manage the whole site\nat a glance with a trade / process / task schedule.",
+      "desc": "Visualise cash flow from your document data and manage the whole site at a glance with a trade / process / task schedule.",
       "steps": [
         {
           "name": "Hierarchical scheduling",
@@ -1286,7 +1286,7 @@
     },
     "defectDemo": {
       "title": "Defect repair requests",
-      "desc": "Location and time metadata makes the target unambiguous, and approval\nhistory is tracked for you.",
+      "desc": "Location and time metadata makes the target unambiguous, and approval history is tracked for you.",
       "steps": [
         {
           "name": "Defect location",
@@ -1377,7 +1377,7 @@
     "talkDemo": {
       "title": "Field messenger",
       "titleBadge": "Talk",
-      "desc": "Talk in a channel dedicated to the project, share locations on the\ndrawing, and circulate TBM notes for accurate collaboration.",
+      "desc": "Talk in a channel dedicated to the project, share locations on the drawing, and circulate TBM notes for accurate collaboration.",
       "steps": [
         {
           "name": "Channel collaboration",
@@ -1789,13 +1789,13 @@
           "value": "300K",
           "suffix": "+",
           "title": "Document Recognition Data",
-          "desc": "Field document recognition\nand analysis data"
+          "desc": "Field document recognition and analysis data"
         },
         {
           "value": "95%",
           "suffix": "+",
           "title": "Data Extraction Accuracy",
-          "desc": "Verified structuring performance on\nfield documents and drawings"
+          "desc": "Verified structuring performance on field documents and drawings"
         },
         {
           "value": "7",
@@ -1916,7 +1916,7 @@
       "title": "Our office",
       "body1": "Even in the early stage, we work with confidence that every small step moves us forward.",
       "body2": "Within freedom and responsibility, we lead our work proactively,\nproviding a flexible environment where creativity and collaboration thrive.",
-      "body3": "As we build innovation together, we take pride in contributing every day\nto the company's growth and progress.",
+      "body3": "As we build innovation together, we take pride in contributing every day to the company's growth and progress.",
       "captions": [
         "Office",
         "Lounge",
