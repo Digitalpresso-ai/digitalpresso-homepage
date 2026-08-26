@@ -277,6 +277,12 @@ export function ScheduleDemo() {
                       {/* 프로젝트 진척도 */}
                       <section className={styles.chartCard}>
                         <h6 className={styles.chartTitle}>{t('charts.progress.title')}</h6>
+                        {/* Keeps this donut vertically aligned with the billed
+                            card's, whose title is followed by a .chartTotal
+                            line before its donut. */}
+                        <p className={styles.chartTotal} aria-hidden>
+                          &nbsp;
+                        </p>
                         <ProgressRings done={DONE} plan={PLAN} />
                         <ul className={styles.legend}>
                           <li>

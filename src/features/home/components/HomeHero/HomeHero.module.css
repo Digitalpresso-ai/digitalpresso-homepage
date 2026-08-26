@@ -220,3 +220,18 @@
     height: clamp(14px, 4.4vw, 28px);
   }
 }
+
+/* English runs noticeably longer than Korean here ("AI that connects field
+   records / all the way to reporting", "It sees, hears, and understands
+   the jobsite to / complete the records and documents you need."), so it
+   wraps to more lines than the design's fixed aspect-ratio section was
+   sized for — most visibly on wide/short viewports like a landscape
+   tablet, where the extra lines eat the section's vertical breathing
+   room. Scale the type down a touch so it keeps the same line count. */
+:global(.locale-en) .heading {
+  font-size: clamp(24px, 4.1cqw, 46px);
+}
+
+:global(.locale-en) .body {
+  font-size: clamp(14px, 2.6cqw, 30px);
+}

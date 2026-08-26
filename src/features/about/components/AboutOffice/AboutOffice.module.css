@@ -144,6 +144,12 @@
     font-size: 15px;
   }
 
+  /* Same fix as the phone tier — the manual line break was tuned for the
+     desktop column width, so it lands mid-sentence at this narrower one. */
+  .bodyBreak {
+    white-space: normal;
+  }
+
   .caption {
     font-size: 20px;
     line-height: 28px;
@@ -164,6 +170,13 @@
   .body {
     max-width: 100%;
     font-size: 14px;
+  }
+
+  /* The manual line break in body2/body3 is tuned for the desktop column
+     width, so on this much narrower phone width it lands mid-sentence
+     ("...협업이" / "자유롭게..."). Let it wrap naturally here instead. */
+  .bodyBreak {
+    white-space: normal;
   }
 
   .gallery {

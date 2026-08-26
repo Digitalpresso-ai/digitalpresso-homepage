@@ -43,6 +43,7 @@
   align-items: center;
   justify-content: center;
   width: min(100%, 1280px);
+  min-width: 0;
   min-height: 100%;
   margin: 0 auto;
   padding: 64px;
@@ -53,6 +54,7 @@
   flex-direction: column;
   gap: 16px;
   align-items: center;
+  min-width: 0;
   text-align: center;
 }
 
@@ -205,4 +207,20 @@
     font-size: 18px;
     line-height: 28px;
   }
+}
+
+/* Japanese layout fix: Japanese has almost no natural word breaks, so
+   keep-all (tuned for Korean) can leave a long unbroken sentence with
+   nowhere to wrap, overflowing the viewport on phones. */
+:global(.locale-ja) .title {
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
+/* The section's height is clamped for a consistent hero band, but a
+   longer-wrapping Japanese title needs a bit more room than Korean/English
+   to avoid crowding the cards below it. */
+:global(.locale-ja) .section {
+  height: auto;
+  min-height: 400px;
 }
