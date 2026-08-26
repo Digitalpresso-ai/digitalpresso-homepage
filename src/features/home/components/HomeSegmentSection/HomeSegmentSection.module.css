@@ -32,6 +32,7 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
+  min-width: 0;
   max-width: var(--dp-container);
   margin-inline: auto;
   padding-inline: var(--dp-gutter-lg);
@@ -496,4 +497,12 @@
    shrink it by 1px instead of letting it wrap to a third line. */
 :global(.locale-ja) .hubFlow {
   font-size: 14px;
+}
+
+/* Japanese layout fix: Japanese has almost no natural word breaks, so
+   keep-all (tuned for Korean) can leave a long unbroken sentence with
+   nowhere to wrap, overflowing the viewport on phones. */
+:global(.locale-ja) .title {
+  word-break: normal;
+  overflow-wrap: anywhere;
 }

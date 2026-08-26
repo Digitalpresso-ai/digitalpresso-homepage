@@ -222,6 +222,7 @@
 
 .cardDesc {
   margin: 4px 0 0;
+  min-height: 56px;
   font-size: 18px;
   font-weight: 500;
   line-height: 28px;
@@ -337,6 +338,10 @@
   .bullet {
     font-size: 16px;
     line-height: 24px;
+  }
+
+  .cardDesc {
+    min-height: 48px;
   }
 
   .dot {

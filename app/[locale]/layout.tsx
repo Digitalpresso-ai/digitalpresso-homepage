@@ -20,7 +20,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   }
 
   const messages = await getMessages();
-  const localeClass = locale === 'ja' ? 'locale-ja' : undefined;
+  const localeClass = locale === 'ja' ? 'locale-ja' : locale === 'en' ? 'locale-en' : undefined;
 
   return (
     <NextIntlClientProvider messages={messages}>
