@@ -156,9 +156,11 @@
   font-size: 18px;
   font-weight: 600;
   line-height: 28px;
+  font-family: inherit;
   text-align: center;
   text-decoration: none;
   white-space: nowrap;
+  cursor: pointer;
   transition:
     background 200ms ease-out,
     color 200ms ease-out,
