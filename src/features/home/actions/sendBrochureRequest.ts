@@ -13,7 +13,7 @@ export async function sendBrochureRequest(data: BrochureRequestData): Promise<vo
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      text: `📄 서비스 소개서 요청이 도착했습니다.\n• 이메일: ${data.email}\n• 개인정보 동의: ${data.privacyConsent ? '동의함' : '미동의'}`,
+      text: `📄 서비스 소개서 요청이 도착했습니다.\n• 이메일: ${data.email}`,
     }),
     cache: 'no-store',
   });
