@@ -77,8 +77,13 @@
   width: 92px;
 }
 
+/* The source asset's wordmark sits flush against the top with almost no
+   headroom above it and a visible gap below — centering it in the slot
+   (the default 50% 50%) reads as sitting noticeably low next to the other
+   marks. Pull it up toward the top of its own box to compensate. */
 .item:has(.tall) .logo {
   height: 100%;
+  object-position: 50% 20%;
 }
 
 /* KOVA is the flattest mark (very wide relative to its height) — at the
@@ -110,26 +115,13 @@
 
 /* KICT's source asset has almost no top padding but a bit of bottom
    padding, so centering it in the slot reads as sitting slightly low —
-   nudge it up a touch. It also reads slightly larger than its neighbors at
-   the full slot size, so scale it down a touch too. */
+   nudge it up further still (25% still read low against its neighbors).
+   It also reads slightly larger than its neighbors at the full slot
+   size, so scale it down a touch too. */
 .kictLogo {
-  object-position: 50% 40%;
+  object-position: 50% 10%;
   width: 92%;
   height: 92%;
-}
-
-/* Korea Credit Guarantee Fund's mark fills its source asset with almost no
-   padding, so scaling it to the full slot height reads visually taller/
-   heavier than the other wordmarks around it — cap it down a bit. Capping
-   the height (rather than the shared semiWide slot width) leaves it
-   narrower than its neighbors at the same slot width, so narrow the slot
-   itself to match its actual rendered width. */
-.item:has(.fundLogo) {
-  width: 134px;
-}
-
-.item:has(.fundLogo) .logo {
-  height: 70%;
 }
 
 /* Korea Industrial Complex Corporation's mark has generous padding in its
@@ -192,10 +184,6 @@
 
   .item:has(.betahausLogo) {
     width: 129px;
-  }
-
-  .item:has(.fundLogo) {
-    width: 107px;
   }
 
   /* KAIA's overflow reads fine at the 40px desktop slot, but at the

@@ -1,0 +1,432 @@
+/* src/features/home/components/HomeHeroCarousel/HomeHeroCarousel.module.css */
+
+/* Figma provides three fixed breakpoints (1280 / 800 / 320) rather than one
+   fluid spec, each with its own padding, type scale, and nav-button size —
+   so this file is written as three explicit tiers (desktop / tablet /
+   mobile) instead of a single clamp() curve. */
+
+.section {
+  position: relative;
+  width: 100%;
+  background: #1a1a2e;
+}
+
+/* Figma's hero height is NOT a fixed aspect ratio — the 1920 and 1280 frames
+   are both 518px tall (only the width differs), then height drops to 359px
+   at 800px and 168px at 320px. A single aspect-ratio (as if height scaled
+   with width throughout) squashed the 800px tier's box short enough that
+   the logo/heading/button stack had no breathing room top and bottom. Each
+   tier below sets an explicit height instead. */
+.viewport {
+  position: relative;
+  width: 100%;
+  height: 518px;
+  overflow: hidden;
+}
+
+/* ─── Track / slide (page-turn transition) ─────────────────
+   Three slides (prev / current / next) sit side by side in a strip 3x the
+   viewport width. Advancing slides the whole strip by one slide-width with
+   a CSS transition, then — once it lands — the strip snaps back to the
+   centered (no-transition) position while React swaps in the new current
+   slide. This is the standard "infinite" 3-up track trick: it always looks
+   like it's sliding towards more content, never like it's resetting. */
+.track {
+  display: flex;
+  width: 300%;
+  height: 100%;
+  will-change: transform;
+}
+
+.slide {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  flex: 0 0 33.3333%;
+}
+
+/* ─── Background ─────────────────────────────────────────── */
+.bgLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.bgImage {
+  object-fit: cover;
+  object-position: center;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* ─── Content ────────────────────────────────────────────── */
+.inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  max-width: var(--dp-container);
+  margin-inline: auto;
+  padding: 32px 128px;
+  font-family: var(--font-pretendard), Arial, Helvetica, sans-serif;
+}
+
+/* Figma's 635px text column is fixed width, but at its flat 56px/28px/14px
+   type scale the longer Korean headings (e.g. "2026년도
+   창업성장기술개발사업") don't actually fit that column on one line in the
+   real Pretendard metrics — Figma's own canvas renders it fine, but a
+   browser wraps mid-line, breaking the two-row layout entirely. Give
+   .content its own container-query context so .heading can clamp its font
+   size down to what the 635px column can actually hold, capped at each
+   tier's Figma value. */
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  width: min(635px, 66%);
+  min-width: 0;
+  container-type: inline-size;
+}
+
+.logoRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.logo {
+  width: auto;
+  height: 72px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6));
+}
+
+.logoDivider {
+  width: 1.5px;
+  align-self: stretch;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  /* 7.2cqw of the 635px reference column ≈ 46px, comfortably under the ~50px
+     ceiling the longest line's Pretendard metrics need to stay on one row;
+     capped at Figma's flat 56px so it never renders larger than spec. */
+  font-size: min(56px, 7.2cqw);
+  font-weight: 700;
+  line-height: 1.2;
+  color: #fff;
+  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+  word-break: keep-all;
+}
+
+.headingRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0 16px;
+}
+
+.subtext {
+  margin: 0;
+  /* Figma specs this at a flat 36px, but the longest line ("장갑을 벗지
+     않아도, 통신이 끊긴 건설 현장에서도") measures ~681px in real
+     Pretendard SemiBold metrics — wider than the 635px reference column.
+     32px is the largest size that still fits (~605px); nudged down 2px
+     further per request. */
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #fff;
+  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+  white-space: pre-line;
+  word-break: keep-all;
+}
+
+/* The heading's drop shadow (for legibility of the plain white text over a
+   busy photo background) reads as muddying/darkening a gradient-clipped
+   text fill, since the shadow paints behind the (transparent) glyph and
+   shows through it — even a light shadow dulls the saturated cyan/green/
+   gold Figma calls for, so gradient segments skip the shadow entirely. The
+   bright fill stays legible against the photo without it. */
+.accent {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: none;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.45));
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  height: 72px;
+  padding: 12px 36px;
+  /* Half the .content gap (24px) again, on top of it, so the button sits
+     further from the heading than the heading sits from the logo row. */
+  margin-top: 12px;
+  border: 1.5px solid #2b7fff;
+  border-radius: 6px;
+  background: #fff;
+  color: #2b7fff;
+  font-size: 24px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 16px -5px rgba(0, 0, 0, 0.6);
+  transition: background 150ms ease-out, color 150ms ease-out;
+}
+
+.button:hover {
+  background: #2b7fff;
+  color: #fff;
+}
+
+.buttonIcon {
+  width: 36px;
+  height: 36px;
+}
+
+/* ─── Nav buttons ────────────────────────────────────────── */
+/* Desktop (≥1280px): vertically centered in the hero (Figma moved this
+   tier off its old fixed 223px-from-top position to match the other two
+   tiers). */
+.navButton {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border: 1.5px solid #99a1af;
+  border-radius: 9999px;
+  background: #fff;
+  color: #1e2939;
+  cursor: pointer;
+  box-shadow: 0 4px 16px -5px rgba(0, 0, 0, 0.6);
+  transform: translateY(-50%);
+  transition: background 150ms ease-out;
+}
+
+.navButton:hover {
+  background: #f3f4f6;
+}
+
+.navIcon {
+  width: 36px;
+  height: 36px;
+}
+
+.navPrev {
+  left: 40px;
+}
+
+.navNext {
+  right: 40px;
+}
+
+/* ─── Tablet (800px – 1280px) ───────────────────────────── */
+/* This tier spans a 2x width range (800→1280px), and the hero's height is
+   pegged to width via aspect-ratio — so a single fixed size either overflows
+   the shorter 800px box or looks too small at 1280px. Each property instead
+   scales linearly with viewport width between Figma's 800px value and the
+   slightly-larger-than-Figma 1280px value from the previous pass, via
+   clamp(800px-value, vw-slope, 1280px-value). */
+@media (max-width: 1280px) {
+  .viewport {
+    height: clamp(330px, 18.75vw + 180px, 420px);
+  }
+
+  .inner {
+    padding: 32px 140px;
+  }
+
+  .content {
+    gap: clamp(12px, 3.125vw - 12px, 20px);
+    width: min(635px, 72%);
+  }
+
+  .logoRow {
+    gap: clamp(10px, 1.042vw + 1.67px, 15px);
+  }
+
+  .logo {
+    /* 1280px ceiling lowered from 68px so the tier doesn't read as crammed
+       right below the desktop breakpoint — 800px floor unchanged. */
+    height: clamp(50px, 1.667vw + 36.67px, 58px);
+  }
+
+  .heading {
+    gap: clamp(5px, 0.5vw - 1.67px, 7px);
+    /* 800px floor (27px) still measured against real Pretendard Bold
+       metrics for the longest heading ("2026년도 창업성장기술개발사업") —
+       the largest size that keeps it on one row in the ~374px box. The
+       1280px ceiling is lowered from the metrics-safe 46px to 39px so the
+       tier doesn't look packed right below the desktop breakpoint. */
+    font-size: clamp(27px, 2.5vw + 7px, 39px);
+  }
+
+  .headingRow {
+    gap: 0 clamp(9px, 0.417vw + 5.67px, 11px);
+  }
+
+  /* Same idea as .heading: 800px floor lowered to 18px — GMEP's longer
+     subtext line ("국토교통과학기술진흥원 주관 액셀러레이팅을 통해") sits
+     right at the ~374px edge of .content's rendered width at 19px, wrapping
+     mid-word for that slide specifically even though didimdol's shorter
+     line was fine there. 1280px ceiling unchanged at 27px. */
+  .subtext {
+    font-size: clamp(18px, 1.875vw + 3px, 27px);
+  }
+
+  .button {
+    /* 1280px ceiling lowered from 68px, matching the logo/heading pass. */
+    height: clamp(56px, 0.417vw + 52.67px, 58px);
+    padding: clamp(9px, 0.417vw + 5.67px, 11px) clamp(26px, 0.833vw + 19.33px, 30px);
+    font-size: clamp(19px, 0.417vw + 15.67px, 21px);
+    gap: clamp(9px, 0.417vw + 5.67px, 11px);
+    margin-top: clamp(8px, 0.417vw + 4.67px, 10px);
+  }
+
+  .buttonIcon {
+    width: clamp(28px, 0.833vw + 21.33px, 32px);
+    height: clamp(28px, 0.833vw + 21.33px, 32px);
+  }
+
+  /* Figma centers the nav buttons vertically at this tier instead of
+     pinning them to the heading block. */
+  .navButton {
+    top: 50%;
+    width: clamp(56px, 2.5vw + 36px, 68px);
+    height: clamp(56px, 2.5vw + 36px, 68px);
+  }
+
+  .navIcon {
+    width: clamp(30px, 0.625vw + 25px, 33px);
+    height: clamp(30px, 0.625vw + 25px, 33px);
+  }
+
+  .navPrev {
+    left: clamp(20px, 0.833vw + 13.33px, 24px);
+  }
+
+  .navNext {
+    right: clamp(20px, 0.833vw + 13.33px, 24px);
+  }
+}
+
+/* ─── Mobile (320px – 799px) ────────────────────────────── */
+@media (max-width: 799px) {
+  .viewport {
+    height: clamp(168px, 39.87vw + 40.4px, 359px);
+  }
+
+  .inner {
+    padding: 16px 20px;
+  }
+
+  .content {
+    gap: 8px;
+    width: min(635px, 78%);
+  }
+
+  .logoRow {
+    gap: 8px;
+  }
+
+  /* Lowered from Figma's flat 24px, matching the 1280px tablet-tier pass,
+     so the mobile hero doesn't read as crammed either. */
+  .logo {
+    height: 21px;
+  }
+
+  .heading {
+    gap: 4px;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .headingRow {
+    gap: 0 4px;
+  }
+
+  /* Figma's own mobile spec (800:6673) sets this at a flat 10px/14px —
+     lowered further, matching the same crammed-tier pass. */
+  .subtext {
+    font-size: 8px;
+    line-height: 1.4;
+  }
+
+  .button {
+    height: 28px;
+    padding: 4px 14px;
+    font-size: 11px;
+    gap: 4px;
+    border-width: 0.667px;
+    margin-top: 4px;
+  }
+
+  .buttonIcon {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* Figma keeps the buttons centered and shrinks them further at this
+     tier, moved in from the edge to match the tighter 20px page gutter. */
+  .navButton {
+    top: 50%;
+    width: 32px;
+    height: 32px;
+    border-width: 0.75px;
+  }
+
+  .navIcon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .navPrev {
+    left: 16px;
+  }
+
+  .navNext {
+    right: 16px;
+  }
+}
+
+/* ─── Narrow mobile (≤360px) ────────────────────────────── */
+/* At the true 320px edge, .content's 78%-width column runs wide enough to
+   sit under the 32px nav buttons + 16px gutter on each side — the "(GMEP)
+   선정" row was rendering directly behind the left arrow. Give the content
+   column enough right/left clearance to clear both buttons instead. */
+@media (max-width: 360px) {
+  .inner {
+    padding-left: 62px;
+    padding-right: 56px;
+  }
+
+  .content {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button,
+  .navButton {
+    transition: none;
+  }
+}
