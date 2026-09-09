@@ -12,7 +12,6 @@ const PARTNERS = [
   { key: 'betahaus', src: '/images/partners/betahaus.webp', betahaus: true, width: 808, height: 200 },
   { key: 'vertical', src: '/images/partners/vertical.webp', semiWide: true, width: 340, height: 86 },
   { key: 'corporation', src: '/images/partners/main-corporation.webp', semiWide: true, corporation: true, width: 1181, height: 314 },
-  { key: 'fund', src: '/images/partners/main-fund.webp', semiWide: true, fund: true, width: 640, height: 134 },
 ] as const;
 
 /* One pass of the strip is ~1370px. Repeating it keeps each half of the track

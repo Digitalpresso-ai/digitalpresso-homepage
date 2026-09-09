@@ -201,8 +201,33 @@
         "kosme": "KOSME",
         "betahaus": "betahaus",
         "vertical": "vertical",
-        "corporation": "Korea Industrial Complex Corporation",
-        "fund": "Korea Credit Guarantee Fund"
+        "corporation": "Korea Industrial Complex Corporation"
+      }
+    },
+    "heroCarousel": {
+      "label": "Latest news",
+      "prevSlide": "Previous slide",
+      "nextSlide": "Next slide",
+      "slides": {
+        "didimdol": {
+          "row1Plain": "2026",
+          "row1Accent": "Startup Growth Technology Development Program",
+          "row2Accent1": "(Didimdol)",
+          "row2Plain": "Phase 3 Plan",
+          "row2Gold": "Selected",
+          "subtext": "Even with gloves on, even where connectivity drops on site —\nwe're building AI that records by voice alone.",
+          "logoAlt": "TIPA Korea Technology and Information Promotion Agency for SMEs · digitalPresso",
+          "button": "Learn more"
+        },
+        "gmep": {
+          "row1Plain": "2026",
+          "row1Accent": "Global Accelerating Program",
+          "row2Accent1": "(GMEP)",
+          "row2Gold": "Selected",
+          "subtext": "Through an accelerating program led by KAIA,\nwe're knocking on the door of European construction sites.",
+          "logoAlt": "KAIA Korea Agency for Infrastructure Technology Advancement · digitalPresso",
+          "button": "Learn more"
+        }
       }
     },
     "problem": {

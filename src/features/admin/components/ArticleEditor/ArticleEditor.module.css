@@ -405,6 +405,16 @@
 .editorContent pre code { background: transparent; color: inherit; padding: 0; }
 .editorContent hr { border: none; border-top: 1px solid #e2e8f0; margin: 1.5em 0; }
 .editorContent a { color: var(--color-accent); text-decoration: underline; }
+.editorContent img {
+  display: block;
+  max-width: 100%;
+  max-height: 360px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  margin: 0.75em 0;
+  border-radius: 4px;
+}
 
 /* Locale tabs */
 .localeTabs {
