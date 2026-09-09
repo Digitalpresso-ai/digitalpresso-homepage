@@ -339,13 +339,17 @@
     height: clamp(168px, 39.87vw + 40.4px, 359px);
   }
 
+  /* Left/right padding clears the 32px nav buttons (16px gutter + 32px
+     button) at every mobile width, not just the narrowest phones — a
+     20px-only gutter let the text column's left edge sit under the left
+     arrow's footprint (0–48px) on any phone in this tier, not only ≤360px. */
   .inner {
-    padding: 16px 20px;
+    padding: 16px 56px 16px 62px;
   }
 
   .content {
     gap: 8px;
-    width: min(635px, 78%);
+    width: 100%;
   }
 
   .logoRow {
@@ -409,22 +413,6 @@
 
   .navNext {
     right: 16px;
-  }
-}
-
-/* ─── Narrow mobile (≤360px) ────────────────────────────── */
-/* At the true 320px edge, .content's 78%-width column runs wide enough to
-   sit under the 32px nav buttons + 16px gutter on each side — the "(GMEP)
-   선정" row was rendering directly behind the left arrow. Give the content
-   column enough right/left clearance to clear both buttons instead. */
-@media (max-width: 360px) {
-  .inner {
-    padding-left: 62px;
-    padding-right: 56px;
-  }
-
-  .content {
-    width: 100%;
   }
 }
 
