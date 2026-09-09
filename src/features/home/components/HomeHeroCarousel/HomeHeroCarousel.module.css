@@ -342,9 +342,11 @@
   /* Left/right padding clears the 32px nav buttons (16px gutter + 32px
      button) at every mobile width, not just the narrowest phones — a
      20px-only gutter let the text column's left edge sit under the left
-     arrow's footprint (0–48px) on any phone in this tier, not only ≤360px. */
+     arrow's footprint (0–48px) on any phone in this tier, not only ≤360px.
+     Left padding nudged a touch further past that clearance so the text
+     doesn't read as hugging the arrow. */
   .inner {
-    padding: 16px 56px 16px 62px;
+    padding: 16px 56px 16px 76px;
   }
 
   .content {
