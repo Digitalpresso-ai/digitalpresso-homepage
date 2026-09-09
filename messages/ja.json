@@ -201,8 +201,33 @@
         "kosme": "中小ベンチャー企業振興公団",
         "betahaus": "betahaus",
         "vertical": "vertical",
-        "corporation": "韓国産業団地公団",
-        "fund": "信用保証基金"
+        "corporation": "韓国産業団地公団"
+      }
+    },
+    "heroCarousel": {
+      "label": "最新のお知らせ",
+      "prevSlide": "前のスライド",
+      "nextSlide": "次のスライド",
+      "slides": {
+        "didimdol": {
+          "row1Plain": "2026年度",
+          "row1Accent": "創業成長技術開発事業",
+          "row2Accent1": "（ディディムドル）",
+          "row2Plain": "第3次施行計画",
+          "row2Gold": "選定",
+          "subtext": "手袋を外さなくても、通信が途絶えた建設現場でも\n音声だけで記録できるAIを開発します。",
+          "logoAlt": "TIPA 中小企業技術情報振興院 · digitalPresso",
+          "button": "詳しく見る"
+        },
+        "gmep": {
+          "row1Plain": "2026",
+          "row1Accent": "グローバル・アクセラレーティング",
+          "row2Accent1": "（GMEP）",
+          "row2Gold": "選定",
+          "subtext": "国土交通科学技術振興院主管のアクセラレーティングを通じて\nヨーロッパの建設現場の扉を叩きます。",
+          "logoAlt": "KAIA 国土交通科学技術振興院 · digitalPresso",
+          "button": "詳しく見る"
+        }
       }
     },
     "problem": {

@@ -201,8 +201,33 @@
         "kosme": "중소벤처기업진흥공단",
         "betahaus": "betahaus",
         "vertical": "vertical",
-        "corporation": "한국산업단지공단",
-        "fund": "신용보증기금"
+        "corporation": "한국산업단지공단"
+      }
+    },
+    "heroCarousel": {
+      "label": "주요 소식",
+      "prevSlide": "이전 슬라이드",
+      "nextSlide": "다음 슬라이드",
+      "slides": {
+        "didimdol": {
+          "row1Plain": "2026년도",
+          "row1Accent": "창업성장기술개발사업",
+          "row2Accent1": "(디딤돌)",
+          "row2Plain": "제3차 시행계획",
+          "row2Gold": "선정",
+          "subtext": "장갑을 벗지 않아도, 통신이 끊긴 건설 현장에서도\n음성만으로 기록할 수 있는 AI를 개발합니다.",
+          "logoAlt": "TIPA 중소기업기술정보진흥원 · digitalPresso",
+          "button": "자세히"
+        },
+        "gmep": {
+          "row1Plain": "2026",
+          "row1Accent": "글로벌 액셀러레이팅",
+          "row2Accent1": "(GMEP)",
+          "row2Gold": "선정",
+          "subtext": "국토교통과학기술진흥원 주관 액셀러레이팅을 통해\n유럽 건설 현장의 문을 두드립니다.",
+          "logoAlt": "KAIA 국토교통과학기술진흥원 · digitalPresso",
+          "button": "자세히"
+        }
       }
     },
     "problem": {

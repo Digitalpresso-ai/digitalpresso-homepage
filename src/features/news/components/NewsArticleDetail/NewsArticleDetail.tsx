@@ -64,7 +64,8 @@ export async function NewsArticleDetail({
               alt={article.mainImage.alt}
               width={article.mainImage.width}
               height={article.mainImage.height}
-              style={{ width: '100%', maxWidth: article.mainImage.width, height: 'auto' }}
+              style={{ width: '100%', height: 'auto' }}
+              sizes="(min-width: 1000px) 1000px, 100vw"
               priority
             />
           </div>
@@ -90,7 +91,8 @@ export async function NewsArticleDetail({
                       alt={img.alt}
                       width={img.width}
                       height={img.height}
-                      style={{ width: '100%', maxWidth: img.width, height: 'auto' }}
+                      style={{ width: '100%', height: 'auto' }}
+                      sizes="(min-width: 1000px) 1000px, 100vw"
                     />
                   </div>
                 );
