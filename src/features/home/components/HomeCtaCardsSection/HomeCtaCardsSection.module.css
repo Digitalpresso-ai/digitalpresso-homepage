@@ -1,5 +1,5 @@
 .section {
-  background: #ffffff;
+  background: var(--dp-surface-tint, #eff6ff);
   padding: 64px 0;
 }
 
@@ -81,6 +81,17 @@
     transform 200ms ease-out,
     box-shadow 200ms ease-out,
     border-color 200ms ease-out;
+  /* .card is now the clickable element itself (an <a> or <button>) — reset
+     the native text/button chrome so it still reads as the same card. */
+  font-family: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.cardButton {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1px solid #d1d5dc;
 }
 
 .card:hover {
@@ -142,6 +153,10 @@
   word-break: keep-all;
 }
 
+/* Visual-only now — the whole .card is the clickable element (an <a> or
+   <button>), so this is a plain <span> styled to look like a button rather
+   than an interactive element of its own (avoids nesting a button/link
+   inside another). */
 .button {
   display: inline-flex;
   align-items: center;
@@ -160,7 +175,6 @@
   text-align: center;
   text-decoration: none;
   white-space: nowrap;
-  cursor: pointer;
   transition:
     background 200ms ease-out,
     color 200ms ease-out,
