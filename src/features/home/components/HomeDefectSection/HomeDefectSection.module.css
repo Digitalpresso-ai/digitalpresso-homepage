@@ -141,9 +141,6 @@
   height: 25px;
 }
 
-
-
-
 .appBarIcons {
   display: inline-flex;
   align-items: center;
@@ -1098,8 +1095,7 @@
 /* The 62px rail column is a tight fit for a label like "プロジェクト" —
    shrink the type a touch instead of wrapping to two lines, so it still
    reads as one word at a glance. */
-:global(.locale-ja) .rail,
-:global(.locale-zh) .rail {
+:global(.locale-ja) .rail {
   font-size: 9px;
   letter-spacing: -0.02em;
 }
@@ -1113,7 +1109,11 @@
 :global(.locale-ja) .stepDesc,
 :global(.locale-ja) .breadcrumb,
 :global(.locale-ja) .docName,
-:global(.locale-ja) .fieldBox,
+:global(.locale-ja) .fieldBox {
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
 :global(.locale-zh) .title,
 :global(.locale-zh) .desc,
 :global(.locale-zh) .stepDash,
@@ -1122,13 +1122,11 @@
 :global(.locale-zh) .docName,
 :global(.locale-zh) .fieldBox {
   word-break: normal;
-  overflow-wrap: anywhere;
 }
 
 /* "担当者を指定してみてください。" runs long for this absolutely-positioned
    hint bubble — let it wrap instead of overflowing past the canvas edge. */
-:global(.locale-ja) .assignHint,
-:global(.locale-zh) .assignHint {
+:global(.locale-ja) .assignHint {
   white-space: normal;
   word-break: normal;
   overflow-wrap: anywhere;
@@ -1137,12 +1135,19 @@
   text-align: center;
 }
 
-:global(.locale-ja) .startHint,
-:global(.locale-zh) .startHint {
+:global(.locale-zh) .assignHint {
+  word-break: normal;
+}
+
+:global(.locale-ja) .startHint {
   white-space: normal;
   word-break: normal;
   overflow-wrap: anywhere;
   width: max-content;
   max-width: 220px;
   text-align: center;
+}
+
+:global(.locale-zh) .startHint {
+  word-break: normal;
 }

@@ -428,9 +428,12 @@
    unbroken sentence with nowhere to wrap in languages with few natural
    word breaks, overflowing this fixed-width column. */
 :global(.locale-ja) .heading,
-:global(.locale-ja) .subtext,
+:global(.locale-ja) .subtext {
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
 :global(.locale-zh) .heading,
 :global(.locale-zh) .subtext {
   word-break: normal;
-  overflow-wrap: anywhere;
 }

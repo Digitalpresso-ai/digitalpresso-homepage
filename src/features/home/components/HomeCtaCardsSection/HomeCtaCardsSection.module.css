@@ -273,11 +273,14 @@
 :global(.locale-ja) .title,
 :global(.locale-ja) .subtitle,
 :global(.locale-ja) .cardTitle,
-:global(.locale-ja) .cardDesc,
+:global(.locale-ja) .cardDesc {
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
 :global(.locale-zh) .title,
 :global(.locale-zh) .subtitle,
 :global(.locale-zh) .cardTitle,
 :global(.locale-zh) .cardDesc {
   word-break: normal;
-  overflow-wrap: anywhere;
 }

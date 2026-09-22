@@ -1303,8 +1303,7 @@
         "contact": {
           "title": "Contact us",
           "desc": "Discuss a rollout plan for your site",
-          "button": "Contact us",
-          "href": "/en/contact"
+          "button": "Contact us"
         },
         "brochure": {
           "title": "Download brochure",

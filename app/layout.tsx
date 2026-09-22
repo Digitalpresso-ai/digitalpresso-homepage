@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Noto_Sans_JP, Noto_Sans_KR, Noto_Sans_SC } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import { getSiteUrl } from "@/lib/site-url";
 import QueryProvider from "@/src/providers/QueryProvider";
@@ -15,24 +15,12 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const notoSansKR = Noto_Sans_KR({
-  variable: "--font-noto-sans-kr",
-  weight: ["400", "600", "700"],
-  subsets: ["latin"],
-});
-
-const notoSansJP = Noto_Sans_JP({
-  variable: "--font-noto-sans-jp",
-  weight: ["400", "500", "700"],
-  subsets: ["latin"],
-});
-
-const notoSansSC = Noto_Sans_SC({
-  variable: "--font-noto-sans-sc",
-  weight: ["400", "500", "700"],
-  subsets: ["latin"],
-});
-
+// Noto Sans KR/JP/SC는 next/font/google로 로드하지 않는다: Google Fonts API상
+// 이 CJK 폰트들이 제공하는 subsets는 latin/latin-ext/cyrillic/vietnamese뿐이라,
+// subsets: ["latin"]을 지정해도 실제 한글/가나/한자 글리프는 전혀 받아지지 않고
+// 브라우저가 조용히 시스템 폴백 폰트로 렌더링한다(줄바꿈 위치가 사용자 OS마다
+// 달라지는 원인이 됨). 대신 Google Fonts CSS2 API를 <link>로 직접 불러
+// unicode-range 기반으로 실제 필요한 CJK 서브셋이 로드되게 한다.
 const pretendard = localFont({
   src: "../public/fonts/PretendardVariable.woff2",
   variable: "--font-pretendard",
@@ -106,8 +94,14 @@ export default function RootLayout({
 }>) {
   return (
     <html>
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+        />
+      </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${notoSansKR.variable} ${notoSansJP.variable} ${notoSansSC.variable} ${pretendard.variable}`}
+        className={`${geistSans.variable} ${geistMono.variable} ${pretendard.variable}`}
       >
         <script
           type="application/ld+json"

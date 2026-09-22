@@ -1304,8 +1304,7 @@
         "contact": {
           "title": "문의하기",
           "desc": "현장에 맞는 도입 방안 상담",
-          "button": "문의하러 가기",
-          "href": "/ko/contact"
+          "button": "문의하러 가기"
         },
         "brochure": {
           "title": "브로셔 다운로드",

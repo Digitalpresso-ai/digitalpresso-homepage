@@ -1303,8 +1303,7 @@
         "contact": {
           "title": "お問い合わせ",
           "desc": "現場に合わせた導入方法を相談",
-          "button": "問い合わせる",
-          "href": "/ja/contact"
+          "button": "問い合わせる"
         },
         "brochure": {
           "title": "資料ダウンロード",

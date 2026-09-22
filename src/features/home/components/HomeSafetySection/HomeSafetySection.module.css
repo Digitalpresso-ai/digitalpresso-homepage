@@ -140,9 +140,6 @@
   height: 25px;
 }
 
-
-
-
 .appBarIcons {
   display: inline-flex;
   align-items: center;
@@ -1067,8 +1064,7 @@
 /* The 62px rail column is a tight fit for a label like "プロジェクト" —
    shrink the type a touch instead of wrapping to two lines, so it still
    reads as one word at a glance. */
-:global(.locale-ja) .rail,
-:global(.locale-zh) .rail {
+:global(.locale-ja) .rail {
   font-size: 9px;
   letter-spacing: -0.02em;
 }
@@ -1084,26 +1080,20 @@
 :global(.locale-ja) .docName,
 :global(.locale-ja) .fieldBox,
 :global(.locale-ja) .askHead strong,
-:global(.locale-ja) .askDesc,
-:global(.locale-zh) .title,
-:global(.locale-zh) .desc,
-:global(.locale-zh) .stepDash,
-:global(.locale-zh) .stepDesc,
-:global(.locale-zh) .breadcrumb,
-:global(.locale-zh) .docName,
-:global(.locale-zh) .fieldBox,
-:global(.locale-zh) .askHead strong,
-:global(.locale-zh) .askDesc {
+:global(.locale-ja) .askDesc {
   word-break: break-all;
   overflow-wrap: anywhere;
 }
 
-:global(.locale-ja) .startHint,
-:global(.locale-zh) .startHint {
+:global(.locale-ja) .startHint {
   white-space: normal;
   word-break: normal;
   overflow-wrap: anywhere;
   width: max-content;
   max-width: 220px;
   text-align: center;
+}
+
+:global(.locale-zh) .startHint {
+  word-break: normal;
 }

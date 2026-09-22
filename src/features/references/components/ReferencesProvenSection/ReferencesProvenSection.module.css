@@ -179,17 +179,19 @@
 
 /* Japanese layout fixes */
 :global(.locale-ja) .heading,
-:global(.locale-ja) .cardTitle,
-:global(.locale-zh) .heading,
-:global(.locale-zh) .cardTitle {
+:global(.locale-ja) .cardTitle {
   white-space: normal;
   word-break: normal;
   overflow-wrap: anywhere;
   letter-spacing: 0;
 }
 
-:global(.locale-ja) .cardTitleNowrap,
-:global(.locale-zh) .cardTitleNowrap {
+:global(.locale-zh) .heading,
+:global(.locale-zh) .cardTitle {
+  word-break: normal;
+}
+
+:global(.locale-ja) .cardTitleNowrap {
   white-space: normal;
   overflow: visible;
 }
