@@ -8,6 +8,7 @@ import styles from './NewsArticleGrid.module.css';
 interface NewsArticleGridProps {
   articles: NewsArticle[];
   viewButtonText: string;
+  emptyText: string;
   tagLabels: Record<NewsCategory, string>;
   /** 카드에 카테고리 태그를 노출할지 여부 ('전체' 탭에서만 true) */
   showTag: boolean;
@@ -19,6 +20,7 @@ interface NewsArticleGridProps {
 export function NewsArticleGrid({
   articles,
   viewButtonText,
+  emptyText,
   tagLabels,
   showTag,
   hasNextPage,
@@ -30,7 +32,7 @@ export function NewsArticleGrid({
   });
 
   if (articles.length === 0 && !isFetchingNextPage) {
-    return <p className={styles.empty}>등록된 소식이 없습니다.</p>;
+    return <p className={styles.empty}>{emptyText}</p>;
   }
 
   return (

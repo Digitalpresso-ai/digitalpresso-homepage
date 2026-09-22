@@ -64,6 +64,7 @@ export function NewsContent({
       <NewsArticleGrid
         articles={articles}
         viewButtonText={t('viewButton')}
+        emptyText={t('empty')}
         tagLabels={tagLabels}
         showTag={activeTab === 'all'}
         hasNextPage={!!hasNextPage}
