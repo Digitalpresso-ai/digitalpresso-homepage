@@ -1085,6 +1085,18 @@
   overflow-wrap: anywhere;
 }
 
+:global(.locale-zh) .title,
+:global(.locale-zh) .desc,
+:global(.locale-zh) .stepDash,
+:global(.locale-zh) .stepDesc,
+:global(.locale-zh) .breadcrumb,
+:global(.locale-zh) .docName,
+:global(.locale-zh) .fieldBox,
+:global(.locale-zh) .askHead strong,
+:global(.locale-zh) .askDesc {
+  word-break: normal;
+}
+
 :global(.locale-ja) .startHint {
   white-space: normal;
   word-break: normal;

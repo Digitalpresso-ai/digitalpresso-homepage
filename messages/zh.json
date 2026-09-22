@@ -1269,7 +1269,7 @@
       }
     },
     "support": {
-      "title": "<accent>从<mobileBr></mobileBr>现场诊断到系统部署及培训</accent>，<br></br>通过<accent>分阶段的专属支持</accent><mobileBr></mobileBr>，快速实现现场<mobileBr></mobileBr>应用。",
+      "title": "<accent>从<mobileBr></mobileBr>现场诊断到系统部署及培训</accent>，<br></br>通过<accent>分阶段的专属支持</accent>，<mobileBr></mobileBr>快速实现现场<mobileBr></mobileBr>应用。",
       "steps": {
         "diagnosis": {
           "title": "现场诊断",
@@ -1628,7 +1628,7 @@
       },
       "features": {
         "tag": "DP Builder",
-        "heading": "在单张屏幕上就项目达成<accent>初步共识</accent><br></br>。",
+        "heading": "在单张屏幕上<br></br>就项目达成<accent>初步共识</accent>。",
         "lead": "<strong>DP Builder</strong> 是一款协作画布，可将售前阶段模糊的对话转化为结构化的工作流。它将客户的需求以节点形式可视化呈现，开发方与客户可在同一屏幕上共同绘制流程图，从而在项目启动前准确统一范围和意图。",
         "points": [
           {
