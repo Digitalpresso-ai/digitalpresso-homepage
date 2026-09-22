@@ -19,12 +19,14 @@
         "options": {
           "ko": "한국어",
           "ja": "日本語",
-          "en": "English"
+          "en": "English",
+          "zh": "中文"
         },
         "short": {
           "ko": "KR",
           "ja": "JP",
-          "en": "ENG"
+          "en": "ENG",
+          "zh": "CHN"
         },
         "aria": {
           "button": "언어 선택",
@@ -39,7 +41,11 @@
       }
     },
     "footer": {
+      "logoAlt": "digitalPresso 로고",
       "copyright": "Copyright ⓒ 2025 Digitalpresso All rights reserved.",
+      "aria": {
+        "nav": "푸터 네비게이션"
+      },
       "nav": {
         "aboutUs": "회사 소개",
         "references": "고객 사례",
@@ -1744,6 +1750,7 @@
       "searchLabel": "소식 이름",
       "searchPlaceholder": "소식 이름을 검색해 주세요.",
       "viewButton": "확인하기",
+      "empty": "등록된 소식이 없습니다.",
       "countSuffix": "개",
       "pagination": {
         "prev": "이전",

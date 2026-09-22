@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Noto_Sans_JP, Noto_Sans_KR } from "next/font/google";
+import { Geist, Geist_Mono, Noto_Sans_JP, Noto_Sans_KR, Noto_Sans_SC } from "next/font/google";
 import localFont from "next/font/local";
 import { getSiteUrl } from "@/lib/site-url";
 import QueryProvider from "@/src/providers/QueryProvider";
@@ -23,6 +23,12 @@ const notoSansKR = Noto_Sans_KR({
 
 const notoSansJP = Noto_Sans_JP({
   variable: "--font-noto-sans-jp",
+  weight: ["400", "500", "700"],
+  subsets: ["latin"],
+});
+
+const notoSansSC = Noto_Sans_SC({
+  variable: "--font-noto-sans-sc",
   weight: ["400", "500", "700"],
   subsets: ["latin"],
 });
@@ -101,7 +107,7 @@ export default function RootLayout({
   return (
     <html>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${notoSansKR.variable} ${notoSansJP.variable} ${pretendard.variable}`}
+        className={`${geistSans.variable} ${geistMono.variable} ${notoSansKR.variable} ${notoSansJP.variable} ${notoSansSC.variable} ${pretendard.variable}`}
       >
         <script
           type="application/ld+json"

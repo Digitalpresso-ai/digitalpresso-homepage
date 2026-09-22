@@ -1058,7 +1058,8 @@
 /* The 62px rail column is a tight fit for a label like "プロジェクト" —
    shrink the type a touch instead of wrapping to two lines, so it still
    reads as one word at a glance. */
-:global(.locale-ja) .rail {
+:global(.locale-ja) .rail,
+:global(.locale-zh) .rail {
   font-size: 9px;
   letter-spacing: -0.02em;
 }
@@ -1072,12 +1073,20 @@
 :global(.locale-ja) .stepDesc,
 :global(.locale-ja) .breadcrumb,
 :global(.locale-ja) .docName,
-:global(.locale-ja) .fieldBox {
+:global(.locale-ja) .fieldBox,
+:global(.locale-zh) .title,
+:global(.locale-zh) .desc,
+:global(.locale-zh) .stepDash,
+:global(.locale-zh) .stepDesc,
+:global(.locale-zh) .breadcrumb,
+:global(.locale-zh) .docName,
+:global(.locale-zh) .fieldBox {
   word-break: normal;
   overflow-wrap: anywhere;
 }
 
-:global(.locale-ja) .startHint {
+:global(.locale-ja) .startHint,
+:global(.locale-zh) .startHint {
   white-space: normal;
   word-break: normal;
   overflow-wrap: anywhere;

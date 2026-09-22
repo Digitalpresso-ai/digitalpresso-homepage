@@ -1,5 +1,6 @@
 'use client';
 
+import { Fragment } from 'react';
 import { useEditor, EditorContent, type Editor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import TiptapImage from '@tiptap/extension-image';
@@ -18,6 +19,29 @@ import styles from './ArticleEditor.module.css';
 interface Props {
   article?: ArticleEntity;
 }
+
+type EditorLocale = 'ko' | 'en' | 'ja' | 'zh';
+
+const LOCALE_TABS: Array<{ locale: EditorLocale; label: string }> = [
+  { locale: 'ko', label: 'KR' },
+  { locale: 'en', label: 'EN' },
+  { locale: 'ja', label: 'JP' },
+  { locale: 'zh', label: 'CN' },
+];
+
+const TITLE_PLACEHOLDERS: Record<EditorLocale, string> = {
+  ko: '아티클 제목 (한국어)',
+  en: 'Article Title (English)',
+  ja: '記事タイトル (日本語)',
+  zh: '文章标题（中文）',
+};
+
+const CONTENT_PLACEHOLDERS: Record<EditorLocale, string> = {
+  ko: '본문을 작성하세요...',
+  en: 'Enter article content in English...',
+  ja: '日本語で記事の内容を入力してください...',
+  zh: '请输入中文正文内容...',
+};
 
 /** Date/ISO 문자열을 <input type="date"> 용 'YYYY-MM-DD' 로 변환 */
 function toDateInputValue(value: string | Date | null | undefined): string {
@@ -77,7 +101,8 @@ export default function ArticleEditor({ article }: Props) {
   const [title, setTitle] = useState(article?.title ?? '');
   const [titleEn, setTitleEn] = useState(article?.title_en ?? '');
   const [titleJa, setTitleJa] = useState(article?.title_ja ?? '');
-  const [activeLocale, setActiveLocale] = useState<'ko' | 'en' | 'ja'>('ko');
+  const [titleZh, setTitleZh] = useState(article?.title_zh ?? '');
+  const [activeLocale, setActiveLocale] = useState<EditorLocale>('ko');
   const [isTranslating, setIsTranslating] = useState(false);
   const [translateError, setTranslateError] = useState<string | null>(null);
   const [category, setCategory] = useState<NewsCategory>(
@@ -140,7 +165,7 @@ export default function ArticleEditor({ article }: Props) {
     immediatelyRender: false,
     extensions: [
       ...sharedExtensions,
-      Placeholder.configure({ placeholder: '본문을 작성하세요...' }),
+      Placeholder.configure({ placeholder: CONTENT_PLACEHOLDERS.ko }),
     ],
     content: article?.content ?? '',
     onCreate: ({ editor }) => {
@@ -179,7 +204,7 @@ export default function ArticleEditor({ article }: Props) {
     immediatelyRender: false,
     extensions: [
       ...sharedExtensions,
-      Placeholder.configure({ placeholder: 'Enter article content in English...' }),
+      Placeholder.configure({ placeholder: CONTENT_PLACEHOLDERS.en }),
     ],
     content: article?.content_en ?? '',
     editorProps: {
@@ -212,7 +237,7 @@ export default function ArticleEditor({ article }: Props) {
     immediatelyRender: false,
     extensions: [
       ...sharedExtensions,
-      Placeholder.configure({ placeholder: '日本語で記事の内容を入力してください...' }),
+      Placeholder.configure({ placeholder: CONTENT_PLACEHOLDERS.ja }),
     ],
     content: article?.content_ja ?? '',
     editorProps: {
@@ -240,6 +265,53 @@ export default function ArticleEditor({ article }: Props) {
       },
     },
   });
+
+  const editorZh = useEditor({
+    immediatelyRender: false,
+    extensions: [
+      ...sharedExtensions,
+      Placeholder.configure({ placeholder: CONTENT_PLACEHOLDERS.zh }),
+    ],
+    content: article?.content_zh ?? '',
+    editorProps: {
+      attributes: { class: styles.editorContent },
+      handlePaste: (view, event) => {
+        const items = Array.from(event.clipboardData?.items ?? []);
+        const imageItem = items.find((item) => item.type.startsWith('image/'));
+        if (imageItem) {
+          const file = imageItem.getAsFile();
+          if (file) {
+            event.preventDefault();
+            void handleImageUpload(file, editorZh);
+            return true;
+          }
+        }
+        return pasteMarkdown(view, event);
+      },
+      handleDrop: (_view, event) => {
+        const files = Array.from(event.dataTransfer?.files ?? []);
+        const imageFile = files.find((file) => file.type.startsWith('image/'));
+        if (!imageFile) return false;
+        event.preventDefault();
+        void handleImageUpload(imageFile, editorZh);
+        return true;
+      },
+    },
+  });
+
+  const localeEditors: Record<EditorLocale, Editor | null> = {
+    ko: editor,
+    en: editorEn,
+    ja: editorJa,
+    zh: editorZh,
+  };
+
+  const localeTitles: Record<EditorLocale, { value: string; setValue: (v: string) => void }> = {
+    ko: { value: title, setValue: setTitle },
+    en: { value: titleEn, setValue: setTitleEn },
+    ja: { value: titleJa, setValue: setTitleJa },
+    zh: { value: titleZh, setValue: setTitleZh },
+  };
 
   const handleCoverFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -272,10 +344,12 @@ export default function ArticleEditor({ article }: Props) {
     if (!title.trim()) { setTranslateError('한국어 제목을 입력해주세요.'); return; }
     if (!content || content === '<p></p>') { setTranslateError('한국어 본문을 작성해주세요.'); return; }
 
-    const hasExistingEn = titleEn.trim() || (editorEn?.getHTML() && editorEn.getHTML() !== '<p></p>');
-    const hasExistingJa = titleJa.trim() || (editorJa?.getHTML() && editorJa.getHTML() !== '<p></p>');
-    if (hasExistingEn || hasExistingJa) {
-      const ok = window.confirm('영어/일본어에 이미 작성된 내용이 있으면 덮어씁니다. 계속하시겠습니까?');
+    const hasExistingTranslation = (['en', 'ja', 'zh'] as const).some((locale) => {
+      const html = localeEditors[locale]?.getHTML();
+      return localeTitles[locale].value.trim() || (html && html !== '<p></p>');
+    });
+    if (hasExistingTranslation) {
+      const ok = window.confirm('영어/일본어/중국어에 이미 작성된 내용이 있으면 덮어씁니다. 계속하시겠습니까?');
       if (!ok) return;
     }
 
@@ -294,13 +368,21 @@ export default function ArticleEditor({ article }: Props) {
         throw new Error(detail?.message ?? '번역 요청이 실패했습니다.');
       }
 
-      const { titleEn: translatedTitleEn, titleJa: translatedTitleJa, contentEn, contentJa } =
-        await response.json();
+      const {
+        titleEn: translatedTitleEn,
+        titleJa: translatedTitleJa,
+        titleZh: translatedTitleZh,
+        contentEn,
+        contentJa,
+        contentZh,
+      } = await response.json();
 
       setTitleEn(translatedTitleEn);
       setTitleJa(translatedTitleJa);
+      setTitleZh(translatedTitleZh);
       editorEn?.commands.setContent(contentEn);
       editorJa?.commands.setContent(contentJa);
+      editorZh?.commands.setContent(contentZh);
     } catch (error) {
       const message = error instanceof Error ? error.message : '번역 중 오류가 발생했습니다.';
       setTranslateError(message);
@@ -368,9 +450,11 @@ export default function ArticleEditor({ article }: Props) {
           category,
           title_en: '',
           title_ja: '',
+          title_zh: '',
           content: '',
           content_en: '',
           content_ja: '',
+          content_zh: '',
           cover_img_url: null,
         });
         articleId = created.id;
@@ -381,6 +465,7 @@ export default function ArticleEditor({ article }: Props) {
       let nextContent = content;
       let nextContentEn = editorEn?.getHTML() ?? '';
       let nextContentJa = editorJa?.getHTML() ?? '';
+      let nextContentZh = editorZh?.getHTML() ?? '';
       let resolvedCoverUrl: string | null = coverImageUrl;
 
         if (pendingCoverFile) {
@@ -408,6 +493,7 @@ export default function ArticleEditor({ article }: Props) {
         { key: 'ko' as const, doc: parser.parseFromString(content, 'text/html') },
         { key: 'en' as const, doc: parser.parseFromString(nextContentEn, 'text/html') },
         { key: 'ja' as const, doc: parser.parseFromString(nextContentJa, 'text/html') },
+        { key: 'zh' as const, doc: parser.parseFromString(nextContentZh, 'text/html') },
       ];
       const tempIds = Array.from(
         new Set(
@@ -488,6 +574,7 @@ export default function ArticleEditor({ article }: Props) {
       nextContent = docs[0].doc.body.innerHTML;
       nextContentEn = docs[1].doc.body.innerHTML;
       nextContentJa = docs[2].doc.body.innerHTML;
+      nextContentZh = docs[3].doc.body.innerHTML;
 
         await updateArticleMutation.mutateAsync({
           id: articleId,
@@ -495,9 +582,11 @@ export default function ArticleEditor({ article }: Props) {
             title,
             title_en: titleEn,
             title_ja: titleJa,
+            title_zh: titleZh,
             content: nextContent,
             content_en: nextContentEn,
             content_ja: nextContentJa,
+            content_zh: nextContentZh,
             cover_img_url: resolvedCoverUrl,
             category,
             // 값이 있을 때만 전송. 비우면 기존 게시일 유지(새 글은 생성 시 오늘 자동).
@@ -513,6 +602,9 @@ export default function ArticleEditor({ article }: Props) {
       }
       if (editorJa && nextContentJa !== (editorJa.getHTML() ?? '')) {
         editorJa.commands.setContent(nextContentJa);
+      }
+      if (editorZh && nextContentZh !== (editorZh.getHTML() ?? '')) {
+        editorZh.commands.setContent(nextContentZh);
       }
 
       setPendingImages({});
@@ -616,70 +708,41 @@ export default function ArticleEditor({ article }: Props) {
       </div>
 
       <div className={styles.localeTabs}>
-        <button type="button" className={`${styles.localeTab} ${activeLocale === 'ko' ? styles.localeTabActive : ''}`} onClick={() => setActiveLocale('ko')}>KR</button>
-        <span className={styles.localeDivider}>|</span>
-        <button type="button" className={`${styles.localeTab} ${activeLocale === 'en' ? styles.localeTabActive : ''}`} onClick={() => {
-          if (editorEn && editor) {
-            const enHtml = editorEn.getHTML();
-            if (!enHtml || enHtml === '<p></p>') {
-              editorEn.commands.setContent(editor.getHTML());
-            }
-          }
-          setActiveLocale('en');
-        }}>EN</button>
-        <span className={styles.localeDivider}>|</span>
-        <button type="button" className={`${styles.localeTab} ${activeLocale === 'ja' ? styles.localeTabActive : ''}`} onClick={() => {
-          if (editorJa && editor) {
-            const jaHtml = editorJa.getHTML();
-            if (!jaHtml || jaHtml === '<p></p>') {
-              editorJa.commands.setContent(editor.getHTML());
-            }
-          }
-          setActiveLocale('ja');
-        }}>JP</button>
+        {LOCALE_TABS.map(({ locale, label }, index) => (
+          <Fragment key={locale}>
+            {index > 0 && <span className={styles.localeDivider}>|</span>}
+            <button
+              type="button"
+              className={`${styles.localeTab} ${activeLocale === locale ? styles.localeTabActive : ''}`}
+              onClick={() => {
+                if (locale !== 'ko') {
+                  const targetEditor = localeEditors[locale];
+                  const koHtml = editor?.getHTML();
+                  const targetHtml = targetEditor?.getHTML();
+                  if (targetEditor && koHtml && (!targetHtml || targetHtml === '<p></p>')) {
+                    targetEditor.commands.setContent(koHtml);
+                  }
+                }
+                setActiveLocale(locale);
+              }}
+            >
+              {label}
+            </button>
+          </Fragment>
+        ))}
       </div>
 
-      {activeLocale === 'ko' && (
-        <>
-          <div className={styles.titleRow}>
-            <input
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              placeholder="아티클 제목 (한국어)"
-              className={styles.titleInput}
-            />
-          </div>
-        </>
-      )}
-
-      {activeLocale === 'en' && (
-        <>
-          <div className={styles.titleRow}>
-            <input
-              type="text"
-              value={titleEn}
-              onChange={(e) => setTitleEn(e.target.value)}
-              placeholder="Article Title (English)"
-              className={styles.titleInput}
-            />
-          </div>
-        </>
-      )}
-
-      {activeLocale === 'ja' && (
-        <>
-          <div className={styles.titleRow}>
-            <input
-              type="text"
-              value={titleJa}
-              onChange={(e) => setTitleJa(e.target.value)}
-              placeholder="記事タイトル (日本語)"
-              className={styles.titleInput}
-            />
-          </div>
-        </>
-      )}
+      {LOCALE_TABS.map(({ locale }) => activeLocale === locale && (
+        <div key={locale} className={styles.titleRow}>
+          <input
+            type="text"
+            value={localeTitles[locale].value}
+            onChange={(e) => localeTitles[locale].setValue(e.target.value)}
+            placeholder={TITLE_PLACEHOLDERS[locale]}
+            className={styles.titleInput}
+          />
+        </div>
+      ))}
 
       <div className={styles.coverSection}>
         <div className={styles.coverHeader}>
@@ -727,41 +790,17 @@ export default function ArticleEditor({ article }: Props) {
         />
       </div>
 
-      {activeLocale === 'ko' && (
-        <div className={styles.editorWrapper}>
+      {LOCALE_TABS.map(({ locale }) => activeLocale === locale && (
+        <div key={locale} className={styles.editorWrapper}>
           <Toolbar
-            editor={editor}
-            onUploadClick={() => openImagePicker(editor)}
+            editor={localeEditors[locale]}
+            onUploadClick={() => openImagePicker(localeEditors[locale])}
             isUploading={isUploading}
             uploadError={uploadError}
           />
-          <EditorContent editor={editor} className={styles.editorArea} />
+          <EditorContent editor={localeEditors[locale]} className={styles.editorArea} />
         </div>
-      )}
-
-      {activeLocale === 'en' && (
-        <div className={styles.editorWrapper}>
-          <Toolbar
-            editor={editorEn}
-            onUploadClick={() => openImagePicker(editorEn)}
-            isUploading={isUploading}
-            uploadError={uploadError}
-          />
-          <EditorContent editor={editorEn} className={styles.editorArea} />
-        </div>
-      )}
-
-      {activeLocale === 'ja' && (
-        <div className={styles.editorWrapper}>
-          <Toolbar
-            editor={editorJa}
-            onUploadClick={() => openImagePicker(editorJa)}
-            isUploading={isUploading}
-            uploadError={uploadError}
-          />
-          <EditorContent editor={editorJa} className={styles.editorArea} />
-        </div>
-      )}
+      ))}
 
       <input
         ref={fileInputRef}

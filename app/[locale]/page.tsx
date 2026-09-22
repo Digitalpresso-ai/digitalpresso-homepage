@@ -35,6 +35,11 @@ const HOME_META: Record<AppLocale, { title: string; description: string }> = {
     description:
       "digitalPresso (디지털프레소) provides RENAME DP, an AI-powered platform that automates field records, reporting, and safety-quality operations for construction teams.",
   },
+  zh: {
+    title: "digitalPresso（디지털프레소）| RENAME DP 现场记录·安全·质量管理解决方案",
+    description:
+      "digitalPresso（디지털프레소）提供 RENAME DP 解决方案，该方案利用人工智能自动整理施工现场数据，从而提升记录、报告以及安全与质量管理的效率。",
+  },
   ja: {
     title: "digitalPresso (디지털프레소) | RENAME DP 現場記録・安全・品質管理プラットフォーム",
     description:

@@ -38,6 +38,11 @@ const NEWS_META: Record<AppLocale, { title: string; description: string }> = {
     description:
       'Read the latest updates and insights from digitalPresso on construction, safety, and AI-powered field operations.',
   },
+  zh: {
+    title: '新闻 | digitalPresso',
+    description:
+      '了解digitalPresso在建筑、安全及AI现场运营方面的最新动态与见解。',
+  },
   ja: {
     title: 'ニュース | digitalPresso',
     description:

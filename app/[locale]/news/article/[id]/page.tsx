@@ -104,7 +104,7 @@ export default async function NewsArticlePage({ params }: Props) {
   }
 
   const safeLocale: AppLocale = isAppLocale(locale) ? locale : 'ko';
-  const article = mapCmsArticleToNewsArticle(entity, locale);
+  const article = mapCmsArticleToNewsArticle(entity, safeLocale);
   const { prev, next } = await getAdjacentArticles(id);
   const jsonLd = buildNewsArticleJsonLd(entity, article, safeLocale);
 
@@ -116,8 +116,8 @@ export default async function NewsArticlePage({ params }: Props) {
       />
       <NewsArticleDetail
         article={article}
-        prevArticle={prev ? mapCmsArticleToNewsArticle(prev, locale) : undefined}
-        nextArticle={next ? mapCmsArticleToNewsArticle(next, locale) : undefined}
+        prevArticle={prev ? mapCmsArticleToNewsArticle(prev, safeLocale) : undefined}
+        nextArticle={next ? mapCmsArticleToNewsArticle(next, safeLocale) : undefined}
       />
     </main>
   );

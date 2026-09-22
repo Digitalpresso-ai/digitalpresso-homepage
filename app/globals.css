@@ -126,10 +126,38 @@ body {
   font-family: var(--font-noto-sans-jp), var(--font-pretendard), Arial, Helvetica, sans-serif;
 }
 
-/* Japanese locale typography guardrails:
+.locale-zh {
+  font-family: var(--font-noto-sans-sc), var(--font-pretendard), Arial, Helvetica, sans-serif;
+}
+
+/* CJK locale typography guardrails (ja/zh):
    Many section styles use keep-all/nowrap and aggressive negative tracking,
-   which can cause overflow with longer Japanese copy. */
+   which can cause overflow with longer Japanese/Chinese copy. */
 .locale-ja :where(
+  .heading,
+  .title,
+  .subtitle,
+  .body,
+  .cardTitle,
+  .headerLine1,
+  .headerLine2,
+  .eyebrow,
+  .eyebrowSub,
+  .partnersHeading,
+  .contactText,
+  .featureText,
+  .recommendText,
+  .label,
+  .tag,
+  .cardText,
+  .cardAuthor,
+  .cardRole,
+  .navLink,
+  .mobileNavLink,
+  .ctaButton,
+  .mobileCtaButton
+),
+.locale-zh :where(
   .heading,
   .title,
   .subtitle,
@@ -168,6 +196,17 @@ body {
   .eyebrow,
   .eyebrowSub,
   .partnersHeading
+),
+.locale-zh :where(
+  .heading,
+  .title,
+  .subtitle,
+  .cardTitle,
+  .headerLine1,
+  .headerLine2,
+  .eyebrow,
+  .eyebrowSub,
+  .partnersHeading
 ) {
   letter-spacing: 0 !important;
 }
@@ -182,11 +221,23 @@ body {
   .tag,
   .ctaButton,
   .mobileCtaButton
+),
+.locale-zh :where(
+  .heading,
+  .title,
+  .subtitle,
+  .eyebrow,
+  .eyebrowSub,
+  .partnersHeading,
+  .tag,
+  .ctaButton,
+  .mobileCtaButton
 ) {
   white-space: normal !important;
 }
 
-.locale-ja :where(.titleRow) {
+.locale-ja :where(.titleRow),
+.locale-zh :where(.titleRow) {
   flex-wrap: wrap;
   gap: 8px;
 }

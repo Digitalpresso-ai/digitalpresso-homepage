@@ -12,8 +12,8 @@ interface Props { data: LocaleStat[] }
 type LocaleWithShare = LocaleStat & { share: number };
 type SortKey = keyof LocaleWithShare;
 
-const LOCALE_LABELS: Record<string, string> = { ko: '한국어', en: 'English', ja: '日本語' };
-const COLORS = ['#193cb8', '#2b7fff', '#63b3ed'];
+const LOCALE_LABELS: Record<string, string> = { ko: '한국어', en: 'English', ja: '日本語', zh: '中文' };
+const COLORS = ['#193cb8', '#2b7fff', '#63b3ed', '#a3d5ff'];
 
 function sortData(arr: LocaleWithShare[], key: SortKey, dir: 'asc' | 'desc'): LocaleWithShare[] {
   return [...arr].sort((a, b) => {

@@ -5,7 +5,7 @@ import * as schema from './schema';
 type AppDb = PostgresJsDatabase<typeof schema>;
 
 declare global {
-  var __db: AppDb | undefined; // eslint-disable-line no-var
+  var __db: AppDb | undefined;
 }
 
 function createDb(): AppDb {

@@ -25,6 +25,11 @@ const TERMS_META: Record<AppLocale, { title: string; description: string }> = {
     description:
       'Read the terms, conditions, rights, and responsibilities for using digitalPresso services.',
   },
+  zh: {
+    title: '使用条款 | digitalPresso',
+    description:
+      '您可以查阅与digitalPresso服务使用条款相关的权利、义务及责任事项。',
+  },
   ja: {
     title: '利用規約 | digitalPresso',
     description:

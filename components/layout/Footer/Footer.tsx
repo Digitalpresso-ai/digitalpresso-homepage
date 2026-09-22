@@ -24,7 +24,7 @@ export async function Footer() {
           <Link href="/">
             <Image
               src="/images/dp_logo_eng.svg"
-              alt="디지털프레소 로고"
+              alt={t("logoAlt")}
               width={264}
               height={93}
               sizes="(max-width: 1279px) 200px, 264px"
@@ -34,7 +34,7 @@ export async function Footer() {
           <small className={styles.copyright}>{t("copyright")}</small>
         </div>
 
-        <nav className={styles.nav} aria-label="푸터 네비게이션">
+        <nav className={styles.nav} aria-label={t("aria.nav")}>
           <ul className={styles.navColumn}>
             {primaryNavLinks.map(({ href, label }) => (
               <li key={href}>

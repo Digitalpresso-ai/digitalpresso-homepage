@@ -192,14 +192,14 @@ export async function getContentPerformance(from: string, to: string): Promise<C
 }
 
 export interface LocaleStat {
-  locale: 'ko' | 'en' | 'ja';
+  locale: 'ko' | 'en' | 'ja' | 'zh';
   sessions: number;
   users: number;
   pageViews: number;
   bounceRate: number;
 }
 
-/** 언어별(ko/en/ja) 트래픽 — URL 경로 prefix 기반 */
+/** 언어별(ko/en/ja/zh) 트래픽 — URL 경로 prefix 기반 */
 export async function getLocaleBreakdown(from: string, to: string): Promise<LocaleStat[]> {
   const client = getClient();
   const [response] = await client.runReport({
@@ -219,12 +219,14 @@ export async function getLocaleBreakdown(from: string, to: string): Promise<Loca
     ko: { sessions: 0, users: 0, pv: 0, brSum: 0, cnt: 0 },
     en: { sessions: 0, users: 0, pv: 0, brSum: 0, cnt: 0 },
     ja: { sessions: 0, users: 0, pv: 0, brSum: 0, cnt: 0 },
+    zh: { sessions: 0, users: 0, pv: 0, brSum: 0, cnt: 0 },
   };
 
   for (const row of response.rows ?? []) {
     const path = row.dimensionValues?.[0].value ?? '';
     const locale = path.startsWith('/en/') || path === '/en' ? 'en'
       : path.startsWith('/ja/') || path === '/ja' ? 'ja'
+      : path.startsWith('/zh/') || path === '/zh' ? 'zh'
       : 'ko';
     const b = buckets[locale];
     b.sessions += Number(row.metricValues?.[0].value ?? 0);
@@ -234,7 +236,7 @@ export async function getLocaleBreakdown(from: string, to: string): Promise<Loca
     b.cnt      += 1;
   }
 
-  return (['ko', 'en', 'ja'] as const).map(locale => ({
+  return (['ko', 'en', 'ja', 'zh'] as const).map(locale => ({
     locale,
     sessions:  buckets[locale].sessions,
     users:     buckets[locale].users,
