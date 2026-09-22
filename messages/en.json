@@ -19,12 +19,14 @@
         "options": {
           "ko": "Korean",
           "ja": "Japanese",
-          "en": "English"
+          "en": "English",
+          "zh": "Chinese"
         },
         "short": {
           "ko": "KR",
           "ja": "JP",
-          "en": "ENG"
+          "en": "ENG",
+          "zh": "CHN"
         },
         "aria": {
           "button": "Select language",
@@ -39,7 +41,11 @@
       }
     },
     "footer": {
+      "logoAlt": "digitalPresso logo",
       "copyright": "Copyright ⓒ 2025 Digitalpresso All rights reserved.",
+      "aria": {
+        "nav": "Footer navigation"
+      },
       "nav": {
         "aboutUs": "About Us",
         "references": "References",
@@ -1743,6 +1749,7 @@
       "searchLabel": "Article name",
       "searchPlaceholder": "Search articles by name.",
       "viewButton": "View",
+      "empty": "No news available yet.",
       "countSuffix": "",
       "pagination": {
         "prev": "Previous",

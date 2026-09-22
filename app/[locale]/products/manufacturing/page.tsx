@@ -25,6 +25,11 @@ const MANUFACTURING_META: Record<AppLocale, { title: string; description: string
     description:
       "digitalPresso's manufacturing solution automates shop-floor data capture and applies AI analytics to lift productivity, quality, and safety together.",
   },
+  zh: {
+    title: "制造业数字化转型（DX）·自动化转型（AX）解决方案 | digitalPresso",
+    description:
+      "digitalPresso的制造业解决方案，通过工艺数据的自动采集和AI分析，全面提升制造现场的生产效率、质量和安全性。",
+  },
   ja: {
     title: "製造業 DX・AX ソリューション | digitalPresso",
     description:

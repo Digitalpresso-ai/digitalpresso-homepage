@@ -12,9 +12,11 @@ export const articles = pgTable('articles', {
   title: text('title').notNull(),
   title_en: text('title_en').notNull().default(''),
   title_ja: text('title_ja').notNull().default(''),
+  title_zh: text('title_zh').notNull().default(''),
   content: text('content').notNull().default(''),
   content_en: text('content_en').notNull().default(''),
   content_ja: text('content_ja').notNull().default(''),
+  content_zh: text('content_zh').notNull().default(''),
   cover_img_url: text('cover_img_url'),
   category: text('category').notNull().default('company'),
   // 'draft' = 임시저장(공개 안 됨), 'published' = 실서버 게시

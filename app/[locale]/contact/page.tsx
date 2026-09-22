@@ -21,6 +21,11 @@ const CONTACT_META: Record<AppLocale, { title: string; description: string }> = 
     description:
       "Get in touch for RENAME DP adoption and service inquiries. We will guide you with a rollout plan tailored to your field operations.",
   },
+  zh: {
+    title: "联系我们 | digitalPresso",
+    description:
+      "请留下关于引入RENAME DP的咨询及服务需求。我们将为您提供适合现场工作环境的实施方案。",
+  },
   ja: {
     title: "お問い合わせ | digitalPresso",
     description:

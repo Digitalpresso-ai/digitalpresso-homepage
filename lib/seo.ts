@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 
-export type AppLocale = "ko" | "en" | "ja";
+export type AppLocale = "ko" | "en" | "ja" | "zh";
 
 const DEFAULT_LOCALE: AppLocale = "ko";
-const SUPPORTED_LOCALES: AppLocale[] = ["ko", "en", "ja"];
+const SUPPORTED_LOCALES: AppLocale[] = ["ko", "en", "ja", "zh"];
 
 const OG_LOCALE: Record<AppLocale, string> = {
   ko: "ko_KR",
   en: "en_US",
   ja: "ja_JP",
+  zh: "zh_CN",
 };
 
 function normalizePath(path: string): string {
@@ -48,6 +49,7 @@ export function buildLanguageAlternates(path: string): Record<string, string> {
     ko: localizedPath("ko", normalizedPath),
     en: localizedPath("en", normalizedPath),
     ja: localizedPath("ja", normalizedPath),
+    zh: localizedPath("zh", normalizedPath),
     "x-default": localizedPath(DEFAULT_LOCALE, normalizedPath),
   };
 }

@@ -20,6 +20,11 @@ const PRODUCTS_META: Record<AppLocale, { title: string; description: string }> =
     description:
       "Browse digitalPresso's industry-specific AI solutions. We automate field data to lift operational efficiency and quality.",
   },
+  zh: {
+    title: "产品介绍 | digitalPresso",
+    description:
+      "一览digitalPresso各行业的AI解决方案。通过自动化处理现场数据，提升运营效率和质量。",
+  },
   ja: {
     title: "製品紹介 | digitalPresso",
     description:

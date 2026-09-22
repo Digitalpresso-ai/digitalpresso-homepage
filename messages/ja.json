@@ -19,12 +19,14 @@
         "options": {
           "ko": "韓国語",
           "ja": "日本語",
-          "en": "英語"
+          "en": "英語",
+          "zh": "中国語"
         },
         "short": {
           "ko": "KR",
           "ja": "JP",
-          "en": "ENG"
+          "en": "ENG",
+          "zh": "CHN"
         },
         "aria": {
           "button": "言語を選択",
@@ -39,7 +41,11 @@
       }
     },
     "footer": {
+      "logoAlt": "digitalPresso ロゴ",
       "copyright": "Copyright ⓒ 2025 Digitalpresso All rights reserved.",
+      "aria": {
+        "nav": "フッターナビゲーション"
+      },
       "nav": {
         "aboutUs": "会社紹介",
         "references": "導入事例",
@@ -1743,6 +1749,7 @@
       "searchLabel": "記事名",
       "searchPlaceholder": "記事名で検索してください。",
       "viewButton": "確認する",
+      "empty": "登録されたお知らせがありません。",
       "countSuffix": "件",
       "pagination": {
         "prev": "前へ",

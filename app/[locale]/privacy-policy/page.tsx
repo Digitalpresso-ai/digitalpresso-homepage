@@ -25,6 +25,11 @@ const PRIVACY_META: Record<AppLocale, { title: string; description: string }> = 
     description:
       "Review digitalPresso's policy on personal data collection, use, retention, protection measures, and user rights.",
   },
+  zh: {
+    title: "隐私政策 | digitalPresso",
+    description:
+      "本政策涉及digitalPresso对个人信息的收集、使用、保存、保护措施以及信息主体的权利。",
+  },
   ja: {
     title: "プライバシーポリシー | digitalPresso",
     description:

@@ -21,6 +21,11 @@ const REFERENCES_META: Record<AppLocale, { title: string; description: string }>
     description:
       "Explore real implementation cases and outcomes delivered by digitalPresso across construction, electrical, and infrastructure projects.",
   },
+  zh: {
+    title: "客户案例 | digitalPresso",
+    description:
+      "请查看digitalPresso在建筑、电气和基础设施领域实际应用的案例及成果。",
+  },
   ja: {
     title: "導入事例 | digitalPresso",
     description:

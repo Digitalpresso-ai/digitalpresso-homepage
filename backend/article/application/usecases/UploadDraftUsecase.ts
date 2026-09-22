@@ -10,8 +10,10 @@ export interface UploadDraftInput {
   contentFormat?: 'markdown' | 'html';
   titleEn?: string;
   titleJa?: string;
+  titleZh?: string;
   contentEn?: string;
   contentJa?: string;
+  contentZh?: string;
   coverImgUrl?: string;
 }
 
@@ -62,14 +64,17 @@ export class UploadDraftUsecase {
     const ko = sanitizeArticleImages(toHtml(rawContent, fmt));
     const en = input.contentEn ? sanitizeArticleImages(toHtml(input.contentEn, fmt)) : null;
     const ja = input.contentJa ? sanitizeArticleImages(toHtml(input.contentJa, fmt)) : null;
+    const zh = input.contentZh ? sanitizeArticleImages(toHtml(input.contentZh, fmt)) : null;
 
     const content = ko.html;
     const contentEn = en?.html ?? '';
     const contentJa = ja?.html ?? '';
+    const contentZh = zh?.html ?? '';
     const removedImages = [
       ...ko.removed,
       ...(en?.removed ?? []),
       ...(ja?.removed ?? []),
+      ...(zh?.removed ?? []),
     ];
 
     // MCP/스킬로 올라온 글은 항상 임시저장(draft)으로 들어간다.
@@ -78,9 +83,11 @@ export class UploadDraftUsecase {
       title,
       title_en: (input.titleEn ?? '').trim(),
       title_ja: (input.titleJa ?? '').trim(),
+      title_zh: (input.titleZh ?? '').trim(),
       content: marker ? `${marker}\n${content}` : content,
       content_en: contentEn,
       content_ja: contentJa,
+      content_zh: contentZh,
       cover_img_url: input.coverImgUrl?.trim() || null,
       category,
       status: 'draft',
