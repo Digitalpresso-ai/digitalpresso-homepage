@@ -151,10 +151,13 @@
    nowhere to wrap, overflowing the viewport. */
 :global(.locale-ja) .title,
 :global(.locale-ja) .subtitle,
-:global(.locale-ja) .infoText,
+:global(.locale-ja) .infoText {
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
 :global(.locale-zh) .title,
 :global(.locale-zh) .subtitle,
 :global(.locale-zh) .infoText {
   word-break: normal;
-  overflow-wrap: anywhere;
 }

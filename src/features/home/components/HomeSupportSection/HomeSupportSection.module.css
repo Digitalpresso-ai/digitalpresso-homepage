@@ -303,19 +303,25 @@
 :global(.locale-ja) .title,
 :global(.locale-ja) .cardTitle,
 :global(.locale-ja) .cardSubtitle,
-:global(.locale-ja) .cardDesc,
+:global(.locale-ja) .cardDesc {
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
 :global(.locale-zh) .title,
 :global(.locale-zh) .cardTitle,
 :global(.locale-zh) .cardSubtitle,
 :global(.locale-zh) .cardDesc {
   word-break: normal;
-  overflow-wrap: anywhere;
 }
 
-:global(.locale-ja) .pill,
-:global(.locale-zh) .pill {
+:global(.locale-ja) .pill {
   white-space: normal;
   word-break: normal;
   overflow-wrap: anywhere;
   text-align: center;
+}
+
+:global(.locale-zh) .pill {
+  word-break: normal;
 }
