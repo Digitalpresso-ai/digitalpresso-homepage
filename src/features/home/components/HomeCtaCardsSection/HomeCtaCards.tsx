@@ -5,6 +5,7 @@
 import { useState } from 'react';
 import { ArrowDown, ArrowRight, BookOpen, Mail } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/navigation';
 import { RevealOnScroll } from '@/src/components/motion/RevealOnScroll';
 import { BrochureModal } from '../BrochureModal/BrochureModal';
 import styles from './HomeCtaCardsSection.module.css';
@@ -53,9 +54,9 @@ export function HomeCtaCards() {
                   {cardBody}
                 </button>
               ) : (
-                <a className={styles.card} href={t(`cards.${key}.href`)}>
+                <Link className={styles.card} href="/contact">
                   {cardBody}
-                </a>
+                </Link>
               )}
             </RevealOnScroll>
           );

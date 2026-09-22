@@ -1304,8 +1304,7 @@
         "contact": {
           "title": "联系我们",
           "desc": "针对现场情况的实施方案咨询",
-          "button": "前往咨询",
-          "href": "/ko/contact"
+          "button": "前往咨询"
         },
         "brochure": {
           "title": "下载宣传册",
