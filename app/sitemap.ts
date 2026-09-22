@@ -4,7 +4,7 @@ import { getSiteUrl } from '@/lib/site-url';
 import { getPublishedArticles } from '@/backend/article/application/server-facade';
 
 const BASE_URL = getSiteUrl();
-const LOCALES: AppLocale[] = ['ko', 'en', 'ja'];
+const LOCALES: AppLocale[] = ['ko', 'en', 'ja', 'zh'];
 
 const STATIC_PATHS = [
   '/',

@@ -3,7 +3,7 @@
 const DEEPL_FREE_ENDPOINT = 'https://api-free.deepl.com/v2/translate';
 const DEEPL_PRO_ENDPOINT = 'https://api.deepl.com/v2/translate';
 
-export type DeeplTargetLang = 'EN-US' | 'JA';
+export type DeeplTargetLang = 'EN-US' | 'JA' | 'ZH';
 
 type DeeplResponse = {
   translations: Array<{

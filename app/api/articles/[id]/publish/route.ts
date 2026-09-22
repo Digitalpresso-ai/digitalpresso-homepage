@@ -49,7 +49,8 @@ export async function POST(req: NextRequest, { params }: Params) {
       if (
         hasUnresolvedImages(existing.content ?? '') ||
         hasUnresolvedImages(existing.content_en ?? '') ||
-        hasUnresolvedImages(existing.content_ja ?? '')
+        hasUnresolvedImages(existing.content_ja ?? '') ||
+        hasUnresolvedImages(existing.content_zh ?? '')
       ) {
         return NextResponse.json<ApiResponse<never>>(
           { success: false, error: '본문에 업로드되지 않은 이미지가 있어 게시할 수 없습니다. 에디터에서 해당 이미지를 직접 업로드해주세요.' },

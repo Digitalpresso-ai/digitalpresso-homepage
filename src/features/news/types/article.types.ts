@@ -36,9 +36,11 @@ export type ArticleFormData = Pick<
   | "title"
   | "title_en"
   | "title_ja"
+  | "title_zh"
   | "content"
   | "content_en"
   | "content_ja"
+  | "content_zh"
   | "cover_img_url"
   | "category"
 >;

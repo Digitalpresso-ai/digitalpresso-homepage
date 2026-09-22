@@ -1147,7 +1147,8 @@
 /* The 62px rail column is a tight fit for a label like "プロジェクト" —
    shrink the type a touch instead of wrapping to two lines, so it still
    reads as one word at a glance. */
-:global(.locale-ja) .rail {
+:global(.locale-ja) .rail,
+:global(.locale-zh) .rail {
   font-size: 9px;
   letter-spacing: -0.02em;
 }
@@ -1161,7 +1162,14 @@
 :global(.locale-ja) .stepDesc,
 :global(.locale-ja) .breadcrumb,
 :global(.locale-ja) .projectName,
-:global(.locale-ja) .modalList dd {
+:global(.locale-ja) .modalList dd,
+:global(.locale-zh) .title,
+:global(.locale-zh) .desc,
+:global(.locale-zh) .stepDash,
+:global(.locale-zh) .stepDesc,
+:global(.locale-zh) .breadcrumb,
+:global(.locale-zh) .projectName,
+:global(.locale-zh) .modalList dd {
   word-break: normal;
   overflow-wrap: anywhere;
 }
@@ -1169,7 +1177,8 @@
 /* "位置タグを押してみてください。" runs longer than the Korean original, but
    width: max-content keeps it on one line, so the base transform/animation
    (tuned for one-line Korean/English copy) still applies unchanged. */
-:global(.locale-ja) .startHint {
+:global(.locale-ja) .startHint,
+:global(.locale-zh) .startHint {
   white-space: normal;
   word-break: normal;
   overflow-wrap: anywhere;

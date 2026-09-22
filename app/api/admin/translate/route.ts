@@ -23,15 +23,17 @@ export async function POST(request: Request) {
 
     const { title, content } = parsed.data;
 
-    const [titleEn, titleJa, contentEn, contentJa] = await Promise.all([
+    const [titleEn, titleJa, titleZh, contentEn, contentJa, contentZh] = await Promise.all([
       translateWithDeepl(title, 'EN-US'),
       translateWithDeepl(title, 'JA'),
+      translateWithDeepl(title, 'ZH'),
       translateWithDeepl(content, 'EN-US'),
       translateWithDeepl(content, 'JA'),
+      translateWithDeepl(content, 'ZH'),
     ]);
 
     return NextResponse.json(
-      { titleEn, titleJa, contentEn, contentJa },
+      { titleEn, titleJa, titleZh, contentEn, contentJa, contentZh },
       { status: 200 },
     );
   } catch (error) {

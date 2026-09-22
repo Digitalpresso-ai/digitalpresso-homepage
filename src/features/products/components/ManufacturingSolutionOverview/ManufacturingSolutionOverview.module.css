@@ -65,7 +65,9 @@
    keep-all (tuned for Korean) can leave a long unbroken sentence with
    nowhere to wrap. */
 :global(.locale-ja) .heading,
-:global(.locale-ja) .body {
+:global(.locale-ja) .body,
+:global(.locale-zh) .heading,
+:global(.locale-zh) .body {
   word-break: normal;
   overflow-wrap: anywhere;
 }

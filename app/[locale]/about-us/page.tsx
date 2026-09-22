@@ -28,6 +28,11 @@ const ABOUT_META: Record<AppLocale, { title: string; description: string }> = {
     description:
       "digitalPresso（디지털프레소）のビジョン、チーム、オフィスをご紹介します。現場起点のAI技術で産業データ自動化を実現します。",
   },
+  zh: {
+    title: "公司简介 | digitalPresso（디지털프레소）",
+    description:
+      "为您介绍digitalPresso（디지털프레소）的愿景、团队和办公环境。我们通过以现场为中心的AI技术，实现工业数据的自动化。",
+  },
 };
 
 export async function generateMetadata({

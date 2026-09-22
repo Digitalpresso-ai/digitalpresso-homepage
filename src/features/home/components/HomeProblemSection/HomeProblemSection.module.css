@@ -358,7 +358,13 @@
 :global(.locale-ja) .stepDesc,
 :global(.locale-ja) .cardTitle,
 :global(.locale-ja) .cardDesc,
-:global(.locale-ja) .bullet {
+:global(.locale-ja) .bullet,
+:global(.locale-zh) .heading,
+:global(.locale-zh) .stepTitle,
+:global(.locale-zh) .stepDesc,
+:global(.locale-zh) .cardTitle,
+:global(.locale-zh) .cardDesc,
+:global(.locale-zh) .bullet {
   word-break: normal;
   overflow-wrap: anywhere;
   min-width: 0;
