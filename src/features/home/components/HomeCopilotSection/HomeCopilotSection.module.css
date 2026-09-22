@@ -433,12 +433,15 @@
 :global(.locale-ja) .cardTitle,
 :global(.locale-ja) .sourceName,
 :global(.locale-ja) .sourceDesc,
-:global(.locale-ja) .bullets li,
+:global(.locale-ja) .bullets li {
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
 :global(.locale-zh) .title,
 :global(.locale-zh) .cardTitle,
 :global(.locale-zh) .sourceName,
 :global(.locale-zh) .sourceDesc,
 :global(.locale-zh) .bullets li {
   word-break: normal;
-  overflow-wrap: anywhere;
 }

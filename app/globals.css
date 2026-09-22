@@ -2,6 +2,13 @@
   --background: #ffffff;
   --foreground: #171717;
 
+  /* Loaded via <link> in app/layout.tsx (Google Fonts CSS2 API), not
+     next/font/google — see the comment there for why. The family names
+     below must match the family= params in that <link> exactly. */
+  --font-noto-sans-kr: "Noto Sans KR";
+  --font-noto-sans-jp: "Noto Sans JP";
+  --font-noto-sans-sc: "Noto Sans SC";
+
   /* Spacing tokens (4px base) */
   --spacing-0: 0px;
   --spacing-1: 0.25rem;  /* 4px */
@@ -122,42 +129,41 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Many components hard-code `font-family: var(--font-pretendard), ...` on a
+   descendant element (e.g. HomeHero's `.inner`, Figma calling for Pretendard
+   "throughout the hero, all locales included"). That descendant sits closer
+   in the DOM than this `.locale-ja`/`.locale-zh` class, so plain CSS
+   inheritance lets its font-family win over the one set here, and Japanese/
+   Chinese text inside falls back to whatever CJK font the OS happens to
+   have — invisible on screen, but it silently breaks word-break's layout
+   math (e.g. "自动" splitting into "自"/"动" mid-word) since font metrics
+   determine where lines actually wrap.
+
+   Redefining the --font-pretendard custom property itself (rather than only
+   font-family) fixes every such component in one place: custom properties
+   inherit and every `var(--font-pretendard)` reference below this class
+   resolves to the CJK font instead, with no per-component changes needed. */
 .locale-ja {
+  --font-pretendard: var(--font-noto-sans-jp);
   font-family: var(--font-noto-sans-jp), var(--font-pretendard), Arial, Helvetica, sans-serif;
 }
 
 .locale-zh {
+  --font-pretendard: var(--font-noto-sans-sc);
   font-family: var(--font-noto-sans-sc), var(--font-pretendard), Arial, Helvetica, sans-serif;
 }
 
-/* CJK locale typography guardrails (ja/zh):
-   Many section styles use keep-all/nowrap and aggressive negative tracking,
-   which can cause overflow with longer Japanese/Chinese copy. */
+/* CJK layout guardrail (ja/zh): keep-all/nowrap (tuned for Korean) and
+   aggressive negative tracking can cause overflow with longer Japanese or
+   Chinese copy.
+
+   Japanese has almost no natural word breaks, so it also needs
+   overflow-wrap: anywhere as a safety net. Chinese text is made of largely
+   self-contained single-character units, so word-break: normal alone wraps
+   safely — adding overflow-wrap: anywhere on top of it instead lets the
+   browser break mid-word even when it doesn't need to (e.g. "自动"
+   splitting into "自"/"动"), so zh gets word-break: normal only. */
 .locale-ja :where(
-  .heading,
-  .title,
-  .subtitle,
-  .body,
-  .cardTitle,
-  .headerLine1,
-  .headerLine2,
-  .eyebrow,
-  .eyebrowSub,
-  .partnersHeading,
-  .contactText,
-  .featureText,
-  .recommendText,
-  .label,
-  .tag,
-  .cardText,
-  .cardAuthor,
-  .cardRole,
-  .navLink,
-  .mobileNavLink,
-  .ctaButton,
-  .mobileCtaButton
-),
-.locale-zh :where(
   .heading,
   .title,
   .subtitle,
@@ -186,18 +192,34 @@ body {
   overflow-wrap: anywhere;
 }
 
-.locale-ja :where(
+.locale-zh :where(
   .heading,
   .title,
   .subtitle,
+  .body,
   .cardTitle,
   .headerLine1,
   .headerLine2,
   .eyebrow,
   .eyebrowSub,
-  .partnersHeading
-),
-.locale-zh :where(
+  .partnersHeading,
+  .contactText,
+  .featureText,
+  .recommendText,
+  .label,
+  .tag,
+  .cardText,
+  .cardAuthor,
+  .cardRole,
+  .navLink,
+  .mobileNavLink,
+  .ctaButton,
+  .mobileCtaButton
+) {
+  word-break: normal;
+}
+
+.locale-ja :where(
   .heading,
   .title,
   .subtitle,
@@ -221,23 +243,11 @@ body {
   .tag,
   .ctaButton,
   .mobileCtaButton
-),
-.locale-zh :where(
-  .heading,
-  .title,
-  .subtitle,
-  .eyebrow,
-  .eyebrowSub,
-  .partnersHeading,
-  .tag,
-  .ctaButton,
-  .mobileCtaButton
 ) {
   white-space: normal !important;
 }
 
-.locale-ja :where(.titleRow),
-.locale-zh :where(.titleRow) {
+.locale-ja :where(.titleRow) {
   flex-wrap: wrap;
   gap: 8px;
 }

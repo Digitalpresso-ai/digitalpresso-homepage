@@ -1012,7 +1012,11 @@
 :global(.locale-ja) .sectionTitle,
 :global(.locale-ja) .breadcrumb,
 :global(.locale-ja) .gridHead,
-:global(.locale-ja) .box,
+:global(.locale-ja) .box {
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
 :global(.locale-zh) .title,
 :global(.locale-zh) .desc,
 :global(.locale-zh) .stepDash,
@@ -1022,15 +1026,13 @@
 :global(.locale-zh) .gridHead,
 :global(.locale-zh) .box {
   word-break: normal;
-  overflow-wrap: anywhere;
 }
 
 /* Only the side-by-side table layout (≥800px) needs the wider label
    column — the ≤799px stacked layout already gives .gridHead its own
    full-width row, so widening it there would fight that width: 100%. */
 @media (min-width: 800px) {
-  :global(.locale-ja) .gridHead,
-  :global(.locale-zh) .gridHead {
+  :global(.locale-ja) .gridHead {
     width: 92px;
     font-size: 9px;
   }
@@ -1039,20 +1041,21 @@
 /* The 62px rail column is a tight fit for a label like "プロジェクト" —
    shrink the type a touch instead of wrapping to two lines, so it still
    reads as one word at a glance. */
-:global(.locale-ja) .rail,
-:global(.locale-zh) .rail {
+:global(.locale-ja) .rail {
   font-size: 9px;
   letter-spacing: -0.02em;
 }
 
-:global(.locale-ja) .loadDesc,
-:global(.locale-zh) .loadDesc {
+:global(.locale-ja) .loadDesc {
   word-break: normal;
   overflow-wrap: anywhere;
 }
 
-:global(.locale-ja) .startHint,
-:global(.locale-zh) .startHint {
+:global(.locale-zh) .loadDesc {
+  word-break: normal;
+}
+
+:global(.locale-ja) .startHint {
   white-space: nowrap;
   width: max-content;
   max-width: none;
