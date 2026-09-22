@@ -158,3 +158,19 @@
   .heading { font-size: 28px; line-height: 1.35; }
   .lead { font-size: 15px; }
 }
+
+/* CJK layout fix (ja/zh): keep-all (tuned for Korean) can leave a long
+   unbroken sentence with nowhere to wrap in languages with few natural
+   word breaks. */
+:global(.locale-ja) .heading,
+:global(.locale-ja) .lead,
+:global(.locale-ja) .pointBody {
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
+:global(.locale-zh) .heading,
+:global(.locale-zh) .lead,
+:global(.locale-zh) .pointBody {
+  word-break: normal;
+}

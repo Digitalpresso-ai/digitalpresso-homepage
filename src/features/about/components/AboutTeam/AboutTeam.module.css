@@ -154,3 +154,15 @@
     font-size: 15px;
   }
 }
+
+/* CJK layout fix (ja/zh): keep-all (tuned for Korean) can leave a long
+   unbroken sentence with nowhere to wrap in languages with few natural
+   word breaks. */
+:global(.locale-ja) .deptItem {
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
+:global(.locale-zh) .deptItem {
+  word-break: normal;
+}
