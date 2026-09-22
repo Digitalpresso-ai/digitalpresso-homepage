@@ -195,25 +195,30 @@
    keep-all (tuned for Korean) can leave a long unbroken sentence with
    nowhere to wrap, overflowing this fixed-height hero. */
 :global(.locale-ja) .heading,
-:global(.locale-ja) .body {
+:global(.locale-ja) .body,
+:global(.locale-zh) .heading,
+:global(.locale-zh) .body {
   word-break: normal;
   overflow-wrap: anywhere;
 }
 
-:global(.locale-ja) .section {
+:global(.locale-ja) .section,
+:global(.locale-zh) .section {
   height: auto;
   min-height: 583px;
   padding-block: 48px;
 }
 
 @media (min-width: 800px) and (max-width: 1279px) {
-  :global(.locale-ja) .section {
+  :global(.locale-ja) .section,
+  :global(.locale-zh) .section {
     min-height: 627px;
   }
 }
 
 @media (max-width: 799px) {
-  :global(.locale-ja) .section {
+  :global(.locale-ja) .section,
+  :global(.locale-zh) .section {
     min-height: 675px;
   }
 }

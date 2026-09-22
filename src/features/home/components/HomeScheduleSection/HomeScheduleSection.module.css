@@ -642,6 +642,14 @@
   word-break: keep-all;
 }
 
+:global(.locale-ja) .placeholderBox,
+:global(.locale-ja) .placeholderCard,
+:global(.locale-zh) .placeholderBox,
+:global(.locale-zh) .placeholderCard {
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
 .placeholderBox {
   flex-shrink: 0;
   height: 168px;
@@ -1243,7 +1251,8 @@
 /* The 62px rail column is a tight fit for a label like "プロジェクト" —
    shrink the type a touch instead of wrapping to two lines, so it still
    reads as one word at a glance. */
-:global(.locale-ja) .rail {
+:global(.locale-ja) .rail,
+:global(.locale-zh) .rail {
   font-size: 9px;
   letter-spacing: -0.02em;
 }
@@ -1253,19 +1262,22 @@
    wrapped, collides with the value sitting on the same line. Stack label
    above value instead, so a two-line label just pushes the value down
    with it rather than overlapping it. */
-:global(.locale-ja) .costItem {
+:global(.locale-ja) .costItem,
+:global(.locale-zh) .costItem {
   flex-direction: column;
   align-items: flex-start;
   gap: 2px;
 }
 
-:global(.locale-ja) .costItem dt {
+:global(.locale-ja) .costItem dt,
+:global(.locale-zh) .costItem dt {
   min-width: 0;
   word-break: normal;
   overflow-wrap: anywhere;
 }
 
-:global(.locale-ja) .costItem dd {
+:global(.locale-ja) .costItem dd,
+:global(.locale-zh) .costItem dd {
   white-space: normal;
 }
 
@@ -1279,12 +1291,21 @@
 :global(.locale-ja) .breadcrumb,
 :global(.locale-ja) .detailTitle,
 :global(.locale-ja) .gTradeCell,
-:global(.locale-ja) .gName {
+:global(.locale-ja) .gName,
+:global(.locale-zh) .title,
+:global(.locale-zh) .desc,
+:global(.locale-zh) .stepDash,
+:global(.locale-zh) .stepDesc,
+:global(.locale-zh) .breadcrumb,
+:global(.locale-zh) .detailTitle,
+:global(.locale-zh) .gTradeCell,
+:global(.locale-zh) .gName {
   word-break: normal;
   overflow-wrap: anywhere;
 }
 
-:global(.locale-ja) .startHint {
+:global(.locale-ja) .startHint,
+:global(.locale-zh) .startHint {
   white-space: normal;
   word-break: normal;
   overflow-wrap: anywhere;

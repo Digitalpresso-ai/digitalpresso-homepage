@@ -424,15 +424,21 @@
   }
 }
 
-/* Japanese layout fix: Japanese has almost no natural word breaks, so
-   keep-all (tuned for Korean) can leave a long unbroken sentence with
-   nowhere to wrap — the line ends up filling only as far as the last
-   break point (e.g. "・"), leaving an odd gap before the next line. */
+/* CJK layout fix (ja/zh): Japanese and Chinese have almost no natural word
+   breaks, so keep-all (tuned for Korean) can leave a long unbroken sentence
+   with nowhere to wrap — the line ends up filling only as far as the last
+   break point (e.g. "・" or "、"), leaving an odd gap before the next line,
+   or in the worst case overflowing the card entirely. */
 :global(.locale-ja) .title,
 :global(.locale-ja) .cardTitle,
 :global(.locale-ja) .sourceName,
 :global(.locale-ja) .sourceDesc,
-:global(.locale-ja) .bullets li {
+:global(.locale-ja) .bullets li,
+:global(.locale-zh) .title,
+:global(.locale-zh) .cardTitle,
+:global(.locale-zh) .sourceName,
+:global(.locale-zh) .sourceDesc,
+:global(.locale-zh) .bullets li {
   word-break: normal;
   overflow-wrap: anywhere;
 }

@@ -103,14 +103,20 @@
 :global(.locale-ja) .sub,
 :global(.locale-ja) .cardSubtitle,
 :global(.locale-ja) .cardTitle,
-:global(.locale-ja) .cardDescription {
+:global(.locale-ja) .cardDescription,
+:global(.locale-zh) .heading,
+:global(.locale-zh) .sub,
+:global(.locale-zh) .cardSubtitle,
+:global(.locale-zh) .cardTitle,
+:global(.locale-zh) .cardDescription {
   word-break: normal;
   overflow-wrap: anywhere;
 }
 
 /* The card's fixed 4/5 ratio clips longer Japanese copy instead of letting
    it overflow past the card — give it room to grow instead. */
-:global(.locale-ja) .card {
+:global(.locale-ja) .card,
+:global(.locale-zh) .card {
   aspect-ratio: auto;
   min-height: 320px;
 }

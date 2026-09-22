@@ -315,19 +315,28 @@
 :global(.locale-ja) .partnersHeading,
 :global(.locale-ja) .cardText,
 :global(.locale-ja) .cardAuthor,
-:global(.locale-ja) .cardRole {
+:global(.locale-ja) .cardRole,
+:global(.locale-zh) .eyebrow,
+:global(.locale-zh) .heading,
+:global(.locale-zh) .body,
+:global(.locale-zh) .partnersHeading,
+:global(.locale-zh) .cardText,
+:global(.locale-zh) .cardAuthor,
+:global(.locale-zh) .cardRole {
   white-space: normal;
   word-break: normal;
   overflow-wrap: anywhere;
   letter-spacing: 0;
 }
 
-:global(.locale-ja) .cardList {
+:global(.locale-ja) .cardList,
+:global(.locale-zh) .cardList {
   height: auto;
   overflow: visible;
   align-items: stretch;
 }
 
-:global(.locale-ja) .card {
+:global(.locale-ja) .card,
+:global(.locale-zh) .card {
   height: auto;
 }

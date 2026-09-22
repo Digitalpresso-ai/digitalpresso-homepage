@@ -555,7 +555,15 @@
 :global(.locale-ja) .cardDesc,
 :global(.locale-ja) .centerTitle,
 :global(.locale-ja) .centerDesc,
-:global(.locale-ja) .groupTitle {
+:global(.locale-ja) .groupTitle,
+:global(.locale-zh) .heading,
+:global(.locale-zh) .chip,
+:global(.locale-zh) .bullet,
+:global(.locale-zh) .cardTitle,
+:global(.locale-zh) .cardDesc,
+:global(.locale-zh) .centerTitle,
+:global(.locale-zh) .centerDesc,
+:global(.locale-zh) .groupTitle {
   word-break: normal;
   overflow-wrap: anywhere;
 }
