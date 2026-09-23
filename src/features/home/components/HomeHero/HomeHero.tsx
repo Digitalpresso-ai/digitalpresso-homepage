@@ -34,9 +34,9 @@ export async function HomeHero() {
           <h1 className={styles.heading}>
             <span className={styles.headingRow}>
               <Image
-                src="/images/main-hero-logo.svg"
+                src="/images/renamedp-logo-eng-white.png"
                 alt={t('logoAlt')}
-                width={281}
+                width={309}
                 height={76}
                 priority
                 className={styles.logo}
