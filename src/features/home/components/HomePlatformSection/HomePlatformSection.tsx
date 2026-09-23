@@ -77,10 +77,10 @@ export async function HomePlatformSection() {
               <div className={styles.centerHead}>
                 <p className={styles.brand}>
                   <Image
-                    src="/images/main-color-logo.svg"
+                    src="/images/renamedp-logo-eng.png"
                     alt={t('center.logoAlt')}
-                    width={134}
-                    height={36}
+                    width={169}
+                    height={41}
                     className={styles.brandLogo}
                   />
                   <span className={styles.brandSuffix}>{t('center.suffix')}</span>
