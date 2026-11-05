@@ -1,249 +1,246 @@
-/* ─── Section ───────────────────────────────────────────── */
+/* ─── Layout variables ───────────────────────────────────────
+   Values are taken from the four Figma page frames (536:3774 / 565:7654 /
+   565:8506 / 565:9478). At 1920, 1280, 800 and 320 they hit Figma
+   exactly; in between they interpolate linearly.
+
+                  bg height   row side margin  row width  button→row gap
+     1920         1000        110              1699.7     141.8
+     1280         666.7       100              1080       51.1
+     800          416.7       130              540        39.0
+     320          216         25               270        17.6
+
+   --u    text block scale (Figma px → CSS px). 1 from 1280 up,
+          0.6 at 800, 0.375 at 320.
+   --r    screenshot row scale = row width / 1699.7 (its 1920 width).
+   --pt   top padding (96 / 96 / 64 / 24).
+   --gap  button → screenshot row.
+   --bg-h hero background height. The row hangs below it onto the
+          next section's colour, as in Figma. */
 .section {
+  --u: 1px;
+  /* margin 100 → 110 between 1280 and 1920: margin = 80px + vw/64 */
+  --r: min(1px, calc((96.875vw - 160px) / 1699.7));
+  --pt: 96px;
+  --gap: min(141.8px, calc(14.18vw - 130.4px));
+  --bg-h: calc(100vw * 1000 / 1920);
+
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
-  /* Matches the 1920×1000 Figma hero frame */
-  aspect-ratio: 1920 / 1000;
-  background-color: #1a4acd;
+  padding: var(--pt) var(--dp-gutter-lg) 0;
+  /* The bottom strip under the background matches the next section, so the
+     screenshots look like they hang over the hero's edge. */
+  background-color: #eff6ff;
   overflow: hidden;
+  font-family: var(--font-pretendard), Arial, Helvetica, sans-serif;
 }
 
 /* ─── Background ────────────────────────────────────────── */
+.bgLayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--bg-h);
+  background-color: #1a5cf0;
+  pointer-events: none;
+}
+
 .bg {
   object-fit: cover;
-  object-position: center center;
-  z-index: 0;
+  object-position: center;
 }
 
-/* ─── Inner container ───────────────────────────────────── */
-/* Figma specifies Pretendard throughout the hero, all locales included. */
-.inner {
-  font-family: var(--font-pretendard), Arial, Helvetica, sans-serif;
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  max-width: var(--dp-container);
-  height: 100%;
-  margin-inline: auto;
-  padding: var(--spacing-8) var(--dp-gutter-lg);
-  container-type: inline-size;
-}
-
-/* ─── Content column ─────────────────────────────────────── */
+/* ─── Text block ────────────────────────────────────────── */
 .content {
+  position: relative;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  /* Figma: 635px text column inside the 1280px container */
-  width: 49.6%;
-  min-width: 0;
-  gap: var(--spacing-8);
+  align-items: center;
+  max-width: 100%;
+  text-align: center;
 }
 
-/* ─── Heading ────────────────────────────────────────────── */
 .heading {
   display: flex;
   flex-direction: column;
-  /* Figma: 40px line box on a 56px font (0.714), rows 34px apart */
-  gap: clamp(12px, 2.95cqw, 34px);
+  align-items: center;
+  gap: calc(32 * var(--u));
   margin: 0;
-  font-size: clamp(28px, 4.86cqw, 56px);
+  font-size: calc(56 * var(--u));
   font-weight: 700;
-  line-height: 0.714;
-  color: #fff;
-  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
-  word-break: keep-all;
+  /* Figma: 40px line box on a 56px font */
+  line-height: calc(40 * var(--u));
+  white-space: nowrap;
 }
 
 .headingRow {
   display: flex;
   align-items: center;
-  gap: 4px;
-  white-space: nowrap;
+  gap: calc(4 * var(--u));
 }
 
-/* Logo scales with the heading so the lockup stays aligned */
-.logo {
+/* Gradient text: text-shadow would paint over a background-clip:text fill,
+   so the Figma shadow is applied as a drop-shadow filter instead. */
+.cyan,
+.gold {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 calc(4 * var(--u)) calc(16 * var(--u)) rgba(0, 0, 0, 0.6));
+}
+
+.cyan {
+  background-image: linear-gradient(180deg, #fff 0%, #0ff 100%);
+}
+
+.gold {
+  background-image: linear-gradient(180deg, #fff 0%, #ffae00 100%);
+}
+
+/* Figma: 281x76 logo slot. The SVG includes its shadow margin
+   (303x98), so negative margins pull it back to the slot size. */
+.logoKo {
+  flex: none;
+  width: calc(303 * var(--u));
+  height: auto;
+  margin: calc(-7 * var(--u)) calc(-11 * var(--u)) calc(-15 * var(--u));
+}
+
+.logoEn {
+  flex: none;
   width: auto;
-  height: 1.36em;
-  filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.6));
+  height: calc(76 * var(--u));
+  filter: drop-shadow(0 calc(4 * var(--u)) calc(16 * var(--u)) rgba(0, 0, 0, 0.6));
 }
 
-/* ─── Body ───────────────────────────────────────────────── */
+/* Figma trims the body's text box to cap height (text-box-trim), so its
+   48px / 80px gaps are measured from the glyphs, not the 56px line box.
+   The 18px of half-leading per side is taken back out of the margins. */
 .body {
-  margin: 0;
-  font-size: clamp(16px, 3.13cqw, 36px);
-  font-weight: 600;
-  line-height: 1.4;
+  margin: calc(30 * var(--u)) 0 0;
+  font-size: calc(40 * var(--u));
+  font-weight: 500;
+  line-height: calc(56 * var(--u));
+  letter-spacing: -0.01em;
   color: #fff;
-  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+  text-shadow: 0 calc(5.9 * var(--u)) calc(13.86 * var(--u)) rgba(0, 0, 0, 0.8);
   white-space: pre-line;
   word-break: keep-all;
+  text-wrap: balance;
 }
 
-/* ─── Tag row ────────────────────────────────────────────── */
-/* Figma: always 2 x 2 with a flat 12px gutter. Flex rows (rather than a grid)
-   let every chip hug its own label, so a shorter chip pulls its neighbour in
-   instead of leaving the column-width gap a grid would reserve. */
-.tagRow {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: clamp(5px, 1.04cqw, 12px);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.tagRowLine {
-  display: flex;
-  gap: clamp(5px, 1.04cqw, 12px);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.tag {
+.cta {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  /* Figma: 16px inline / 8px block padding at a 30px font — scales with type */
-  padding: clamp(4px, 0.69cqw, 8px) clamp(8px, 1.39cqw, 16px);
-  border-radius: 9999px;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(4px);
-  font-size: clamp(13px, 2.60cqw, 30px);
-  font-weight: 700;
-  line-height: 1.2;
-  color: #fff;
-  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
-  white-space: nowrap;
-}
-
-/* ─── Certification badge pill ──────────────────────────── */
-.badgePill {
-  display: inline-flex;
-  align-items: center;
-  gap: clamp(8px, 1.39cqw, 16px);
-  padding: clamp(6px, 1.04cqw, 12px) clamp(12px, 2.08cqw, 24px);
-  border-radius: 9999px;
+  height: calc(72 * var(--u));
+  margin-top: calc(62 * var(--u));
+  padding: 0 calc(36 * var(--u));
+  border-radius: calc(6 * var(--u));
   background: #fff;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6));
+  color: #193cb8;
+  font-size: calc(24 * var(--u));
+  font-weight: 700;
+  line-height: calc(36 * var(--u));
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.15s ease;
 }
 
-.badgeItem {
-  display: inline-flex;
+.cta:hover {
+  background: #eff6ff;
+}
+
+.cta:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+/* ─── Screenshot row ────────────────────────────────────── */
+.shots {
+  position: relative;
+  display: flex;
   align-items: center;
-  gap: clamp(8px, 1.39cqw, 16px);
+  justify-content: center;
+  /* Figma (node 992:6656): 1699.7px row, 48px gaps, centred vertically */
+  gap: calc(48 * var(--r));
+  margin-top: var(--gap);
 }
 
-.badgeDivider {
-  width: 1px;
-  height: clamp(28px, 6.94cqw, 80px);
-  background: rgba(0, 0, 0, 0.1);
+.shot {
+  flex: none;
+  height: auto;
 }
 
-.badgeImage {
-  width: auto;
-  height: clamp(28px, 6.94cqw, 80px);
-  object-fit: contain;
+/* Figma 1920 frame sizes — each matches its source image's aspect ratio */
+.shotGlasses {
+  width: calc(548.13 * var(--r));
+  /* The capture has 25px rounded corners baked in; round the box to match
+     so the Figma box-shadow follows the card instead of a square. */
+  border-radius: calc(25.4 * var(--r));
+  box-shadow: 0 calc(3.877 * var(--r)) calc(15.509 * var(--r)) calc(-4.846 * var(--r))
+    rgba(0, 0, 0, 0.6);
+}
+
+.shotDetection {
+  width: calc(497.24 * var(--r));
+}
+
+.shotReport {
+  width: calc(558.31 * var(--r));
+  filter: drop-shadow(0 calc(3.877 * var(--r)) calc(7.754 * var(--r)) rgba(0, 0, 0, 0.6));
 }
 
 /* ─── Tablet (800px – 1279px) ───────────────────────────── */
+/* Interpolates the 800 frame → the 1280 frame */
 @media (max-width: 1279px) {
-  .inner {
-    padding: var(--spacing-8) var(--dp-gutter-md);
-  }
+  .section {
+    --u: calc((100vw - 80px) / 1200);
+    /* margin 130 → 100: row width = 1.125vw - 360px */
+    --r: calc((112.5vw - 360px) / 1699.7);
+    --pt: calc(6.667vw + 10.667px);
+    --gap: calc(2.51vw + 18.9px);
 
-  .content {
-    width: min(635px, 66%);
-    gap: var(--spacing-6);
-  }
-
-  /* Keep the worker in frame as the viewport narrows */
-  .bg {
-    object-position: 68% center;
+    padding-inline: var(--dp-gutter-md);
   }
 }
 
 /* ─── Mobile (≤799px) ───────────────────────────────────── */
+/* Interpolates the 320 frame → the 800 frame */
 @media (max-width: 799px) {
   .section {
-    aspect-ratio: 320 / 167;
-    max-height: none;
-    min-height: 0;
+    --u: calc((100vw + 480px) / 2133.333);
+    /* margin 25 → 130: row width = 0.5625vw + 90px */
+    --r: calc((56.25vw + 90px) / 1699.7);
+    --pt: calc(8.333vw - 2.667px);
+    --gap: calc(4.458vw + 3.33px);
+    /* 216 at 320 → 416.7 at 800 (the mobile frame is taller than 1920:1000) */
+    --bg-h: calc(41.806vw + 82.2px);
+
+    padding-inline: var(--dp-gutter-sm);
   }
 
-  .inner {
-    padding: var(--spacing-4) var(--dp-gutter-sm);
-  }
-
-  .content {
-    width: 72%;
-    gap: clamp(6px, 1.6vw, 14px);
-  }
-
-  .heading {
-    gap: clamp(2px, 0.9vw, 8px);
-    font-size: clamp(13px, 4.1vw, 26px);
-  }
-
-  .body {
-    font-size: clamp(8px, 2.5vw, 16px);
-  }
-
-  .tagRow {
-    gap: clamp(3px, 1vw, 8px);
-  }
-
-  .tag {
-    padding: clamp(2px, 0.55vw, 5px) clamp(4px, 1.1vw, 10px);
-    font-size: clamp(7px, 2.1vw, 13px);
-    /* Long labels may wrap inside the chip rather than break the 2x2 grid */
+  /* English/Japanese body lines are too long for the fixed 2-line break at
+     phone widths; let them reflow (balanced) instead of breaking twice. */
+  :global(.locale-en) .body,
+  :global(.locale-ja) .body {
     white-space: normal;
-    text-align: center;
-  }
-
-  .badgePill {
-    gap: clamp(4px, 1.3vw, 9px);
-    padding: clamp(3px, 0.9vw, 6px) clamp(6px, 1.9vw, 13px);
-  }
-
-  .badgeItem {
-    gap: clamp(4px, 1.3vw, 9px);
-  }
-
-  .badgeDivider,
-  .badgeImage {
-    height: clamp(14px, 4.4vw, 28px);
   }
 }
 
-/* English runs noticeably longer than Korean here ("AI that connects field
-   records / all the way to reporting", "It sees, hears, and understands
-   the jobsite to / complete the records and documents you need."), so it
-   wraps to more lines than the design's fixed aspect-ratio section was
-   sized for — most visibly on wide/short viewports like a landscape
-   tablet, where the extra lines eat the section's vertical breathing
-   room. Scale the type down a touch so it keeps the same line count. */
+/* The English headline runs longer than Korean; trim the type a little so
+   the two-line lockup still fits at the narrowest widths. */
 :global(.locale-en) .heading {
-  font-size: clamp(24px, 4.1cqw, 46px);
+  font-size: calc(50 * var(--u));
 }
 
-:global(.locale-en) .body {
-  font-size: clamp(14px, 2.6cqw, 30px);
-}
-
-/* CJK layout fix (ja/zh): keep-all (tuned for Korean) can leave a long
-   unbroken sentence with nowhere to wrap in languages with few natural
-   word breaks. */
-:global(.locale-ja) .body {
-  word-break: normal;
-  overflow-wrap: anywhere;
-}
-
+/* CJK layout fix (ja/zh): keep-all (tuned for Korean) leaves long
+   sentences with nowhere to wrap in languages without spaces. */
+:global(.locale-ja) .body,
 :global(.locale-zh) .body {
   word-break: normal;
+  overflow-wrap: anywhere;
 }
