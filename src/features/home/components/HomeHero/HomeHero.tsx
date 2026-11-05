@@ -1,84 +1,111 @@
 import Image from 'next/image';
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
+import TrackedLink from '@/components/analytics/TrackedLink';
 import styles from './HomeHero.module.css';
 
-const TAG_KEYS = [0, 1, 2, 3] as const;
+interface HeroShot {
+  src: string;
+  altKey: 'glassesAlt' | 'detectionAlt' | 'reportAlt';
+  width: number;
+  height: number;
+  /** Per-shot layout slot (Figma 1920 frame: 548 / 497 / 558px wide). */
+  className: string;
+}
 
-const BADGES = [
-  { src: '/images/main-hero-badge1.webp', altKey: 'badge1Alt', width: 241, height: 240 },
-  { src: '/images/main-hero-badge2.webp', altKey: 'badge2Alt', width: 246, height: 240 },
-  { src: '/images/main-hero-badge3.webp', altKey: 'badge3Alt', width: 291, height: 240 },
-] as const;
+const EN_GLASSES: HeroShot = { src: '/images/main-hero-english1.webp', altKey: 'glassesAlt', width: 1200, height: 901, className: styles.shotGlasses };
+const EN_DETECTION: HeroShot = { src: '/images/main-hero-english2.webp', altKey: 'detectionAlt', width: 1200, height: 1039, className: styles.shotDetection };
+const EN_REPORT: HeroShot = { src: '/images/main-hero-english3.webp', altKey: 'reportAlt', width: 1200, height: 826, className: styles.shotReport };
+
+// 이미지 속 문구가 번역되지 않으므로 영어 페이지는 영문 캡처를,
+// 한국어·일본어·중국어 페이지는 한국어 캡처를 보여준다.
+const EN_SHOTS: HeroShot[] = [EN_GLASSES, EN_DETECTION, EN_REPORT];
+
+// 한국어 캡처는 영문 캡처와 같은 캔버스 크기·카드 위치로 맞춰 변환해 둔다.
+const KO_SHOTS: HeroShot[] = [
+  { src: '/images/main-hero-korea1.webp', altKey: 'glassesAlt', width: 1200, height: 901, className: styles.shotGlasses },
+  { src: '/images/main-hero-korea2.webp', altKey: 'detectionAlt', width: 1200, height: 1039, className: styles.shotDetection },
+  { src: '/images/main-hero-korea3.webp', altKey: 'reportAlt', width: 1200, height: 826, className: styles.shotReport },
+];
 
 export async function HomeHero() {
   const t = await getTranslations('home.hero');
-  const tags = TAG_KEYS.map((i) => t(`tags.${i}`));
-  const [headingLead, ...headingRest] = t('heading').split('\n');
+  const locale = await getLocale();
+  const shots = locale === 'en' ? EN_SHOTS : KO_SHOTS;
+  const isKorean = locale === 'ko';
 
   return (
     <section className={styles.section}>
-      <Image
-        src="/images/main-hero-2560.webp"
-        alt=""
-        fill
-        priority
-        fetchPriority="high"
-        quality={82}
-        sizes="100vw"
-        placeholder="blur"
-        blurDataURL="data:image/webp;base64,UklGRpwAAABXRUJQVlA4IJAAAAAQBACdASoUAAoAPu1orU2ppqSiMAgBMB2JbACdMoADRzNGk73s6RzAAAD+uV9wFE9wCrtDVmnKsXHxkur2h+oCsoqv9we5je6fQrzX00NXOwkQGSGv0q228NAp7foZpVtCI3zayktgudpvtP0ufpSocrA5Jf8mf2cmKj+vJ4byl9jYNKQk1aPQ2KEbTL1OAAA="
-        className={styles.bg}
-      />
-      <div className={styles.inner}>
-        <div className={styles.content}>
-          <h1 className={styles.heading}>
-            <span className={styles.headingRow}>
+      <div className={styles.bgLayer} aria-hidden>
+        <Image
+          src="/images/main-hero-city.webp"
+          alt=""
+          fill
+          priority
+          fetchPriority="high"
+          quality={80}
+          sizes="100vw"
+          placeholder="blur"
+          blurDataURL="data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAAAwBACdASoUAAwAPu1iqU2ppaQiMAgBMB2JZgCdMoAC8ge/2ga7IFu6FkAA/rncm/1WNtK4KdGFCN/6r9XexSD/xv62+ILy0zk4n87465BUblgxrAA="
+          className={styles.bg}
+        />
+      </div>
+
+      <div className={styles.content}>
+        <h1 className={styles.heading}>
+          <span className={styles.headingRow}>
+            {isKorean ? (
+              // Figma: 281x76 logo slot; the SVG carries its own drop shadow,
+              // so it is drawn larger (303x98) and pulled back into the slot.
+              <Image
+                src="/images/logos/renamedp-logo-kor-white.svg"
+                alt={t('logoAlt')}
+                width={303}
+                height={98}
+                priority
+                className={styles.logoKo}
+              />
+            ) : (
               <Image
                 src="/images/renamedp-logo-eng-white.png"
                 alt={t('logoAlt')}
-                width={309}
-                height={76}
+                width={960}
+                height={236}
                 priority
-                className={styles.logo}
+                className={styles.logoEn}
               />
-              <span>{headingLead}</span>
+            )}
+            <span className={styles.cyan}>{t('headingRow1')}</span>
+          </span>
+          <span className={styles.headingRow}>
+            <span>
+              <span className={styles.cyan}>{t('headingRow2Lead')}</span>
+              <span className={styles.gold}>{t('headingRow2Accent')}</span>
+              <span className={styles.cyan}>{t('headingRow2Tail')}</span>
             </span>
-            {headingRest.map((line) => (
-              <span key={line} className={styles.headingRow}>
-                {line}
-              </span>
-            ))}
-          </h1>
+          </span>
+        </h1>
 
-          <p className={styles.body}>{t('body')}</p>
+        <p className={styles.body}>{t('body')}</p>
 
-          <div className={styles.tagRow}>
-            {[tags.slice(0, 2), tags.slice(2)].map((line) => (
-              <ul key={line.join()} className={styles.tagRowLine}>
-                {line.map((tag) => (
-                  <li key={tag} className={styles.tag}>
-                    {tag}
-                  </li>
-                ))}
-              </ul>
-            ))}
-          </div>
+        <TrackedLink href="/contact" location="home_hero" className={styles.cta}>
+          {t('cta')}
+        </TrackedLink>
+      </div>
 
-          <div className={styles.badgePill}>
-            {BADGES.map((badge, i) => (
-              <div key={badge.src} className={styles.badgeItem}>
-                {i > 0 && <span className={styles.badgeDivider} aria-hidden />}
-                <Image
-                  src={badge.src}
-                  alt={t(badge.altKey)}
-                  width={badge.width}
-                  height={badge.height}
-                  className={styles.badgeImage}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
+      <div className={styles.shots}>
+        {shots.map((shot) => (
+          <Image
+            key={shot.src}
+            src={shot.src}
+            alt={t(`shots.${shot.altKey}`)}
+            width={shot.width}
+            height={shot.height}
+            loading="eager"
+            quality={80}
+            sizes="(max-width: 1920px) 29vw, 560px"
+            className={`${styles.shot} ${shot.className}`}
+          />
+        ))}
       </div>
     </section>
   );

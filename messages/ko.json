@@ -57,18 +57,18 @@
   },
   "home": {
     "hero": {
-      "heading": ": 현장 기록부터\n보고까지 자동으로 연결하는 AI",
-      "body": "현장을 보고, 듣고, 이해해 필요한 기록과\n문서를 자동으로 완성합니다.",
       "logoAlt": "RENAME DP 로고",
-      "tags": [
-        "스마트 글래스",
-        "온디바이스 AI",
-        "안전·위험 AI 관리",
-        "문서 자동 작성"
-      ],
-      "badge1Alt": "벤처확인기업 인증",
-      "badge2Alt": "KICT 한국건설기술연구원",
-      "badge3Alt": "2026 대한민국 주거환경 대상"
+      "headingRow1": ": 시공기록에",
+      "headingRow2Lead": "숨어있던 ",
+      "headingRow2Accent": "공사기간을",
+      "headingRow2Tail": " 줄이세요.",
+      "body": "촬영부터 보고서까지 반복적인 수기작업을 없애,\n병목을 없애고 공기단축에 기여합니다.",
+      "cta": "문의하기",
+      "shots": {
+        "glassesAlt": "스마트 글래스로 음성 명령 한 번에 철근 점검 사진이 촬영·자동 분류되는 화면",
+        "detectionAlt": "AI가 현장 사진에서 기둥 철근·슬래브 철근·슬리브를 자동 인식해 위치·공종과 함께 기록한 화면",
+        "reportAlt": "RENAME DP에서 현장 기록을 바탕으로 자동 작성된 일일 작업보고서 화면"
+      }
     },
     "impact": {
       "heading": "표준화된 증빙 데이터로 <accent>운영 신뢰를 구축</accent>하고,<br></br><accent>사후 검증 및 분쟁대응을 시스템화</accent> 합니다.",
@@ -208,32 +208,6 @@
         "betahaus": "betahaus",
         "vertical": "vertical",
         "corporation": "한국산업단지공단"
-      }
-    },
-    "heroCarousel": {
-      "label": "주요 소식",
-      "prevSlide": "이전 슬라이드",
-      "nextSlide": "다음 슬라이드",
-      "slides": {
-        "didimdol": {
-          "row1Plain": "2026년도",
-          "row1Accent": "창업성장기술개발사업",
-          "row2Accent1": "(디딤돌)",
-          "row2Plain": "제3차 시행계획",
-          "row2Gold": "선정",
-          "subtext": "장갑을 벗지 않아도, 통신이 끊긴 건설 현장에서도\n음성만으로 기록할 수 있는 AI를 개발합니다.",
-          "logoAlt": "TIPA 중소기업기술정보진흥원 · digitalPresso",
-          "button": "자세히"
-        },
-        "gmep": {
-          "row1Plain": "2026",
-          "row1Accent": "글로벌 액셀러레이팅",
-          "row2Accent1": "(GMEP)",
-          "row2Gold": "선정",
-          "subtext": "국토교통과학기술진흥원 주관 액셀러레이팅을 통해\n유럽 건설 현장의 문을 두드립니다.",
-          "logoAlt": "KAIA 국토교통과학기술진흥원 · digitalPresso",
-          "button": "자세히"
-        }
       }
     },
     "problem": {

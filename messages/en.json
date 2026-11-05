@@ -57,18 +57,18 @@
   },
   "home": {
     "hero": {
-      "heading": ": AI that connects field records\nall the way to reporting",
-      "body": "It sees, hears, and understands the jobsite to\ncomplete the records and documents you need.",
       "logoAlt": "RENAME DP logo",
-      "tags": [
-        "Smart Glasses",
-        "On-Device AI",
-        "Safety & Risk AI",
-        "Auto Documentation"
-      ],
-      "badge1Alt": "Certified Venture Company",
-      "badge2Alt": "KICT Korea Institute of Civil Engineering and Building Technology",
-      "badge3Alt": "2026 Korea Residential Environment Award"
+      "headingRow1": ": Win back the",
+      "headingRow2Lead": "",
+      "headingRow2Accent": "build time",
+      "headingRow2Tail": " lost in records.",
+      "body": "We remove repetitive manual work from photos to reports,\nclearing bottlenecks and shortening your schedule.",
+      "cta": "Contact Us",
+      "shots": {
+        "glassesAlt": "Smart glasses capturing and auto-tagging a rebar inspection photo from a single voice command",
+        "detectionAlt": "AI detecting column rebar, slab rebar and sleeves in a site photo and logging them with location and category",
+        "reportAlt": "A daily work report generated automatically from site records in RENAME DP"
+      }
     },
     "impact": {
       "heading": "Standardized evidence data builds <accent>operational trust</accent>,<br></br>and systemizes <accent>post-verification and dispute response</accent>.",
@@ -208,32 +208,6 @@
         "betahaus": "betahaus",
         "vertical": "vertical",
         "corporation": "Korea Industrial Complex Corporation"
-      }
-    },
-    "heroCarousel": {
-      "label": "Latest news",
-      "prevSlide": "Previous slide",
-      "nextSlide": "Next slide",
-      "slides": {
-        "didimdol": {
-          "row1Plain": "2026",
-          "row1Accent": "Startup Growth Technology Development Program",
-          "row2Accent1": "(Didimdol)",
-          "row2Plain": "Phase 3 Plan",
-          "row2Gold": "Selected",
-          "subtext": "Even with gloves on, even where connectivity drops on site —\nwe're building AI that records by voice alone.",
-          "logoAlt": "TIPA Korea Technology and Information Promotion Agency for SMEs · digitalPresso",
-          "button": "Learn more"
-        },
-        "gmep": {
-          "row1Plain": "2026",
-          "row1Accent": "Global Accelerating Program",
-          "row2Accent1": "(GMEP)",
-          "row2Gold": "Selected",
-          "subtext": "Through an accelerating program led by KAIA,\nwe're knocking on the door of European construction sites.",
-          "logoAlt": "KAIA Korea Agency for Infrastructure Technology Advancement · digitalPresso",
-          "button": "Learn more"
-        }
       }
     },
     "problem": {

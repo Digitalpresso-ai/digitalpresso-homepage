@@ -1,0 +1,177 @@
+/* components/legal/LegalDocument.module.css */
+
+.section {
+  padding: 48px 0 80px;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.titleWrapper {
+  border-bottom: 1px solid #929292;
+  padding-bottom: 24px;
+}
+
+.title {
+  font-family: var(--font-pretendard), 'Pretendard', 'Noto Sans', sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 48px;
+  color: #1e2939;
+  word-break: keep-all;
+  margin: 0;
+}
+
+.body {
+  font-family: var(--font-pretendard), 'Pretendard', 'Noto Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: -0.1px;
+  color: #1e2939;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  min-width: 0;
+}
+
+.body > :first-child {
+  margin-top: 0;
+}
+
+.body p,
+.body ul,
+.body ol {
+  margin: 0.725em 0 0;
+}
+
+/* 조 제목 (## 1. 총칙, ## 제1조 …) */
+.body h2 {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.45;
+  margin: 2.9em 0 0;
+}
+
+/* 소제목 (### 가. …) */
+.body h3 {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.45;
+  margin: 1.8em 0 0;
+}
+
+.body ol,
+.body ul {
+  padding-left: 1.5em;
+}
+
+.body ol {
+  list-style: decimal;
+}
+
+.body ul {
+  list-style: disc;
+}
+
+.body li + li {
+  margin-top: 0.3em;
+}
+
+/* 번호 항목 안에 들여쓴 글머리표 */
+.body li > ul {
+  margin-top: 0.3em;
+}
+
+.body a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  overflow-wrap: anywhere;
+}
+
+/* 표: 좁은 화면에서는 표만 가로로 스크롤되고 페이지는 넘치지 않는다. */
+.body :global(.legal-table-scroll) {
+  margin-top: 1em;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-top: 1px solid #929292;
+}
+
+.body :global(.legal-table-scroll):focus-visible {
+  outline: 2px solid #1e2939;
+  outline-offset: 2px;
+}
+
+.body table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+
+.body table[data-columns='5'] {
+  min-width: 960px;
+}
+
+.body table[data-columns='3'] {
+  min-width: 560px;
+}
+
+.body th,
+.body td {
+  padding: 12px 14px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.body th {
+  font-weight: 600;
+  background: #f5f6f8;
+  white-space: nowrap;
+}
+
+/* 2열 표(구분 | 내용)의 첫 열 */
+.body table[data-columns='2'] td:first-child {
+  width: 22%;
+  min-width: 112px;
+  font-weight: 600;
+}
+
+@media (max-width: 1279px) {
+  .section {
+    padding: 32px 0 80px;
+  }
+
+  .container {
+    padding: 0 48px;
+  }
+}
+
+@media (max-width: 799px) {
+  .section {
+    padding: 48px 0 80px;
+  }
+
+  .container {
+    padding: 0 20px;
+  }
+
+  .body table {
+    font-size: 15px;
+  }
+
+  .body th,
+  .body td {
+    padding: 10px 12px;
+  }
+}

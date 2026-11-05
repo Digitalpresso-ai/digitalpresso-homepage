@@ -1,14 +1,8 @@
 // app/[locale]/terms-of-service/page.tsx
 
 import type { Metadata } from 'next';
-import { getTranslations } from 'next-intl/server';
 import { buildPageMetadata, isAppLocale, type AppLocale } from '@/lib/seo';
-import styles from './TermsOfServicePage.module.css';
-
-interface TermsOfServiceBlock {
-  type: 'articleTitle' | 'text';
-  text: string;
-}
+import { LegalDocument } from '@/components/legal/LegalDocument';
 
 interface TermsOfServicePageProps {
   params: Promise<{ locale: string }>;
@@ -16,7 +10,7 @@ interface TermsOfServicePageProps {
 
 const TERMS_META: Record<AppLocale, { title: string; description: string }> = {
   ko: {
-    title: '이용 약관 | digitalPresso',
+    title: '이용약관 | digitalPresso',
     description:
       'digitalPresso 서비스 이용 약관과 관련된 권리, 의무, 책임 사항을 확인할 수 있습니다.',
   },
@@ -44,37 +38,18 @@ export async function generateMetadata({
   const safeLocale: AppLocale = isAppLocale(locale) ? locale : 'ko';
   const content = TERMS_META[safeLocale];
 
-  return buildPageMetadata({
-    locale: safeLocale,
-    path: '/terms-of-service',
-    title: content.title,
-    description: content.description,
-  });
+  return {
+    ...buildPageMetadata({
+      locale: safeLocale,
+      path: '/terms-of-service',
+      title: content.title,
+      description: content.description,
+    }),
+    // 루트 레이아웃의 title.template이 사이트명을 한 번 더 붙이지 않도록 고정한다.
+    title: { absolute: content.title },
+  };
 }
 
-export default async function TermsOfServicePage() {
-  const t = await getTranslations('termsOfServicePage');
-  const blocks = t.raw('blocks') as TermsOfServiceBlock[];
-
-  return (
-    <main>
-      <section className={styles.section}>
-        <div className={styles.container}>
-          <div className={styles.titleWrapper}>
-            <h2 className={styles.title}>{t('title')}</h2>
-          </div>
-          <div className={styles.body}>
-            {blocks.map((block, index) => (
-              <p
-                key={`${block.type}-${index}`}
-                className={block.type === 'articleTitle' ? styles.articleTitle : undefined}
-              >
-                {block.text}
-              </p>
-            ))}
-          </div>
-        </div>
-      </section>
-    </main>
-  );
+export default function TermsOfServicePage() {
+  return <LegalDocument document="terms" />;
 }
