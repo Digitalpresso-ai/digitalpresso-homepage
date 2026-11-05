@@ -1,14 +1,8 @@
 // app/[locale]/privacy-policy/page.tsx
 
 import type { Metadata } from "next";
-import { getTranslations } from 'next-intl/server';
 import { buildPageMetadata, isAppLocale, type AppLocale } from '@/lib/seo';
-import styles from './PrivacyPolicyPage.module.css';
-
-interface PrivacyPolicyBlock {
-  type: 'articleTitle' | 'text';
-  text: string;
-}
+import { LegalDocument } from '@/components/legal/LegalDocument';
 
 interface PrivacyPolicyPageProps {
   params: Promise<{ locale: string }>;
@@ -16,7 +10,7 @@ interface PrivacyPolicyPageProps {
 
 const PRIVACY_META: Record<AppLocale, { title: string; description: string }> = {
   ko: {
-    title: "개인정보처리방침 | digitalPresso",
+    title: "개인정보 처리방침 | digitalPresso",
     description:
       "digitalPresso의 개인정보 수집, 이용, 보관, 보호 조치 및 정보주체 권리에 대한 정책입니다.",
   },
@@ -44,37 +38,18 @@ export async function generateMetadata({
   const safeLocale: AppLocale = isAppLocale(locale) ? locale : "ko";
   const content = PRIVACY_META[safeLocale];
 
-  return buildPageMetadata({
-    locale: safeLocale,
-    path: "/privacy-policy",
-    title: content.title,
-    description: content.description,
-  });
+  return {
+    ...buildPageMetadata({
+      locale: safeLocale,
+      path: "/privacy-policy",
+      title: content.title,
+      description: content.description,
+    }),
+    // 루트 레이아웃의 title.template이 사이트명을 한 번 더 붙이지 않도록 고정한다.
+    title: { absolute: content.title },
+  };
 }
 
-export default async function PrivacyPolicyPage() {
-  const t = await getTranslations('privacyPolicyPage');
-  const blocks = t.raw('blocks') as PrivacyPolicyBlock[];
-
-  return (
-    <main>
-      <section className={styles.section}>
-        <div className={styles.container}>
-          <div className={styles.titleWrapper}>
-            <h2 className={styles.title}>{t('title')}</h2>
-          </div>
-          <div className={styles.body}>
-            {blocks.map((block, index) => (
-              <p
-                key={`${block.type}-${index}`}
-                className={block.type === 'articleTitle' ? styles.articleTitle : undefined}
-              >
-                {block.text}
-              </p>
-            ))}
-          </div>
-        </div>
-      </section>
-    </main>
-  );
+export default function PrivacyPolicyPage() {
+  return <LegalDocument document="privacy" />;
 }

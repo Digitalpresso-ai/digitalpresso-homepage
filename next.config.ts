@@ -7,6 +7,8 @@ const nextConfig: NextConfig = {
   reactCompiler: true,
   outputFileTracingIncludes: {
     '/api/mcp': ['./content/**/*.md'],
+    '/[locale]/privacy-policy': ['./content/legal/*.md'],
+    '/[locale]/terms-of-service': ['./content/legal/*.md'],
   },
   images: {
     formats: ['image/avif', 'image/webp'],
