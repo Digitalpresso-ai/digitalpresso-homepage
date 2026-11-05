@@ -86,18 +86,40 @@
    so the Figma shadow is applied as a drop-shadow filter instead. */
 .cyan,
 .gold {
+  /* background-clip:text only paints inside the element's box, and the
+     Figma line box (40px) is shorter than the glyphs (56px font), so the
+     tops and bottoms of letters were clipped. Grow the box by --glyph-pad
+     on each side and cancel it with negative margins so the layout keeps
+     Figma's 40px rows. */
+  --glyph-pad: 0.35em;
+
+  display: inline-block;
+  padding-block: var(--glyph-pad);
+  margin-block: calc(-1 * var(--glyph-pad));
+  /* Keep the spaces at segment edges ("숨어있던 ") inside inline-blocks */
+  white-space: pre;
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
   filter: drop-shadow(0 calc(4 * var(--u)) calc(16 * var(--u)) rgba(0, 0, 0, 0.6));
 }
 
+/* Gradient stops sit on the original 40px line box (inside the padding),
+   matching Figma; the padding areas extend the end colours. */
 .cyan {
-  background-image: linear-gradient(180deg, #fff 0%, #0ff 100%);
+  background-image: linear-gradient(
+    180deg,
+    #fff var(--glyph-pad),
+    #0ff calc(100% - var(--glyph-pad))
+  );
 }
 
 .gold {
-  background-image: linear-gradient(180deg, #fff 0%, #ffae00 100%);
+  background-image: linear-gradient(
+    180deg,
+    #fff var(--glyph-pad),
+    #ffae00 calc(100% - var(--glyph-pad))
+  );
 }
 
 /* Figma: 281x76 logo slot. The SVG includes its shadow margin
