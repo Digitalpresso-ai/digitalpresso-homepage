@@ -6,6 +6,11 @@ import {
 } from 'recharts';
 import type { ContentItem } from '@/lib/analytics/ga-data';
 import type { ArticleEntity } from '@/backend/article/domain/entities/ArticleEntity';
+import {
+  formatLocaleBreakdown,
+  mergeByArticle,
+  type Enriched,
+} from './mergeContentItems';
 import styles from './ContentPerformanceTable.module.css';
 
 interface Props {
@@ -13,8 +18,7 @@ interface Props {
   articles: ArticleEntity[];
 }
 
-type Enriched = ContentItem & { title: string };
-type SortKey = keyof Enriched;
+type SortKey = Exclude<keyof Enriched, 'viewsByLocale'>;
 
 function fmtDuration(secs: number) {
   const m = Math.floor(secs / 60);
@@ -41,13 +45,8 @@ export default function ContentPerformanceTable({ items, articles }: Props) {
 
   const byId = new Map(articles.map(a => [a.id, a]));
 
-  const rawEnriched = useMemo<Enriched[]>(() =>
-    items
-      .filter(item => item.articleId !== null)
-      .map(item => ({
-        ...item,
-        title: byId.get(item.articleId!)?.title ?? item.path,
-      })),
+  const rawEnriched = useMemo<Enriched[]>(
+    () => mergeByArticle(items, id => byId.get(id)?.title),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [items, articles],
   );
@@ -57,9 +56,11 @@ export default function ContentPerformanceTable({ items, articles }: Props) {
     [rawEnriched, sortKey, sortDir],
   );
 
-  const chartData = rawEnriched.map(item => ({
+  // 합친 뒤 조회수 순으로 다시 정렬 (GA 응답 순서는 URL 단위 기준)
+  const chartData = sortEnriched(rawEnriched, 'views', 'desc').map(item => ({
     title: item.title.length > 20 ? item.title.slice(0, 20) + '…' : item.title,
     views: item.views,
+    breakdown: formatLocaleBreakdown(item.viewsByLocale),
   }));
   const chartHeight = Math.max(260, chartData.length * 36);
 
@@ -89,7 +90,11 @@ export default function ContentPerformanceTable({ items, articles }: Props) {
             <YAxis type="category" dataKey="title" tick={{ fontSize: 10, fill: '#718096' }} width={150} />
             <Tooltip
               contentStyle={{ fontSize: 12, borderRadius: 6, border: '1px solid #e2e8f0' }}
-              formatter={(v) => [(v as number).toLocaleString(), '조회수']}
+              formatter={(v, _name, entry) => {
+                const breakdown = (entry?.payload as { breakdown?: string } | undefined)?.breakdown;
+                const total = (v as number).toLocaleString();
+                return [breakdown ? `${total} (${breakdown})` : total, '조회수'];
+              }}
             />
             <Bar dataKey="views" fill="#193cb8" radius={[0, 4, 4, 0]} />
           </BarChart>
@@ -110,20 +115,18 @@ export default function ContentPerformanceTable({ items, articles }: Props) {
           </thead>
           <tbody>
             {sorted.map(item => (
-              <tr key={item.path}>
+              <tr key={item.articleId}>
                 <td className={styles.titleCell}>
-                  {item.articleId ? (
-                    <a
-                      href={`/news/article/${item.articleId}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={styles.titleLink}
-                    >
-                      {item.title}
-                    </a>
-                  ) : item.title}
+                  <a
+                    href={`/news/article/${item.articleId}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.titleLink}
+                  >
+                    {item.title}
+                  </a>
                 </td>
-                <td>{item.views.toLocaleString()}</td>
+                <td title={formatLocaleBreakdown(item.viewsByLocale)}>{item.views.toLocaleString()}</td>
                 <td>{fmtDuration(item.avgDuration)}</td>
                 <td>{item.bounceRate}%</td>
                 <td>{item.activeUsers.toLocaleString()}</td>
