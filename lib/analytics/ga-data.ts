@@ -171,7 +171,9 @@ export async function getContentPerformance(from: string, to: string): Promise<C
       },
     },
     orderBys: [{ metric: { metricName: 'screenPageViews' }, desc: true }],
-    limit: 50,
+    // 언어별 URL이 각각 한 행이라, 화면에서 기사 단위로 합친 뒤에도
+    // 충분한 기사 수가 남도록 넉넉히 받는다.
+    limit: 200,
   });
 
   const uuidRe = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i;
