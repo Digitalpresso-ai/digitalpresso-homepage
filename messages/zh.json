@@ -70,6 +70,32 @@
         "reportAlt": "在RENAME DP中根据现场记录自动生成的施工日报画面"
       }
     },
+    "heroCarousel": {
+      "label": "主要新闻",
+      "prevSlide": "上一张幻灯片",
+      "nextSlide": "下一张幻灯片",
+      "slides": {
+        "didimdol": {
+          "row1Plain": "2026年",
+          "row1Accent": "创业成长技术开发项目",
+          "row2Accent1": "(踏脚石)",
+          "row2Plain": "第三次实施计划",
+          "row2Gold": "评选",
+          "subtext": "我们正在开发一种AI技术，即使不脱手套，即使在通信中断的施工现场，也能仅通过语音进行记录。",
+          "logoAlt": "TIPA 中小企业技术信息振兴院 · digitalPresso",
+          "button": "详细信息"
+        },
+        "gmep": {
+          "row1Plain": "2026",
+          "row1Accent": "全球加速器",
+          "row2Accent1": "(GMEP)",
+          "row2Gold": "评选",
+          "subtext": "通过由国土交通科学技术振兴院主办的加速器项目，我们正向欧洲建筑工地敞开大门。",
+          "logoAlt": "KAIA 国土交通科学技术振兴院 · digitalPresso",
+          "button": "详细信息"
+        }
+      }
+    },
     "impact": {
       "heading": "通过标准化证明数据<accent>建立运营信任</accent>，<br></br>并将<accent>事后验证及争议处理系统化</accent>。",
       "cards": {

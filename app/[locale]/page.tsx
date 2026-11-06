@@ -15,6 +15,7 @@ import { HomeDefectSection } from '@/src/features/home/components/HomeDefectSect
 import { HomeTalkSection } from '@/src/features/home/components/HomeTalkSection/HomeTalkSection';
 import { HomeHero } from '@/src/features/home/components/HomeHero/HomeHero';
 import { HomePartnerCarousel } from '@/src/features/home/components/HomePartnerCarousel/HomePartnerCarousel';
+import { HomeHeroCarousel } from '@/src/features/home/components/HomeHeroCarousel/HomeHeroCarousel';
 import { HomePlatformSection } from '@/src/features/home/components/HomePlatformSection/HomePlatformSection';
 import { HomeProblemSection } from '@/src/features/home/components/HomeProblemSection/HomeProblemSection';
 import { buildPageMetadata, isAppLocale, type AppLocale } from '@/lib/seo';
@@ -67,6 +68,8 @@ export default function HomePage() {
     <main>
       <HomeHero />
       <HomeProblemSection />
+      <HomePartnerCarousel />
+      <HomeResultSection />
       <HomePlatformSection />
       <HomeBlueprintSection />
       <HomeSafetySection />
@@ -77,10 +80,9 @@ export default function HomePage() {
       <HomeScheduleSection />
       <HomeCopilotSection />
       <HomeSegmentSection />
-      <HomeResultSection />
       <HomeSupportSection />
+      <HomeHeroCarousel />
       <HomeCtaCardsSection />
-      <HomePartnerCarousel />
     </main>
   );
 }

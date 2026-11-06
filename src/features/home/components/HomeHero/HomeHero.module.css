@@ -14,15 +14,19 @@
    --r    screenshot row scale = row width / 1699.7 (its 1920 width).
    --pt   top padding (96 / 96 / 64 / 24).
    --gap  button → screenshot row.
-   --bg-h hero background height. The row hangs below it onto the
-          next section's colour, as in Figma. */
+
+   The blue background always ends at the vertical centre of the
+   screenshot row (see .bgLayer), so the row straddles the blue / light
+   blue boundary at every width and in every locale. */
 .section {
   --u: 1px;
   /* margin 100 → 110 between 1280 and 1920: margin = 80px + vw/64 */
   --r: min(1px, calc((96.875vw - 160px) / 1699.7));
   --pt: 96px;
   --gap: min(141.8px, calc(14.18vw - 130.4px));
-  --bg-h: calc(100vw * 1000 / 1920);
+  /* Screenshot row height: the tallest shot (detection, 1200x1039)
+     is 497.24 * 1039 / 1200 = 430.53 row units tall. */
+  --row-h: calc(430.53 * var(--r));
 
   position: relative;
   display: flex;
@@ -43,7 +47,10 @@
   top: 0;
   left: 0;
   right: 0;
-  height: var(--bg-h);
+  /* The section has no bottom padding, so its bottom edge is the row's
+     bottom edge; stopping half a row above it puts the boundary on the
+     row's centre line. */
+  bottom: calc(var(--row-h) / 2);
   background-color: #1a5cf0;
   pointer-events: none;
 }
@@ -239,8 +246,6 @@
     --r: calc((56.25vw + 90px) / 1699.7);
     --pt: calc(8.333vw - 2.667px);
     --gap: calc(4.458vw + 3.33px);
-    /* 216 at 320 → 416.7 at 800 (the mobile frame is taller than 1920:1000) */
-    --bg-h: calc(41.806vw + 82.2px);
 
     padding-inline: var(--dp-gutter-sm);
   }
